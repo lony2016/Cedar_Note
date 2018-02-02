@@ -16,10 +16,6 @@
 
 #include "ob_compact_cell_iterator.h"
 #include "ob_object.h"
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase;
 using namespace common;
 
@@ -300,11 +296,7 @@ int ObCompactCellIterator::next_cell()
       break;
     case DENSE_SPARSE:
     case DENSE_DENSE:
-<<<<<<< HEAD
       if(0 == step_) //handle key part
-=======
-      if(0 == step_)
->>>>>>> refs/remotes/origin/master
       {
         ret = parse(buf_reader_, value_);
         if(OB_SUCCESS != ret && OB_ITER_END != ret)
@@ -316,15 +308,9 @@ int ObCompactCellIterator::next_cell()
           step_ = 1;
         }
       }
-<<<<<<< HEAD
       else if(1 == step_) //handle value part
       {
         if(DENSE_SPARSE == store_type_) //sparse value
-=======
-      else if(1 == step_)
-      {
-        if(DENSE_SPARSE == store_type_)
->>>>>>> refs/remotes/origin/master
         {
           ret = parse(buf_reader_, value_, &column_id_);
           if(OB_SUCCESS != ret && OB_ITER_END != ret)
@@ -338,11 +324,7 @@ int ObCompactCellIterator::next_cell()
         }
         else
         {
-<<<<<<< HEAD
           ret = parse(buf_reader_, value_);  //dense value
-=======
-          ret = parse(buf_reader_, value_);
->>>>>>> refs/remotes/origin/master
           if(OB_SUCCESS != ret && OB_ITER_END != ret)
           {
             TBSYS_LOG(WARN, "parse cell fail:ret[%d]", ret);
@@ -532,14 +514,11 @@ int ObCompactCellIterator::parse(ObBufferReader &buf_reader, ObObj &value, uint6
       case ObCellMeta::ES_DEL_ROW:
         value.set_ext(ObActionFlag::OP_DEL_ROW);
         break;
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
       case ObCellMeta::ES_TRUN_TAB:
         value.set_ext(ObActionFlag::OP_DEL_ROW);
         break;
      //add:e
-=======
->>>>>>> refs/remotes/origin/master
       case ObCellMeta::ES_NOP_ROW:
         value.set_ext(ObActionFlag::OP_NOP);
         break;
@@ -569,14 +548,11 @@ int ObCompactCellIterator::parse(ObBufferReader &buf_reader, ObObj &value, uint6
       case ObCellMeta::ES_DEL_ROW:
         value.set_ext(ObActionFlag::OP_DEL_ROW);
         break;
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
      case ObCellMeta::ES_TRUN_TAB:
         value.set_ext(ObActionFlag::OP_DEL_ROW);
         break;
      //add:e
-=======
->>>>>>> refs/remotes/origin/master
       default:
         ret = OB_NOT_SUPPORTED;
         TBSYS_LOG(WARN, "unsupported extend:cell_meta->attr_=%d",
@@ -634,7 +610,6 @@ int ObCompactCellIterator::parse_varchar(ObBufferReader &buf_reader, ObObj &valu
 
 int ObCompactCellIterator::parse_decimal(ObBufferReader &buf_reader, ObObj &value) const
 {
-<<<<<<< HEAD
      //modify xsl ECNU_DECIMAL 2016_12
      int ret = OB_SUCCESS;
      const ObDecimalMeta *dec_meta = NULL;
@@ -669,61 +644,6 @@ int ObCompactCellIterator::parse_decimal(ObBufferReader &buf_reader, ObObj &valu
          value.meta_.dec_scale_ = dec_meta->dec_scale_;
          //modify e
      }
-=======
-  int ret = OB_SUCCESS;
-  const uint8_t *vscale = NULL;
-  const ObDecimalMeta *dec_meta = NULL;
-  const uint32_t *word = NULL;
-  uint32_t *words = NULL;
-
-  if(OB_SUCCESS != (ret = buf_reader.get<uint8_t>(vscale)))
-  {
-    TBSYS_LOG(WARN, "read vscale fail:ret[%d]", ret);
-  }
-  else if(OB_SUCCESS != (ret = buf_reader.get<ObDecimalMeta>(dec_meta)))
-  {
-    TBSYS_LOG(WARN, "get decimal meta fail:ret[%d]", ret);
-  }
-  else
-  {
-    value.meta_.type_ = ObDecimalType;
-    value.meta_.dec_vscale_ = *vscale & ObObj::META_VSCALE_MASK;
-    value.meta_.dec_precision_ = dec_meta->dec_precision_;
-    value.meta_.dec_scale_ = dec_meta->dec_scale_;
-    value.meta_.dec_nwords_ = dec_meta->dec_nwords_;
-  }
-
-  uint8_t nwords = value.meta_.dec_nwords_;
-  nwords ++;
-
-  if (OB_SUCCESS == ret)
-  {
-    if (nwords <= 3)
-    {
-      words = reinterpret_cast<uint32_t*>(&(value.val_len_));
-    }
-    else
-    {
-      //@todo, use ob_pool.h to allocate memory
-      ret = OB_NOT_IMPLEMENT;
-    }
-  }
-
-  if(OB_SUCCESS == ret)
-  {
-    for(int8_t i=0;OB_SUCCESS == ret && i<nwords;i++)
-    {
-      if(OB_SUCCESS != (ret = buf_reader.get<uint32_t>(word)))
-      {
-        TBSYS_LOG(WARN, "get word fail:ret[%d]", ret);
-      }
-      else
-      {
-        words[i] = *word;
-      }
-    }
-  }
->>>>>>> refs/remotes/origin/master
 
   return ret;
 }

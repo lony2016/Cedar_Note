@@ -34,10 +34,7 @@ namespace oceanbase
 
     MemTableRowIterator::MemTableRowIterator() : memtable_(NULL),
                                                  memtable_iter_(),
-<<<<<<< HEAD
                                                  memtable_table_iter_(), /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
                                                  get_iter_(),
                                                  rc_iter_()
     {
@@ -75,7 +72,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "scan all start fail ret=%d memtable=%p", ret, memtable);
         revert_schema_handle_();
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
       else if (OB_SUCCESS != (ret = memtable->scan_all_table(memtable_table_iter_)))
       {
@@ -83,8 +79,6 @@ namespace oceanbase
         revert_schema_handle_();
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       else
       {
         block_size_ = block_size;
@@ -99,10 +93,7 @@ namespace oceanbase
       if (NULL != memtable_)
       {
         memtable_iter_.reset();
-<<<<<<< HEAD
         memtable_table_iter_.reset(); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         revert_schema_handle_();
         memtable_ = NULL;
       }
@@ -152,13 +143,10 @@ namespace oceanbase
         TBSYS_LOG(INFO, "reset row_iter this=%p", this);
         memtable_iter_.reset();
         ret = memtable_->scan_all(memtable_iter_);
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         memtable_table_iter_.reset();
         ret = memtable_->scan_all_table(memtable_table_iter_);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
@@ -177,7 +165,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int MemTableRowIterator::next_table()
     {
@@ -194,9 +181,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     int MemTableRowIterator::get_row(sstable::ObSSTableRow &sstable_row)
     {
       int ret = OB_SUCCESS;
@@ -264,17 +248,13 @@ namespace oceanbase
     bool MemTableRowIterator::get_sstable_schema(sstable::ObSSTableSchema &sstable_schema)
     {
       int bret = false;
-<<<<<<< HEAD
       int ret = OB_SUCCESS; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL != memtable_)
       {
         ObUpdateServerMain *ups_main = ObUpdateServerMain::get_instance();
         if (NULL != ups_main)
         {
           UpsSchemaMgr &schema_mgr = ups_main->get_update_server().get_table_mgr().get_schema_mgr();
-<<<<<<< HEAD
           //mod hxlong [Truncate Table]:20170318:b
 //          if (OB_SUCCESS == schema_mgr.build_sstable_schema(schema_handle_, sstable_schema))
 //          {
@@ -293,12 +273,6 @@ namespace oceanbase
             bret = true;
           }
           //mod:e
-=======
-          if (OB_SUCCESS == schema_mgr.build_sstable_schema(schema_handle_, sstable_schema))
-          {
-            bret = true;
-          }
->>>>>>> refs/remotes/origin/master
         }
       }
       return bret;
@@ -330,7 +304,6 @@ namespace oceanbase
       }
       return bret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int MemTableRowIterator::fill_truncate_info_(sstable::ObSSTableSchema &sstable_schema)
     {
@@ -376,8 +349,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

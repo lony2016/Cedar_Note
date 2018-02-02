@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,9 +15,6 @@
  *         zhangcd<zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_30
  */
-=======
-
->>>>>>> refs/remotes/origin/master
 /**
  * (C) 2007-2010 Taobao Inc.
  *
@@ -59,7 +55,6 @@ namespace oceanbase
        *         others: 发生了错误.
        */
       int read_log(LogCommand &cmd, uint64_t &log_seq, char *&log_data, int64_t &data_len);
-<<<<<<< HEAD
 
       //add lbzhong [Max Log Timestamp] 20150824:b
       //add lbzhong [Max Log Timestamp] 20150824:b
@@ -96,8 +91,6 @@ namespace oceanbase
       //add chujiajia [log synchronization][multi_cluster] 20160326:b
       int64_t max_cmt_id_;  ///< max commited log id
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace common
 } // end namespace oceanbase

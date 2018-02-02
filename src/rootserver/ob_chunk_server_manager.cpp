@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  * @file     ob_chunk_server_manager.cpp
@@ -11,8 +10,6 @@
  * @author   zhangcd<zhangcd_ecnu@ecnu.cn>
  * @date     2015-12-25
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
 *   (C) 2007-2010 Taobao Inc.
 *
@@ -822,11 +819,7 @@ namespace oceanbase
           header.set_magic_num(CHUNK_SERVER_MAGIC);
           header.header_length_ = static_cast<int16_t>(header_length);
           header.version_ = 0;
-<<<<<<< HEAD
           header.timestamp_ = 0;
-=======
-          header.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
 
           header.data_length_ = static_cast<int32_t>(total_size);
           header.data_zlength_ = static_cast<int32_t>(total_size);
@@ -1153,7 +1146,6 @@ namespace oceanbase
           ms_num++;
         }
       }
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150405:b
       /// return the lms's address when only one lms exists.
       if(ms_num == 0 && size() > 0)
@@ -1192,35 +1184,11 @@ namespace oceanbase
               {
                 ++i;
               }
-=======
-      if (OB_SUCCESS != (ret = serialization::encode_vi32(buf, buf_len, pos, ms_num)))
-      {
-        TBSYS_LOG(WARN, "serialize error");
-      }
-      else
-      {
-        int i = 0;
-        for (it = begin(); it != end() && i < ms_num; ++it)
-        {
-          if (ObServerStatus::STATUS_DEAD != it->ms_status_
-              && !it->lms_)
-          {
-            if (OB_SUCCESS != (ret = serialize_ms(it, buf, buf_len, pos)))
-            {
-              break;
-            }
-            else
-            {
-              ++i;
->>>>>>> refs/remotes/origin/master
             }
           }
         }
       }
-<<<<<<< HEAD
       // modify:e
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
     int ObChunkServerManager::get_ms_port(const ObServer& server, int32_t &port)const

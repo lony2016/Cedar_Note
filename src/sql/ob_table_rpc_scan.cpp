@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -25,9 +24,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +72,6 @@ namespace oceanbase
       rpc_scan_(), scalar_agg_(NULL), group_(NULL), group_columns_sort_(), limit_(),
       has_rpc_(false), has_scalar_agg_(false), has_group_(false),
       has_group_columns_sort_(false), has_limit_(false), is_skip_empty_row_(true),
-<<<<<<< HEAD
       read_method_(ObSqlReadStrategy::USE_SCAN),
       is_use_index_rpc_scan_(false),is_use_index_for_storing_(false),is_use_index_for_storing_for_tostring_(false),
       index_tid_for_storing_for_tostring_(OB_INVALID_ID),is_use_index_without_storing_for_tostring_(false),
@@ -85,9 +80,6 @@ namespace oceanbase
     is_right_table_(false),
     expr_clone(NULL)
   //add wanglei [semi join] 20170417:e
-=======
-      read_method_(ObSqlReadStrategy::USE_SCAN)
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -145,7 +137,6 @@ namespace oceanbase
       empty_row_filter_.reset();
       is_skip_empty_row_ = true;
       read_method_ = ObSqlReadStrategy::USE_SCAN;
-<<<<<<< HEAD
       //add longfei
       is_use_index_rpc_scan_=false;
       is_use_index_for_storing_=false;
@@ -154,8 +145,6 @@ namespace oceanbase
       is_use_index_without_storing_for_tostring_=false;
       index_tid_without_storing_for_tostring_=OB_INVALID_ID;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       ObTableScan::reset();
     }
 
@@ -195,7 +184,6 @@ namespace oceanbase
       }
       empty_row_filter_.reuse();
       is_skip_empty_row_ = true;
-<<<<<<< HEAD
       //add longfei
       is_use_index_rpc_scan_=false;
       is_use_index_for_storing_=false;
@@ -208,12 +196,6 @@ namespace oceanbase
     }
 
     int ObTableRpcScan::open()//slwang note：
-=======
-      read_method_ = ObSqlReadStrategy::USE_SCAN;
-    }
-
-    int ObTableRpcScan::open()
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (child_op_ == NULL)
@@ -221,23 +203,15 @@ namespace oceanbase
         // rpc_scan_ is the leaf operator
         if (OB_SUCCESS == ret && has_rpc_)
         {
-<<<<<<< HEAD
           child_op_ = &rpc_scan_; //bind（绑定） the child_op_ to the member field(成员变量), rpc_scan_
           child_op_->set_phy_plan(my_phy_plan_);
           if (ObSqlReadStrategy::USE_GET == read_method_
             && is_skip_empty_row_)//slwang note:初始值为true，没从这里
-=======
-          child_op_ = &rpc_scan_;
-          child_op_->set_phy_plan(my_phy_plan_);
-          if (ObSqlReadStrategy::USE_GET == read_method_
-            && is_skip_empty_row_)
->>>>>>> refs/remotes/origin/master
           {
             empty_row_filter_.set_child(0, *child_op_);
             select_get_filter_.set_child(0, empty_row_filter_);
             child_op_ = &select_get_filter_;
           }
-<<<<<<< HEAD
           //add longfei
           else if(ObSqlReadStrategy::USE_SCAN == read_method_ && is_use_index_rpc_scan_)
           {
@@ -245,8 +219,6 @@ namespace oceanbase
               child_op_ = &select_get_filter_;
           }
           //add e
-=======
->>>>>>> refs/remotes/origin/master
         }
         else
         {
@@ -283,11 +255,7 @@ namespace oceanbase
               ret = OB_ERR_GEN_PLAN;
               TBSYS_LOG(WARN, "Physical plan error, group need a sort operator. ret=%d", ret);
             }
-<<<<<<< HEAD
             else if (OB_SUCCESS != (ret = group_columns_sort_.set_child(0, *child_op_)))//slwang note:group_columns_sort_为ObSort类型
-=======
-            else if (OB_SUCCESS != (ret = group_columns_sort_.set_child(0, *child_op_)))
->>>>>>> refs/remotes/origin/master
             {
               TBSYS_LOG(WARN, "Fail to set child of sort operator. ret=%d", ret);
             }
@@ -303,11 +271,7 @@ namespace oceanbase
           }
         }
         // limit
-<<<<<<< HEAD
         if (OB_SUCCESS == ret && has_limit_)//slwang note
-=======
-        if (OB_SUCCESS == ret && has_limit_)
->>>>>>> refs/remotes/origin/master
         {
           if (OB_SUCCESS != (ret = limit_.set_child(0, *child_op_)))
           {
@@ -324,11 +288,7 @@ namespace oceanbase
       // open the operation chain
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         ret = child_op_->open();//slwang note:child_op_一开始被指向了child_op_ = &rpc_scan_，此处打开的是ObRpcScan算子
-=======
-        ret = child_op_->open();
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           TBSYS_LOG(WARN, "fail to open table scan. ret=%d", ret);
@@ -372,15 +332,12 @@ namespace oceanbase
       if (OB_UNLIKELY(NULL == child_op_))
       {
         ret = OB_NOT_INIT;
-<<<<<<< HEAD
         //add by zt 20160115:b to get a template row desc before rpc execution
         if( my_phy_plan_->is_group_exec() )
         {
           ret = rpc_scan_.get_row_desc(row_desc);
         }
         //add by zt 20160115:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       else
       {
@@ -413,7 +370,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add longfei [secondary index select] 20151116 :b
     void ObTableRpcScan::set_main_tid(uint64_t tid)
     {
@@ -539,19 +495,13 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObTableRpcScan::add_output_column(const ObSqlExpression& expr)
     {
       int ret = OB_SUCCESS;
       if (OB_SUCCESS == ret)
       {
         // add output column to scan param
-<<<<<<< HEAD
         ret = rpc_scan_.add_output_column(expr);//slwang note:设置rpc_scan_中的成员变量行描述
-=======
-        ret = rpc_scan_.add_output_column(expr);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           TBSYS_LOG(WARN, "fail to add column to rpc scan operator. ret=%d", ret);
@@ -682,7 +632,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add fanqiushi [semi_join] [0.1] 20150910:b
         int ObTableRpcScan::add_filter_set_for_semijoin(ObSqlExpression *expr)
         {
@@ -695,8 +644,6 @@ namespace oceanbase
         }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObTableRpcScan::add_filter(ObSqlExpression *expr)
     {
       int ret = OB_SUCCESS;
@@ -713,15 +660,11 @@ namespace oceanbase
         {
           TBSYS_LOG(WARN, "fail to add filter to rpc scan operator. ret=%d", ret);
         }
-<<<<<<< HEAD
         /* del longfei 20151116:b
-=======
->>>>>>> refs/remotes/origin/master
         else if (OB_SUCCESS != (ret = select_get_filter_.add_filter(expr_clone)))
         {
           TBSYS_LOG(WARN, "fail to add filter to filter for select get. ret=%d", ret);
         }
-<<<<<<< HEAD
         del e */
         else
         {
@@ -735,8 +678,6 @@ namespace oceanbase
           }
           //modify:e
         }
-=======
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
@@ -785,7 +726,6 @@ namespace oceanbase
     int64_t ObTableRpcScan::to_string(char* buf, const int64_t buf_len) const
     {
       int64_t pos = 0;
-<<<<<<< HEAD
       //modify longfei [secondary index select] 20151120 :b
       //databuff_printf(buf, buf_len, pos, "TableRpcScan(read_method=%s, ", read_method_ == ObSqlReadStrategy::USE_SCAN ? "SCAN":"GET");
       databuff_printf(buf, buf_len, pos,
@@ -796,9 +736,6 @@ namespace oceanbase
           is_use_index_without_storing_for_tostring_,
           index_tid_without_storing_for_tostring_);
       //modify e
-=======
-      databuff_printf(buf, buf_len, pos, "TableRpcScan(read_method=%s, ", read_method_ == ObSqlReadStrategy::USE_SCAN ? "SCAN":"GET");
->>>>>>> refs/remotes/origin/master
       if (has_limit_)
       {
         databuff_printf(buf, buf_len, pos, "limit=<");
@@ -832,7 +769,6 @@ namespace oceanbase
       }
       return pos;
     }
-<<<<<<< HEAD
 //add wanglei [semi join] 20170417 :b
 int ObTableRpcScan::add_index_filter_ll(ObSqlExpression* expr)
 {
@@ -881,9 +817,6 @@ void ObTableRpcScan::set_is_right_table(bool flag)
     is_right_table_ = flag ;
 }
 //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
     PHY_OPERATOR_ASSIGN(ObTableRpcScan)
     {
       int ret = OB_SUCCESS;
@@ -955,7 +888,6 @@ void ObTableRpcScan::set_is_right_table(bool flag)
         has_group_columns_sort_ = o_ptr->has_group_columns_sort_;
         has_limit_ = o_ptr->has_limit_;
         is_skip_empty_row_ = o_ptr->is_skip_empty_row_;
-<<<<<<< HEAD
         //add longfei
 //        is_use_index_rpc_scan_=o_ptr->is_use_index_rpc_scan_;
         //add e
@@ -976,8 +908,6 @@ void ObTableRpcScan::set_is_right_table(bool flag)
           TBSYS_LOG(WARN, "Assign main_project for secondary index failed. ret=%d", ret);
         }
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         read_method_ = o_ptr->read_method_;
       }
       return ret;

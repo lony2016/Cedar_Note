@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
 * Copyright (C) 2013-2016 DaSE .
 *
@@ -16,8 +15,6 @@
 * @date 2015_01_21
 */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Alibaba Group Holding Limited.
  *
@@ -45,12 +42,9 @@
 #include "ob_get_cell_stream_wrapper.h"
 #include "ob_query_agent.h"
 #include "ob_tablet_merge_filter.h"
-<<<<<<< HEAD
 //add maoxx
 #include "common/ob_column_checksum.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -146,7 +140,6 @@ namespace oceanbase
         int check_row_count_in_column_group();
         void reset_for_next_column_group();
 
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief is_index_or_with_index
@@ -196,8 +189,6 @@ namespace oceanbase
          */
         int calc_tablet_col_checksum_for_index(const sstable::ObSSTableRow& row, ObRowDesc row_desc, char *column_checksum, const uint64_t max_data_table_cid);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       private:
         common::ObRowkey split_rowkey_;
@@ -225,7 +216,6 @@ namespace oceanbase
         ObGetCellStreamWrapper    ms_wrapper_;
         ObQueryAgent          merge_join_agent_;
         ObTabletMergerFilter tablet_merge_filter_;
-<<<<<<< HEAD
 
         //add maoxx
         ObColumnChecksum column_checksum_; ///<column checksum
@@ -236,8 +226,6 @@ namespace oceanbase
         uint64_t max_data_table_cid_; ///<max column id of data table
         //add e
         bool is_static_truncated_; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
     };
   } /* chunkserver */
 } /* oceanbase */

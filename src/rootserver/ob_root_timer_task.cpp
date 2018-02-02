@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -56,7 +53,6 @@ namespace oceanbase
     {
       worker_->submit_check_task_process();
     }
-<<<<<<< HEAD
 
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     int ObRootSetAutoElectFlagTask::init(ObRootWorker *worker)
@@ -85,8 +81,6 @@ namespace oceanbase
       }
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

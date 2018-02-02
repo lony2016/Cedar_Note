@@ -108,12 +108,8 @@ namespace oceanbase
                      const common::ObSchemaManagerV2& schema_mgr,
                      const ObOperatorMemLimit& mem_limit,
                      const int64_t timeout_time = 0,
-<<<<<<< HEAD
                      const bool unmerge_if_unchanged = false,
                      const bool is_static_truncated = false); /*add zhxlong [Truncate Table]:20170318 param:is_static_truncated*/
-=======
-                     const bool unmerge_if_unchanged = false); 
->>>>>>> refs/remotes/origin/master
 
      /**
       * WARNING: this function is only used for test, please don't 
@@ -158,12 +154,8 @@ namespace oceanbase
                               ObCellStream& ups_stream, 
                               ObCellStream& ups_join_stream, 
                               const common::ObSchemaManagerV2& schema_mgr,
-<<<<<<< HEAD
                               const bool unmerge_if_unchanged,
                               const bool is_static_truncated); /*add hxlong [Truncate Table]:20170318 param:is_static_truncated*/
-=======
-                              const bool unmerge_if_unchanged);
->>>>>>> refs/remotes/origin/master
       int stage_two_machine();
       int do_groupby(bool need_filter = false);
       int filter_one_row(const common::ObCellArray& cells, const int64_t row_beg,

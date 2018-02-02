@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -24,8 +23,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -44,7 +41,6 @@
 
 #include "ob_server.h"
 #include "ob_rpc_stub.h"
-<<<<<<< HEAD
 #include "location/ob_tablet_location_list.h"
 #include "sql/ob_physical_plan.h"
 #include "sql/ob_ups_result.h"
@@ -58,13 +54,6 @@
 //add by wangdonghui 20160308 :b
 #include "common/ob_name_code_map.h"
 //add :e
-=======
-#include "common/location/ob_tablet_location_list.h"
-#include "sql/ob_physical_plan.h"
-#include "sql/ob_ups_result.h"
-#include "common/ob_transaction.h"
-#include "common/ob_data_source_desc.h"
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
@@ -107,7 +96,6 @@ namespace oceanbase
         //        @root_server root server addr
         //        @merge_server merge server addr
         //        @is_merger merge server status
-<<<<<<< HEAD
         //modify wenghaixing [secondary index.static_index]20160118
         //int register_server(const int64_t timeout, const common::ObServer & root_server,
             //const common::ObServer & server, const bool is_merger, int32_t &status, const char* server_version) const;
@@ -115,10 +103,6 @@ namespace oceanbase
                             const common::ObServer & chunk_server, const bool is_merger,
                             int32_t &status, int64_t &cluster_id, const char* server_version) const;
         //modify e
-=======
-        int register_server(const int64_t timeout, const common::ObServer & root_server,
-            const common::ObServer & server, const bool is_merger, int32_t &status, const char* server_version) const;
->>>>>>> refs/remotes/origin/master
 
         // register to root server as a merge server by rpc call
         // param  @timeout  action timeout
@@ -180,7 +164,6 @@ namespace oceanbase
         //        @schema fetch cmd output schema data
         int fetch_schema(const int64_t timeout, const common::ObServer & root_server,
             const int64_t timestamp, const bool only_core_tables, common::ObSchemaManagerV2 & schema) const;
-<<<<<<< HEAD
         //add by wangdonghui 20160304 :b
         /**
          * @brief fetch_procedure
@@ -193,9 +176,6 @@ namespace oceanbase
         int fetch_procedure(const int64_t timeout, const ObServer & root_server,
             common::ObNameCodeMap & namecodemap) const;
         //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
         // get tables schema newest version through root server rpc call
         // param  @timeout  action timeout
         //        @root_server root server addr
@@ -237,7 +217,6 @@ namespace oceanbase
         // drop table
         int drop_table(const int64_t timeout, const common::ObServer & root_server,
             bool if_exists, const common::ObStrings & tables) const;
-<<<<<<< HEAD
         // truncate table
         int truncate_table(const int64_t timeout, const common::ObServer & root_server,
                            bool if_exists, const common::ObStrings & tables, const common::ObString & user,
@@ -277,12 +256,6 @@ namespace oceanbase
         int drop_procedure(const int64_t timeout, const common::ObServer & root_server,
                            bool if_exists, const common::ObString &proc_name) const;
         //add :e
-=======
-        // alter table
-        int alter_table(const int64_t timeout, const common::ObServer & root_server,
-            const common::AlterTableSchema & alter_schema) const;
-
->>>>>>> refs/remotes/origin/master
         /*
          * Report tablets to RootServer, report finishes at has_more flag is off
          * @param tablets TabletReportInfoList to be reported
@@ -450,7 +423,6 @@ namespace oceanbase
         int get_ups_log_seq(const common::ObServer &ups, const int64_t timeout, int64_t & log_seq) const;
         int set_obi_role(const ObServer &rs, const int64_t timeout, const ObiRole &obi_role) const;
         int set_master_rs_vip_port_to_cluster(const ObServer &rs, const int64_t timeout, const char *new_master_ip, const int32_t new_master_port) const; 
-<<<<<<< HEAD
       public:
         //longfei secondary index service
         //longfei [drop index]
@@ -509,8 +481,6 @@ namespace oceanbase
             const ObServer &client_server,  const ObTabletHistogramReportInfoList& tablets,
             const int64_t time_stamp, bool has_more);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       protected:
         // default cmd version

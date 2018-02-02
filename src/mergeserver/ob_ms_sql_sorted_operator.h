@@ -17,12 +17,9 @@
 #include "common/ob_row.h"
 #include "ob_ms_request.h"
 #include "common/ob_se_array.h"
-<<<<<<< HEAD
 //add wanglei [semi join in expr] 20161131:b
 #include <iostream>
 //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
@@ -64,13 +61,9 @@ namespace oceanbase
       int64_t get_sharding_result_count()const { return sharding_result_arr_.count(); }
       int64_t get_cur_sharding_result_idx()const { return cur_sharding_result_idx_; }
       //inline int64_t get_seamless_result_count() { return seamless_result_count_; }
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       int set_param_only(const sql::ObSqlScanParam & scan_param);
       //add wanglei [semi join in expr] 20161131:e
-=======
-
->>>>>>> refs/remotes/origin/master
     private:
       static const int64_t FULL_SCANNER_RESERVED_BYTE_COUNT  = 200;
       void sort(bool &is_finish, oceanbase::common::ObNewScanner * last_sharding_res = NULL);
@@ -93,14 +86,11 @@ namespace oceanbase
       const sql::ObSqlScanParam    *scan_param_;
       common::ObNewRange              scan_range_;
       int64_t           total_mem_size_used_;
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       common::ObNewRange first_scan_range_ ;
       public:
       std::vector<common::ObNewRange> used_rowkey_;
       //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

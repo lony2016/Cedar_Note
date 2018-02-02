@@ -41,7 +41,6 @@ namespace oceanbase
         /* check if all config is validated */
         virtual int check_all() const;
         int add_extra_config(const char* config_str, bool check_name = false);
-<<<<<<< HEAD
         //add by qx 20161207 : b
         /**
          * @brief add_extra_config2
@@ -52,14 +51,10 @@ namespace oceanbase
          */
         int add_extra_config2(const char* config_str, bool check_name = false);
         //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
         /* print all config to log file */
         void print() const;
 
         NEED_SERIALIZE_AND_DESERIALIZE;
-<<<<<<< HEAD
         //add by qx 20161207 :b
         /**
          * @brief deserialize2
@@ -71,8 +66,6 @@ namespace oceanbase
          */
         int deserialize2(const char* buf, const int64_t data_len, int64_t& pos);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
       protected:
         /* return OB_CHUNKSERVER, OB_MERGESERVER, OB_ROOTSERFER,
          * OB_UPDATESERVER */
@@ -91,10 +84,7 @@ namespace oceanbase
         DEF_INT(port, "0", "(1024,65536)", "listen port");
         DEF_STR(devname, "bond0", "listen device");
         DEF_INT(retry_times, "3", "[1,]", "retry times if failed");
-<<<<<<< HEAD
         DEF_INT(cluster_id, "0", "cluster id");//add longfei [cons static index] e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

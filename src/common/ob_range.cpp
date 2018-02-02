@@ -25,7 +25,6 @@ namespace oceanbase
 { 
   namespace common 
   {
-<<<<<<< HEAD
   //add hxlong [Truncate Table]:20170318:b
   DEFINE_SERIALIZE(ObBorderFlag)
   {
@@ -120,8 +119,6 @@ namespace oceanbase
     return ret;
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 #if 0
     // --------------------------------------------------------

@@ -24,13 +24,10 @@ namespace oceanbase
     ObRingBuffer::ObRingBuffer()
     {
       reset_();
-<<<<<<< HEAD
 
       DEF_BLOCK_BITS=OB_DEFAULT_BLOCK_BITS;
       DEF_BLOCK_SIZE=1<<DEF_BLOCK_BITS;
 
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObRingBuffer::~ObRingBuffer()
@@ -622,11 +619,7 @@ namespace oceanbase
     {
       int64_t offset = 0;
       offset = version << RING_QUEUE_BITS;                   // queue_size = 1 << 10
-<<<<<<< HEAD
       offset = (offset | queue_idx) << DEF_BLOCK_BITS;
-=======
-      offset = (offset | queue_idx) << DEF_BLOCK_BITS;       // block_size = 1 << 22
->>>>>>> refs/remotes/origin/master
       offset |= task_offset;
 
       return offset;

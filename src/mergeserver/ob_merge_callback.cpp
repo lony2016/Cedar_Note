@@ -2,11 +2,7 @@
 #include "ob_merge_callback.h"
 #include "tblog.h"
 #include "mergeserver/ob_merge_server.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "common/ob_packet.h"
 #include "ob_ms_rpc_event.h"
 #include "ob_ms_sql_rpc_event.h"
@@ -20,33 +16,19 @@ namespace oceanbase
   namespace mergeserver
   {
     ObPacketFactory ObMergeCallback::packet_factory_;
-<<<<<<< HEAD
     int ObMergeCallback::process(onev_request_e* r)
     {
       int ret = ONEV_OK;
-=======
-    int ObMergeCallback::process(easy_request_t* r)
-    {
-      int ret = EASY_OK;
->>>>>>> refs/remotes/origin/master
 
       if (NULL == r)
       {
         TBSYS_LOG(WARN, "request is empty, r = %p", r);
-<<<<<<< HEAD
         ret = ONEV_BREAK;
-=======
-        ret = EASY_BREAK;
->>>>>>> refs/remotes/origin/master
       }
       else if (NULL == r->ipacket)
       {
         TBSYS_LOG(WARN, "request is empty, r->ipacket = %p", r->ipacket);
-<<<<<<< HEAD
         ret = ONEV_BREAK;
-=======
-        ret = EASY_BREAK;
->>>>>>> refs/remotes/origin/master
       }
       else
       {
@@ -57,11 +39,7 @@ namespace oceanbase
         if (OB_REQUIRE_HEARTBEAT == req->get_packet_code())
         {
           server->handle_request(req);
-<<<<<<< HEAD
           ret = ONEV_OK;
-=======
-          ret = EASY_OK;
->>>>>>> refs/remotes/origin/master
         }
         else
         {
@@ -69,7 +47,6 @@ namespace oceanbase
           if (OB_SUCCESS == ret)
           {
             r->ms->c->pool->ref++;
-<<<<<<< HEAD
             onev_atomic_inc(&r->ms->pool->ref);
             onev_pool_set_lock(r->ms->pool);
             ret = ONEV_AGAIN;
@@ -77,15 +54,6 @@ namespace oceanbase
           else
           {
             ret = ONEV_OK;
-=======
-            easy_atomic_inc(&r->ms->pool->ref);
-            easy_pool_set_lock(r->ms->pool);
-            ret = EASY_AGAIN;
-          }
-          else
-          {
-            ret = EASY_OK;
->>>>>>> refs/remotes/origin/master
             TBSYS_LOG(WARN, "can not push packet(src is %s, pcode is %u) to packet queue", 
                       inet_ntoa_r(r->ms->c->addr), req->get_packet_code());
 
@@ -95,7 +63,6 @@ namespace oceanbase
       return ret;
     }
     
-<<<<<<< HEAD
     int ObMergeCallback::rpc_process(onev_request_e* r)
     {
       int ret = ONEV_OK;
@@ -103,24 +70,11 @@ namespace oceanbase
       {
         TBSYS_LOG(WARN, "async response is empty, r = %p", r);
         ret = ONEV_ERROR;
-=======
-    int ObMergeCallback::rpc_process(easy_request_t* r)
-    {
-      int ret = EASY_OK;
-      if (NULL == r)
-      {
-        TBSYS_LOG(WARN, "async response is empty, r = %p", r);
-        ret = EASY_ERROR;
->>>>>>> refs/remotes/origin/master
       }
       else if (NULL == r->user_data)
       {
         TBSYS_LOG(WARN, "async response r->user_data = %p", r->user_data);
-<<<<<<< HEAD
         ret = ONEV_ERROR;
-=======
-        ret = EASY_ERROR;
->>>>>>> refs/remotes/origin/master
       }
       else //call handle_packet whatever r->ipacket is null or not
       {
@@ -130,11 +84,7 @@ namespace oceanbase
         {
           TBSYS_LOG(WARN, "r = %p r->ipacket = %p", r, r->ipacket);
         }
-<<<<<<< HEAD
         // 这里是libonev网络线程，所以直接将trace id，chid打印出来,忽略profile log头部打印出的东西
-=======
-        // 这里是libeasy网络线程，所以直接将trace id，chid打印出来,忽略profile log头部打印出的东西
->>>>>>> refs/remotes/origin/master
         else
         {
           //设置包收到的时间
@@ -143,7 +93,6 @@ namespace oceanbase
         ret = event->handle_packet(packet, NULL);
         if (OB_SUCCESS == ret)
         {
-<<<<<<< HEAD
           ret = ONEV_OK;
         }
         else
@@ -162,35 +111,11 @@ namespace oceanbase
       {
         TBSYS_LOG(WARN, "async response is empty, r = %p", r);
         ret = ONEV_ERROR;
-=======
-          ret = EASY_OK;
-        }
-        else
-        {
-          ret = EASY_ERROR;
-        }
-      }
-      easy_session_destroy(r->ms);
-      return EASY_OK;
-    }
-
-    int ObMergeCallback::sql_process(easy_request_t* r)
-    {
-      int ret = EASY_OK;
-      if (NULL == r)
-      {
-        TBSYS_LOG(WARN, "async response is empty, r = %p", r);
-        ret = EASY_ERROR;
->>>>>>> refs/remotes/origin/master
       }
       else if (NULL == r->user_data)
       {
         TBSYS_LOG(WARN, "async response r->user_data = %p", r->user_data);
-<<<<<<< HEAD
         ret = ONEV_ERROR;
-=======
-        ret = EASY_ERROR;
->>>>>>> refs/remotes/origin/master
       }
       else //call handle_packet whatever r->ipacket is null or not
       {
@@ -213,7 +138,6 @@ namespace oceanbase
         r->user_data = NULL;
         if (OB_SUCCESS == ret)
         {
-<<<<<<< HEAD
           ret = ONEV_OK;
         }
         else
@@ -223,17 +147,6 @@ namespace oceanbase
       }
       onev_destroy_session(r->ms);
       return ONEV_OK;
-=======
-          ret = EASY_OK;
-        }
-        else
-        {
-          ret = EASY_ERROR;
-        }
-      }
-      easy_session_destroy(r->ms);
-      return EASY_OK;
->>>>>>> refs/remotes/origin/master
     }
   }//namespace mergeserver
 }//namespace oceanbase

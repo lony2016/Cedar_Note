@@ -215,7 +215,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160625:b
     int ObSeqQueue::update_after_switch(const int64_t seq)
     {
@@ -228,7 +227,5 @@ namespace oceanbase
       return err;
     }
 	//add:e
-=======
->>>>>>> refs/remotes/origin/master
   }; // end namespace common
 }; // end namespace oceanbase

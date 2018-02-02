@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -132,13 +129,9 @@ namespace oceanbase
         void nb_print_balance_infos(char *buf, const int64_t buf_len, int64_t& pos); // for monitor
         void dump_migrate_info() const; // for monitor
         void nb_print_shutting_down_progress(char *buf, const int64_t buf_len, int64_t& pos); // for monitor
-<<<<<<< HEAD
         //add wenghaixing [secondary index.static_index]20151216
         bool check_create_index_over();
         //add e
-=======
-
->>>>>>> refs/remotes/origin/master
         // testing functions
         bool nb_is_all_tables_balanced(const common::ObServer &except_cs); // only for testing
         bool nb_is_all_tablets_replicated(int32_t expected_replicas_num);    // only for testing

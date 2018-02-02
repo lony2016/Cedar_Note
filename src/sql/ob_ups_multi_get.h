@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -42,12 +39,9 @@
 #include "common/ob_sql_ups_rpc_proxy.h"
 #include "ob_rowkey_phy_operator.h"
 #include "common/ob_row.h"
-<<<<<<< HEAD
 // add by guojinwei [repeatable read] 20160312:b
 #include "common/ob_transaction.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {

@@ -118,7 +118,6 @@ int64_t ObConfigIntItem::get(const char* str, bool &valid) const
   }
   return value;
 }
-<<<<<<< HEAD
 //add by qx 20161027 :b
 int64_t ObConfigInt2Item::get(const char* str, bool &valid) const
 {
@@ -147,8 +146,6 @@ int64_t ObConfigInt2Item::get(const char* str, bool &valid) const
 }
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 
 int64_t ObConfigTimeItem::get(const char* str, bool &valid) const
 {

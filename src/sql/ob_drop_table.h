@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -58,7 +55,6 @@ namespace oceanbase
 
         void set_if_exists(bool if_exists);
         int add_table_name(const common::ObString &tname);
-<<<<<<< HEAD
         // longfei [drop index]
         /**
          * @brief get_if_exists
@@ -67,8 +63,6 @@ namespace oceanbase
         const bool get_if_exists() const;
 
         mergeserver::ObMergerRootRpcProxy* get_rpc_stub() const;
-=======
->>>>>>> refs/remotes/origin/master
 
         /// execute the insert statement
         virtual int open();
@@ -80,7 +74,6 @@ namespace oceanbase
         virtual int get_next_row(const common::ObRow *&row);
         /// @note always return OB_NOT_SUPPORTED
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
-<<<<<<< HEAD
 
         // longfei [drop index]
         /**
@@ -106,8 +99,6 @@ namespace oceanbase
         int add_all_indexs(const common::ObString &idxname);
 
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // types and constants
       private:
@@ -120,13 +111,10 @@ namespace oceanbase
         bool if_exists_;
         common::ObStrings tables_;
         mergeserver::ObMergerRootRpcProxy* rpc_;
-<<<<<<< HEAD
 
         // add longfei [drop index] 20151028
         bool has_indexs_; ///< table has index?
         common::ObStrings all_indexs_; ///< store all indexs on all tables
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline int ObDropTable::get_next_row(const common::ObRow *&row)
@@ -146,7 +134,6 @@ namespace oceanbase
       rpc_ = rpc;
     }
 
-<<<<<<< HEAD
     inline bool ObDropTable::isHasIndexs() const
     {
       return has_indexs_;
@@ -157,8 +144,6 @@ namespace oceanbase
       has_indexs_ = hasIndexs;
     }
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace sql
 } // end namespace oceanbase
 

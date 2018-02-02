@@ -20,14 +20,10 @@ namespace oceanbase
     int64_t ObUpsModifyWithDmlType::to_string(char* buf, const int64_t buf_len) const
     {
       int64_t pos = 0;
-<<<<<<< HEAD
       //modify wangjiahao [table lock] 20160616 :b
       //databuff_printf(buf, buf_len, pos, "ObUpsModifyWithDmlType(dml_type=%s)\n", str_dml_type(dml_type_));
       databuff_printf(buf, buf_len, pos, "ObUpsModifyWithDmlType(dml_type=%s, table_id=%ld)\n", str_dml_type(dml_type_), table_id_);
       //modify :e
-=======
-      databuff_printf(buf, buf_len, pos, "ObUpsModifyWithDmlType(dml_type=%s)\n", str_dml_type(dml_type_));
->>>>>>> refs/remotes/origin/master
       if (NULL != child_op_)
       {
         pos += child_op_->to_string(buf+pos, buf_len-pos);
@@ -43,7 +39,6 @@ namespace oceanbase
       {
         TBSYS_LOG(ERROR, "serialize(buf=%p[%ld-%ld])=>%d", buf, new_pos, buf_len, err);
       }
-<<<<<<< HEAD
       //add wangjiahao [table lock] 20160616 :b
       else if (OB_SUCCESS != (err = serialization::encode_i64(buf, buf_len, new_pos, table_id_)))
       {
@@ -56,8 +51,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "serialize(buf=%p[%ld-%ld])=>%d", buf, new_pos, buf_len, err);
       }
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
       else
       {
         pos = new_pos;
@@ -73,7 +66,6 @@ namespace oceanbase
       {
         TBSYS_LOG(ERROR, "deserialize(buf=%p[%ld-%ld])=>%d", buf, new_pos, data_len, err);
       }
-<<<<<<< HEAD
       //add wangjiahao [table lock] 20160616 :b
       else if (OB_SUCCESS != (err = serialization::decode_i64(buf, data_len, new_pos, (int64_t*)&table_id_)))
       {
@@ -85,8 +77,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "deserialize(buf=%p[%ld-%ld])=>%d", buf, new_pos, data_len, err);
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       else
       {
         pos = new_pos;
@@ -96,15 +86,11 @@ namespace oceanbase
 
     int64_t ObUpsModifyWithDmlType::get_serialize_size(void) const
     {
-<<<<<<< HEAD
       return serialization::encoded_length_i32(dml_type_)
           //add lbzhong [auto_increment] 20161215:b
           + serialization::encoded_length_i64(auto_value_)
           //add:e
           ;
-=======
-      return serialization::encoded_length_i32(dml_type_);
->>>>>>> refs/remotes/origin/master
     }
 
     REGISTER_PHY_OPERATOR(ObUpsModify, PHY_UPS_MODIFY);

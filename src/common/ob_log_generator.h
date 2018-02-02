@@ -55,7 +55,6 @@ namespace oceanbase
         int update_cursor(const ObLogCursor& log_cursor); // 备机写日志时也会更新log_generator的cursor
         int fill_batch(const char* buf, int64_t len);
         int write_log(const LogCommand cmd, const char* log_data, const int64_t data_len);
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160328:b
         /**
          * @brief write log using the input parameters
@@ -91,22 +90,12 @@ namespace oceanbase
         //int gen_keep_alive();
         int gen_keep_alive(const bool is_ups_nop, const int64_t max_cmt_id);
         //mod:e
-=======
-        template<typename T>
-        int write_log(const LogCommand cmd, T& data);
-        int get_log(ObLogCursor& start_cursor, ObLogCursor& end_cursor, char*& buf, int64_t& len);
-        int commit(const ObLogCursor& end_cursor);
-        int switch_log(int64_t& new_file_id);
-        int check_point(int64_t& cur_log_file_id);
-        int gen_keep_alive();
->>>>>>> refs/remotes/origin/master
         bool is_clear() const;
         int64_t to_string(char* buf, const int64_t len) const;
         static bool is_eof(const char* buf, int64_t len);
       public:
         int get_start_cursor(ObLogCursor& log_cursor) const;
         int get_end_cursor(ObLogCursor& log_cursor) const;
-<<<<<<< HEAD
 		//add chujiajia [log synchronization][multi_cluster] 20160625:b
         /**
          * @brief set start_cursor_
@@ -121,8 +110,6 @@ namespace oceanbase
          */
         void set_end_cursor(ObLogCursor& log_cursor);
 		//add:e
-=======
->>>>>>> refs/remotes/origin/master
         int dump_for_debug() const;
       protected:
         bool is_inited() const;
@@ -130,7 +117,6 @@ namespace oceanbase
         bool has_log() const;
         int do_write_log(const LogCommand cmd, const char* log_data, const int64_t data_len,
                          const int64_t reserved_len);
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160328:b
         /**
          * @brief do write log using the input parameters
@@ -159,11 +145,6 @@ namespace oceanbase
          */
         int write_nop(const bool is_ups_nop, const int64_t max_cmt_id, const bool force_write=false);
         //modify:e
-=======
-        int check_log_file_size();
-        int switch_log();
-        int write_nop(const bool force_write=false);
->>>>>>> refs/remotes/origin/master
         int append_eof();
       public:
         static char eof_flag_buf_[LOG_FILE_ALIGN_SIZE] __attribute__ ((aligned(DIO_ALIGN_SIZE)));
@@ -248,7 +229,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
 
     //add chujiajia [log synchronization][multi_cluster] 20160603:b
     template<typename T>
@@ -328,8 +308,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 

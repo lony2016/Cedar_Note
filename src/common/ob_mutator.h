@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,8 +13,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_07_24
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -158,14 +155,11 @@ namespace oceanbase
             const ObString& column_name, const ObObj& value, const int return_flag = RETURN_NO_RESULT);
         int update(const uint64_t table_id, const ObRowkey& row_key,
             const uint64_t column_id, const ObObj& value, const int return_flag = RETURN_NO_RESULT);
-<<<<<<< HEAD
         //add by qx 20170210 :b
         //fix replace rowkey conflict
         int update(const uint64_t table_id, const ObRowkey& row_key,
             const uint64_t column_id, const ObObj& value, bool is_row_changed,const int return_flag = RETURN_NO_RESULT );
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         // Adds insert mutation to list
         int insert(const ObString& table_name, const ObRowkey& row_key,
             const ObString& column_name, const ObObj& value, const int return_flag = RETURN_NO_RESULT);
@@ -186,7 +180,6 @@ namespace oceanbase
         int del_row(const ObString& table_name, const ObRowkey& row_key);
         int del_row(const uint64_t table_id, const ObRowkey& row_key);
 
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:2017403:b
         int trun_tab(const uint64_t table_id, const common::ObString & table_name, const common::ObString & user_name, const common::ObString & comment);
         int ups_trun_tab(const uint64_t table_id, const bool force_finish = false);
@@ -198,11 +191,6 @@ namespace oceanbase
         // add function for fix bug replace rowkey conflict
         int add_cell(const ObMutatorCellInfo& cell, bool is_row_changed);
         //add :e
-=======
-        int add_row_barrier();
-        int set_dml_type(const ObDmlType dml_type);
-        int add_cell(const ObMutatorCellInfo& cell);
->>>>>>> refs/remotes/origin/master
         const ObString & get_first_table_name(void) const;
         int64_t size(void) const;
       public:
@@ -249,16 +237,11 @@ namespace oceanbase
         };
 
       private:
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20150520
         //int copy_cell_(const ObMutatorCellInfo& src_cell, ObMutatorCellInfo& dst_cell,
         //              RowChangedStat row_changed_stat, int64_t& store_size);
         int copy_cell_(const ObMutatorCellInfo& src_cell, ObMutatorCellInfo& dst_cell,
                       RowChangedStat row_changed_stat, int64_t& store_size, const BarrierFlag barrier_flag );
-=======
-        int copy_cell_(const ObMutatorCellInfo& src_cell, ObMutatorCellInfo& dst_cell,
-                      RowChangedStat row_changed_stat, int64_t& store_size);
->>>>>>> refs/remotes/origin/master
         int add_node_(CellInfoNode* cur_node);
 
       private:

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date  2016_07_26
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2012 Taobao Inc.
  *
@@ -69,7 +66,6 @@ namespace oceanbase
       int modify_table_id(common::TableSchema &table_schema, const int64_t new_table_id);
       // update max used table id
       int update_max_table_id(const uint64_t table_id);
-<<<<<<< HEAD
       //add by wangdonghui 20160125 :b
       /**
        * @brief create_procedure
@@ -92,8 +88,6 @@ namespace oceanbase
       //add wenghaixing [secondary index.static_index]20151217
       tbsys::CThreadMutex &get_ddl_lock(){return mutex_lock_;}
       //add e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       bool check_inner_stat(void) const;
       // read max table id and modify table schema
@@ -116,7 +110,6 @@ namespace oceanbase
       // allocate column id
       int set_column_info(const common::TableSchema & schema, const char * column_name,
           uint64_t & max_column_id, AlterColumn & column);
-<<<<<<< HEAD
 
       //add by wangdonghui 20160125 :b
       /**
@@ -138,8 +131,6 @@ namespace oceanbase
        */
       bool delete_procedure(const common::ObString & proc_name);
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       // not support parallel ddl operation
       tbsys::CThreadMutex mutex_lock_;

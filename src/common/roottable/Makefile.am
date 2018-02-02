@@ -1,9 +1,5 @@
 AM_CPPFLAGS= -I${TBLIB_ROOT}/include/tbsys \
-<<<<<<< HEAD
 			 -I${ONEV_ROOT}/include/onev \
-=======
-			 -I${EASY_ROOT}/include/easy \
->>>>>>> refs/remotes/origin/master
 			 -I${top_srcdir}/include \
 			 -I${top_srcdir}/src
 
@@ -13,11 +9,7 @@ CXXFLAGS+=-fprofile-arcs -ftest-coverage
 AM_LDFLAGS+=-lgcov
 endif
 
-<<<<<<< HEAD
 LDADD = ${ONEV_LIB_PATH}/libonev.a ${TBLIB_ROOT}/lib/libtbsys.a
-=======
-LDADD = ${EASY_LIB_PATH}/libeasy.a ${TBLIB_ROOT}/lib/libtbsys.a
->>>>>>> refs/remotes/origin/master
 
 noinst_LIBRARIES = libroottable.a
 

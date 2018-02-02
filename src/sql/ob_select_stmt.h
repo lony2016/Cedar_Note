@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 /**
 * Copyright (C) 2013-2016 ECNU_DaSE.
@@ -18,8 +17,6 @@
 * @date 2016_07_29
 */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_SELECTSTMT_H_
 #define OCEANBASE_SQL_SELECTSTMT_H_
 
@@ -29,21 +26,17 @@
 #include "common/ob_string_buf.h"
 #include "common/ob_array.h"
 #include "common/ob_vector.h"
-<<<<<<< HEAD
 //delete by qx [query optimization] 20170308 :b
 //add by dhc [query optimization] 20170227 :b
 //#include "ob_optimizer_relation.h"
 //add :e
 #include "common/ob_list.h"
 //delete :e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
 
     //add by qx [query optimization] :b
     class ObBaseRelStatInfo;
@@ -54,8 +47,6 @@ namespace oceanbase
     class ObFromItemJoinMethodHelper;
     //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
     struct SelectItem
     {
       uint64_t   expr_id_;
@@ -85,7 +76,6 @@ namespace oceanbase
         T_LEFT,
         T_RIGHT,
         T_INNER,
-<<<<<<< HEAD
         //add wanglei [semi join] 20170417:b
         T_SEMI,
         T_SEMI_LEFT,
@@ -103,14 +93,10 @@ namespace oceanbase
         MERGE_JOIN,
       };
       //add:e
-=======
-      };
->>>>>>> refs/remotes/origin/master
 
       int add_table_id(uint64_t tid) { return table_ids_.push_back(tid); }
       int add_join_type(JoinType type) { return join_types_.push_back(type); }
       int add_expr_id(uint64_t eid) { return expr_ids_.push_back(eid); }
-<<<<<<< HEAD
       int add_join_exprs(ObVector<uint64_t>& exprs);
       void set_joined_tid(uint64_t tid) { joined_table_id_ = tid; }
       //add by dhc [query optimization] 20170220:b
@@ -122,28 +108,20 @@ namespace oceanbase
       common::ObArray<uint64_t>& get_expr_ids() { return expr_ids_; }
       common::ObArray<uint64_t>& get_join_types() { return join_types_; }      
       
-=======
-      void set_joined_tid(uint64_t tid) { joined_table_id_ = tid; }
-
->>>>>>> refs/remotes/origin/master
       uint64_t   joined_table_id_;
       common::ObArray<uint64_t>  table_ids_;
       common::ObArray<uint64_t>  join_types_;
       common::ObArray<uint64_t>  expr_ids_;
-<<<<<<< HEAD
       //add by dhc [query optimization] 20170220:b
       /**
        * @brief 记录决策后的两表连接算法
        */
       common::ObArray<uint64_t>  optimized_join_operator_;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     struct FromItem
     {
-<<<<<<< HEAD
       //add by dhc [query optimization] 20170227 :b
       FromItem()
       {
@@ -156,11 +134,6 @@ namespace oceanbase
       uint64_t   table_id_;
       // false: it is the real table id
       // true: it is the joined table id //slwang note: new gen_table_id
-=======
-      uint64_t   table_id_;
-      // false: it is the real table id
-      // true: it is the joined table id
->>>>>>> refs/remotes/origin/master
       bool      is_joined_;
     };
   }
@@ -214,7 +187,6 @@ namespace oceanbase
         NONE,
       };
 
-<<<<<<< HEAD
       //add by dhc [query optimization] 20170328:b
       /**
        * @brief 支持的两表连接算法
@@ -227,8 +199,6 @@ namespace oceanbase
       };
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       ObSelectStmt(common::ObStringBuf* name_pool);
       virtual ~ObSelectStmt();
 
@@ -274,7 +244,6 @@ namespace oceanbase
         OB_ASSERT(0 <= index && index < from_items_.size());
         return from_items_[index];
       }
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/12
       common::ObVector<FromItem>& get_from_items()
@@ -303,15 +272,12 @@ namespace oceanbase
         return select_stmt_rel_info_;
       }
       //add dhc :e
-=======
->>>>>>> refs/remotes/origin/master
 
       const OrderItem& get_order_item(int32_t index) const
       {
         OB_ASSERT(0 <= index && index < order_items_.size());
         return order_items_[index];
       }
-<<<<<<< HEAD
 	  //add dhc, [optimize group_order by index,query_optimizer]20170419:b
       int64_t& get_order_item_flag(int32_t index) const
       {
@@ -319,15 +285,11 @@ namespace oceanbase
         return order_items_indexed_flags_[index];
       }
 	  //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       uint64_t get_group_expr_id(int32_t index) const
       {
         OB_ASSERT(0 <= index && index < group_expr_ids_.size());
         return group_expr_ids_[index];
       }
-<<<<<<< HEAD
 	  //add dhc, [optimize group_order by index/query optimizer]20170419:b
       int64_t& get_group_expr_flag(int32_t index) const
       {
@@ -335,9 +297,6 @@ namespace oceanbase
         return group_expr_indexed_flags_[index];
       }
 	  //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       uint64_t get_agg_expr_id(int32_t index) const
       {
         OB_ASSERT(0 <= index && index < agg_func_ids_.size());
@@ -357,10 +316,7 @@ namespace oceanbase
 
       int add_group_expr(uint64_t expr_id)
       {
-<<<<<<< HEAD
         group_expr_indexed_flags_.push_back(0);//add dhc, [optimize group_order by index,query_optimizer]20170419
-=======
->>>>>>> refs/remotes/origin/master
         return group_expr_ids_.push_back(expr_id);
       }
 
@@ -388,10 +344,7 @@ namespace oceanbase
 
       int add_order_item(OrderItem& order_item)
       {
-<<<<<<< HEAD
         order_items_indexed_flags_.push_back(0);//add dhc, [optimize group_order by index,query_optimizer]20170419
-=======
->>>>>>> refs/remotes/origin/master
         return order_items_.push_back(order_item);
       }
 
@@ -431,7 +384,6 @@ namespace oceanbase
 
       int copy_select_items(ObSelectStmt* select_stmt);
       void print(FILE* fp, int32_t level, int32_t index = 0);
-<<<<<<< HEAD
       /**
        * @brief add_raw_var_expr
        * add a variable expression
@@ -486,8 +438,6 @@ namespace oceanbase
       {
         return column_items_;
       }
-=======
->>>>>>> refs/remotes/origin/master
 
     private:
       /* These fields are only used by normal select */
@@ -496,10 +446,7 @@ namespace oceanbase
       common::ObVector<FromItem>     from_items_;
       common::ObVector<JoinedTable*> joined_tables_;
       common::ObVector<uint64_t>     group_expr_ids_;
-<<<<<<< HEAD
       common::ObVector<int64_t>      group_expr_indexed_flags_;//indexed flag, 0 false : 1 true, default false //add liumz, [optimize group_order by index]20170419
-=======
->>>>>>> refs/remotes/origin/master
       common::ObVector<uint64_t>     having_expr_ids_;
       common::ObVector<uint64_t>     agg_func_ids_;
 
@@ -511,11 +458,8 @@ namespace oceanbase
 
       /* These fields are used by both normal select and set select */
       common::ObVector<OrderItem>  order_items_;
-<<<<<<< HEAD
 	  common::ObVector<int64_t>    order_items_indexed_flags_;//indexed flag, 0 false : 1 true, default false //add liumz, [optimize group_order by index]20170419
       
-=======
->>>>>>> refs/remotes/origin/master
 
       /* -1 means no limit */
       uint64_t    limit_count_id_;
@@ -525,7 +469,6 @@ namespace oceanbase
       bool      for_update_;
 
       uint64_t    gen_joined_tid_;
-<<<<<<< HEAD
 
       //add zt 20151105:b
       common::ObArray<const ObRawExpr *> var_expr_list_;
@@ -543,8 +486,6 @@ namespace oceanbase
       oceanbase::common::ObList<ObOptimizerRelation*> joined_from_item_rel_info_list_;  ///< joined from item relation info list
       ObOptimizerRelation* select_stmt_rel_info_;
       // add e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

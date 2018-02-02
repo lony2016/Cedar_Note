@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -132,11 +129,7 @@ namespace oceanbase
         OB_ASYNC_FILE_APPENDER,
         OB_MODULE_PAGE_ALLOCATOR,
         OB_PACKET_LIGHTY_QUEUE,
-<<<<<<< HEAD
         LIBONEV,
-=======
-        LIBEASY,
->>>>>>> refs/remotes/origin/master
         OB_RESULT_SET,
         OB_FIRST_TABLET_META,
         OB_FILE_CLIENT,
@@ -179,7 +172,6 @@ namespace oceanbase
         OB_MS_UPDATE_BLOOM_FILTER,
         OB_MS_SQL_SCAN_REQ_POOL,
         OB_MS_SQL_GET_REQ_POOL,
-<<<<<<< HEAD
         //add maoxx
         OB_STATIC_INDEX_HISTOGRAM,
         OB_TABLET_HISTOGRAM_REPORT, ///<module for reporting table histogram information
@@ -192,8 +184,6 @@ namespace oceanbase
         OB_STATISTICS_BUILD,
         //add e
         OB_MS_SUB_QUERY, // add lxb [hash join single] 20170408 
-=======
->>>>>>> refs/remotes/origin/master
 
         // updateserver modules
         OB_UPS_ENGINE,
@@ -221,10 +211,7 @@ namespace oceanbase
         OB_CS_COMMON,
         OB_CS_FILE_RECYCLE,
         OB_CS_BLOOM_FILTER,
-<<<<<<< HEAD
         OB_INDEX_HANDLER, //add longfei [cons static index] 151205:e
-=======
->>>>>>> refs/remotes/origin/master
 
         // sstable modules
         OB_SSTABLE_AIO,
@@ -267,10 +254,7 @@ namespace oceanbase
         OB_SQL_AGGR_FUNC,
         OB_SQL_INSERT,
         OB_SQL_MERGE_JOIN,
-<<<<<<< HEAD
         OB_SQL_SEMI_JOIN,//add wanglei [semi join] 20170417
-=======
->>>>>>> refs/remotes/origin/master
         OB_SQL_RESULT_SET,
         OB_SQL_TABLET_CACHE_JOIN,
         OB_SQL_UPDATE,
@@ -291,25 +275,18 @@ namespace oceanbase
         OB_SQL_PS_STORE_PHYSICALPLAN,
         OB_SQL_PS_STORE_OPERATORS,
         OB_SQL_PS_STORE_ITEM,
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161129:b
         OB_SQL_AUTO_INCREMENT,
         //add:e
         OB_STATIC_INDEX,//add wenghaixing [secondary index.static_index]20151118
-=======
-
->>>>>>> refs/remotes/origin/master
         // liboblog
         OB_LOG_BINLOG_RECORD,
         OB_LOG_STMT,
 
-<<<<<<< HEAD
         //add by qx 20161024 :b
         OB_SQL_EXPLAIN,  ///<  module for sql explain temp buffer
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
         OB_MOD_END
       };
     };
@@ -361,11 +338,7 @@ namespace oceanbase
       ADD_MOD(OB_ASYNC_FILE_APPENDER);
       ADD_MOD(OB_MODULE_PAGE_ALLOCATOR);
       ADD_MOD(OB_PACKET_LIGHTY_QUEUE);
-<<<<<<< HEAD
       ADD_MOD(LIBONEV);
-=======
-      ADD_MOD(LIBEASY);
->>>>>>> refs/remotes/origin/master
       ADD_MOD(OB_RESULT_SET);
       ADD_MOD(OB_FIRST_TABLET_META);
       ADD_MOD(OB_FILE_CLIENT);
@@ -407,15 +380,12 @@ namespace oceanbase
       ADD_MOD(OB_MS_UPDATE_BLOOM_FILTER);
       ADD_MOD(OB_MS_SQL_SCAN_REQ_POOL);
       ADD_MOD(OB_MS_SQL_GET_REQ_POOL);
-<<<<<<< HEAD
       //add maoxx
       ADD_MOD(OB_TABLET_HISTOGRAM_REPORT); ///<add module for reporting table histogram information
       //add e
       //add weixing [statistics build]20170118:b
       ADD_MOD(OB_STATISTICS_BUILD);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       ADD_MOD(OB_UPS_ENGINE);
       ADD_MOD(OB_UPS_MEMTABLE);
@@ -499,7 +469,6 @@ namespace oceanbase
       ADD_MOD(OB_SQL_PS_STORE_PHYSICALPLAN);
       ADD_MOD(OB_SQL_PS_STORE_OPERATORS);
       ADD_MOD(OB_SQL_PS_STORE_ITEM);
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161129:b
       ADD_MOD(OB_SQL_AUTO_INCREMENT);
       //add:e
@@ -507,8 +476,6 @@ namespace oceanbase
       ADD_MOD(OB_STATIC_INDEX);//add wenghaixing [secondary index.static_index]20151118
 
       ADD_MOD(OB_SQL_EXPLAIN); //add by qx 20161024
-=======
->>>>>>> refs/remotes/origin/master
 
       ADD_MOD(OB_MOD_END);
     }

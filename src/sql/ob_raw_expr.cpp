@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_raw_expr.h"
 #include "ob_transformer.h"
 #include "type_name.c"
@@ -81,7 +78,6 @@ bool ObRawExpr::is_join_cond() const
       && binary_expr->get_second_op_expr()->get_expr_type() == T_REF_COLUMN)
       ret = true;
   }
-<<<<<<< HEAD
   else if(is_semi_join_cond()){
     ret = true;
   }
@@ -165,11 +161,6 @@ bool ObRawExpr::is_sub_query() const
 
 
 //add :e
-=======
-  return ret;
-}
-
->>>>>>> refs/remotes/origin/master
 bool ObRawExpr::is_aggr_fun() const
 {
   bool ret = false;
@@ -213,15 +204,12 @@ int ObConstRawExpr::set_value_and_type(const common::ObObj& val)
       this->set_expr_type(T_BOOL);
       this->set_result_type(ObBoolType);
       break;
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     case ObDecimalType:
       this->set_expr_type(T_DECIMAL);
       this->set_result_type(ObDecimalType);
       break;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     default:
       ret = OB_NOT_SUPPORTED;
       TBSYS_LOG(WARN, "obj type not support, type=%d", val.get_type());
@@ -339,7 +327,6 @@ int ObConstRawExpr::fill_sql_expression(
       item.value_.double_ = d;
       break;
     case T_DECIMAL:
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL 2016_12
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //ret = value_.get_varchar(item.string_);
@@ -351,12 +338,6 @@ int ObConstRawExpr::fill_sql_expression(
     case T_INT:
       ret = value_.get_int(item.value_.int_);//slwang note:value_是ObConstRawExpr的成员变量，是一个ObObj对象
                                              //get_int实质上是把ObObj中的value_中的int_val值（这才是实际存储的值）传给了item下的value_中的int_
-=======
-      ret = value_.get_varchar(item.string_);
-      break;
-    case T_INT:
-      ret = value_.get_int(item.value_.int_);
->>>>>>> refs/remotes/origin/master
       break;
     case T_BOOL:
       ret = value_.get_bool(item.value_.bool_);
@@ -385,7 +366,6 @@ int ObConstRawExpr::fill_sql_expression(
   return ret;
 }
 
-<<<<<<< HEAD
 //add zt 20151125:b
 int ObArrayRawExpr::fill_sql_expression(
     ObSqlExpression &inter_expr,
@@ -450,8 +430,6 @@ void ObArrayRawExpr::print(FILE *fp, int32_t level) const
 }
 //add zt 20151125:e
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObCurTimeExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
@@ -480,11 +458,7 @@ int ObCurTimeExpr::fill_sql_expression(
 void ObUnaryRefRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-<<<<<<< HEAD
   fprintf(fp, "<ObUnaryRefRawExpr> %s : %lu </ObUnaryRefRawExpr>\n", get_type_name(get_expr_type()), id_);
-=======
-  fprintf(fp, "%s : %lu\n", get_type_name(get_expr_type()), id_);
->>>>>>> refs/remotes/origin/master
 }
 
 int ObUnaryRefRawExpr::fill_sql_expression(
@@ -522,17 +496,10 @@ void ObBinaryRefRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   if (first_id_ == OB_INVALID_ID)
-<<<<<<< HEAD
     fprintf(fp, "<ObBinaryRefRawExpr> %s : [table_id, column_id] = [NULL, %lu] </ObBinaryRefRawExpr>\n",
             get_type_name(get_expr_type()), second_id_);
   else
     fprintf(fp, "<ObBinaryRefRawExpr> %s : [table_id, column_id] = [%lu, %lu] </ObBinaryRefRawExpr>\n",
-=======
-    fprintf(fp, "%s : [table_id, column_id] = [NULL, %lu]\n",
-            get_type_name(get_expr_type()), second_id_);
-  else
-    fprintf(fp, "%s : [table_id, column_id] = [%lu, %lu]\n",
->>>>>>> refs/remotes/origin/master
             get_type_name(get_expr_type()), first_id_, second_id_);
 }
 
@@ -568,7 +535,6 @@ int ObBinaryRefRawExpr::fill_sql_expression(
 void ObUnaryOpRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-<<<<<<< HEAD
   fprintf(fp, "<ObUnaryOpRawExpr>\n");
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
@@ -578,10 +544,6 @@ void ObUnaryOpRawExpr::print(FILE* fp, int32_t level) const
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   fprintf(fp, "</ObUnaryOpRawExpr>\n");
-=======
-  fprintf(fp, "%s\n", get_type_name(get_expr_type()));
-  expr_->print(fp, level + 1);
->>>>>>> refs/remotes/origin/master
 }
 
 int ObUnaryOpRawExpr::fill_sql_expression(
@@ -605,7 +567,6 @@ int ObUnaryOpRawExpr::fill_sql_expression(
 void ObBinaryOpRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-<<<<<<< HEAD
   fprintf(fp, "<ObBinaryOpRawExpr>\n");
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
@@ -616,11 +577,6 @@ void ObBinaryOpRawExpr::print(FILE* fp, int32_t level) const
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   fprintf(fp, "</ObBinaryOpRawExpr>\n");
-=======
-  fprintf(fp, "%s\n", get_type_name(get_expr_type()));
-  first_expr_->print(fp, level + 1);
-  second_expr_->print(fp, level + 1);
->>>>>>> refs/remotes/origin/master
 }
 
 void ObBinaryOpRawExpr::set_op_exprs(ObRawExpr *first_expr, ObRawExpr *second_expr)
@@ -691,11 +647,7 @@ int ObBinaryOpRawExpr::fill_sql_expression(
     }
     else if (first_expr_->get_expr_type() != T_OP_ROW
       && first_expr_->get_expr_type() != T_REF_QUERY
-<<<<<<< HEAD
       && second_expr_->get_expr_type() == T_OP_ROW)//slwang note: 表达式：c1 in (1, 2, 3) c1是T_REF_COLUMN;(1,2,3)是T_OP_ROW
-=======
-      && second_expr_->get_expr_type() == T_OP_ROW)
->>>>>>> refs/remotes/origin/master
     {
       dem_1_to_2 = true;
       ExprItem dem2;
@@ -735,11 +687,7 @@ int ObBinaryOpRawExpr::fill_sql_expression(
       ExprItem dem2;
       dem2.type_ = T_OP_ROW;
       dem2.data_type_ = ObIntType;
-<<<<<<< HEAD
       dem2.value_.int_ = 1;//slwang note
-=======
-      dem2.value_.int_ = 1;
->>>>>>> refs/remotes/origin/master
       ObMultiOpRawExpr *row_expr = dynamic_cast<ObMultiOpRawExpr*>(second_expr_);
       if (row_expr != NULL)
       {
@@ -776,22 +724,16 @@ int ObBinaryOpRawExpr::fill_sql_expression(
 void ObTripleOpRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-<<<<<<< HEAD
   fprintf(fp, "<ObTripleOpRawExpr>\n");
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-=======
->>>>>>> refs/remotes/origin/master
   fprintf(fp, "%s\n", get_type_name(get_expr_type()));
   first_expr_->print(fp, level + 1);
   second_expr_->print(fp, level + 1);
   third_expr_->print(fp, level + 1);
-<<<<<<< HEAD
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   fprintf(fp, "</ObTripleOpRawExpr>\n");
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void ObTripleOpRawExpr::set_op_exprs(
@@ -830,23 +772,17 @@ int ObTripleOpRawExpr::fill_sql_expression(
 void ObMultiOpRawExpr::print(FILE* fp, int32_t level) const
 {
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-<<<<<<< HEAD
   fprintf(fp, "<ObMultiOpRawExpr>\n");
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-=======
->>>>>>> refs/remotes/origin/master
   fprintf(fp, "%s\n", get_type_name(get_expr_type()));
   for (int32_t i = 0; i < exprs_.size(); i++)
   {
     exprs_[i]->print(fp, level + 1);
   }
-<<<<<<< HEAD
   
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   fprintf(fp, "</ObMultiOpRawExpr>\n");
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObMultiOpRawExpr::fill_sql_expression(
@@ -997,13 +933,10 @@ ObSqlRawExpr::ObSqlRawExpr()
   contain_alias_ = false;
   is_columnlized_ = false;
   expr_ = NULL;
-<<<<<<< HEAD
 
   //add dhc [join_without_pushdown_is_null/query_optimizer] 20151214:b
   can_push_down_with_outerjoin_ = true;
   //add duyr 20151214:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 ObSqlRawExpr::ObSqlRawExpr(
@@ -1017,13 +950,10 @@ ObSqlRawExpr::ObSqlRawExpr(
   contain_alias_ = false;
   is_columnlized_ = false;
   expr_ = expr;
-<<<<<<< HEAD
 
   //add dhc [join_without_pushdown_is_null/query_optimizer] 20151214:b
   can_push_down_with_outerjoin_ = true;
   //add duyr 20151214:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSqlRawExpr::fill_sql_expression(
@@ -1058,7 +988,6 @@ void ObSqlRawExpr::print(FILE* fp, int32_t level, int32_t index) const
     fprintf(fp, "(table_id : column_id) = (NULL : %lu)\n", column_id_);
   else
     fprintf(fp, "(table_id : column_id) = (%lu : %lu)\n", table_id_, column_id_);
-<<<<<<< HEAD
   for(int i = 0; i < level; ++i) fprintf(fp, "    ");
   fprintf(fp, "is_apply_: %s, contain_aggr_: %s, contain_alias_: %s, is_columnlized_: %s\n", 
   	is_apply_?"True":"False", contain_aggr_?"True":"False", contain_alias_?"True":"False", is_columnlized_?"True":"False");
@@ -1429,9 +1358,3 @@ int ObSysFunRawExpr::optimize_sql_expression(
   
   return ret;
 }
-=======
-  expr_->print(fp, level);
-  for(int i = 0; i < level; ++i) fprintf(fp, "    ");
-  fprintf(fp, "<ObSqlRawExpr %d End>\n", index);
-}
->>>>>>> refs/remotes/origin/master

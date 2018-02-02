@@ -19,7 +19,6 @@
 using namespace oceanbase;
 using namespace common;
 using namespace sql;
-<<<<<<< HEAD
 //add wanglei [semi join in expr] 20161130:b
 struct ObSqlReadStrategy::Comparer
 {
@@ -156,9 +155,6 @@ int  ObSqlReadStrategy::release_rowkey_objs()
     return ret ;
 }
 //add wanglei [semi join in expr] 20161130:e
-=======
-
->>>>>>> refs/remotes/origin/master
 ObSqlReadStrategy::ObSqlReadStrategy()
   :simple_in_filter_list_(common::OB_MALLOC_BLOCK_SIZE, ModulePageAllocator(ObModIds::OB_SQL_READ_STRATEGY)),
    simple_cond_filter_list_(common::OB_MALLOC_BLOCK_SIZE, ModulePageAllocator(ObModIds::OB_SQL_READ_STRATEGY)),
@@ -166,7 +162,6 @@ ObSqlReadStrategy::ObSqlReadStrategy()
 {
   memset(start_key_mem_hold_, 0, sizeof(start_key_mem_hold_));
   memset(end_key_mem_hold_, 0, sizeof(end_key_mem_hold_));
-<<<<<<< HEAD
   //add wanglei [semi join in expr] 20161130:b
   range_count_ = 0;
   range_count_cons_ = 0;
@@ -177,8 +172,6 @@ ObSqlReadStrategy::ObSqlReadStrategy()
   mutiple_end_key_mem_hold_= NULL;
   in_sub_query_idx_ = OB_INVALID_INDEX;
   //add wanglei [semi join in expr] 20161130:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 ObSqlReadStrategy::~ObSqlReadStrategy()
@@ -193,15 +186,12 @@ void ObSqlReadStrategy::reset()
   rowkey_info_ = NULL;
   memset(start_key_mem_hold_, 0, sizeof(start_key_mem_hold_));
   memset(end_key_mem_hold_, 0, sizeof(end_key_mem_hold_));
-<<<<<<< HEAD
   //add wanglei [semi join in expr] 20170416:b
   release_rowkey_objs() ;
   idx_key_ = 0;
   range_count_ = 0;
   range_count_cons_ = 0;
   //add wanglei [semi join in expr] 20170416:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSqlReadStrategy::find_single_column_range(bool real_val, int64_t idx, uint64_t column_id, bool &found)
@@ -285,15 +275,10 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
         expected_type.set_type(target_type);
         ObString string;
         char *varchar_buff = NULL;
-<<<<<<< HEAD
         //modify xsl DECIMAL
         if ((target_type == ObVarcharType && source_type != ObVarcharType) || (target_type == ObDecimalType))
         {
             //modify e
-=======
-        if (target_type == ObVarcharType && source_type != ObVarcharType)
-        {
->>>>>>> refs/remotes/origin/master
           if (NULL == (varchar_buff = (char*)ob_malloc(OB_MAX_VARCHAR_LENGTH, ObModIds::OB_SQL_READ_STRATEGY)))
           {
             ret = OB_ALLOCATE_MEMORY_FAILED;
@@ -303,7 +288,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
           {
             string.assign_ptr(varchar_buff, OB_MAX_VARCHAR_LENGTH);
             promoted_obj.set_varchar(string);
-<<<<<<< HEAD
             //add xsl DECIMAL
             if(target_type == ObDecimalType)
             {
@@ -317,9 +301,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
             //modify xsl DECIMAL
             if (OB_SUCCESS != ret/*(ret = obj_cast(cond_val, expected_type, promoted_obj, p_promoted_obj))*/)
             //modify e
-=======
-            if (OB_SUCCESS != (ret = obj_cast(cond_val, expected_type, promoted_obj, p_promoted_obj)))
->>>>>>> refs/remotes/origin/master
             {
                 TBSYS_LOG(WARN, "failed to cast object, ret=%d, from_type=%d to_type=%d", ret, source_type, target_type);
                 ob_free(varchar_buff);
@@ -437,7 +418,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
             }
           }
         }
-<<<<<<< HEAD
         /*
         //add xsl ECNU_DECIMAL 2017_3
         else if (target_type == ObDecimalType || source_type == ObDecimalType)
@@ -531,8 +511,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
 
         //add e
         */
-=======
->>>>>>> refs/remotes/origin/master
         else
         {
           if (OB_SUCCESS != (ret = obj_cast(cond_val, expected_type, promoted_obj, p_promoted_obj)))
@@ -658,13 +636,9 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
           const ObObj *p_end_promoted_obj = NULL;
           ObObjType start_source_type = cond_start.get_type();
           ObObjType end_source_type = cond_end.get_type();
-<<<<<<< HEAD
           //modify xsl DECIMAL
           if ((target_type == ObVarcharType && start_source_type != ObVarcharType) || (target_type == ObDecimalType))
           //modify e
-=======
-          if (target_type == ObVarcharType && start_source_type != ObVarcharType)
->>>>>>> refs/remotes/origin/master
           {
             if (NULL == (varchar_buff = (char*)ob_malloc(OB_MAX_VARCHAR_LENGTH, ObModIds::OB_SQL_READ_STRATEGY)))
             {
@@ -675,7 +649,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
             {
               start_string.assign_ptr(varchar_buff, OB_MAX_VARCHAR_LENGTH);
               start_promoted_obj.set_varchar(start_string);
-<<<<<<< HEAD
               //add xsl DECIMAL
               if(target_type == ObDecimalType)
               {
@@ -689,9 +662,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
               //modify xsl DECIMAL
               if (OB_SUCCESS != ret/*(ret = obj_cast(cond_start, expected_type, start_promoted_obj, p_start_promoted_obj))*/)
               //modify e
-=======
-              if (OB_SUCCESS != (ret = obj_cast(cond_start, expected_type, start_promoted_obj, p_start_promoted_obj)))
->>>>>>> refs/remotes/origin/master
               {
                 TBSYS_LOG(WARN, "failed to cast object, ret=%d, from_type=%d to_type=%d", ret, start_source_type, target_type);
                 ob_free(varchar_buff);
@@ -757,13 +727,9 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
           varchar_buff = NULL;
           if (OB_SUCCESS == ret)
           {
-<<<<<<< HEAD
               //modify xsl DECIMAL
               if ((target_type == ObVarcharType && end_source_type != ObVarcharType) || (target_type == ObDecimalType))
               //modify e
-=======
-            if (target_type == ObVarcharType && end_source_type != ObVarcharType)
->>>>>>> refs/remotes/origin/master
             {
               if (NULL == (varchar_buff = (char*)ob_malloc(OB_MAX_VARCHAR_LENGTH, ObModIds::OB_SQL_READ_STRATEGY)))
               {
@@ -775,7 +741,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
                 end_key_mem_hold_[idx] = varchar_buff;
                 end_string.assign_ptr(varchar_buff, OB_MAX_VARCHAR_LENGTH);
                 end_promoted_obj.set_varchar(end_string);
-<<<<<<< HEAD
                 //add xsl DECIMAL
                 if(target_type == ObDecimalType)
                 {
@@ -787,9 +752,6 @@ int ObSqlReadStrategy::find_closed_column_range(bool real_val, int64_t idx, uint
                 }
                 //add e
                 if(OB_SUCCESS != ret)
-=======
-                if (OB_SUCCESS != (ret = obj_cast(cond_end, expected_type, end_promoted_obj, p_end_promoted_obj)))
->>>>>>> refs/remotes/origin/master
                 {
                   TBSYS_LOG(WARN, "failed to cast object, ret=%d, from_type=%d to_type=%d", ret, end_source_type, target_type);
                   ob_free(varchar_buff);
@@ -925,10 +887,7 @@ int ObSqlReadStrategy::find_rowkeys_from_equal_expr(bool real_val, ObIArray<ObRo
     start_key_objs_[idx].set_min_value();
     end_key_objs_[idx].set_max_value();
   }
-<<<<<<< HEAD
   //遍历全主键
-=======
->>>>>>> refs/remotes/origin/master
   for (idx = 0; idx < rowkey_info_->get_size(); idx++)
   {
     if (OB_SUCCESS != (ret = rowkey_info_->get_column_id(idx, column_id)))
@@ -1086,10 +1045,7 @@ void ObSqlReadStrategy::destroy()
       }
     }
   }
-<<<<<<< HEAD
   release_rowkey_objs();//add wanglei [semi join in expr] 20170415
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSqlReadStrategy::assign(const ObSqlReadStrategy *other, ObPhyOperator *owner_op)
@@ -1138,7 +1094,6 @@ int64_t ObSqlReadStrategy::to_string(char* buf, const int64_t buf_len) const
   databuff_printf(buf, buf_len, pos, ")\n");
   return pos;
 }
-<<<<<<< HEAD
 //add wanglei [semi join in expr] 20170417:b
 int  ObSqlReadStrategy::print_ranges() const
 {
@@ -2140,5 +2095,3 @@ void ObSqlReadStrategy::remove_last_expr()
 //}
 //add e
 //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master

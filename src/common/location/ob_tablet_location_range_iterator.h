@@ -43,7 +43,6 @@ namespace oceanbase
       int range_intersect(const ObNewRange& r1, const ObNewRange& r2, 
         ObNewRange& r3, ObStringBuf& range_rowkey_buf) const;
 
-<<<<<<< HEAD
     public:
       //add longfei 2016-03-30 13:57:02
       int64_t to_string()
@@ -53,8 +52,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       bool init_;
       bool is_iter_end_;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  *         zhangcd<zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2012 Taobao Inc.
  *
@@ -56,7 +53,6 @@ namespace oceanbase
       LMS_ONLINE = 6,
       OBI_ROLE_CHANGE = 7,
       ROLE_CHANGE = 5,
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150405:b
       /// represent the task which update inner table __all_sys_config
       /// In this table there are two records master_root_server_ip and
@@ -67,8 +63,6 @@ namespace oceanbase
       // add by guojinwei [obi role switch][multi_cluster] 20150916:b
       CLUSTER_OBI_ROLE_CHANGE = 9,
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
     // only safe for one thread head first then pop one task
     // multi-thread can push tasks safely

@@ -1,18 +1,10 @@
 AM_CPPFLAGS := $(AM_CPPFLAGS) -I${TBLIB_ROOT}/include/tbsys\
-<<<<<<< HEAD
              -I${ONEV_ROOT}/include/onev\
-=======
-             -I${EASY_ROOT}/include/easy\
->>>>>>> refs/remotes/origin/master
              -I${top_srcdir}/include\
              -I${top_srcdir}/src\
              -fPIC
 
-<<<<<<< HEAD
 LDADD = ${ONEV_LIB_PATH}/libonev.a \
-=======
-LDADD = ${EASY_LIB_PATH}/libeasy.a \
->>>>>>> refs/remotes/origin/master
         ${TBLIB_ROOT}/lib/libtbsys.a \
         $(top_builddir)/src/common/btree/libbtree.a \
         ${top_builddir}/src/sql/libsql.a
@@ -91,10 +83,7 @@ common_sources=				                                                  \
   ob_client_manager.h              ob_client_manager.cpp                \
   ob_client_proxy.h                ob_client_proxy.cpp                  \
   ob_client_wait_obj.h             ob_client_wait_obj.cpp               \
-<<<<<<< HEAD
   ob_cluster_mgr.h                 ob_cluster_mgr.cpp                   \
-=======
->>>>>>> refs/remotes/origin/master
   ob_column_filter.h                                                    \
   ob_common_param.h                ob_common_param.cpp                  \
   ob_common_rpc_stub.h             ob_common_rpc_stub.cpp               \
@@ -112,14 +101,9 @@ common_sources=				                                                  \
   ob_define.h                                                           \
   ob_delay_guard.h                                                      \
   ob_direct_log_reader.h           ob_direct_log_reader.cpp             \
-<<<<<<< HEAD
   ob_onev_array.h                                                       \
   ob_onev_log.h                    ob_onev_log.cpp                      \
   ob_election_role_mgr.h                                                \
-=======
-  ob_easy_array.h                                                       \
-  ob_easy_log.h                    ob_easy_log.cpp                      \
->>>>>>> refs/remotes/origin/master
   ob_encrypt.h                     ob_encrypt.cpp                       \
   ob_endian.h                                                           \
   ob_expr_obj.h                    ob_expr_obj.cpp                      \
@@ -154,10 +138,7 @@ common_sources=				                                                  \
   ob_log_writer.h                  ob_log_writer.cpp                    \
   ob_log_writer2.h                 ob_log_writer2.cpp                   \
   ob_log_data_writer.h                 ob_log_data_writer.cpp                   \
-<<<<<<< HEAD
   ob_log_post.h                    ob_log_post.cpp                      \
-=======
->>>>>>> refs/remotes/origin/master
   ob_login_mgr.h                   ob_login_mgr.cpp                     \
   ob_lrucache.h                                                         \
   ob_malloc.h                      ob_malloc.cpp                        \
@@ -213,10 +194,7 @@ common_sources=				                                                  \
   ob_row_util.h                    ob_row_util.cpp                      \
   ob_rowkey.h                      ob_rowkey.cpp                        \
   ob_rowkey_helper.h               ob_rowkey_helper.cpp                 \
-<<<<<<< HEAD
   ob_rs_rs_message.h               ob_rs_rs_message.cpp                 \
-=======
->>>>>>> refs/remotes/origin/master
   ob_rs_ups_message.h              ob_rs_ups_message.cpp                \
   ob_scan_param.h                  ob_scan_param.cpp                    \
   ob_scanner.h                     ob_scanner.cpp                       \
@@ -226,11 +204,8 @@ common_sources=				                                                  \
   ob_schema_service.h              ob_schema_service.cpp                \
   ob_schema_service_impl.h         ob_schema_service_impl.cpp           \
   ob_schema_table.h                ob_schema_table.cpp                  \
-<<<<<<< HEAD
   ob_secondary_index_service.h \
   ob_secondary_index_service_impl.h  ob_secondary_index_service_impl.cpp \
-=======
->>>>>>> refs/remotes/origin/master
   ob_seq_queue.h                   ob_seq_queue.cpp                     \
   ob_server.h                      ob_server.cpp                        \
   ob_server_ext.h                  ob_server_ext.cpp                    \
@@ -326,11 +301,7 @@ common_sources=				                                                  \
 	ob_profile_fill_log.h              ob_profile_fill_log.cpp\
 	ob_request_profile_data.h\
   ob_queue_thread.h                  ob_queue_thread.cpp\
-<<<<<<< HEAD
 	ob_libonev_mem_pool.h              ob_libonev_mem_pool.cpp\
-=======
-	ob_libeasy_mem_pool.h              ob_libeasy_mem_pool.cpp\
->>>>>>> refs/remotes/origin/master
 	ob_balance_filter.h								 ob_balance_filter.cpp\
 	ob_adapter_allocator.h\
 	ob_reload_config.h\
@@ -340,7 +311,6 @@ common_sources=				                                                  \
 	ob_fifo_stream.h									 ob_fifo_stream.cpp \
 	ob_multi_wakeup.h									 ob_multi_wakeup.cpp \
 	ob_global_factory.h\
-<<<<<<< HEAD
   ob_errno.h ob_errno.cpp\
 ob_custom_allocator.h  ob_custom_allocator.cpp \
 Ob_Decimal.h	Ob_Decimal.cpp\
@@ -358,9 +328,6 @@ ob_column_checksum.h               ob_column_checksum.cpp\
   ob_gather_table_info.h   ob_gather_table_info.cpp
 
 
-=======
-  ob_errno.h ob_errno.cpp
->>>>>>> refs/remotes/origin/master
 
 
 location_sources=                                                                             \

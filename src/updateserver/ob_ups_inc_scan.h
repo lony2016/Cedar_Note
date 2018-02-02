@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 ECNU_DaSE.
 *
 * This program is free software; you can redistribute it and/or
@@ -21,8 +20,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,10 +37,7 @@
 #include "sql/ob_inc_scan.h"
 #include "ob_table_list_query.h"
 #include "ob_ups_utils.h"
-<<<<<<< HEAD
 #include "sql/ob_expr_values.h" //add by zt 20160113
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -52,13 +46,8 @@ namespace oceanbase
     class ObRowDescPrepare : public RowkeyInfoCache
     {
       public:
-<<<<<<< HEAD
         ObRowDescPrepare() {}
         virtual ~ObRowDescPrepare() {}
-=======
-        ObRowDescPrepare() {};
-        virtual ~ObRowDescPrepare() {};
->>>>>>> refs/remotes/origin/master
       protected:
         int set_rowkey_size(ObUpsTableMgr* table_mgr, ObRowDesc* row_desc);
     };
@@ -102,15 +91,12 @@ namespace oceanbase
         int get_next_row(const common::ObRow *&row);
         int get_row_desc(const common::ObRowDesc *&row_desc) const;
         int64_t to_string(char* buf, const int64_t buf_len) const { return snprintf(buf, buf_len, "%s", "inc_get_iter"); }
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief reset_iterator
          */
         void reset_iterator() { last_cell_idx_ = 0;}
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         common::ObRowDesc row_desc_;
         sql::ObLockFlag lock_flag_;
@@ -142,30 +128,21 @@ namespace oceanbase
         {}
         ObUpsIncScan(): session_ctx_(NULL), result_(NULL)
         {}
-<<<<<<< HEAD
         void set_session_ctx(BaseSessionCtx *session_ctx) {session_ctx_ = session_ctx;}
         virtual ~ObUpsIncScan() {}
-=======
-        void set_session_ctx(BaseSessionCtx *session_ctx) {session_ctx_ = session_ctx;};
-        virtual ~ObUpsIncScan() {};
->>>>>>> refs/remotes/origin/master
         void reset()
         {
           session_ctx_ = NULL;
           result_ = NULL;
           get_iter_.reset();
           scan_iter_.reset();
-<<<<<<< HEAD
 
           input_values_.reset();
-=======
->>>>>>> refs/remotes/origin/master
         }
       public:
         int open();
         int close();
         int64_t to_string(char* buf, const int64_t buf_len) const;
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief reset_iterator
@@ -200,19 +177,11 @@ namespace oceanbase
          */
         int prepare_data();
         //add by zt 20160113:e
-=======
-      public:
-        int get_next_row(const common::ObRow *&row);
-        int get_row_desc(const common::ObRowDesc *&row_desc) const;
-      protected:
-        virtual ObUpsTableMgr* get_table_mgr(); // for test
->>>>>>> refs/remotes/origin/master
       private:
         BaseSessionCtx *session_ctx_;
         sql::ObPhyOperator* result_;
         ObIncGetIter get_iter_;
         ObIncScanIter scan_iter_;
-<<<<<<< HEAD
 
         //add by zt 20160113
         sql::ObExprValues input_values_;  ///<  input variable values
@@ -220,10 +189,5 @@ namespace oceanbase
     };
   } // end namespace updateserver
 } // end namespace oceanbase
-=======
-    };
-  }; // end namespace updateserver
-}; // end namespace oceanbase
->>>>>>> refs/remotes/origin/master
 
 #endif /* __OB_UPDATESERVER_OB_INC_SCAN_IMPL_H__ */

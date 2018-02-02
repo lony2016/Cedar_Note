@@ -91,18 +91,12 @@ namespace oceanbase
           if (OB_SUCCESS == ret)
           {
             ObVersion mv = cache->mem_.get_data_version();
-<<<<<<< HEAD
             //mod hxlong [Truncate Table]:20170318:b
             //TBSYS_LOG(INFO,"add compact cache to tablet,tablet:[%p,%s],cache:[%p,row_num:%ld,version:%d-%hd-%hd]",
             TBSYS_LOG(INFO,"add compact cache to tablet,tablet:[%p,%s],cache:[%p,row_num:%ld,version:%ld-%ld-%hd]",
                       tablet,scan_range2str(tablet->get_range()),
                       cache,cache->mem_.get_row_count(),mv.major_,mv.minor_,mv.is_final_minor_);
             //mod:e
-=======
-            TBSYS_LOG(INFO,"add compact cache to tablet,tablet:[%p,%s],cache:[%p,row_num:%ld,version:%d-%hd-%hd]",
-                      tablet,scan_range2str(tablet->get_range()),
-                      cache,cache->mem_.get_row_count(),mv.major_,mv.minor_,mv.is_final_minor_);
->>>>>>> refs/remotes/origin/master
             tablet->add_compactsstable(cache);
           }
         }

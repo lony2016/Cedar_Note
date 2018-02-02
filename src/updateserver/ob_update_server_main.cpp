@@ -95,13 +95,10 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "Parse extra config error! string: [%s], ret: [%d]",
                   cmd_extra_config_, ret);
       }
-<<<<<<< HEAD
       if (cmd_commit_group_size_ > 0)
       {
         ups_config_.commit_group_size = cmd_commit_group_size_;
       }
-=======
->>>>>>> refs/remotes/origin/master
       ups_config_.print();
 
       if (OB_SUCCESS == ret && OB_SUCCESS != (ret = ups_config_.check_all()))

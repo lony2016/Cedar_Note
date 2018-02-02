@@ -97,12 +97,8 @@ namespace oceanbase
 
           inline value_type & at(const int32_t index) const 
           { 
-<<<<<<< HEAD
             // assert(index >= 0 && index < size()); 
             OB_ASSERT(index >= 0 && index < size()); // modify by lxb on 20170705 for hint resolve
-=======
-            assert(index >= 0 && index < size()); 
->>>>>>> refs/remotes/origin/master
             return *(mem_begin_ + index); 
           }
           inline value_type & operator[](const int32_t index) const 

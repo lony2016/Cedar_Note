@@ -69,7 +69,6 @@ namespace oceanbase
         virtual int write_varchar(const ObObj &value, ObObj *clone_value);
       public:
         void set_row_deleted(const bool deleted) {is_row_deleted_ = deleted;};
-<<<<<<< HEAD
         void set_tab_truncated(const bool truncated) {is_tab_truncated_ = truncated;}; /*add hxlong [Truncate Table]:20170318*/
         bool is_row_deleted() {return is_row_deleted_;};
         bool is_tab_truncated() {return is_tab_truncated_;}; /*add hxlong [Truncate Table]:20170318*/
@@ -77,19 +76,12 @@ namespace oceanbase
         //void reset() {ObCompactCellWriter::reset(); is_row_deleted_ = false; ctime_recorder_.reset(); };
         void reset() {ObCompactCellWriter::reset(); is_row_deleted_ = false; is_tab_truncated_ = false; ctime_recorder_.reset(); };
         //mod:e
-=======
-        bool is_row_deleted() {return is_row_deleted_;};
-        void reset() {ObCompactCellWriter::reset(); is_row_deleted_ = false; ctime_recorder_.reset(); };
->>>>>>> refs/remotes/origin/master
         ObCTimeRecorder& get_ctime_recorder() { return ctime_recorder_; }
 
       private:
         MemTank *mem_tank_;
         bool is_row_deleted_;
-<<<<<<< HEAD
         bool is_tab_truncated_; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         ObCTimeRecorder ctime_recorder_;
     };
   }

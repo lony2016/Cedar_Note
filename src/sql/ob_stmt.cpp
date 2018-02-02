@@ -2,10 +2,7 @@
 #include "ob_select_stmt.h"
 #include "parse_malloc.h"
 #include "ob_logical_plan.h"
-<<<<<<< HEAD
 #include "ob_multi_logic_plan.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_schema_checker.h"
 #include "common/utility.h"
 
@@ -31,7 +28,6 @@ int ObStmt::add_table_item(
   const ObString& alias_name,
   uint64_t& table_id,
   const TableItem::TableType type,
-<<<<<<< HEAD
   const uint64_t ref_id,
   bool is_optimizer /* if the item is added by logical optimizer */)
 {
@@ -52,13 +48,6 @@ int ObStmt::add_table_item(
   }
   /* end by wangyanzhao */
   
-=======
-  const uint64_t ref_id)
-{
-  int& ret = result_plan.err_stat_.err_code_ = OB_SUCCESS;
-  table_id = OB_INVALID_ID;
-  ObLogicalPlan* logical_plan = static_cast<ObLogicalPlan*>(result_plan.plan_tree_);
->>>>>>> refs/remotes/origin/master
   if (logical_plan == NULL)
   {
     ret = OB_ERR_LOGICAL_PLAN_FAILD;
@@ -216,36 +205,27 @@ int ObStmt::add_table_item(
   return ret;
 }
 
-<<<<<<< HEAD
 uint64_t ObStmt::get_table_item(
          const ObString& table_name,
          TableItem** table_item,
          ObStmt* super_stmt//add slwang [exists related subquery] 20170609
          ) const
-=======
-uint64_t ObStmt::get_table_item(const ObString& table_name, TableItem** table_item) const
->>>>>>> refs/remotes/origin/master
 {
   // table name mustn't be empty
   int32_t num = table_items_.size();
   for (int32_t i = 0; i < num; i++)
   {
     TableItem& item = table_items_[i];
-<<<<<<< HEAD
     //modify slwang [exists related subquery] 20171031:b
     //if (table_name == item.table_name_ || table_name == item.alias_name_)
     if ((table_name == item.table_name_ && (item.alias_name_ == NULL)) || (table_name == item.alias_name_))
     //modify 20171031:e
-=======
-    if (table_name == item.table_name_ || table_name == item.alias_name_)
->>>>>>> refs/remotes/origin/master
     {
       if (table_item)
         *table_item = &item;
       return item.table_id_;
     }
   }
-<<<<<<< HEAD
   //add slwang [exists related subquery] 20170609:b
   if(super_stmt != NULL)
   {
@@ -266,9 +246,6 @@ uint64_t ObStmt::get_table_item(const ObString& table_name, TableItem** table_it
     }
   }
   //add 20170609:e
-=======
-
->>>>>>> refs/remotes/origin/master
   return OB_INVALID_ID;
 }
 
@@ -348,13 +325,9 @@ int ObStmt::add_column_item(
   ResultPlan& result_plan,
   const oceanbase::common::ObString& column_name,
   const oceanbase::common::ObString* table_name,
-<<<<<<< HEAD
   ColumnItem** col_item,
   ObStmt* super_stmt//add slwang [exists related subquery] 20170622
   )
-=======
-  ColumnItem** col_item)
->>>>>>> refs/remotes/origin/master
 {
   int& ret = result_plan.err_stat_.err_code_ = OB_SUCCESS;
   ColumnItem column_item;
@@ -365,14 +338,10 @@ int ObStmt::add_column_item(
 
   if (table_name)
   {
-<<<<<<< HEAD
     //modify slwang [exists related subquery] 20170622:b
     //column_item.table_id_ = get_table_item(*table_name, &table_item);
     column_item.table_id_ = get_table_item(*table_name, &table_item, super_stmt);
     //modify 20170622:e
-=======
-    column_item.table_id_ = get_table_item(*table_name, &table_item);
->>>>>>> refs/remotes/origin/master
     if (column_item.table_id_ == OB_INVALID_ID)
     {
       ret = OB_ERR_TABLE_UNKNOWN;
@@ -589,12 +558,8 @@ int ObStmt::check_table_column(
     {
       ret = OB_ERR_COLUMN_UNKNOWN;
       snprintf(result_plan.err_stat_.err_msg_, MAX_ERROR_MSG,
-<<<<<<< HEAD
           // "Unknown table type"); 
           "Unknown column"); // modify by lxb on 20170705 for hint resolve
-=======
-          "Unknown table type");
->>>>>>> refs/remotes/origin/master
     }
   }
   return ret;
@@ -631,15 +596,11 @@ void ObStmt::print(FILE* fp, int32_t level, int32_t index)
         fprintf(fp, "Type:ALIAS_TABLE, ");
       else if (item.type_ == TableItem::GENERATED_TABLE)
         fprintf(fp, "Type:GENERATED_TABLE, ");
-<<<<<<< HEAD
       fprintf(fp, "RefId: %lu, ", item.ref_id_);
 	  if (item.has_scan_columns_)
         fprintf(fp, "has_scan_columns_:True}\n");
       else
         fprintf(fp, "has_scan_columns_:False}\n");
-=======
-      fprintf(fp, "RefId: %lu}\n", item.ref_id_);
->>>>>>> refs/remotes/origin/master
     }
     print_indentation(fp, level);
     fprintf(fp, "<TableItemList End>\n");
@@ -653,16 +614,10 @@ void ObStmt::print(FILE* fp, int32_t level, int32_t index)
     {
       ColumnItem& item = column_items_[i];
       print_indentation(fp, level + 1);
-<<<<<<< HEAD
       fprintf(fp, "{Num %d, ColumnId:%lu, ColumnName:%.*s, TableId:%lu, query_id_:%lu, is_name_unique_:%s, is_group_based_:%s, data_type_ = %d}\n", i,
         item.column_id_, item.column_name_.length(), item.column_name_.ptr(),
         item.table_id_, item.query_id_, item.is_name_unique_? "True":"False",
         item.is_group_based_? "True":"False", int(item.data_type_));
-=======
-      fprintf(fp, "{Num %d, ColumnId:%lu, ColumnName:%.*s, TableRef:%lu}\n", i,
-        item.column_id_, item.column_name_.length(), item.column_name_.ptr(),
-        item.table_id_);
->>>>>>> refs/remotes/origin/master
     }
     print_indentation(fp, level);
     fprintf(fp, "<ColumnItemList End>\n");

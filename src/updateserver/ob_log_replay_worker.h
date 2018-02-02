@@ -35,10 +35,7 @@ namespace oceanbase
             {}
             virtual ~ApplyWorker()
             {}
-<<<<<<< HEAD
             //modify hushuang [scalable commit]20150506
-=======
->>>>>>> refs/remotes/origin/master
             virtual void handle(void *task, void *pdata)
             {
               int err = OB_SUCCESS;
@@ -48,7 +45,6 @@ namespace oceanbase
                 TBSYS_LOG(WARN, "replay_worker_->handle_apply()=>%d", err);
               }
             }
-<<<<<<< HEAD
 //            virtual void handle(void *task, void *pdata, uint64_t idx)
 //            {
 //              int err = OB_SUCCESS;
@@ -60,8 +56,6 @@ namespace oceanbase
 //              }
 //            }
             //modify e
-=======
->>>>>>> refs/remotes/origin/master
           private:
             ObLogReplayWorker& replay_worker_;
         };
@@ -79,13 +73,9 @@ namespace oceanbase
       protected:
         int handle_apply(ObLogTask* task);
         int64_t set_next_commit_log_id(const int64_t log_id);
-<<<<<<< HEAD
         //delete chujiajia [log synchronization][multi_cluster] 20160422:b
         //int64_t set_next_flush_log_id(const int64_t log_id);
         //delete:e
-=======
-        int64_t set_next_flush_log_id(const int64_t log_id);
->>>>>>> refs/remotes/origin/master
       public:
         void stop();
         void wait();
@@ -96,12 +86,9 @@ namespace oceanbase
         int64_t get_replayed_log_id() const;
         int get_replay_cursor(ObLogCursor& cursor) const;
         int update_replay_cursor(const ObLogCursor& cursor);
-<<<<<<< HEAD
 		//add chujiajia [log synchronization][multi_cluster] 20160625:b
         int update_replay_cursor_after_switch(const ObLogCursor& cursor);
 		//add:e
-=======
->>>>>>> refs/remotes/origin/master
         int start_log(const ObLogCursor& log_cursor);
         int wait_task(int64_t id) const;
         int submit(int64_t& task_id, const char* buf, int64_t len, int64_t& pos, const ReplayType replay_type);
@@ -111,13 +98,10 @@ namespace oceanbase
         int64_t get_next_commit_log_id() const { return next_commit_log_id_; }
         int64_t get_next_flush_log_id() const { return next_flush_log_id_; }
         int64_t get_last_barrier_log_id() const { return last_barrier_log_id_; }
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160422:b
         int64_t set_next_flush_log_id(const int64_t log_id);
         int64_t& get_master_cmt_log_id();
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       protected:
         bool is_inited() const;
         bool is_task_commited(const int64_t log_id) const;
@@ -143,12 +127,9 @@ namespace oceanbase
         tbsys::CThreadCond commit_log_id_cond_;
         tbsys::CThreadCond flush_log_id_cond_;
 
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160524:b
         int64_t master_cmt_log_id_; // 备机知道的主机已提交的最大日志号
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         volatile int err_;
         volatile int64_t next_submit_log_id_;
         volatile int64_t next_commit_log_id_;

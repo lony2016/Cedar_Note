@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_MERGESERVER_MERGESERVER_H_
 #define OCEANBASE_MERGESERVER_MERGESERVER_H_
 
@@ -39,7 +36,6 @@
 #include "ob_ms_sql_scan_request.h"
 #include "ob_ms_sql_get_request.h"
 
-<<<<<<< HEAD
 //add by wangdonghui [procedure physical plan cache] 20160229 :b
 #include "mergeserver/ob_physical_plan_cache_manager.h"
 //add :e
@@ -50,8 +46,6 @@
 #include "ob_statistic_info_cache.h"
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace mergeserver
@@ -125,20 +119,16 @@ namespace oceanbase
         {
           return insert_cache_;
         }
-<<<<<<< HEAD
         //add huangcc [statistic information cache] 20170317:b
         inline ObStatisticInfoCache* get_statistic_info_cache()
         {
           return &statistic_info_cache_;
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         inline ObBloomFilterTaskQueueThread & get_bloom_filter_task_queue_thread()
         {
           return bloom_filter_queue_thread_;
         }
-<<<<<<< HEAD
         //add by wangdonghui [procedure physical plan cache] 20160229 :b
         /**
          * @brief get_procedure_manager
@@ -151,8 +141,6 @@ namespace oceanbase
         }
 
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
       private:
         DISALLOW_COPY_AND_ASSIGN(ObMergeServer);
@@ -179,23 +167,17 @@ namespace oceanbase
         common::ObPrivilegeManager privilege_mgr_;
         ObFrozenDataCache frozen_data_cache_;
         ObInsertCache insert_cache_;
-<<<<<<< HEAD
         //add huangcc [statistic information cache] 20170317:b
         ObStatisticInfoCache statistic_info_cache_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         ObBloomFilterTaskQueueThread bloom_filter_queue_thread_;
         common::ObObjPool<mergeserver::ObMsSqlScanRequest> scan_req_pool_;
         common::ObObjPool<mergeserver::ObMsSqlGetRequest> get_req_pool_;
 
-<<<<<<< HEAD
 
         //add by wangdonghui 20160229 [procedure physical plan cache] :b
         ObProcedureManager procedure_manager_;   ///<  procedure manager
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } /* mergeserver */
 } /* oceanbase */

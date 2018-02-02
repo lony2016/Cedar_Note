@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -45,19 +42,11 @@ namespace oceanbase
 {
   namespace common
   {
-<<<<<<< HEAD
     const int64_t DEFAULT_LOG_SIZE = 2 * 1024 * 1024;  //not uesed
     class ObSingleLogReader
     {
     public:
       //static const int64_t LOG_BUFFER_MAX_LENGTH;
-=======
-    const int64_t DEFAULT_LOG_SIZE = 2 * 1024 * 1024;
-    class ObSingleLogReader
-    {
-    public:
-      static const int64_t LOG_BUFFER_MAX_LENGTH;
->>>>>>> refs/remotes/origin/master
     public:
       ObSingleLogReader();
       virtual ~ObSingleLogReader();
@@ -105,7 +94,6 @@ namespace oceanbase
        *         others: 发生了错误.
        */
       virtual int read_log(LogCommand &cmd, uint64_t &log_seq, char *&log_data, int64_t &data_len) = 0;
-<<<<<<< HEAD
 
       //add lbzhong [Max Log Timestamp] 20150824:b
       /**
@@ -137,8 +125,6 @@ namespace oceanbase
       virtual int read_log_for_data_checksum(LogCommand &cmd, uint64_t &log_seq, int64_t& data_checksum) = 0;
       // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       inline uint64_t get_cur_log_file_id()
       {
         return file_id_;

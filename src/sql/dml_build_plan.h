@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -23,8 +22,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -49,12 +46,9 @@
 #include "common/ob_vector.h"
 #include <stdint.h>
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index create fix]20141226
 #include "common/ob_strings.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 /*
   * Expressions from different scope have different limitations,
   * we need a flage to distinguish where they are from.
@@ -72,13 +66,9 @@
 extern int resolve_select_stmt(
     ResultPlan* result_plan,
     ParseNode* node,
-<<<<<<< HEAD
     uint64_t& query_id,
     oceanbase::sql::ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170604
     );
-=======
-    uint64_t& query_id);
->>>>>>> refs/remotes/origin/master
 extern int resolve_delete_stmt(
     ResultPlan* result_plan,
     ParseNode* node,
@@ -101,31 +91,22 @@ extern int resolve_and_exprs(
     oceanbase::sql::ObStmt* stmt,
     ParseNode* node,
     oceanbase::common::ObVector<uint64_t>& and_exprs,
-<<<<<<< HEAD
     int32_t expr_scope_type = T_NONE_LIMIT,
     oceanbase::sql::ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170604
     );
-=======
-    int32_t expr_scope_type = T_NONE_LIMIT);
->>>>>>> refs/remotes/origin/master
 extern int resolve_independ_expr(
     ResultPlan * result_plan,
     oceanbase::sql::ObStmt* stmt,
     ParseNode* node,
     uint64_t& expr_id,
-<<<<<<< HEAD
     int32_t expr_scope_type = T_NONE_LIMIT,
     oceanbase::sql::ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170606
     );
-=======
-    int32_t expr_scope_type = T_NONE_LIMIT);
->>>>>>> refs/remotes/origin/master
 extern int resolve_table_columns(
     ResultPlan * result_plan,
     oceanbase::sql::ObStmt* stmt,
     oceanbase::sql::TableItem& table_item,
     int64_t num_columns = -1);
-<<<<<<< HEAD
 // add longfei 20151105
 /**
  * @brief generate_inner_index_table_name
@@ -149,8 +130,6 @@ extern int resolve_array_expr(
     ObString &array_name,
     ObObj &idx_value);
 //add zt 20151207:e
-=======
->>>>>>> refs/remotes/origin/master
 
 #endif //DML_BUILD_PLAN_H_
 

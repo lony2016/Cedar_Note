@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.taobao.oceanbase.base;
 
 /**
@@ -19,25 +18,3 @@ public enum ModifyTypeEnum {
         return value;
     }
 }
-=======
-package com.taobao.oceanbase.base;
-
-/**
- * @author baoni
- *
- */
-public enum ModifyTypeEnum {
-	NULL("NULL"),
-	UPDATE("UPDATE"),
-	DELETE("DELETE"),
-	INSERT("INSERT");
-
-    private String value;
-    private ModifyTypeEnum(final String value){
-        this.value = value;
-    }
-    public String getValue() {
-        return value;
-    }
-}
->>>>>>> refs/remotes/origin/master

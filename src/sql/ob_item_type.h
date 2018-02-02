@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -22,8 +21,6 @@
  * @author zhutao <zhutao@stu.ecnu.edu.cn>
  * @date 2016_07_27
  */
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_OB_ITEM_TYPE_H_
 #define OCEANBASE_SQL_OB_ITEM_TYPE_H_
 
@@ -35,7 +32,6 @@ typedef enum ObItemType
 {
   T_INVALID = 0,  // Min tag
 
-<<<<<<< HEAD
     /* Cursor type tags */
   //zhounan unmark:b
   T_CURSOR_DECLARE,
@@ -57,8 +53,6 @@ typedef enum ObItemType
   T_CURSOR_FETCH_NEXT,
   T_CURSOR_FETCH_NEXT_INTO,
 	//add:e
-=======
->>>>>>> refs/remotes/origin/master
   /* Literal data type tags */
   T_INT,
   T_STRING,
@@ -112,21 +106,12 @@ typedef enum ObItemType
   T_OP_REM,   // remainder
   T_OP_MOD,
   T_OP_EQ,      /* 2. Bool operators */
-<<<<<<< HEAD
   T_OP_LE,//slwang note: less than equal    小于等于
   T_OP_LT,//             less than          小于
   T_OP_GE,//             greater than equal 大于等于
   T_OP_GT,//             greater than       大于
   T_OP_NE,//             not equal          不等于
   T_OP_IS,//EQ - IS全是is_simple_conditions
-=======
-  T_OP_LE,
-  T_OP_LT,
-  T_OP_GE,
-  T_OP_GT,
-  T_OP_NE,
-  T_OP_IS,
->>>>>>> refs/remotes/origin/master
   T_OP_IS_NOT,
   T_OP_BTW,
   T_OP_NOT_BTW,
@@ -136,19 +121,12 @@ typedef enum ObItemType
   T_OP_AND,
   T_OP_OR,
   T_OP_IN,
-<<<<<<< HEAD
   // T_OP_LEFT_SEMI, // add wangyanzhao [pull up sublink]  20170322:e
   T_OP_NOT_IN,
   // T_OP_LEFT_ANTI_SEMI, // add wangyanzhao [pull up sublink]  20170322:e
   T_OP_ARG_CASE,
   T_OP_CASE,
   T_OP_ROW,     //129
-=======
-  T_OP_NOT_IN,
-  T_OP_ARG_CASE,
-  T_OP_CASE,
-  T_OP_ROW,
->>>>>>> refs/remotes/origin/master
   T_OP_EXISTS,
 
   T_OP_CNN,  /* 3. String operators */
@@ -208,14 +186,11 @@ typedef enum ObItemType
   T_VALUE_VECTOR,
   T_JOINED_TABLE,
   T_JOIN_INNER,
-<<<<<<< HEAD
   //add wanglei [semi join] 20170417:b
   T_JOIN_SEMI,
   T_JOIN_SEMI_LEFT,
   T_JOIN_SEMI_RIGHT,
   //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
   T_JOIN_FULL,
   T_JOIN_LEFT,
   T_JOIN_RIGHT,
@@ -223,17 +198,12 @@ typedef enum ObItemType
   T_WHEN,
 
   T_CREATE_TABLE,
-<<<<<<< HEAD
   T_CREATE_INDEX, // add longfei [create index] [secondaryindex reconstruct] 20150916:e
   T_TABLE_ELEMENT_LIST,
   T_INDEX_ELEMENT_LIST, // add longfei [create index] [secondaryindex reconstruct] 20150916:e
   T_INDEX_STORING_LIST, // add longfei [create index] [secondaryindex reconstruct] 20150921:e
   T_TABLE_OPTION_LIST,
   T_INDEX_OPTION_LIST, // add longfei [create index] [secondaryindex reconstruct] 20150916:e
-=======
-  T_TABLE_ELEMENT_LIST,
-  T_TABLE_OPTION_LIST,
->>>>>>> refs/remotes/origin/master
   T_PRIMARY_KEY,
   T_COLUMN_DEFINITION,
   T_COLUMN_ATTRIBUTES,
@@ -256,11 +226,8 @@ typedef enum ObItemType
   T_CONSISTENT_MODE,
   T_DROP_TABLE,
   T_TABLE_LIST,
-<<<<<<< HEAD
   T_DROP_INDEX, // add longfei [drop index] 20151024:e
   T_INDEX_LIST, // add longfei [drop index] 20151024:e
-=======
->>>>>>> refs/remotes/origin/master
 
   T_ALTER_TABLE,
   T_ALTER_ACTION_LIST,
@@ -268,13 +235,10 @@ typedef enum ObItemType
   T_COLUMN_DROP,
   T_COLUMN_ALTER,
   T_COLUMN_RENAME,
-<<<<<<< HEAD
   //add hxlong [Truncate Table] 20170403:b
   T_TRUNCATE_TABLE,
   //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 
   T_ALTER_SYSTEM,
   T_CHANGE_OBI,
@@ -288,12 +252,9 @@ typedef enum ObItemType
   T_SERVER_ADDRESS,
 
   T_SHOW_TABLES,
-<<<<<<< HEAD
   // add longfei [show index] 20151019
   T_SHOW_INDEX,
   // add e
-=======
->>>>>>> refs/remotes/origin/master
   T_SHOW_VARIABLES,
   T_SHOW_COLUMNS,
   T_SHOW_SCHEMA,
@@ -334,7 +295,6 @@ typedef enum ObItemType
   T_READ_STATIC,
   T_HOTSPOT,
   T_READ_CONSISTENCY,
-<<<<<<< HEAD
   T_LONG_TRANS, //add by qx 21070317
   T_NO_GROUP,//add by wdh 20160716
   T_USE_INDEX,// add longfei
@@ -402,12 +362,6 @@ typedef enum ObItemType
   
   T_OP_LEFT_SEMI, // modify lxb [logical optimizer] 20170901
   T_OP_LEFT_ANTI_SEMI // modify lxb [logical optimizer] 20170901
-=======
-
-  T_KILL,
-
-  T_MAX,
->>>>>>> refs/remotes/origin/master
 
 } ObItemType;
 

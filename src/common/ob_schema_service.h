@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -28,8 +27,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -49,29 +46,21 @@
 #ifndef _OB_SCHEMA_SERVICE_H
 #define _OB_SCHEMA_SERVICE_H
 
-<<<<<<< HEAD
 #include "ob_define.h"
-=======
-#include "common/ob_define.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_object.h"
 #include "ob_string.h"
 #include "ob_array.h"
 #include "ob_hint.h"
 
-<<<<<<< HEAD
 //add by wangdonghui 20160308 :b
 #include "common/nb_accessor/nb_query_res.h"
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
   {
     typedef ObObjType ColumnType;
-<<<<<<< HEAD
 
     //add longfei [cons static index] 151120:b
     /**
@@ -108,8 +97,6 @@ namespace oceanbase
     };
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     /* 表单join关系描述，对应于__all_join_info内部表 */
     struct JoinInfo
     {
@@ -149,27 +136,20 @@ namespace oceanbase
       int64_t data_precision_;
       int64_t data_scale_;
       bool nullable_;
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161123:b
       bool auto_increment_;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       int64_t length_in_rowkey_; //如果是rowkey列，则表示在二进制rowkey串中占用的字节数；
       int32_t order_in_rowkey_;
       ObCreateTime gm_create_;
       ObModifyTime gm_modify_;
       ColumnSchema():column_id_(OB_INVALID_ID), column_group_id_(OB_INVALID_ID), rowkey_id_(-1),
           join_table_id_(OB_INVALID_ID), join_column_id_(OB_INVALID_ID), data_type_(ObMinType),
-<<<<<<< HEAD
           data_precision_(0), data_scale_(0), nullable_(true),
           //add lbzhong [auto_increment] 20161123:b
           auto_increment_(false),
           //add:e
           length_in_rowkey_(0), order_in_rowkey_(0)
-=======
-          data_precision_(0), data_scale_(0), nullable_(true), length_in_rowkey_(0), order_in_rowkey_(0)
->>>>>>> refs/remotes/origin/master
       {
         column_name_[0] = '\0';
       }
@@ -226,14 +206,11 @@ namespace oceanbase
       int64_t tablet_block_size_;
       int64_t tablet_max_size_;
       int64_t max_rowkey_length_;
-<<<<<<< HEAD
 
       //longfei [create index]
       uint64_t original_table_id_; ///< original table's id
       IndexStatus index_status_; ///< index table's status
 
-=======
->>>>>>> refs/remotes/origin/master
       int64_t merge_write_sstable_version_;
       int64_t schema_version_;
       uint64_t create_time_column_id_;
@@ -258,14 +235,11 @@ namespace oceanbase
            tablet_block_size_(OB_DEFAULT_SSTABLE_BLOCK_SIZE),
           tablet_max_size_(OB_DEFAULT_MAX_TABLET_SIZE),
           max_rowkey_length_(0),
-<<<<<<< HEAD
 
           //longfei [create index]
           original_table_id_(OB_INVALID_ID),
           index_status_(ERROR),
 
-=======
->>>>>>> refs/remotes/origin/master
           merge_write_sstable_version_(DEFAULT_SSTABLE_VERSION),
           schema_version_(0),
           create_time_column_id_(OB_CREATE_TIME_COLUMN_ID),
@@ -455,7 +429,6 @@ namespace oceanbase
         virtual int init(ObScanHelper* client_proxy, bool only_core_tables) = 0;
         virtual int get_table_schema(const ObString& table_name, TableSchema& table_schema) = 0;
         virtual int create_table(const TableSchema& table_schema) = 0;
-<<<<<<< HEAD
         //add by wangdonghui 20160125 :b
         /**
          * @brief create_procedure
@@ -484,16 +457,12 @@ namespace oceanbase
          */
         virtual int drop_procedure(const ObString& proc_name) = 0;
         //add :e
-=======
-        virtual int drop_table(const ObString& table_name) = 0;
->>>>>>> refs/remotes/origin/master
         virtual int alter_table(const AlterTableSchema& table_schema, const int64_t old_schema_version) = 0;
         virtual int get_table_id(const ObString& table_name, uint64_t& table_id) = 0;
         virtual int get_table_name(uint64_t table_id, ObString& table_name) = 0;
         virtual int get_max_used_table_id(uint64_t &max_used_tid) = 0;
         virtual int modify_table_id(TableSchema& table_schema, const int64_t new_table_id) = 0;
         virtual int set_max_used_table_id(const uint64_t max_used_tid) = 0;
-<<<<<<< HEAD
       //add maoxx
       /**
        * @brief check_column_checksum
@@ -531,8 +500,6 @@ namespace oceanbase
       virtual int get_cluster_count(int64_t &cc) = 0;
       virtual int get_index_stat(const uint64_t table_id, const int64_t cluster_count, IndexStatus &stat) = 0;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
   }

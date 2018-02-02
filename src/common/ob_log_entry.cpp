@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  *         zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *   (C) 2010-2010 Taobao Inc.
  *
@@ -50,14 +47,10 @@ int ObLogEntry::fill_header(const char* log_data, const int64_t data_len)
     header_.set_magic_num(MAGIC_NUMER);
     header_.header_length_ = OB_RECORD_HEADER_LENGTH;
     header_.version_ = LOG_VERSION;
-<<<<<<< HEAD
     //add by lbzhong [Max Log Timestamp] 20150824:b
     header_.timestamp_ = tbsys::CTimeUtil::getTime();
     //add:e
     header_.max_cmt_id_ = 0;
-=======
-    header_.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
     header_.data_length_ = static_cast<int32_t>(sizeof(uint64_t) + sizeof(LogCommand) + data_len);
     header_.data_zlength_ = header_.data_length_;
     if (NULL != log_data)
@@ -74,7 +67,6 @@ int ObLogEntry::fill_header(const char* log_data, const int64_t data_len)
   return ret;
 }
 
-<<<<<<< HEAD
 //add chujiajia [log synchronization] [multi_cluster] 20160328:b
 //fill ups_commit_log header
 int ObLogEntry::fill_header(const char* log_data, const int64_t data_len,const int64_t max_cmt_id)
@@ -121,8 +113,6 @@ int ObLogEntry::set_entry(const char* log_data, const int64_t data_len, const in
   return err;
 }
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 int64_t ObLogEntry::calc_data_checksum(const char* log_data, const int64_t data_len) const
 {
   uint64_t data_checksum = 0;

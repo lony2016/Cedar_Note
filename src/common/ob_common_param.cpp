@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_object.h"
 #include "ob_action_flag.h"
 #include "ob_common_param.h"
@@ -47,12 +44,9 @@ namespace oceanbase
       is_result_cached_ = 0;
       version_range_.start_version_ = 0;
       version_range_.end_version_ = 0;
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160312:b
       trans_id_.reset();
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObReadParam::~ObReadParam()
@@ -88,7 +82,6 @@ namespace oceanbase
     {
       return version_range_;
     }
-<<<<<<< HEAD
     // add by guojinwei [repeatable read] 20160311:b
     void ObReadParam::set_trans_id(const ObTransID& trans_id)
     {
@@ -100,8 +93,6 @@ namespace oceanbase
       return trans_id_;
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     int ObReadParam::serialize_reserve_param(char * buf, const int64_t buf_len, int64_t & pos) const
     {
@@ -169,7 +160,6 @@ namespace oceanbase
           ret = obj.serialize(buf, buf_len, pos);
         }
       }
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160312:b
       // trans id
       if (ret == OB_SUCCESS)
@@ -180,8 +170,6 @@ namespace oceanbase
         }
       }
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       return ret;
     }
@@ -244,7 +232,6 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160312:b
       // trans id
       if (ret == OB_SUCCESS)
@@ -255,8 +242,6 @@ namespace oceanbase
         }
       }
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       return ret;
     }
@@ -275,13 +260,10 @@ namespace oceanbase
       total_size += obj.get_serialize_size();
       obj.set_int(version_range_.end_version_);
       total_size += obj.get_serialize_size();
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160312:b
       // trans id
       total_size += trans_id_.get_serialize_size();
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       return total_size;
     }

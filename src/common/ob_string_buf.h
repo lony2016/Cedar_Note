@@ -24,13 +24,9 @@
 #include "ob_memory_pool.h"
 #include "page_arena.h"
 #include "ob_rowkey.h"
-<<<<<<< HEAD
 //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 #include "common/Ob_Decimal.h"
 //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
@@ -60,7 +56,6 @@ namespace oceanbase
         int write_obj(const ObObj& obj, ObObj* stored_obj);
         // Write a rowkey
         int write_string(const ObRowkey& rowkey, ObRowkey* stored_rowkey);
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         //int write_obj_varchar_to_decimal(const ObObj& obj, ObObj *stored_obj);
         //add:e
@@ -69,9 +64,6 @@ namespace oceanbase
         int write_decimal(const ObDecimal &dec, ObDecimal *stored_dec, uint32_t len);
         int write_decimal(const uint64_t* dec, uint64_t*& stored_dec, uint32_t len);
         //add e
-=======
-
->>>>>>> refs/remotes/origin/master
         inline int64_t used() const
         {
           return arena_.used();

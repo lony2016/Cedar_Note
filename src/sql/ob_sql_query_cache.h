@@ -139,11 +139,7 @@ namespace oceanbase
         int remove             (const ObSQLQueryCacheKey & key, ObResWrapper & res);
         int prepare_ongoing_res(int64_t sql_id, const common::ObIArray<common::ObObj> & params,
                                 ObResWrapper & res);
-<<<<<<< HEAD
         int append_ongoing_res (onev_buf_e * res);
-=======
-        int append_ongoing_res (easy_buf_t * res);
->>>>>>> refs/remotes/origin/master
         int finish_ongoing_res ();
         int stop_ongoing_res   ();
       protected:

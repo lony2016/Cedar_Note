@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -82,7 +79,6 @@ namespace oceanbase
        * @return otherwise 失败
        */
       int read_log(LogCommand &cmd, uint64_t &seq, char* &log_data, int64_t &data_len);
-<<<<<<< HEAD
 
       //add lbzhong [Max Log Timestamp] 20150824:b
       /**
@@ -127,8 +123,6 @@ namespace oceanbase
       int read_log_for_data_checksum_(LogCommand& cmd, uint64_t &log_seq, int64_t& data_checksum);
       // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       //重新打开一个新的文件，并定位到当前日志的下一位
       int reset_file_id(const uint64_t log_id_start, const uint64_t log_seq_start);
 
@@ -206,13 +200,10 @@ namespace oceanbase
 
       int read_log_(LogCommand &cmd, uint64_t &log_seq, char *&log_data, int64_t &data_len);
 
-<<<<<<< HEAD
       //add lbzhong [Max Log Timestamp] 20150824:b
       int read_log_(LogCommand &cmd, uint64_t &log_seq, int64_t& timestamp);
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       uint64_t cur_log_file_id_;
       uint64_t cur_log_seq_id_;

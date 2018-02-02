@@ -80,14 +80,11 @@ int64_t ObJoin::to_string(char* buf, const int64_t buf_len) const
     case INNER_JOIN:
       databuff_printf(buf, buf_len, pos, "INNER JOIN\n");
       break;
-<<<<<<< HEAD
     //add by wanglei [semi join] 20170417:b
     case SEMI_JOIN:
       databuff_printf(buf, buf_len, pos, "SEMI INNER JOIN: ");
       break;
     //add by wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
     case LEFT_OUTER_JOIN:
       databuff_printf(buf, buf_len, pos, "LEFT OUTER JOIN\n");
       break;

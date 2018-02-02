@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -56,7 +53,6 @@ namespace oceanbase
        *         others: 发生了错误.
        */
       int read_log(LogCommand &cmd, uint64_t &log_seq, char *&log_data, int64_t &data_len);
-<<<<<<< HEAD
 
       //add lbzhong [Max Log Timestamp] 20150824:b
       /**
@@ -95,8 +91,6 @@ namespace oceanbase
        */
       int read_log_for_data_checksum(LogCommand &cmd, uint64_t &log_seq, int64_t& data_checksum);
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace common
 } // end namespace oceanbase

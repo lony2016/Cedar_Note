@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -22,8 +21,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -62,10 +59,7 @@
 #include "sql/ob_create_user_stmt.h"
 #include "sql/ob_drop_user_stmt.h"
 #include "sql/ob_drop_table_stmt.h"
-<<<<<<< HEAD
 #include "sql/ob_truncate_table_stmt.h" //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
 #include "sql/ob_revoke_stmt.h"
 #include "sql/ob_lock_user_stmt.h"
 #include "sql/ob_set_password_stmt.h"
@@ -77,7 +71,6 @@
 #include "ob_ups_executor.h"
 #include "ob_table_rpc_scan.h"
 #include "ob_get_cur_time_phy_operator.h"
-<<<<<<< HEAD
 #include "ob_physical_plan.h"
 
 //add longfei [secondary index drop index]
@@ -102,8 +95,6 @@
 //add slwang [exists related subquery] 20170629:b
 #include "sql/ob_exists_logical_optimizer.h"
 //add 20170629:e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::sql;
@@ -111,7 +102,6 @@ using namespace oceanbase::sql;
 template <typename OperatorT>
 static int init_hook_env(ObSqlContext &context, ObPhysicalPlan *&phy_plan, OperatorT *&op)
 {
-<<<<<<< HEAD
     int ret = OB_SUCCESS;
     phy_plan = NULL;
     op = NULL;
@@ -144,40 +134,6 @@ static int init_hook_env(ObSqlContext &context, ObPhysicalPlan *&phy_plan, Opera
         }
     }
     return ret;
-=======
-  int ret = OB_SUCCESS;
-  phy_plan = NULL;
-  op = NULL;
-  StackAllocator& allocator = context.session_info_->get_transformer_mem_pool();
-  void *ptr1 = allocator.alloc(sizeof(ObPhysicalPlan));
-  void *ptr2 = allocator.alloc(sizeof(OperatorT));
-  if (NULL == ptr1 || NULL == ptr2)
-  {
-    ret = OB_ALLOCATE_MEMORY_FAILED;
-    TBSYS_LOG(WARN, "fail to malloc memory for ObValues, op=%p", op);
-  }
-  else
-  {
-    op = new(ptr2) OperatorT();
-    phy_plan = new(ptr1) ObPhysicalPlan();
-    if (OB_SUCCESS != (ret = phy_plan->store_phy_operator(op)))
-    {
-      TBSYS_LOG(WARN, "failed to add operator, err=%d", ret);
-      op->~OperatorT();
-      phy_plan->~ObPhysicalPlan();
-    }
-    else if (OB_SUCCESS != (ret = phy_plan->add_phy_query(op, NULL, true)))
-    {
-      TBSYS_LOG(WARN, "failed to add query, err=%d", ret);
-      phy_plan->~ObPhysicalPlan();
-    }
-    else
-    {
-      ob_inc_phy_operator_stat(op->get_type());
-    }
-  }
-  return ret;
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSql::direct_execute(const common::ObString &stmt, ObResultSet &result, ObSqlContext &context)
@@ -207,13 +163,10 @@ int ObSql::direct_execute(const common::ObString &stmt, ObResultSet &result, ObS
   else
   {
     ResultPlan result_plan;
-<<<<<<< HEAD
     //add by qx 20160802:b
     // initlize result_plan.err_stat_.err_msg_ ,prohibit result_plan.err_stat_.err_msg_ have illegal content caused to show wrong error message
     result_plan.err_stat_.err_msg_[0]  ='\0';
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
     ObMultiPhyPlan multi_phy_plan;
     ObMultiLogicPlan *multi_logic_plan = NULL;
     ObLogicalPlan *logic_plan = NULL;
@@ -244,7 +197,6 @@ int ObSql::direct_execute(const common::ObString &stmt, ObResultSet &result, ObS
             TBSYS_LOG(WARN, "no privilege,sql=%.*s ret=%d", stmt.length(), stmt.ptr(), ret);
           }
         }
-<<<<<<< HEAD
         //add slwang [exists related subquery] 20170629:b
         if(ret == OB_SUCCESS)
         {
@@ -265,8 +217,6 @@ int ObSql::direct_execute(const common::ObString &stmt, ObResultSet &result, ObS
             ret = ObOptimizer::optimizer(result_plan, result);
           }
         }
-=======
->>>>>>> refs/remotes/origin/master
 
         if (OB_SUCCESS == ret)
         {
@@ -315,7 +265,6 @@ int ObSql::direct_execute(const common::ObString &stmt, ObResultSet &result, ObS
 
 int ObSql::generate_logical_plan(const common::ObString &stmt, ObSqlContext & context, ResultPlan  &result_plan, ObResultSet & result)
 {
-<<<<<<< HEAD
     int ret = OB_SUCCESS;
     common::ObStringBuf &parser_mem_pool = context.session_info_->get_parser_mem_pool();
     ParseResult parse_result;
@@ -426,102 +375,6 @@ int ObSql::generate_logical_plan(const common::ObString &stmt, ObSqlContext & co
     parse_terminate(&parse_result);
     result.set_errcode(ret);
     return ret;
-=======
-  int ret = OB_SUCCESS;
-  common::ObStringBuf &parser_mem_pool = context.session_info_->get_parser_mem_pool();
-  ParseResult parse_result;
-  static const int MAX_ERROR_LENGTH = 80;
-
-  parse_result.malloc_pool_ = &parser_mem_pool;
-  if (0 != (ret = parse_init(&parse_result)))
-  {
-    TBSYS_LOG(WARN, "parser init err, err=%s", strerror(errno));
-    ret = OB_ERR_PARSER_INIT;
-  }
-  else
-  {
-    // generate syntax tree
-    PFILL_ITEM_START(sql_to_logicalplan);
-    FILL_TRACE_LOG("before_parse");
-    if (parse_sql(&parse_result, stmt.ptr(), static_cast<size_t>(stmt.length())) != 0
-      || NULL == parse_result.result_tree_)
-    {
-      TBSYS_LOG(WARN, "parse: %p, %p, %p, msg=[%s], start_col_=[%d], end_col_[%d], line_[%d], yycolumn[%d], yylineno_[%d]",
-          parse_result.yyscan_info_,
-          parse_result.result_tree_,
-          parse_result.malloc_pool_,
-          parse_result.error_msg_,
-          parse_result.start_col_,
-          parse_result.end_col_,
-          parse_result.line_,
-          parse_result.yycolumn_,
-          parse_result.yylineno_);
-
-      int64_t error_length = min(stmt.length() - (parse_result.start_col_ - 1), MAX_ERROR_LENGTH);
-      snprintf(parse_result.error_msg_, MAX_ERROR_MSG,
-          "You have an error in your SQL syntax; check the manual that corresponds to your OceanBase version for the right syntax to use near '%.*s' at line %d", static_cast<int32_t>(error_length), stmt.ptr() + parse_result.start_col_ - 1, parse_result.line_);
-      TBSYS_LOG(WARN, "failed to parse sql=%.*s err=%s", stmt.length(), stmt.ptr(), parse_result.error_msg_);
-      result.set_message(parse_result.error_msg_);
-      ret = OB_ERR_PARSE_SQL;
-    }
-    else if (NULL == context.schema_manager_)
-    {
-      TBSYS_LOG(WARN, "context.schema_manager_ is null");
-      ret = OB_ERR_UNEXPECTED;
-    }
-    else
-    {
-      FILL_TRACE_LOG("parse");
-      result_plan.name_pool_ = &parser_mem_pool;
-      ObSchemaChecker *schema_checker =  (ObSchemaChecker*)parse_malloc(sizeof(ObSchemaChecker), result_plan.name_pool_);
-      if (NULL == schema_checker)
-      {
-        TBSYS_LOG(WARN, "out of memory");
-        ret = OB_ERR_PARSER_MALLOC_FAILED;
-      }
-      else
-      {
-        schema_checker->set_schema(*context.schema_manager_);
-        result_plan.schema_checker_ = schema_checker;
-        result_plan.plan_tree_ = NULL;
-        // generate logical plan
-        ret = resolve(&result_plan, parse_result.result_tree_);
-        PFILL_ITEM_END(sql_to_logicalplan);
-        FILL_TRACE_LOG("resolve");
-        if (OB_SUCCESS != ret)
-        {
-          TBSYS_LOG(WARN, "failed to generate logical plan, err=%d sql=%.*s result_plan.err_stat_.err_msg_=[%s]",
-              ret, stmt.length(), stmt.ptr(), result_plan.err_stat_.err_msg_);
-          result.set_message(result_plan.err_stat_.err_msg_);
-        }
-        else
-        {
-          ObMultiLogicPlan *multi_logic_plan = static_cast<ObMultiLogicPlan*>(result_plan.plan_tree_);
-          ////TODO 为了prepare stmtname from select from test a 也使用psstore 需要记录下绑定的语句
-          //ObLogicalPlan *logical_plan = NULL;
-          //for (int32_t i = 0; ret = OB_SUCCESS && i < multi_logic_plan.size(); ++i)
-          //{
-          //  if (T_PREPARE == login_plan->get_main_stmt()->get_stmt_type())
-          //  {
-          //    //TODO
-          //    //log sql to ob_prepare_stmt >>>> ob_prepare构造执行计划的时候可以去 ObPsStore里面找 在session上保存一个stmt_name->sql id的映射
-          //    //ob_prepare  ob_execute连个操作符号需要修改
-          //  }
-          //}
-          if (OB_UNLIKELY(TBSYS_LOGGER._level >= TBSYS_LOG_LEVEL_DEBUG))
-          {
-            multi_logic_plan->print();
-          }
-        }
-      }
-    }
-  }
-  // destroy syntax tree
-  destroy_tree(parse_result.result_tree_);
-  parse_terminate(&parse_result);
-  result.set_errcode(ret);
-  return ret;
->>>>>>> refs/remotes/origin/master
 }
 
 void ObSql::clean_result_plan(ResultPlan &result_plan)
@@ -536,13 +389,10 @@ int ObSql::generate_physical_plan(ObSqlContext & context, ResultPlan &result_pla
   int ret = OB_SUCCESS;
   ObTransformer trans(context);
   ErrStat err_stat;
-<<<<<<< HEAD
   //add by qx 20160802:b
   // initlize err_stat.err_msg_ ,prohibit err_stat.err_msg_ have illegal content caused to show wrong error message
   err_stat.err_msg_[0]='\0';
   //add :e
-=======
->>>>>>> refs/remotes/origin/master
   ObMultiLogicPlan *multi_logic_plan = static_cast<ObMultiLogicPlan*>(result_plan.plan_tree_);
   PFILL_ITEM_START(logicalplan_to_physicalplan);
   if (OB_SUCCESS != (ret = trans.generate_physical_plans(*multi_logic_plan, multi_phy_plan, err_stat)))
@@ -892,7 +742,6 @@ int ObSql::stmt_close(const uint64_t stmt_id, ObSqlContext &context)
 
 bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet &result, ObSqlContext &context)
 {
-<<<<<<< HEAD
     int ret = OB_SUCCESS;
     const char *select_collation = (const char *)"SHOW COLLATION";
     int64_t select_collation_len = strlen(select_collation);
@@ -931,27 +780,6 @@ bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet 
     if (stmt.length() >= select_collation_len && 0 == strncasecmp(stmt.ptr(), select_collation, select_collation_len))
     {
         /*
-=======
-  int ret = OB_SUCCESS;
-  const char *select_collation = (const char *)"SHOW COLLATION";
-  int64_t select_collation_len = strlen(select_collation);
-  const char *show_charset = (const char *)"SHOW CHARACTER SET";
-  int64_t show_charset_len = strlen(show_charset);
-  // SET NAMES latin1/gb2312/utf8/etc...
-  const char *set_names = (const char *)"SET NAMES ";
-  int64_t set_names_len = strlen(set_names);
-  const char *set_session_transaction_isolation = (const char *)"SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED";
-  int64_t set_session_transaction_isolation_len = strlen(set_session_transaction_isolation);
-
-  ObRow row;
-  ObRowDesc row_desc;
-  ObValues *op = NULL;
-  ObPhysicalPlan *phy_plan = NULL;
-
-  if (stmt.length() >= select_collation_len && 0 == strncasecmp(stmt.ptr(), select_collation, select_collation_len))
-  {
-    /*
->>>>>>> refs/remotes/origin/master
        mysql> SHOW COLLATION;
         +------------------------+----------+-----+---------+----------+---------+
         | Collation              | Charset  | Id  | Default | Compiled | Sortlen |
@@ -960,7 +788,6 @@ bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet 
         | ...                        | ...          |  ... |   ...      | ...            |       ... |
        +------------------------+----------+-----+---------+----------+---------+
        */
-<<<<<<< HEAD
         if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
         {
         }
@@ -1033,80 +860,6 @@ bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet 
     else if (stmt.length() >= show_charset_len && 0 == strncasecmp(stmt.ptr(), show_charset, show_charset_len))
     {
         /*
-=======
-    if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
-    {
-    }
-    else
-    {
-
-      // construct table header
-      ObResultSet::Field field;
-      ObString tname = ObString::make_string("tmp_table");
-      field.tname_ = tname;
-      field.org_tname_ = tname;
-      ObString cname[6];
-      cname[0] = ObString::make_string("Collation");
-      cname[1] = ObString::make_string("Charset");
-      cname[2] = ObString::make_string("Id");
-      cname[3] = ObString::make_string("Default");
-      cname[4] = ObString::make_string("Compiled");
-      cname[5] = ObString::make_string("Sortlen");
-      ObObjType type[6];
-      type[0] = ObVarcharType;
-      type[1] = ObVarcharType;
-      type[2] = ObIntType;
-      type[3] = ObVarcharType;
-      type[4] = ObVarcharType;
-      type[5] = ObIntType;
-      for (int i = 0; i < 6; i++)
-      {
-        field.cname_ = cname[i];
-        field.org_cname_ = cname[i];
-        field.type_.set_type(type[i]);
-        if (OB_SUCCESS != (ret = result.add_field_column(field)))
-        {
-          TBSYS_LOG(WARN, "fail to add field column %d", i);
-          break;
-        }
-      }
-
-      // construct table body
-      for (int i = 0; i < 6; ++i)
-      {
-        ret = row_desc.add_column_desc(OB_INVALID_ID, OB_APP_MIN_COLUMN_ID+i);
-        OB_ASSERT(OB_SUCCESS == ret);
-      }
-      row.set_row_desc(row_desc);
-      OB_ASSERT(NULL != op);
-      op->set_row_desc(row_desc);
-      // | binary               | binary   |  63 | Yes     | Yes      |       1 |
-      ObObj cells[6];
-      ObString cell0 = ObString::make_string("binary");
-      cells[0].set_varchar(cell0);
-      ObString cell1 = ObString::make_string("binary");
-      cells[1].set_varchar(cell1);
-      cells[2].set_int(63);
-      ObString cell3 = ObString::make_string("Yes");
-      cells[3].set_varchar(cell3);
-      ObString cell4 = ObString::make_string("Yes");
-      cells[4].set_varchar(cell4);
-      cells[5].set_int(1);
-      ObRow one_row;
-      one_row.set_row_desc(row_desc);
-      for (int i = 0; i < 6; ++i)
-      {
-        ret = one_row.set_cell(OB_INVALID_ID, OB_APP_MIN_COLUMN_ID+i, cells[i]);
-        OB_ASSERT(OB_SUCCESS == ret);
-      }
-      ret = op->add_values(one_row);
-      OB_ASSERT(OB_SUCCESS == ret);
-    }
-  }
-  else if (stmt.length() >= show_charset_len && 0 == strncasecmp(stmt.ptr(), show_charset, show_charset_len))
-  {
-    /*
->>>>>>> refs/remotes/origin/master
        mysql> SHOW CHARACTER SET
        +----------+-----------------------------+---------------------+--------+
        | Charset  | Description                 | Default collation   | Maxlen |
@@ -1114,7 +867,6 @@ bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet 
        | binary   | Binary pseudo charset       | binary              |      1 |
        +----------+-----------------------------+---------------------+--------+
     */
-<<<<<<< HEAD
         if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
         {
         }
@@ -1370,112 +1122,6 @@ bool ObSql::process_special_stmt_hook(const common::ObString &stmt, ObResultSet 
         result.set_physical_plan(phy_plan, true);
     }
     return (OB_SUCCESS == ret);
-=======
-    if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
-    {
-    }
-    else
-    {
-
-      // construct table header
-      ObResultSet::Field field;
-      ObString tname = ObString::make_string("tmp_table");
-      field.tname_ = tname;
-      field.org_tname_ = tname;
-      ObString cname[4];
-      cname[0] = ObString::make_string("Charset");
-      cname[1] = ObString::make_string("Description");
-      cname[2] = ObString::make_string("Default collation");
-      cname[3] = ObString::make_string("Maxlen");
-      ObObjType type[4];
-      type[0] = ObVarcharType;
-      type[1] = ObVarcharType;
-      type[2] = ObVarcharType;
-      type[3] = ObIntType;
-      for (int i = 0; i < 4; i++)
-      {
-        field.cname_ = cname[i];
-        field.org_cname_ = cname[i];
-        field.type_.set_type(type[i]);
-        if (OB_SUCCESS != (ret = result.add_field_column(field)))
-        {
-          TBSYS_LOG(WARN, "fail to add field column %d", i);
-          break;
-        }
-      }
-
-      // construct table body
-      for (int i = 0; i < 4; ++i)
-      {
-        ret = row_desc.add_column_desc(OB_INVALID_ID, OB_APP_MIN_COLUMN_ID+i);
-        OB_ASSERT(OB_SUCCESS == ret);
-      }
-      row.set_row_desc(row_desc);
-      OB_ASSERT(NULL != op);
-      op->set_row_desc(row_desc);
-      // | binary   | Binary pseudo charset       | binary              |      1 |
-      ObObj cells[4];
-      ObString cell0 = ObString::make_string("binary");
-      cells[0].set_varchar(cell0);
-      ObString cell1 = ObString::make_string("Binary pseudo charset");
-      cells[1].set_varchar(cell1);
-      ObString cell2 = ObString::make_string("binary");
-      cells[2].set_varchar(cell2);
-      cells[3].set_int(1);
-      ObRow one_row;
-      one_row.set_row_desc(row_desc);
-      for (int i = 0; i < 4; ++i)
-      {
-        ret = one_row.set_cell(OB_INVALID_ID, OB_APP_MIN_COLUMN_ID+i, cells[i]);
-        OB_ASSERT(OB_SUCCESS == ret);
-      }
-      ret = op->add_values(one_row);
-      OB_ASSERT(OB_SUCCESS == ret);
-    }
-  }
-  else if (stmt.length() >= set_names_len && 0 == strncasecmp(stmt.ptr(), set_names, set_names_len))
-  {
-    if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
-    {
-    }
-    else
-    {
-      // SET NAMES ...
-      OB_ASSERT(NULL != op);
-      op->set_row_desc(row_desc);
-    }
-  }
-  else if (stmt.length() >= set_session_transaction_isolation_len &&
-      0 == strncasecmp(stmt.ptr(), set_session_transaction_isolation, set_session_transaction_isolation_len))
-  {
-    if (OB_SUCCESS != init_hook_env(context, phy_plan, op))
-    {
-    }
-    else
-    {
-      // SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
-      OB_ASSERT(NULL != op);
-      op->set_row_desc(row_desc);
-    }
-  }
-  else
-  {
-    ret = OB_NOT_SUPPORTED;
-  }
-
-  if (OB_SUCCESS != ret)
-  {
-    if (NULL != phy_plan)
-    {
-      phy_plan->~ObPhysicalPlan(); // will destruct op automatically
-    }
-  }
-  else
-  {
-    result.set_physical_plan(phy_plan, true);
-  }
-  return (OB_SUCCESS == ret);
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSql::do_privilege_check(const ObString & username, const ObPrivilege **pp_privilege, ObLogicalPlan *plan)
@@ -1788,7 +1434,6 @@ int ObSql::do_privilege_check(const ObString & username, const ObPrivilege **pp_
           }
           break;
         }
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         case ObBasicStmt::T_TRUNCATE_TABLE:
         {
@@ -1847,8 +1492,6 @@ int ObSql::do_privilege_check(const ObString & username, const ObPrivilege **pp_
           break;
         }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       case ObBasicStmt::T_SHOW_GRANTS:
         {
           ObShowStmt *show_grant_stmt = dynamic_cast<ObShowStmt*>(stmt);
@@ -1878,7 +1521,6 @@ int ObSql::do_privilege_check(const ObString & username, const ObPrivilege **pp_
           }
           break;
         }
-<<<<<<< HEAD
       //add weixing [statistics build]20161215:b
       case ObBasicStmt::T_GAHTHER_STATISTICS:
       {
@@ -1902,8 +1544,6 @@ int ObSql::do_privilege_check(const ObString & username, const ObPrivilege **pp_
         break;
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       default:
         err = OB_ERR_NO_PRIVILEGE;
         break;
@@ -2178,7 +1818,6 @@ int ObSql::copy_physical_plan(ObPhysicalPlan& new_plan, ObPhysicalPlan& old_plan
 
 int ObSql::set_execute_context(ObPhysicalPlan& plan, ObSqlContext& context)
 {
-<<<<<<< HEAD
     int ret = OB_SUCCESS;
     for (int64_t i = 0; ret == OB_SUCCESS && i < plan.get_operator_size(); i++)
     {
@@ -2244,65 +1883,6 @@ int ObSql::set_execute_context(ObPhysicalPlan& plan, ObSqlContext& context)
         }
     }
     return ret;
-=======
-  int ret = OB_SUCCESS;
-  for (int64_t i = 0; ret == OB_SUCCESS && i < plan.get_operator_size(); i++)
-  {
-    ObPhyOperator *op = plan.get_phy_operator(i);
-    TBSYS_LOG(DEBUG, "plan %ld op is type=%s %p", i, ob_phy_operator_type_str(op->get_type()), op);
-    if (!op)
-    {
-      ret = OB_ERR_UNEXPECTED;
-      TBSYS_LOG(WARN, "Wrong physical plan, ret=%d, operator idx=%ld", ret, i);
-    }
-    switch (op->get_type())
-    {
-      case PHY_UPS_EXECUTOR:
-      {
-        ObUpsExecutor *exe_op = dynamic_cast<ObUpsExecutor*>(op);
-        ObPhysicalPlan *inner_plan = exe_op->get_inner_plan();
-        if (!inner_plan)
-        {
-          ret = OB_ERR_UNEXPECTED;
-          TBSYS_LOG(WARN, "Empty inner plan of ObUpsExecutor, ret=%d", ret);
-        }
-        else
-        {
-          exe_op->set_rpc_stub(context.merger_rpc_proxy_);
-          ret = ObSql::set_execute_context(*inner_plan, context);
-        }
-        break;
-      }
-      case PHY_START_TRANS:
-      {
-        ObStartTrans *start_op = dynamic_cast<ObStartTrans*>(op);
-        start_op->set_rpc_stub(context.merger_rpc_proxy_);
-        break;
-      }
-      case PHY_END_TRANS:
-      {
-        ObEndTrans *end_op = dynamic_cast<ObEndTrans*>(op);
-        end_op->set_rpc_stub(context.merger_rpc_proxy_);
-        break;
-      }
-      case PHY_TABLE_RPC_SCAN:
-      {
-        ObTableRpcScan *table_rpc_op = dynamic_cast<ObTableRpcScan*>(op);
-        table_rpc_op->init(&context);
-        break;
-      }
-      case PHY_CUR_TIME:
-      {
-        ObGetCurTimePhyOperator *get_cur_time_op = dynamic_cast<ObGetCurTimePhyOperator*>(op);
-        get_cur_time_op->set_rpc_stub(context.merger_rpc_proxy_);
-        break;
-      }
-      default:
-        break;
-    }
-  }
-  return ret;
->>>>>>> refs/remotes/origin/master
 }
 
 bool ObSql::need_rebuild_plan(const common::ObSchemaManagerV2 *schema_manager, ObPsStoreItem *item)
@@ -2342,7 +1922,6 @@ bool ObSql::need_rebuild_plan(const common::ObSchemaManagerV2 *schema_manager, O
   }
   return ret;
 }
-<<<<<<< HEAD
 
 
 //add zt 20151117:b
@@ -2525,5 +2104,3 @@ void ObSql::deblank(ObString &string)
 }
 
 //add :e
-=======
->>>>>>> refs/remotes/origin/master

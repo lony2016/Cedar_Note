@@ -129,7 +129,6 @@ namespace oceanbase
           common::ObString new_string(value.size(),value.length(),buf);
           ret->value.set_varchar(new_string);
         }
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         //modify xsl ECNU_DECIMAL 2016_12
         else if(ObDecimalType == other.value.get_type())
@@ -151,8 +150,6 @@ namespace oceanbase
         }
         //modify e
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         else
         {
           //do nothing;

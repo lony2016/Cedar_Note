@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -23,9 +22,6 @@
  *         zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date  2016_07_24
  *//*
-=======
-/*
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,11 +40,7 @@
 #ifndef __OCEANBASE_CHUNKSERVER_OB_UPDATE_SERVER_H__
 #define __OCEANBASE_CHUNKSERVER_OB_UPDATE_SERVER_H__
 
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "common/ob_single_server.h"
 #include "common/ob_packet_factory.h"
 #include "common/thread_buffer.h"
@@ -90,7 +82,6 @@
 #include "ob_trigger_handler.h"
 #include "ob_util_interface.h"
 #include "common/ob_trace_id.h"
-<<<<<<< HEAD
 // add by guojinwei [lease between rs and ups][multi_cluster] 20150909:b
 #include "common/ob_election_role_mgr.h"
 // add:e
@@ -98,8 +89,6 @@
 #include "ob_switch_group_runnable.h"
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -200,12 +189,8 @@ namespace oceanbase
 
     class TransExecutor;
     class ObUpdateServer
-<<<<<<< HEAD
       : public common::ObBaseServer, public ObPacketQueueHandler, public common::IBatchPacketQueueHandler, public ObUtilInterface,
         public ISwitchGroupHandler //add by zhouhuan for [scalable commit] 20160712
-=======
-      : public common::ObBaseServer, public ObPacketQueueHandler, public common::IBatchPacketQueueHandler, public ObUtilInterface
->>>>>>> refs/remotes/origin/master
     {
       public:
         const static int64_t RESPONSE_RESERVED_US = 60 * 1000 * 1000;
@@ -223,15 +208,11 @@ namespace oceanbase
         int handlePacket(ObPacket *packet);
         bool handlePacketQueue(ObPacket *packet, void *args);
         bool handleBatchPacketQueue(const int64_t batch_num, ObPacket** packets, void* args);
-<<<<<<< HEAD
        //add by zhouhuan for [scalable commit] 20160723:b
         int handleSwitchGroup();
         int switch_group();
         volatile void set_force_switch_flag(bool flag) {force_switch_flag_ = flag;};
        //add :b
-=======
-
->>>>>>> refs/remotes/origin/master
         /** called before start server */
         virtual int initialize();
         virtual void wait_for_queue();
@@ -244,7 +225,6 @@ namespace oceanbase
         bool is_master_lease_valid() const;
         virtual void on_ioth_start();
       public:
-<<<<<<< HEAD
         //add lbzhong [Commit Point] 20150820:b
         /**
          * @brief whether the ups need to replay local log to commit point
@@ -255,8 +235,6 @@ namespace oceanbase
             return is_replay_to_commit_point_;
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         const common::ObClientManager& get_client_manager() const
         {
           return client_manager_;
@@ -289,10 +267,7 @@ namespace oceanbase
           return log_mgr_;
         }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
         const common::ObServer& get_self()
         {
           return self_addr_;
@@ -410,7 +385,6 @@ namespace oceanbase
         int submit_lease_task();
         int submit_check_keep_alive();
         int submit_fake_write_for_keep_alive();
-<<<<<<< HEAD
         // add by zhangcd [majority_count_init] 20151118:b
         /**
          * @brief ups_set_majority_count
@@ -419,8 +393,6 @@ namespace oceanbase
          */
         int ups_set_majority_count();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         int submit_update_schema();
         int submit_kill_zombie();
         int submit_check_sstable_checksum(const uint64_t sstable_id, const uint64_t checksum);
@@ -454,12 +426,9 @@ namespace oceanbase
         int set_timer_time_update();
         int init_slave_log_mgr();
         int slave_report_quit();
-<<<<<<< HEAD
         // add by zhangcd [majority_count_init] 20151118:b
         int set_timer_majority_count();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         int register_and_start_fetch(const common::ObServer &master, uint64_t &replay_point);
         //add
@@ -475,7 +444,6 @@ namespace oceanbase
         int ups_update_lease(const common::ObMsgUpsHeartbeat &hb);
         int ups_revoke_lease(const common::ObMsgRevokeLease &revoke_info);
         bool is_lease_valid() const;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
         /**
          * @brief whether the rs election lease is valid
@@ -483,8 +451,6 @@ namespace oceanbase
          */
         bool is_rs_election_lease_valid() const;
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         bool get_sync_state();
         bool can_serve_read_req(const bool is_consistency_read, const int64_t query_version);
         int init_fetch_thread(const common::ObFetchParam &fetch_param);
@@ -498,7 +464,6 @@ namespace oceanbase
       private:
         //add:
         int start_timer_schedule();
-<<<<<<< HEAD
         int return_not_master(const int32_t version, onev_request_e* req,
             const uint32_t channel_id, const int32_t packet_code);
 
@@ -508,22 +473,10 @@ namespace oceanbase
             onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
         int ob_login(const int32_t version, common::ObDataBuffer& in_buff,
             onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-=======
-        int return_not_master(const int32_t version, easy_request_t* req,
-            const uint32_t channel_id, const int32_t packet_code);
-
-        int ups_rs_lease(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_rs_revoke_lease(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ob_login(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
->>>>>>> refs/remotes/origin/master
         int ups_switch_skey();
         int check_keep_alive_();
         int grant_keep_alive_();
         int check_lease_();
-<<<<<<< HEAD
         //add lbzhong [Commit Point] 20150820:b
         /**
          * @brief let master ups restart when switch to slave
@@ -531,13 +484,10 @@ namespace oceanbase
          */
         int ups_restart_server();
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         void set_heartbeat_res(ObMsgUpsHeartbeatResp &hb_res);
         int register_to_rootserver(const uint64_t log_seq_id);
         void set_register_msg(const uint64_t log_id, ObMsgUpsRegister &msg_register);
         int set_obi_role(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
             onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
         ///slave_master ups send fetch param to slave_slave
         int slave_set_fetch_param(const int32_t version, common::ObDataBuffer& in_buff,
@@ -638,97 +588,6 @@ namespace oceanbase
         int ups_check_incremental_data_range(const int32_t version, common::ObDataBuffer& in_buff,
             onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
         //add:e
-=======
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        ///slave_master ups send fetch param to slave_slave
-        int slave_set_fetch_param(const int32_t version, common::ObDataBuffer& in_buff,
-                    easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_slave_write_log(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_fetch_log_for_slave(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff, common::ObPacket* packet);
-
-        int ups_fill_log_cursor_for_slave(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_clog_status(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_set_sync_limit(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_clog_cursor(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_clog_master(const int32_t version, easy_request_t* req,
-                                const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_log_sync_delay_stat(const int32_t version, easy_request_t* req,
-                                        const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_clog_stat(const int32_t version, easy_request_t* req,
-                              const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_sql_scan(const int32_t version, common::ObDataBuffer& in_buff,
-                         easy_request_t* req, const uint32_t channel_id,
-                         common::ObDataBuffer& out_buff);
-        int ups_ping(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_new_get(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-            const int64_t start_time, const int64_t packet_timewait, const int32_t priority);
-        int ups_new_scan(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-            const int64_t start_time, const int64_t packet_timewait, const int32_t priority);
-
-        int ups_get(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-            const int64_t start_time, const int64_t packet_timewait, const int32_t priority);
-        int ups_scan(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-            const int64_t start_time, const int64_t packet_timewait, const int32_t priority);
-        int ups_preprocess(const int32_t version, const int32_t packet_code, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-            const int64_t start_time, const int64_t packet_timewait);
-        int ups_slave_register(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_slave_quit(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-
-        int ups_dump_text_memtable(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_dump_text_schemas(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_force_fetch_schema(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_reload_conf(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_renew_lease(const int32_t version, common::ObDataBuffer& in_buf,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_grant_lease(const int32_t version, common::ObDataBuffer& in_buf,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_change_vip(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_memory_watch(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_memory_limit_set(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_priv_queue_conf_set(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_clear_active_memtable(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_switch_commit_log(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_last_frozen_version(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_slave_info(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_rs_get_max_log_seq(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_table_time_stamp(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_enable_memtable_checksum(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_disable_memtable_checksum(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_fetch_stat_info(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_schema(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_get_sstable_range_list(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-
->>>>>>> refs/remotes/origin/master
         int ups_start_transaction(const MemTableTransType type, UpsTableMgrTransHandle& handle);
         int ups_apply(const bool using_id, UpsTableMgrTransHandle& handle, common::ObDataBuffer& in_buff, common::ObScanner *scanner);
         int ups_end_transaction(common::ObPacket** packets, ScannerArray &scanner_array, const int64_t start_idx,
@@ -737,7 +596,6 @@ namespace oceanbase
         int ups_freeze_memtable(const int32_t version, common::ObPacket *packet_orig, common::ObDataBuffer& in_buff, const int pcode);
         int ups_switch_schema(const int32_t version, common::ObPacket *packet_orig, common::ObDataBuffer &in_buf);
         int ups_create_memtable_index();
-<<<<<<< HEAD
         int ups_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id);
         int ups_delay_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id);
         int ups_immediately_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id);
@@ -792,66 +650,11 @@ namespace oceanbase
         int response_lease_(int32_t ret_code, const common::ObLease& lease,
             int32_t cmd_type, int32_t func_version,
             onev_request_e* req, const uint32_t channel_id,
-=======
-        int ups_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_delay_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_immediately_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_drop_memtable();
-        int ups_load_bypass(const int32_t version,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff, const int pcode);
-        int ups_check_cur_version();
-        int ups_commit_check_sstable_checksum(ObDataBuffer &buffer);
-        int ups_get_bloomfilter(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff);
-        int ups_store_memtable(const int32_t version, common::ObDataBuffer &in_buf,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_erase_sstable(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_handle_frozen();
-        int ups_load_new_store(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_reload_all_store(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_froce_report_frozen_version(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_reload_store(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_umount_store(const int32_t version, common::ObDataBuffer& in_buff,
-            easy_request_t* req, const uint32_t channel_id);
-        int ups_change_log_level(const int32_t version, common::ObDataBuffer& in_buff,
-                                 easy_request_t* req, const uint32_t channel_id);
-        int ups_stop_server(const int32_t version, common::ObDataBuffer& in_buff,
-                                 easy_request_t* req, const uint32_t channel_id);
-        int ob_malloc_stress(const int32_t version, common::ObDataBuffer& in_buff,
-                             easy_request_t* req, const uint32_t channel_id);
-        int ups_set_config(const int32_t version, common::ObDataBuffer& in_buff,
-                           easy_request_t* req, const uint32_t channel_id);
-        int ups_get_config(const int32_t version, easy_request_t* req,
-                           const uint32_t channel_id, common::ObDataBuffer& out_buff);
-
-
-        int ups_handle_fake_write_for_keep_alive();
-
-
-        int response_result_(int32_t ret_code, int32_t cmd_type, int32_t func_version,
-                             easy_request_t* req, const uint32_t channel_id, int64_t receive_ts = 0, const char *ret_string = NULL);
-        int response_scanner_(int32_t ret_code, const common::ObScanner &scanner,
-            int32_t cmd_type, int32_t func_version,
-            easy_request_t* req, const uint32_t channel_id,
-            common::ObDataBuffer& out_buff);
-        int response_fetch_param_(int32_t ret_code, const ObUpsFetchParam& fetch_param,
-            const int64_t log_id, int32_t cmd_type, int32_t func_version,
-            easy_request_t* req, const uint32_t channel_id,
-            common::ObDataBuffer& out_buff);
-        int response_lease_(int32_t ret_code, const common::ObLease& lease,
-            int32_t cmd_type, int32_t func_version,
-            easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
             common::ObDataBuffer& out_buff);
         template <class T>
         int response_data_(int32_t ret_code, const T &data,
                           int32_t cmd_type, int32_t func_version,
-<<<<<<< HEAD
                           onev_request_e* req, const uint32_t channel_id,
-=======
-                          easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                            common::ObDataBuffer& out_buff, const int64_t receive_ts=0, const int32_t* priority = NULL, const char *ret_string = NULL);
         int low_priv_speed_control_(const int64_t scanner_size);
 
@@ -863,11 +666,7 @@ namespace oceanbase
                               const common::ObPacket *packet = NULL);
         template <class Queue>
         int submit_async_task_(const common::PacketCode pcode, Queue &qthread, int32_t task_queue_size,
-<<<<<<< HEAD
             const int32_t version, common::ObDataBuffer& in_buff, onev_request_e* req,
-=======
-            const int32_t version, common::ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
             const uint32_t channel_id, const int64_t timeout);
 
         int report_frozen_version_();
@@ -877,23 +676,14 @@ namespace oceanbase
         int do_async_update_whole_schema();
 
         //add
-<<<<<<< HEAD
         int slave_ups_receive_keep_alive(const int32_t version, onev_request_e* req, const uint32_t channel_id);
         int ups_clear_fatal_status(const int32_t version, onev_request_e* req, const uint32_t channel_id);
-=======
-        int slave_ups_receive_keep_alive(const int32_t version, easy_request_t* req, const uint32_t channel_id);
-        int ups_clear_fatal_status(const int32_t version, easy_request_t* req, const uint32_t channel_id);
->>>>>>> refs/remotes/origin/master
       public:
         int ui_deserialize_mutator(ObDataBuffer& buffer, ObMutator &mutator);
       private:
         static const int MY_VERSION = 1;
         static const int HEARTBEAT_VERSION = 2;
-<<<<<<< HEAD
         //static const int32_t RPC_BUFFER_SIZE = 1024*1024*2; //2MB
-=======
-        static const int32_t RPC_BUFFER_SIZE = 1024*1024*2; //2MB
->>>>>>> refs/remotes/origin/master
         static const int32_t DEFAULT_TASK_READ_QUEUE_SIZE = 1000;
         static const int32_t DEFAULT_TASK_WRITE_QUEUE_SIZE = 1000;
         static const int32_t DEFAULT_TASK_PREPROCESS_QUEUE_SIZE = 1000;
@@ -938,15 +728,12 @@ namespace oceanbase
         common::BatchPacketQueueThread write_thread_queue_; // for write task
         common::ObPacketQueueThread lease_thread_queue_; // for lease
         common::ObPacketQueueThread store_thread_; // store sstable
-<<<<<<< HEAD
         //add by zhouhuan [scalable commit] 20160710
         common::BatchPacketQueueThread alive_thread_queue_; // for fake_alive task
         SwitchGroupThread switch_group_thread_; //for switch group
         volatile bool obi_switch_flag_;
         volatile bool force_switch_flag_;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         ObUpsFetchRunnable fetch_thread_;
         ObUpsReplayRunnable log_replay_thread_;
         //common::ObCheckRunnable check_thread_;
@@ -990,12 +777,9 @@ namespace oceanbase
         ObUpsGrantKeepAliveTask grant_keep_alive_duty_;
         KillZombieDuty kill_zombie_duty_;
         ObUpsLeaseTask ups_lease_task_;
-<<<<<<< HEAD
         // add by zhangcd [majority_count_init] 20151118:b
         ObUpsSetMajorityCountTask set_majority_count_task_;
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         common::ObTimer timer_;
         common::ObTimer config_timer_;
         common::MsList ms_list_task_;
@@ -1012,7 +796,6 @@ namespace oceanbase
         tbsys::CThreadMutex mutex_;
         int64_t lease_timeout_in_advance_;
         int64_t lease_expire_time_us_;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         int64_t rs_election_lease_;
         common::ObElectionRoleMgr election_role_;
@@ -1020,8 +803,6 @@ namespace oceanbase
         bool is_restarting_;
         int64_t last_obi_change_to_slave_time_us_;
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         //int64_t last_keep_alive_time_;
         int64_t keep_alive_valid_interval_;
         int64_t ups_renew_reserved_us_;
@@ -1032,15 +813,12 @@ namespace oceanbase
         TransExecutor trans_executor_;
         ObLogReplayWorker replay_worker_;
         ObAsyncLogApplier log_applier_;
-<<<<<<< HEAD
 
         //add lbzhong [Commit Point] 20150820:b
         bool is_replay_to_commit_point_;
         bool has_master_ups_;
         ObCommitPointRunnable commit_point_thread_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

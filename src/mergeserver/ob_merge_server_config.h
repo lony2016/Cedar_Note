@@ -72,12 +72,9 @@ namespace oceanbase
         DEF_BOOL(lms, "False", "is listener mergeserver");
         DEF_CAP(frozen_data_cache_size, "256MB", "frozen data cache size");
         DEF_CAP(bloom_filter_cache_size, "256MB", "bloom filter cache size");
-<<<<<<< HEAD
         //add huangcc [statistic information cache] 20170317:b
         DEF_CAP(statistic_info_cache_size, "512MB", "statistic_info cache size");
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         DEF_TIME(change_obi_timeout, "30s", "change obi role timeout");//30s
         DEF_INT(check_ups_log_interval, "1", "change obi role, check ups log interval");
         //param for obmysql

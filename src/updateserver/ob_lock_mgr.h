@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_lock_mgr.h updateserver / Oceanbase
@@ -83,7 +80,6 @@ namespace oceanbase
         int unlock(TEValue *value, BaseSessionCtx &session);
     };
 
-<<<<<<< HEAD
     class TableUnlocker : public ISessionCallback
     {
       public:
@@ -91,8 +87,6 @@ namespace oceanbase
         int cb_func(const bool rollback, void *data, BaseSessionCtx &session);
     };
 
-=======
->>>>>>> refs/remotes/origin/master
     class LockMgr;
     class RWSessionCtx;
     class RPSessionCtx;
@@ -125,7 +119,6 @@ namespace oceanbase
       public:
         int on_trans_begin();
         int on_read_begin(const TEKey &key, TEValue &value);
-<<<<<<< HEAD
         /**
          * @brief lock a key-value pair
          * @param[in] key, key of target record
@@ -153,8 +146,6 @@ namespace oceanbase
       public:
         int on_trans_begin();
         int on_read_begin(const TEKey &key, TEValue &value);
-=======
->>>>>>> refs/remotes/origin/master
         int on_write_begin(const TEKey &key, TEValue &value);
         void on_trans_end();
         void on_precommit_end();
@@ -165,10 +156,7 @@ namespace oceanbase
         RowExclusiveUnlocker row_exclusive_unlocker_;
         CallbackMgr callback_mgr_;
     };
-<<<<<<< HEAD
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     class LockMgr
     {

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -164,15 +161,11 @@ namespace oceanbase
        * reset get parameter, easier to reuse it.
        */
       void reset(bool deep_copy_args = false);
-<<<<<<< HEAD
       /**
        * @brief reset_cells
        * clear all cells
        */
       void reset_cells(); //add by zt 20160118
-=======
-
->>>>>>> refs/remotes/origin/master
       /**
        * get how mang rows in get parameter 
        * 

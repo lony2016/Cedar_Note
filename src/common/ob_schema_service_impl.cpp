@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -20,8 +19,6 @@
  * @date 2016_07_26
  */
  
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_schema_service_impl.h"
 #include "ob_extra_tables_schema.h"
 #include "ob_schema_service.h"
@@ -120,11 +117,6 @@ int ObSchemaServiceImpl::add_join_info(ObMutator* mutator, const TableSchema& ta
       value[3].set_int(join_info.right_column_id_);
       rowkey.assign(value, 4);
 
-<<<<<<< HEAD
-=======
-      //连调需要
-      //rowkey列不需要写入，等郁白在UPS端的修改完成以后可以去掉
->>>>>>> refs/remotes/origin/master
       //to be delete start
      // ADD_INT(joininfo_table_name, rowkey, "left_table_id", join_info.left_table_id_);
      // ADD_INT(joininfo_table_name, rowkey, "left_column_id", join_info.left_column_id_);
@@ -187,12 +179,9 @@ int ObSchemaServiceImpl::add_column(ObMutator* mutator, const TableSchema& table
         ADD_INT(column_table_name, rowkey, "data_precision", column.data_precision_);
         ADD_INT(column_table_name, rowkey, "data_scale", column.data_scale_);
         ADD_INT(column_table_name, rowkey, "nullable", column.nullable_);
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161123:b
         ADD_INT(column_table_name, rowkey, "auto_increment", column.auto_increment_);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         ADD_INT(column_table_name, rowkey, "length_in_rowkey", column.length_in_rowkey_);
         ADD_INT(column_table_name, rowkey, "order_in_rowkey", column.order_in_rowkey_);
       }
@@ -348,7 +337,6 @@ int ObSchemaServiceImpl::create_table_mutator(const TableSchema& table_schema, O
       TBSYS_LOG(WARN, "add join info to mutator fail:ret[%d]", ret);
     }
   }
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161201:b
   if (OB_SUCCESS == ret)
   {
@@ -385,11 +373,6 @@ int ObSchemaServiceImpl::create_procedure_mutator(const common::ObString& proc_n
   return ret;
 }
 //add :e
-=======
-
-  return ret;
-}
->>>>>>> refs/remotes/origin/master
 
 int ObSchemaServiceImpl::alter_table_mutator(const AlterTableSchema& table_schema, ObMutator* mutator, const int64_t old_schema_version)
 {
@@ -475,12 +458,9 @@ int ObSchemaServiceImpl::update_column_mutator(ObMutator* mutator, ObRowkey & ro
   ADD_INT(column_table_name, rowkey, "data_precision", column.data_precision_);
   ADD_INT(column_table_name, rowkey, "data_scale", column.data_scale_);
   ADD_INT(column_table_name, rowkey, "nullable", column.nullable_);
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   ADD_INT(column_table_name, rowkey, "auto_increment", column.auto_increment_);
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   ADD_INT(column_table_name, rowkey, "length_in_rowkey", column.length_in_rowkey_);
   ADD_INT(column_table_name, rowkey, "order_in_rowkey", column.order_in_rowkey_);
   return ret;
@@ -569,7 +549,6 @@ int ObSchemaServiceImpl::create_table(const TableSchema& table_schema)
 
   if(OB_SUCCESS == ret)
   {
-<<<<<<< HEAD
 	//mod longfei [create index]
 	if(OB_INVALID_ID == table_schema.original_table_id_)
 	{
@@ -587,13 +566,6 @@ int ObSchemaServiceImpl::create_table(const TableSchema& table_schema)
 	      TBSYS_LOG(WARN, "create index mutator fail:ret[%d]", ret);
 	    }
 	}
-=======
-    ret = create_table_mutator(table_schema, mutator);
-    if(OB_SUCCESS != ret)
-    {
-      TBSYS_LOG(WARN, "create table mutator fail:ret[%d]", ret);
-    }
->>>>>>> refs/remotes/origin/master
   }
 
   if(OB_SUCCESS == ret)
@@ -641,7 +613,6 @@ int ObSchemaServiceImpl::create_table(const TableSchema& table_schema)
   return ret;
 }
 
-<<<<<<< HEAD
 
 //add by wangdonghui 20160125 this is not a wise choice,
 //maybe we can build a new file which names ob_procedure_service :b
@@ -693,8 +664,6 @@ int ObSchemaServiceImpl::create_procedure(const common::ObString& proc_name, con
 }
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 #define ASSIGN_INT_FROM_ROWKEY(column, rowkey_index, field, type) \
 if(OB_SUCCESS == ret) \
 { \
@@ -880,7 +849,6 @@ int ObSchemaServiceImpl::drop_table(const ObString& table_name)
 
   if(OB_SUCCESS == ret)
   {
-<<<<<<< HEAD
     // mod longfei [drop index] 20151026
     // delect index table's schema in __all_secondary_index
 
@@ -897,9 +865,6 @@ int ObSchemaServiceImpl::drop_table(const ObString& table_name)
       ret = nb_accessor_.delete_row(FIRST_TABLET_TABLE_NAME, rowkey);
     }
     //mod e
-=======
-    ret = nb_accessor_.delete_row(FIRST_TABLET_TABLE_NAME, rowkey);
->>>>>>> refs/remotes/origin/master
     if(OB_SUCCESS != ret)
     {
       TBSYS_LOG(WARN, "delete rwo from first tablet table fail:ret[%d]", ret);
@@ -926,7 +891,6 @@ int ObSchemaServiceImpl::drop_table(const ObString& table_name)
     }
   }
 
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161201:b
   if (OB_SUCCESS == ret)
   {
@@ -934,8 +898,6 @@ int ObSchemaServiceImpl::drop_table(const ObString& table_name)
   }
   //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
   int err = 0;
   if(OB_SUCCESS == ret)
   {
@@ -950,7 +912,6 @@ int ObSchemaServiceImpl::drop_table(const ObString& table_name)
   return ret;
 }
 
-<<<<<<< HEAD
 //add by wangdonghui 20160225 [drop procedure] :b
 int ObSchemaServiceImpl::drop_procedure(const ObString& proc_name)
 {
@@ -982,8 +943,6 @@ int ObSchemaServiceImpl::drop_procedure(const ObString& proc_name)
 }
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObSchemaServiceImpl::init_id_name_map()
 {
   int ret = OB_SUCCESS;
@@ -1032,13 +991,10 @@ int ObSchemaServiceImpl::init_id_name_map(ObTableIdNameIterator& iterator)
       {
         TBSYS_LOG(WARN, "write string to string buf fail:ret[%d]", ret);
       }
-<<<<<<< HEAD
       else
       {
         //TBSYS_LOG(INFO, "get_table_id_name = %.*s", table_id_name->table_name_.length(),table_id_name->table_name_.ptr());
       }
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     int err = 0;
@@ -1083,14 +1039,11 @@ int ObSchemaServiceImpl::get_table_name(uint64_t table_id, ObString& table_name)
   {
     table_name = joininfo_table_name;
   }
-<<<<<<< HEAD
   //longfei [create index]
   else if (OB_ALL_SECONDARY_INDEX_TID == table_id)
   {
     table_name = secondary_index_table_name;
   }
-=======
->>>>>>> refs/remotes/origin/master
   else if (!check_inner_stat())
   {
     ret = OB_ERROR;
@@ -1103,7 +1056,6 @@ int ObSchemaServiceImpl::get_table_name(uint64_t table_id, ObString& table_name)
     {
       ret = hash::HASH_NOT_EXIST == err ? OB_ENTRY_NOT_EXIST : OB_ERROR;
       TBSYS_LOG(WARN, "id name map get fail:err[%d], table_id[%lu]", err, table_id);
-<<<<<<< HEAD
       //add by qx 20170225 :b for test
 //      hash::ObHashMap<uint64_t, ObString>::const_iterator iter1=id_name_map_.begin();
 //      for (;iter1!=id_name_map_.end();iter1++)
@@ -1113,8 +1065,6 @@ int ObSchemaServiceImpl::get_table_name(uint64_t table_id, ObString& table_name)
 //        TBSYS_LOG(WARN, "reseting name hash map iter->first=%ld  second=%s", id, name.ptr());
 //      }
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
     }
   }
   TBSYS_LOG(DEBUG, "get table_name=%.*s", table_name.length(), table_name.ptr());
@@ -1140,7 +1090,6 @@ int ObSchemaServiceImpl::get_table_id(const ObString& table_name, uint64_t& tabl
 
   if(OB_SUCCESS == ret)
   {
-<<<<<<< HEAD
     // mod longfei [drop index] 20151026
     // search index table's schema in __all_secondary_index
 
@@ -1157,10 +1106,6 @@ int ObSchemaServiceImpl::get_table_id(const ObString& table_name, uint64_t& tabl
       ret = nb_accessor_.get(res, FIRST_TABLET_TABLE_NAME, rowkey, SC("table_id"));
     }
     // mod e
-=======
-    ret = nb_accessor_.get(res, FIRST_TABLET_TABLE_NAME, rowkey, SC("table_id"));
-
->>>>>>> refs/remotes/origin/master
     if(OB_SUCCESS != ret)
     {
       TBSYS_LOG(WARN, "get table schema fail:ret[%d]", ret);
@@ -1258,12 +1203,9 @@ int ObSchemaServiceImpl::assemble_column(const TableRow* table_row, ColumnSchema
   ASSIGN_INT("data_precision", column.data_precision_, int64_t);
   ASSIGN_INT("data_scale", column.data_scale_, int64_t);
   ASSIGN_INT("nullable", column.nullable_, int64_t);
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   ASSIGN_INT("auto_increment", column.auto_increment_, int64_t);
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   ASSIGN_INT("length_in_rowkey", column.length_in_rowkey_, int64_t);
   ASSIGN_INT("order_in_rowkey", column.order_in_rowkey_, int32_t);
   ASSIGN_CREATE_TIME("gm_create", column.gm_create_, ObCreateTime);
@@ -1307,13 +1249,10 @@ int ObSchemaServiceImpl::get_table_schema(const ObString& table_name, TableSchem
   {
     ret = ObExtraTablesSchema::all_join_info_schema(table_schema);
   }
-<<<<<<< HEAD
   else if (table_name == secondary_index_table_name)
   {
     ret = ObExtraTablesSchema::all_secondary_index_schema(table_schema); //longfei [create index]
   }
-=======
->>>>>>> refs/remotes/origin/master
   else
   {
     if(!check_inner_stat())
@@ -1335,7 +1274,6 @@ int ObSchemaServiceImpl::get_table_schema(const ObString& table_name, TableSchem
   return ret;
 }
 
-<<<<<<< HEAD
 //add by wangdonghui 20160308 :b
 int ObSchemaServiceImpl::get_procedure_info(QueryRes *&res_)
 {
@@ -1368,8 +1306,6 @@ int ObSchemaServiceImpl::get_procedure_info(QueryRes *&res_)
 //add :e
 
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSchema& table_schema)
 {
   int ret = OB_SUCCESS;
@@ -1391,7 +1327,6 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
 
   TableRow* table_row = NULL;
 
-<<<<<<< HEAD
   // mod longfei [create index]
   if(OB_SUCCESS == ret)
   {
@@ -1417,16 +1352,6 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
 			("is_read_static")("merge_write_sstable_version")("schema_version")("is_pure_update_table")("rowkey_split")
 			("create_time_column_id")("modify_time_column_id"));
 	  }
-=======
-  if(OB_SUCCESS == ret)
-  {
-    ret = nb_accessor_.get(res, FIRST_TABLET_TABLE_NAME, rowkey, SC("table_name")("table_id")
-        ("table_type")("load_type")("table_def_type")("rowkey_column_num")("replica_num")
-        ("max_used_column_id")("create_mem_version")("tablet_max_size")("tablet_block_size")
-        ("max_rowkey_length")("compress_func_name")("expire_condition")("is_use_bloomfilter")
-        ("is_read_static")("merge_write_sstable_version")("schema_version")("is_pure_update_table")("rowkey_split")
-        ("create_time_column_id")("modify_time_column_id"));
->>>>>>> refs/remotes/origin/master
     if(OB_SUCCESS != ret)
     {
       TBSYS_LOG(WARN, "get table schema fail:ret[%d]", ret);
@@ -1438,7 +1363,6 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
     table_row = res->get_only_one_row();
     if(NULL != table_row)
     {
-<<<<<<< HEAD
     	//mod longfei [create index]
       if(is_index_table_or_not(table_name))
       //if(0)
@@ -1450,9 +1374,6 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
       {
     	  ret = assemble_table(table_row, table_schema);
       }
-=======
-      ret = assemble_table(table_row, table_schema);
->>>>>>> refs/remotes/origin/master
       if(OB_SUCCESS != ret)
       {
         TBSYS_LOG(WARN, "assemble table fail:ret[%d]", ret);
@@ -1482,18 +1403,14 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
   }
   if(OB_SUCCESS == ret)
   {
-<<<<<<< HEAD
     //mod lbzhong [auto_increment] 20161123:b
     //add ("auto_increment")
     /*
-=======
->>>>>>> refs/remotes/origin/master
     ret = nb_accessor_.scan(res, OB_ALL_COLUMN_TABLE_NAME, range,
         SC("column_name")("column_id")("gm_create")("gm_modify")("column_group_id")("rowkey_id")
         ("join_table_id")("join_column_id")("data_type")("data_length")("data_precision")
         ("data_scale")("nullable")("length_in_rowkey")("order_in_rowkey"),
         ScanConds("table_id", EQ, table_schema.table_id_));
-<<<<<<< HEAD
         */
     ret = nb_accessor_.scan(res, OB_ALL_COLUMN_TABLE_NAME, range,
         SC("column_name")("column_id")("gm_create")("gm_modify")("column_group_id")("rowkey_id")
@@ -1501,8 +1418,6 @@ int ObSchemaServiceImpl::fetch_table_schema(const ObString& table_name, TableSch
         ("data_scale")("nullable")("auto_increment")("length_in_rowkey")("order_in_rowkey"),
         ScanConds("table_id", EQ, table_schema.table_id_));
     //mod:e
-=======
->>>>>>> refs/remotes/origin/master
     if(OB_SUCCESS != ret)
     {
       TBSYS_LOG(WARN, "scan column table fail:ret[%d]", ret);
@@ -1638,11 +1553,7 @@ int ObSchemaServiceImpl::set_max_used_table_id(const uint64_t max_used_tid)
     snprintf(buf, sizeof(buf), "%lu", max_used_tid);
     value.assign(buf, static_cast<int32_t>(strlen(buf)));
     KV new_value("value", value);
-<<<<<<< HEAD
     // TODO should using add 1 operator
-=======
-    /// TODO should using add 1 operator
->>>>>>> refs/remotes/origin/master
     if (OB_SUCCESS != (ret = nb_accessor_.update(OB_ALL_SYS_STAT_TABLE_NAME, rowkey, new_value)))
     {
       TBSYS_LOG(WARN, "failed to update the row, err=%d", ret);
@@ -1994,7 +1905,6 @@ int ObSchemaServiceImpl::prepare_privilege_for_table(const TableRow* table_row, 
   return ret;
 }
 
-<<<<<<< HEAD
 int ObSchemaServiceImpl::create_index_mutator(const TableSchema& table_schema, ObMutator* mutator)
 {
   int ret = OB_SUCCESS;
@@ -2690,5 +2600,3 @@ int ObSchemaServiceImpl::delete_auto_increment(const int64_t table_id)
 }
 
 //add:e
-=======
->>>>>>> refs/remotes/origin/master

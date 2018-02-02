@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  *   Weng Haixing <wenghaixing@ecnu.cn>
  * @date  20160124
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -124,7 +121,6 @@ namespace oceanbase
       return buff[ i % BUFFER_NUM];
     }
 
-<<<<<<< HEAD
     // add by zhangcd [rs_election] 20151129:b
     bool ObServer::is_valid() const
     {
@@ -142,8 +138,6 @@ namespace oceanbase
     }
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     bool ObServer::set_ipv4_addr(const char* ip, const int32_t port)
     {
       bool res = true;
@@ -364,7 +358,6 @@ namespace oceanbase
 
       return ret;
     }
-<<<<<<< HEAD
     //add wenghaixing [secondary index.static_index]20151217
     uint32_t ObServer::murmurhash2(const uint32_t hash) const
     {
@@ -375,8 +368,6 @@ namespace oceanbase
       return result;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     DEFINE_DESERIALIZE(ObServer)
     {
@@ -426,7 +417,6 @@ namespace oceanbase
       return total_size;
     }
 
-<<<<<<< HEAD
     // add by zhangcd [rs_election] 20151129:b
     bool ObServer::set_ipv6_addr(const char* ip, const int32_t port)
     {
@@ -496,8 +486,6 @@ namespace oceanbase
       return ret;
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 

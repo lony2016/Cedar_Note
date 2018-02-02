@@ -48,14 +48,11 @@ namespace oceanbase
         virtual int open() = 0;
         virtual int close() = 0;
         virtual int get_next_row(const common::ObRow *&row) = 0;
-<<<<<<< HEAD
         virtual int add_main_output_column(const ObSqlExpression& expr) = 0;
         virtual int cons_second_row_desc(ObRowDesc &row_desc) = 0;
         virtual int set_second_row_desc(ObRowDesc *row_desc) = 0;
         virtual int add_main_filter( ObSqlExpression* expr) = 0;
         virtual int add_index_filter(ObSqlExpression* expr) = 0;
-=======
->>>>>>> refs/remotes/origin/master
 
         /**
          * 添加一个需输出的column
@@ -66,7 +63,6 @@ namespace oceanbase
          * @return OB_SUCCESS或错误码
          */
         virtual int add_output_column(const ObSqlExpression& expr) = 0;
-<<<<<<< HEAD
         //add wanglei [semi join] 20170417:b
         virtual int add_index_filter_ll(ObSqlExpression* expr) = 0;
         virtual int add_index_output_column_ll(ObSqlExpression& expr) = 0;
@@ -76,14 +72,6 @@ namespace oceanbase
          * @note 只有基本表被重命名的情况才会使两个不相同id，其实两者相同时base_table_id可以给个默认值。
          * @param table_id [in] 输出的table_id  //slwang note:这是别名的tt1的table_id(65533)
          * @param base_table_id [in] 被访问表的id  //slwang note:这是表t1的真正table_id(3001)
-=======
-
-        /**
-         * 设置table_id
-         * @note 只有基本表被重命名的情况才会使两个不相同id，其实两者相同时base_table_id可以给个默认值。
-         * @param table_id [in] 输出的table_id
-         * @param base_table_id [in] 被访问表的id
->>>>>>> refs/remotes/origin/master
          *
          * @return OB_SUCCESS或错误码
          */

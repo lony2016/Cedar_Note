@@ -37,10 +37,7 @@ namespace oceanbase
   namespace mergeserver
   {
     class ObMergeServerService;
-<<<<<<< HEAD
     class ObSemiJoinTaskQueueThread;//add wanglei [semi join multi thread] 20170417
-=======
->>>>>>> refs/remotes/origin/master
   }
 
   namespace sql
@@ -67,14 +64,10 @@ namespace oceanbase
 
       // the following members are used by SQL module internally
       ObIAllocator *transformer_allocator_;
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161215:b
       bool need_load_auto_value_;
       //add:e
       oceanbase::mergeserver::ObSemiJoinTaskQueueThread *semi_join_task_queue_;//add wanglei [semi join multi thread] 20170417
-=======
-
->>>>>>> refs/remotes/origin/master
       ObSqlContext() :
         cache_proxy_(NULL),
         async_rpc_(NULL),
@@ -91,13 +84,10 @@ namespace oceanbase
         privilege_mgr_(NULL),
         stat_mgr_(NULL),
         transformer_allocator_(NULL)
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161215:b
         , need_load_auto_value_(false),
         //add:e
         semi_join_task_queue_(NULL)//add wanglei [semi join multi thread] 20170417
-=======
->>>>>>> refs/remotes/origin/master
       {
       }
     };

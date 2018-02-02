@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 ECNU_DaSE.
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -36,10 +33,7 @@
 #include "common/utility.h"
 #include "common/ob_trace_log.h"
 #include "common/ob_packet.h"
-<<<<<<< HEAD
 #include "common/ob_common_stat.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 
 namespace oceanbase{
@@ -119,7 +113,6 @@ namespace oceanbase
     {
       int err = OB_SUCCESS;
       int64_t new_pos = pos;
-<<<<<<< HEAD
 
       //add by zt 20160113:b
       TBSYS_LOG(TRACE, "ups exec mode: %d", my_phy_plan_->is_group_exec());
@@ -134,8 +127,6 @@ namespace oceanbase
       }
       else //step into the original branch
       //add by zt 20160113:e
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != (err = serialization::encode_i32(buf, buf_len, new_pos, lock_flag_)))
       {
         TBSYS_LOG(ERROR, "serialize(buf=%p[%ld-%ld])=>%d", buf, new_pos, buf_len, err);
@@ -209,7 +200,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add by zt 20160113:b
     int ObIncScan::serialize_template(char *buf, const int64_t buf_len, int64_t &pos) const
     {
@@ -284,8 +274,6 @@ namespace oceanbase
     }
     //add by zt 20160113:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObIncScan::deserialize(const char* buf, const int64_t data_len, int64_t& pos)
     {
       int err = OB_SUCCESS;
@@ -330,10 +318,7 @@ namespace oceanbase
       {
         pos = new_pos;
       }
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
       return err;
     }
 
@@ -424,15 +409,12 @@ namespace oceanbase
                 }
               }
             } // end for
-<<<<<<< HEAD
             /**************************************************
              *  Seems to used for distribute the job to a dedicated thread on ups
              *  A strong assumption, what if the rowkey is not known at advance, then such a sign cannot be calculated
              *  This optimization strategy is the same as Calvin
              *  The first row key is caculcated for distribute the job
              * **************************************************/
-=======
->>>>>>> refs/remotes/origin/master
             if (0 == request_sign
                 && hotspot_)
             {

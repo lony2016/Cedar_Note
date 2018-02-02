@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_27
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_LOGICALPLAN_H_
 #define OCEANBASE_SQL_LOGICALPLAN_H_
 #include "parse_node.h"
@@ -64,15 +61,11 @@ namespace oceanbase
       ObSelectStmt* get_select_query(uint64_t query_id) const;
 
       ObSqlRawExpr* get_expr(uint64_t expr_id) const;
-<<<<<<< HEAD
       //add wanglei [semi join] 20170417:b
       int32_t get_expr_list_num()const;
       ObSqlRawExpr* get_expr_for_something(int32_t no) const;
       oceanbase::common::ObVector<ObSqlRawExpr*> & get_expr_list();
       //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
       int add_query(ObBasicStmt* stmt)
       {
         int ret = common::OB_SUCCESS;
@@ -107,7 +100,6 @@ namespace oceanbase
         return ret;
       }
 
-<<<<<<< HEAD
       //add zt 20151102:b
 //      int32_t get_raw_expr_count() const
 //      {
@@ -120,8 +112,6 @@ namespace oceanbase
 //      }
       //add zt 20151102:e
 
-=======
->>>>>>> refs/remotes/origin/master
       int fill_result_set(ObResultSet& result_set, ObSQLSessionInfo *session_info, common::ObIAllocator &alloc);
 
       uint64_t generate_table_id()
@@ -197,7 +187,6 @@ namespace oceanbase
         OB_ASSERT(index >= 0 && index < get_stmts_count());
         return stmts_.at(index);
       }
-<<<<<<< HEAD
 
       /*
        * get stmt by query_id
@@ -279,9 +268,6 @@ namespace oceanbase
       {
         query_rel_info_ = query_rel_opt;
       }
-=======
-      void print(FILE* fp = stderr, int32_t level = 0) const;
->>>>>>> refs/remotes/origin/master
 
     protected:
       oceanbase::common::ObStringBuf* name_pool_;
@@ -297,13 +283,10 @@ namespace oceanbase
       uint64_t  new_gen_qid_;
       uint64_t  new_gen_eid_;
       int64_t   new_gen_wid_;   // when number
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/16 for logical optimizer
       int64_t new_gen_aid_; // generate alias table
       ObOptimizerRelation* query_rel_info_; //add dhc [query_optimizer] 20170525
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

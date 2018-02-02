@@ -1,9 +1,5 @@
 AM_CPPFLAGS := $(AM_CPPFLAGS) -I${TBLIB_ROOT}/include/tbsys \
-<<<<<<< HEAD
               -I${ONEV_ROOT}/include/onev   \
-=======
-              -I${EASY_ROOT}/include/easy   \
->>>>>>> refs/remotes/origin/master
               -I${top_srcdir}/include       \
               -I${top_srcdir}/src
 
@@ -18,11 +14,7 @@ LDADD = $(top_builddir)/src/sstable/libsstable.a                \
         $(top_builddir)/src/common/btree/libbtree.a             \
         $(top_builddir)/src/common/libcommon.a                  \
         $(top_builddir)/src/sql/libsql.a                        \
-<<<<<<< HEAD
         ${ONEV_LIB_PATH}/libonev.a                              \
-=======
-        ${EASY_LIB_PATH}/libeasy.a                              \
->>>>>>> refs/remotes/origin/master
         ${TBLIB_ROOT}/lib/libtbsys.a
 
 

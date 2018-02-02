@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -23,9 +22,6 @@
  *         zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_07_24
  *//*
-=======
-/*
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -42,18 +38,12 @@
  *
  */
 #include <math.h>
-<<<<<<< HEAD
 #include <sys/syscall.h>
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_trace_log.h"
 #include "common/serialization.h"
 #include "common/utility.h"
 #include "common/ob_log_dir_scanner.h"
-<<<<<<< HEAD
 #include "common/ob_log_post.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_tsi_factory.h"
 #include "common/ob_rs_ups_message.h"
 #include "common/ob_token.h"
@@ -75,12 +65,9 @@
 #include "common/ob_profile_type.h"
 #include "common/gperf.h"
 #include "common/ob_pcap.h"
-<<<<<<< HEAD
 // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
 #include "common/ob_cluster_mgr.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 
@@ -119,12 +106,8 @@ namespace oceanbase
                                    ObUpdateServerConfig& config)
       : config_(config),
         config_mgr_(config_mgr),
-<<<<<<< HEAD
         rpc_buffer_(OB_RPC_BUFFER_SIZE),
         my_thread_buffer_(OB_MAX_THREAD_BUFFER_SIZE),
-=======
-        rpc_buffer_(RPC_BUFFER_SIZE),
->>>>>>> refs/remotes/origin/master
         read_task_queue_size_(DEFAULT_TASK_READ_QUEUE_SIZE),
         write_task_queue_size_(DEFAULT_TASK_WRITE_QUEUE_SIZE),
         lease_task_queue_size_(DEFAULT_TASK_LEASE_QUEUE_SIZE),
@@ -159,7 +142,6 @@ namespace oceanbase
       //last_keep_alive_time_ = 0;
       ups_renew_reserved_us_ = 0;
 
-<<<<<<< HEAD
       // add by guojinwei [lease between rs and ups][multi_cluster] 20150914
       rs_election_lease_ = 0;
       need_restart_ = false;
@@ -171,8 +153,6 @@ namespace oceanbase
       force_switch_flag_ = false;
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == err)
       {
         read_task_queue_size_ = static_cast<int32_t>(config_.read_queue_size);
@@ -193,11 +173,7 @@ namespace oceanbase
 
       if (OB_SUCCESS == err)
       {
-<<<<<<< HEAD
         memset(&server_handler_, 0, sizeof(onev_io_handler_pe));
-=======
-        memset(&server_handler_, 0, sizeof(easy_io_handler_pt));
->>>>>>> refs/remotes/origin/master
         server_handler_.encode = ObTbnetCallback::encode;
         server_handler_.decode = ObTbnetCallback::decode;
         server_handler_.process = ObUpdateCallback::process;
@@ -317,17 +293,12 @@ namespace oceanbase
 
       if (OB_SUCCESS == err)
       {
-<<<<<<< HEAD
         // modify by zhangcd [majority_count_init] 20151118:b
         // err = slave_mgr_.init(&trans_executor_, &role_mgr_, &ups_rpc_stub_,
         //                       config_.log_sync_timeout, 2);
         err = slave_mgr_.init(&trans_executor_, &role_mgr_, &ups_rpc_stub_,
                               config_.log_sync_timeout);
         // modify:e
-=======
-        err = slave_mgr_.init(&trans_executor_, &role_mgr_, &ups_rpc_stub_,
-                              config_.log_sync_timeout);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != err)
         {
           TBSYS_LOG(WARN, "failed to init slave mgr, err=%d", err);
@@ -341,16 +312,12 @@ namespace oceanbase
       {
         int64_t timeout_delta = 50 * 1000;
         int64_t n_blocks = config_.log_cache_n_block;
-<<<<<<< HEAD
         // modify by qx 20170306 :b
         //fix bug
         //  I don't understand why need -1 ? This means error for cfg2mb
         //int64_t block_size_shift =  __builtin_ffsl(config_.log_cache_block_size) - 1;
         int64_t block_size_shift =  __builtin_ffsl(config_.log_cache_block_size);
         // modify :e
-=======
-        int64_t block_size_shift =  __builtin_ffsl(config_.log_cache_block_size) - 1;
->>>>>>> refs/remotes/origin/master
         int64_t log_file_max_size = config_.commit_log_size;
         int64_t n_replay_worker = config_.replay_worker_num;
         int64_t replay_log_buf_len = config_.replay_log_buf_size;
@@ -393,7 +360,6 @@ namespace oceanbase
                                                     &slave_mgr_,
                                                     &obi_role_,
                                                     &role_mgr_,
-<<<<<<< HEAD
                                                     config_.log_sync_type
 													//delete chujiajia [log synchronization][multi_cluster] 20160625:b
                                                     //add by lbzhong [Commit Point] 20150824:b
@@ -402,9 +368,6 @@ namespace oceanbase
                                                     ,config_.commit_group_size
 													//delete:e
                                                     )))
-=======
-                                                    config_.log_sync_type)))
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(WARN, "failed to init log mgr, path=%s, log_file_size=%ld, err=%d",
                     config_.commit_log_dir.str(), log_file_max_size, err);
@@ -427,13 +390,10 @@ namespace oceanbase
         write_thread_queue_.setThreadParameter(1, this, NULL);
         lease_thread_queue_.setThreadParameter(1, this, NULL);
         store_thread_.setThreadParameter(static_cast<int32_t>(store_thread_count), this, NULL);
-<<<<<<< HEAD
         //add by zhouhuan for [scalable commit] 20160710
         alive_thread_queue_.setThreadParameter(1, this, NULL);
         switch_group_thread_.setThreadParamter(1, this, config_.switch_group_period);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
 
       if (OB_SUCCESS == err)
@@ -467,14 +427,9 @@ namespace oceanbase
         err = trans_executor_.init(config_.trans_thread_num,
                                   config_.trans_thread_start_cpu,
                                   config_.trans_thread_end_cpu,
-<<<<<<< HEAD
                                   config_.commit_bind_core_id);
                                   //config_.commit_end_thread_num);
                                   //modify by zhouhuan [scalabecommit] 20160427
-=======
-                                  config_.commit_bind_core_id,
-                                  config_.commit_end_thread_num);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != err)
         {
           TBSYS_LOG(WARN, "trans executor init fail, err=%d", err);
@@ -557,14 +512,11 @@ namespace oceanbase
       role_mgr_.set_state(ObUpsRoleMgr::STOP);
       log_mgr_.signal_stop();
       replay_worker_.stop();
-<<<<<<< HEAD
 	  //delete chujiajia [log synchronization][multi_cluster] 20160625:b
       //add lbzhong [Commit Point] 20150820:b
       //commit_point_thread_.stop();
       //add:e
 	  //delete:e
-=======
->>>>>>> refs/remotes/origin/master
       ObBaseServer::destroy();
     }
 
@@ -585,7 +537,6 @@ namespace oceanbase
       /// 转储线程
       store_thread_.stop();
 
-<<<<<<< HEAD
       //add by zhouhuan for [scalable commit] 20160710
       /// keep_alive线程
       alive_thread_queue_.stop();
@@ -602,11 +553,6 @@ namespace oceanbase
       //add:e
 	  //delete:e
 
-=======
-      ///日志回放线程
-      log_replay_thread_.stop();
-
->>>>>>> refs/remotes/origin/master
       replay_worker_.wait();
 
       /// 写线程
@@ -621,7 +567,6 @@ namespace oceanbase
       /// 转储线程
       store_thread_.wait();
 
-<<<<<<< HEAD
       //add by zhouhuan for [scalable commit] 20160710
       /// keep_alive线程
       alive_thread_queue_.wait();
@@ -638,11 +583,6 @@ namespace oceanbase
       //add:e
 	  //delete:e
 
-=======
-      ///日志回放线程
-      log_replay_thread_.wait();
-
->>>>>>> refs/remotes/origin/master
       timer_.destroy();
       config_timer_.destroy();
       //TODO stop network
@@ -708,7 +648,6 @@ namespace oceanbase
         }
       }
 
-<<<<<<< HEAD
       // add by zhangcd [majority_count_init] 20151118:b
       if (OB_SUCCESS == err)
       {
@@ -719,8 +658,6 @@ namespace oceanbase
       }
       // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == err)
       {
         err = timer_.schedule(ms_list_task_, 10000000, true);
@@ -772,7 +709,6 @@ namespace oceanbase
         }
       }
 
-<<<<<<< HEAD
       //delete by lbzhong [Commit Point] 20150820:b
       /*提交一次本地日志回放任务
       if (OB_SUCCESS == err)
@@ -780,13 +716,6 @@ namespace oceanbase
         err = submit_replay_commit_log();
       }*/
       //delete:e
-=======
-      //提交一次本地日志回放任务
-      if (OB_SUCCESS == err)
-      {
-        err = submit_replay_commit_log();
-      }
->>>>>>> refs/remotes/origin/master
 
       //获取本地最大日志号去找RS注册
       int64_t log_id = 0;
@@ -814,7 +743,6 @@ namespace oceanbase
       {
         err = start_timer_schedule();
       }
-<<<<<<< HEAD
       //add lbzhong [Commit Point] 20150820:b
       /*
        * waiting util the role of the ups is clear
@@ -838,9 +766,6 @@ namespace oceanbase
         err = submit_replay_commit_log();
       }
       //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       while (ObUpsRoleMgr::STOP != role_mgr_.get_state()
              && ObUpsRoleMgr::FATAL != role_mgr_.get_state())
       {
@@ -920,15 +845,10 @@ namespace oceanbase
 
       TBSYS_LOG(INFO, "UPS server exit");
 
-<<<<<<< HEAD
       // modify by zhangcd [ups_core_dump_while_process_stop] 20151215:b
       cleanup();
       stop();
       // modify:e
-=======
-      stop();
-      cleanup();
->>>>>>> refs/remotes/origin/master
       TBSYS_LOG(INFO, "server stoped.");
       return err;
     }
@@ -966,7 +886,6 @@ namespace oceanbase
       /// 转储线程
       store_thread_.start();
 
-<<<<<<< HEAD
       //add by zhouhuan for [scalable commit] 20160710
       /// keep_alive线程
       alive_thread_queue_.start();
@@ -974,8 +893,6 @@ namespace oceanbase
       switch_group_thread_.start();
       //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       ///日志回放线程
       log_replay_thread_.start();
 
@@ -1026,7 +943,6 @@ namespace oceanbase
       const int64_t wait_us = 10000;
 
       TBSYS_LOG(INFO, "SWITCHING state happen");
-<<<<<<< HEAD
       // add by zhangcd [majority_count_init] 20151118:b
       if(slave_mgr_.get_ack_queue_majority_count() == INT32_MAX)
       {
@@ -1035,8 +951,6 @@ namespace oceanbase
         return err;
       }
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       tbsys::CThreadGuard guard(&mutex_);
       //等待log_replay_thread的完成
       TBSYS_LOG(INFO, "wait replay thread to stop.");
@@ -1077,14 +991,11 @@ namespace oceanbase
         if (OB_SUCCESS == err)
         {
           TBSYS_LOG(INFO, "switch to master_master succ, %s", to_cstring(log_mgr_));
-<<<<<<< HEAD
           //add by zhouhuan for [scalable commit] 20160621:b
           int64_t timestamp = trans_executor_.get_session_mgr().get_published_trans_id();
           log_mgr_.set_group_as_slave(log_mgr_.get_max_flushed_log_id() - 1,timestamp);
           //add:e
           __sync_synchronize();
-=======
->>>>>>> refs/remotes/origin/master
           obi_role_.set_role(ObiRole::MASTER);
           role_mgr_.set_role(ObUpsRoleMgr::MASTER);
           trans_executor_.get_session_mgr().enable_start_write_session();
@@ -1101,31 +1012,24 @@ namespace oceanbase
       TBSYS_LOG(INFO, "begin switch to slave");
       if (is_obi_change)
       {
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20151026:b
         last_obi_change_to_slave_time_us_ = tbsys::CTimeUtil::getTime();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         obi_role_.set_role(ObiRole::SLAVE);
       }
       if (is_role_change)
       {
         role_mgr_.set_role(ObUpsRoleMgr::SLAVE);
       }
-<<<<<<< HEAD
       //add by zhouhuan for [scalable commit] 20160712:b
       obi_switch_flag_ = true;
       __sync_synchronize();
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       write_thread_queue_.notify_state_change();
       while(!stoped_ && !write_thread_queue_.wait_state_change_ack())
       {
         usleep(static_cast<useconds_t>(wait_us));
       }
-<<<<<<< HEAD
 		//add chujiajia [log synchronization][multi_cluster] 20160703:b
 //	  if(OB_SUCCESS != (err = trans_executor_.handle_uncommited_session_list_after_switch()))
 //      {
@@ -1135,19 +1039,14 @@ namespace oceanbase
       {
         TBSYS_LOG(ERROR, "update_tmp_log_cursor err->%d", err);
       }
-=======
->>>>>>> refs/remotes/origin/master
       while(!stoped_ && OB_SUCCESS != (err = trans_executor_.get_session_mgr().wait_write_session_end_and_lock(wait_write_session_end_timeout_us)))
       {
         TBSYS_LOG(INFO, "master_switch_to_slave wait session end.");
       }
-<<<<<<< HEAD
       //add by zhouhuan for [scalablecommit] 20160712:b
       __sync_synchronize();
       obi_switch_flag_ = false;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != err)
       {
         TBSYS_LOG(ERROR, "wait_write_session_end_and_lock(timeout=%ld)=>%d, log_mgr=%s, switch_to_slave fail, will kill self",
@@ -1157,10 +1056,7 @@ namespace oceanbase
       else
       {
         TBSYS_LOG(INFO, "wait_write_session_end_and_lock succ, %s.", to_cstring(log_mgr_));
-<<<<<<< HEAD
         //log_mgr_.reset_next_pos();//add by zhouhuan for [scalable commit] 20160621
-=======
->>>>>>> refs/remotes/origin/master
         trans_executor_.get_session_mgr().disable_start_write_session();
         trans_executor_.get_session_mgr().unlock_write_session();
         slave_mgr_.reset_slave_list();
@@ -1333,7 +1229,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     // add by zhangcd [majority_count_init] 20151118:b
     int ObUpdateServer::set_timer_majority_count()
     {
@@ -1347,8 +1242,6 @@ namespace oceanbase
     }
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObUpdateServer::set_timer_grant_keep_alive()
     {
       int err = OB_SUCCESS;
@@ -1762,7 +1655,6 @@ namespace oceanbase
             response_result_(OB_NOT_MASTER, OB_WRITE_RES, MY_VERSION, packet->get_request(), packet->get_channel_id());
             rc = OB_ERROR;
           }
-<<<<<<< HEAD
           // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
           else if (!(election_role_.is_master() && is_rs_election_lease_valid()))
           {
@@ -1775,23 +1667,17 @@ namespace oceanbase
           //else if (OB_INTERNAL_WRITE == packet_code || OB_FAKE_WRITE_FOR_KEEP_ALIVE == packet_code)
           else if (OB_INTERNAL_WRITE == packet_code)
           //modify:e
-=======
-          else if (OB_INTERNAL_WRITE == packet_code || OB_FAKE_WRITE_FOR_KEEP_ALIVE == packet_code)
->>>>>>> refs/remotes/origin/master
           {
             //ps = write_thread_queue_.push(req, write_task_queue_size_, false);
             trans_executor_.handle_packet(*req);
             ps = true;
           }
-<<<<<<< HEAD
           //add by zhouhuan [scalablecommit] 20160417:b
           else if (OB_FAKE_WRITE_FOR_KEEP_ALIVE == packet_code)
           {
             ps = alive_thread_queue_.push(req, write_task_queue_size_, false);
           }
           //add :e
-=======
->>>>>>> refs/remotes/origin/master
           else
           {
             //ps = write_thread_queue_.push(req, write_task_queue_size_, false);
@@ -1822,10 +1708,7 @@ namespace oceanbase
       case OB_UPS_MINOR_LOAD_BYPASS:
       case OB_UPS_MAJOR_LOAD_BYPASS:
       case OB_UPS_CLEAR_ACTIVE_MEMTABLE:
-<<<<<<< HEAD
       case OB_TRUNCATE_TABLE: //add hxlong [Truncate Table] 20170403
-=======
->>>>>>> refs/remotes/origin/master
       case OB_SWITCH_SCHEMA:
       case OB_UPS_FORCE_FETCH_SCHEMA:
       case OB_UPS_SWITCH_COMMIT_LOG:
@@ -1893,16 +1776,12 @@ namespace oceanbase
       case OB_GET_CLOG_MASTER:
       case OB_GET_LOG_SYNC_DELAY_STAT:
       case OB_RS_GET_MAX_LOG_SEQ:
-<<<<<<< HEAD
       case OB_RS_GET_MAX_LOG_TIMESTAMP:  // add by guojinwei [log timestamp][multi_cluster] 20150820
       case OB_RS_UPS_GET_READY:          // add by guojinwei [reelect][multi_cluster] 20151129
-=======
->>>>>>> refs/remotes/origin/master
       case OB_GET_CLOG_STAT:
       case OB_SQL_SCAN_REQUEST:
       case OB_SET_CONFIG:
       case OB_GET_CONFIG:
-<<<<<<< HEAD
       case OB_CHECK_INCREMENTAL_RANGE: /*add hxlong [Truncate Table]:20170318*/
       case OB_GET_INIT_INDEX:   //add wenghaixing[secondary index.static_index]20151118
           ps = read_thread_queue_.push(req, read_task_queue_size_, false,
@@ -1911,13 +1790,6 @@ namespace oceanbase
                                        : PriorityPacketQueueThread::LOW_PRIV);
           break;
 
-=======
-        ps = read_thread_queue_.push(req, read_task_queue_size_, false,
-                                     (NORMAL_PRI == priority)
-                                     ? PriorityPacketQueueThread::NORMAL_PRIV
-                                     : PriorityPacketQueueThread::LOW_PRIV);
-        break;
->>>>>>> refs/remotes/origin/master
       case OB_SLAVE_QUIT:
       case OB_UPS_GET_SLAVE_INFO:
         if (ObUpsRoleMgr::MASTER != role_mgr_.get_role())
@@ -2043,17 +1915,10 @@ namespace oceanbase
           OB_STAT_INC(UPDATESERVER, UPS_STAT_PACKET_LONG_WAIT_COUNT, 1);
           TBSYS_LOG(WARN, "packet wait too long time, receive_time=%ld cur_time=%ld packet_max_timewait=%ld packet_code=%d "
               "priority=%d last_log_network_elapse=%ld last_log_disk_elapse=%ld "
-<<<<<<< HEAD
               "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu alive_task_queue_size=%zu",
               ob_packet->get_receive_ts(), tbsys::CTimeUtil::getTime(), packet_timewait, packet_code, priority,
               log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(),
               read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size(), alive_thread_queue_.size());
-=======
-              "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu",
-              ob_packet->get_receive_ts(), tbsys::CTimeUtil::getTime(), packet_timewait, packet_code, priority,
-              log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(),
-              read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size());
->>>>>>> refs/remotes/origin/master
         }
         else if (in_buf == NULL)
         {
@@ -2062,11 +1927,7 @@ namespace oceanbase
         else
         {
           packet_timewait -= DEFAULT_REQUEST_TIMEOUT_RESERVE;
-<<<<<<< HEAD
           onev_request_e* req = ob_packet->get_request();
-=======
-          easy_request_t* req = ob_packet->get_request();
->>>>>>> refs/remotes/origin/master
           if (OB_SELF_FLAG != ob_packet->get_target_id() &&
             (NULL == req || NULL == req->ms || NULL == req->ms->c))
           {
@@ -2216,14 +2077,11 @@ namespace oceanbase
               case OB_FETCH_STATS:
                 return_code = ups_fetch_stat_info(version, req, channel_id, thread_buff);
                 break;
-<<<<<<< HEAD
               //add hxlong [Truncate Table]:20170318:b
               case OB_CHECK_INCREMENTAL_RANGE:
                 return_code = ups_check_incremental_data_range(version, *in_buf, req, channel_id, thread_buff);
                 break;
               //add:e
-=======
->>>>>>> refs/remotes/origin/master
               case OB_FETCH_SCHEMA:
                 return_code = ups_get_schema(version, *in_buf, req, channel_id, thread_buff);
                 break;
@@ -2275,14 +2133,11 @@ namespace oceanbase
               case OB_UPS_ASYNC_CHECK_LEASE:
                 return_code = check_lease_();
                 break;
-<<<<<<< HEAD
               //add lbzhong [Commit Point] 20150820:b
               case OB_UPS_RESTART_SERVER:
                 return_code = ups_restart_server();
                 break;
               //add:e
-=======
->>>>>>> refs/remotes/origin/master
               case OB_UPS_LOAD_NEW_STORE:
                 return_code = ups_load_new_store(version, req, channel_id);
                 break;
@@ -2307,7 +2162,6 @@ namespace oceanbase
               case OB_RS_GET_MAX_LOG_SEQ:
                 return_code = ups_rs_get_max_log_seq(version, req, channel_id, thread_buff);
                 break;
-<<<<<<< HEAD
               // add by guojinwei [log timestamp][multi_cluster] 20150820:b
               case OB_RS_GET_MAX_LOG_TIMESTAMP:
                 return_code = ups_rs_get_max_log_timestamp(version, req, channel_id, thread_buff);
@@ -2318,8 +2172,6 @@ namespace oceanbase
                 return_code = ups_get_election_ready(version, *in_buf, req, channel_id, thread_buff);
                 break;
               // add:e
-=======
->>>>>>> refs/remotes/origin/master
               case OB_CHANGE_LOG_LEVEL:
                 return_code = ups_change_log_level(version, *in_buf, req, channel_id);
                 break;
@@ -2332,14 +2184,11 @@ namespace oceanbase
               case OB_GET_CONFIG:
                 return_code = ups_get_config(version, req, channel_id, thread_buff);
                 break;
-<<<<<<< HEAD
               //add wenghaixing [secondary index.static_index]20151118
               case OB_GET_INIT_INDEX:
                 return_code = ups_get_init_index(version, *in_buf, req, channel_id, thread_buff);
                 break;
               //add e
-=======
->>>>>>> refs/remotes/origin/master
               case OB_UPS_ASYNC_UPDATE_SCHEMA:
                 return_code = do_async_update_whole_schema();
                 break;
@@ -2367,11 +2216,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_preprocess(const int32_t version, const int32_t packet_code, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
         const int64_t start_time, const int64_t timeout)
     {
       UNUSED(out_buff);
@@ -2385,11 +2230,7 @@ namespace oceanbase
       ObMutator *mutator_ptr = GET_TSI_MULT(ObMutator, TSI_UPS_MUTATOR_1);
       ObToken token;
       ObToken *token_ptr = NULL;
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       if (NULL == mutator_ptr)
       {
         TBSYS_LOG(WARN, "GET_TSI ObMutator or ObScanner fail");
@@ -2498,7 +2339,6 @@ namespace oceanbase
         return_code = OB_NOT_MASTER;
         TBSYS_LOG(WARN, "is master_master But lease is invalid");
       }
-<<<<<<< HEAD
       // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
       else if (election_role_.is_master() && !is_rs_election_lease_valid())
       {
@@ -2506,8 +2346,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "rs election lease is invalid");
       }
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == scanner_array)
       {
         TBSYS_LOG(WARN, "get tsi scanner_array fail");
@@ -2554,11 +2392,7 @@ namespace oceanbase
           }
           else
           {
-<<<<<<< HEAD
             onev_request_e* req = ob_packet->get_request();
-=======
-            easy_request_t* req = ob_packet->get_request();
->>>>>>> refs/remotes/origin/master
             if (OB_SELF_FLAG != ob_packet->get_target_id() &&
                 (NULL == req || NULL == req->ms || NULL == req->ms->c))
             {
@@ -2808,7 +2642,6 @@ namespace oceanbase
       return ret;//if return true packet will be deleted.
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::handleSwitchGroup()
     {
       int err = OB_SUCCESS;
@@ -2945,28 +2778,12 @@ namespace oceanbase
       //else if (OB_SUCCESS != (err = log_mgr_.write_keep_alive_log()))
       else if (OB_SUCCESS != (err = log_mgr_.write_keep_alive_log(true, log_mgr_.get_flushed_clog_id_without_update())))
       //modify:e
-=======
-    int ObUpdateServer::ups_handle_fake_write_for_keep_alive()
-    {
-      int err = OB_SUCCESS;
-      int64_t end_log_id = 0;
-      if (!(ObiRole::MASTER == obi_role_.get_role()
-            && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
-            && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-            && is_lease_valid()))
-      {
-        err = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valid=%s", STR_BOOL(is_lease_valid()));
-      }
-      else if (OB_SUCCESS != (err = log_mgr_.write_keep_alive_log()))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR, "log_mgr.write_keep_alive_log()=>%d", err);
       }
       else if (OB_SUCCESS != (err = log_mgr_.async_flush_log(end_log_id, TraceLog::get_logbuffer())))
       {
         TBSYS_LOG(ERROR, "log_mgr.flush_log()=>%d", err);
-<<<<<<< HEAD
       }*/
       else
       {
@@ -3054,8 +2871,6 @@ namespace oceanbase
 //            TBSYS_LOG(ERROR, "set_log_position(len=0)=>%d", err);
 //          }
 //        }
-=======
->>>>>>> refs/remotes/origin/master
       }
       if (OB_SUCCESS != err)
       {
@@ -3107,11 +2922,7 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::return_not_master(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::return_not_master(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                           const uint32_t channel_id, const int32_t packet_code)
     {
       int return_code = OB_SUCCESS;
@@ -3119,10 +2930,7 @@ namespace oceanbase
       switch (packet_code)
       {
         case OB_FREEZE_MEM_TABLE:
-<<<<<<< HEAD
         case OB_TRUNCATE_TABLE: //add hxlong [Truncate Table] 20170127
-=======
->>>>>>> refs/remotes/origin/master
         case OB_UPS_MINOR_FREEZE_MEMTABLE:
         case OB_UPS_ASYNC_MAJOR_FREEZE_MEMTABLE:
         case OB_UPS_ASYNC_AUTO_FREEZE_MEMTABLE:
@@ -3175,11 +2983,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::set_obi_role(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(out_buff);
 
@@ -3259,7 +3063,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
     bool ObUpdateServer::is_rs_election_lease_valid() const
     {
@@ -3278,20 +3081,15 @@ namespace oceanbase
     }
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     bool ObUpdateServer::is_master_lease_valid() const
     {
       return ObiRole::MASTER == obi_role_.get_role()
         && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
         && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
         && election_role_.is_master()
         && is_rs_election_lease_valid()
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         && is_lease_valid();
     }
 
@@ -3311,18 +3109,11 @@ namespace oceanbase
         TBSYS_LOG(INFO, "io thread setaffinity tid=%ld ret=%d cpu=%ld start=%ld end=%ld",
                   GETTID(), ret, local_cpu, affinity_start_cpu, affinity_end_cpu);
       }
-<<<<<<< HEAD
       TBSYS_LOG(INFO,"test::zhouhuan1 ups io thread tid = [%ld]", syscall(SYS_gettid));
     }
 
     /*int ObUpdateServer::slave_set_fetch_param(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-    }
-
-    /*int ObUpdateServer::slave_set_fetch_param(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       ObResultCode result_msg;
@@ -3369,22 +3160,14 @@ namespace oceanbase
     }
 */
     int ObUpdateServer::ups_fetch_log_for_slave(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                                 onev_request_e* request, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-                                                easy_request_t* request, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
                                                 ObPacket* packet)
     {
       int err = OB_SUCCESS;
       int ret_err = OB_SUCCESS;
       ObFetchLogReq req;
       ObFetchedLog result;
-<<<<<<< HEAD
       const char* src_addr = inet_ntoa_r(get_onev_addr(request));
-=======
-      const char* src_addr = inet_ntoa_r(get_easy_addr(request));
->>>>>>> refs/remotes/origin/master
       if (version != MY_VERSION)
       {
         err = OB_ERROR_FUNC_VERSION;
@@ -3424,11 +3207,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_fill_log_cursor_for_slave(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                                       onev_request_e* req, const uint32_t channel_id,
-=======
-                                                      easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                                                       common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3455,11 +3234,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get_clog_status(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                                       onev_request_e* req, const uint32_t channel_id,
-=======
-                                                      easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                                                       common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3507,17 +3282,12 @@ namespace oceanbase
         stat.next_flush_log_id_ = replay_worker_.get_next_flush_log_id();
         stat.last_barrier_log_id_ = replay_worker_.get_last_barrier_log_id();
         stat.wait_trans_ = trans_executor_.TransHandlePool::get_queued_num();
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160510
         //stat.wait_commit_ = trans_executor_.get_commit_queue_len();
         //stat.wait_response_ = trans_executor_.CommitEndHandlePool::get_queued_num();
         stat.wait_commit_ = log_mgr_.get_next_pos().group_id_ - trans_executor_.get_commit_queue_len();
         stat.wait_response_ = 0;
         //modify:e
-=======
-        stat.wait_commit_ = trans_executor_.get_commit_queue_len();
-        stat.wait_response_ = trans_executor_.CommitEndHandlePool::get_queued_num();
->>>>>>> refs/remotes/origin/master
       }
       if (OB_SUCCESS !=
           (err = response_data_(err, stat, OB_GET_CLOG_STATUS_RESPONSE, MY_VERSION, req, channel_id, out_buff)))
@@ -3528,23 +3298,16 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_slave_write_log(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(out_buff);
 
       int err = OB_SUCCESS;
       int response_err = OB_SUCCESS;
-<<<<<<< HEAD
       // add by guojinwei [log synchronization][multi_cluster] 20150819:b
       ObLogPostResponse response_data;
       int64_t cur_time_us = tbsys::CTimeUtil::getTime();
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       if (version != MY_VERSION)
       {
@@ -3561,7 +3324,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "slave_receive_log(buf=%p[%ld:%ld])=>%d",
                   in_buff.get_data(), in_buff.get_position(), in_buff.get_capacity(), err);
       }
-<<<<<<< HEAD
       // add by guojinwei [log synchronization][multi_cluster] 20150819:b
       response_data.next_flush_log_id_ = replay_worker_.get_next_flush_log_id();
       response_data.message_residence_time_us_ = tbsys::CTimeUtil::getTime() - cur_time_us;
@@ -3584,9 +3346,6 @@ namespace oceanbase
                                                        channel_id,
                                                        out_buff)))
       // modify:e
-=======
-      if (OB_SUCCESS != (response_err = response_result_(err, OB_SEND_LOG_RES, MY_VERSION, req, channel_id)))
->>>>>>> refs/remotes/origin/master
       {
         err = response_err;
         TBSYS_LOG(ERROR, "response_result_()=>%d", err);
@@ -3596,11 +3355,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_change_log_level(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                          onev_request_e* req, const uint32_t channel_id)
-=======
-                                         easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(version);
@@ -3632,11 +3387,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_stop_server(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                          onev_request_e* req, const uint32_t channel_id)
-=======
-                                         easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(version);
@@ -3672,11 +3423,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ob_malloc_stress(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                          onev_request_e* req, const uint32_t channel_id)
-=======
-                                         easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       int64_t malloc_limit = 0;
@@ -3715,11 +3462,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ob_login(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       int proc_ret = OB_SUCCESS;
@@ -3730,11 +3473,7 @@ namespace oceanbase
       }
 
       ObLoginInfo login_info;
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       ret = login_info.deserialize(in_buff.get_data(), in_buff.get_capacity(), in_buff.get_position());
       if (OB_SUCCESS != ret)
       {
@@ -3760,11 +3499,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_set_sync_limit(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(out_buff);
       int ret = OB_SUCCESS;
@@ -3787,11 +3522,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_ping(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_ping(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
 
@@ -3805,11 +3536,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_get_clog_master(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::ups_get_clog_master(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                             const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3888,11 +3615,7 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_get_clog_cursor(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::ups_get_clog_cursor(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                             const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3915,11 +3638,7 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_get_log_sync_delay_stat(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::ups_get_log_sync_delay_stat(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                             const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3939,11 +3658,7 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_get_clog_stat(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::ups_get_clog_stat(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                             const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       int err = OB_SUCCESS;
@@ -3967,11 +3682,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_sql_scan(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                      onev_request_e* req, const uint32_t channel_id,
-=======
-                                     easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                                      common::ObDataBuffer& out_buff)
     {
       static const int32_t UPS_SCAN_VERSION = 1;
@@ -4058,11 +3769,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_new_get(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
         const int64_t start_time, const int64_t timeout, const int32_t priority)
     {
       int ret = OB_SUCCESS;
@@ -4149,11 +3856,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
         const int64_t start_time, const int64_t timeout, const int32_t priority)
     {
       int ret = OB_SUCCESS;
@@ -4236,11 +3939,7 @@ namespace oceanbase
     template <class T>
     int ObUpdateServer::response_data_(int32_t ret_code, const T &data,
                                           int32_t cmd_type, int32_t func_version,
-<<<<<<< HEAD
                                           onev_request_e* req, const uint32_t channel_id,
-=======
-                                          easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                                        common::ObDataBuffer& out_buff, const int64_t receive_ts, const int32_t* priority, const char *ret_string)
     {
       int ret = OB_SUCCESS;
@@ -4292,11 +3991,7 @@ namespace oceanbase
 
     int ObUpdateServer::response_fetch_param_(int32_t ret_code, const ObUpsFetchParam& fetch_param,
         const int64_t log_id, int32_t cmd_type, int32_t func_version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id,
-=======
-        easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& out_buff)
     {
       int ret = OB_SUCCESS;
@@ -4339,11 +4034,7 @@ namespace oceanbase
 
     int ObUpdateServer::response_lease_(int32_t ret_code, const ObLease& lease,
         int32_t cmd_type, int32_t func_version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id,
-=======
-        easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& out_buff)
     {
       int ret = OB_SUCCESS;
@@ -4377,11 +4068,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_new_scan(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
         const int64_t start_time, const int64_t timeout, const int32_t priority)
     {
       int ret = OB_SUCCESS;
@@ -4471,11 +4158,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_scan(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff,
->>>>>>> refs/remotes/origin/master
         const int64_t start_time, const int64_t timeout, const int32_t priority)
     {
       int err = OB_SUCCESS;
@@ -4487,11 +4170,7 @@ namespace oceanbase
       {
         err = OB_ERROR_FUNC_VERSION;
       }
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == err)
       {
         if (NULL == scan_param_ptr
@@ -4560,11 +4239,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get_bloomfilter(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       int64_t frozen_version = 0;
@@ -4639,7 +4314,6 @@ namespace oceanbase
       if (!(ObiRole::MASTER == obi_role_.get_role()
             && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
             && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
             // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
             && election_role_.is_master()
             && is_rs_election_lease_valid()
@@ -4652,12 +4326,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "not master:is_lease_valid=%s, is_rs_election_lease_valid=%s",
                   STR_BOOL(is_lease_valid()), STR_BOOL(is_rs_election_lease_valid()));
         // modify:e
-=======
-            && is_lease_valid()))
-      {
-        ret = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valie=%s", STR_BOOL(is_lease_valid()));
->>>>>>> refs/remotes/origin/master
       }
       else if (OB_SUCCESS != (ret = table_mgr_.freeze_memtable(freeze_type, frozen_version, report_version_changed, packet_orig)))
       {
@@ -4688,11 +4356,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_store_memtable(const int32_t version, common::ObDataBuffer &in_buf,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -4743,7 +4407,6 @@ namespace oceanbase
         {
           TBSYS_LOG(DEBUG, "STANDALONE slave_master, need not check keep alive.");
         }
-<<<<<<< HEAD
         // add by guojinwei [ups lease between clusters][multi_cluster] 20151207:b
         else if (ObUpsRoleMgr::MASTER == role_mgr_.get_role()
                  && !log_mgr_.is_log_replay_finished())
@@ -4751,8 +4414,6 @@ namespace oceanbase
           TBSYS_LOG(DEBUG, "slave_master ups need not to register to master_master ups when replaying local log");
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         else
         {
           ObServer null_server;
@@ -4769,7 +4430,6 @@ namespace oceanbase
               {
                 TBSYS_LOG(ERROR, "[PER_5_MIN] keep_alive msg timeout, last_time = %ld, cur_time = %ld, duration_time = %ld", last_keep_alive_time,  cur_time_us, keep_alive_valid_interval_);
               }
-<<<<<<< HEAD
               //del chujiajia [log synchronization][multi_cluster] 20160524:b
               //if (ObUpsRoleMgr::ACTIVE == role_mgr_.get_state())
               //{
@@ -4777,13 +4437,6 @@ namespace oceanbase
               //  role_mgr_.set_state(ObUpsRoleMgr::REPLAYING_LOG);
               //}
               //del:e
-=======
-              if (ObUpsRoleMgr::ACTIVE == role_mgr_.get_state())
-              {
-                TBSYS_LOG(WARN, "slave_ups can't connect with master_ups. set state to REPLAYING_LOG");
-                role_mgr_.set_state(ObUpsRoleMgr::REPLAYING_LOG);
-              }
->>>>>>> refs/remotes/origin/master
             }
             else
             {
@@ -4875,15 +4528,12 @@ namespace oceanbase
         {
           TBSYS_LOG(DEBUG, "lease is invalid");
         }
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
         else if (!(election_role_.is_master() && is_rs_election_lease_valid()))
         {
           TBSYS_LOG(DEBUG, "rs election lease is invalid");
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         else if (log_mgr_.get_last_flush_log_time() + config_.keep_alive_interval > tbsys::CTimeUtil::getTime())
         {
           TBSYS_LOG(DEBUG, "log_mgr.last_flush_log_time=%ld, keep_alive_interval=%ld, no need write NOP again",
@@ -4956,7 +4606,6 @@ namespace oceanbase
       {
         TBSYS_LOG(DEBUG, "enter fatal state");
       }
-<<<<<<< HEAD
       // modify by guojinwei [lease between rs and ups][multi_cluster] 20150901:b
       //else if (lease_expire_time_us_ < cur_time_us)
       else if ((lease_expire_time_us_ < cur_time_us)
@@ -5037,45 +4686,6 @@ namespace oceanbase
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150901:b
         }
         // add:e
-=======
-      else if (lease_expire_time_us_ < cur_time_us)
-      {
-        if (0 != lease_expire_time_us_)
-        {
-          TBSYS_LOG(ERROR, "lease timeout, need reregister to rootserver. lease=%ld, cur_time=%ld",
-              lease_expire_time_us_, cur_time_us);
-
-          if (ObUpsRoleMgr::MASTER == role_mgr_.get_role()
-              && ObiRole::MASTER == obi_role_.get_role())
-          {
-            err = master_switch_to_slave(false, true);
-            if (OB_SUCCESS == err)
-            {
-              TBSYS_LOG(WARN, "master_master_ups lease timeout, change to master_slave");
-            }
-            else
-            {
-              TBSYS_LOG(ERROR, "master_master_ups lease timeout, change to master_slave failed!, err=%d", err);
-            }
-          }
-          else if (ObUpsRoleMgr::MASTER == role_mgr_.get_role())
-          {
-            err = slave_change_role(false, true);
-            if (OB_SUCCESS != err)
-            {
-              TBSYS_LOG(WARN, "ups lease timetout, change role failed!");
-            }
-          }
-        }
-
-        int64_t log_id = 0;
-        log_mgr_.get_max_log_seq_replayable(log_id);
-        err = register_to_rootserver(log_id);
-        if (OB_SUCCESS != err)
-        {
-          TBSYS_LOG(WARN, "fail to register to rootserver. err=%d", err);
-        }
->>>>>>> refs/remotes/origin/master
       }
       else if (lease_expire_time_us_ - cur_time_us < ups_renew_reserved_us_)
       {
@@ -5104,7 +4714,6 @@ namespace oceanbase
       check_lease_guard_.done();
       return err;
     }
-<<<<<<< HEAD
     //add lbzhong [Commit Point] 20150522:b
     /**
      * @brief let master ups restart when switch to slave
@@ -5123,8 +4732,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     void ObUpdateServer::set_heartbeat_res(ObMsgUpsHeartbeatResp &hb_res)
     {
       hb_res.addr_.set_ipv4_addr(self_addr_.get_ipv4(), self_addr_.get_port());
@@ -5154,14 +4761,10 @@ namespace oceanbase
 
     int ObUpdateServer::submit_fake_write_for_keep_alive()
     {
-<<<<<<< HEAD
       //modify by zhouhuan for [scalable commit] 20160710
       //return submit_async_task_(OB_FAKE_WRITE_FOR_KEEP_ALIVE, write_thread_queue_, write_task_queue_size_);
       return submit_async_task_(OB_FAKE_WRITE_FOR_KEEP_ALIVE, alive_thread_queue_, write_task_queue_size_);
       //modify :e
-=======
-      return submit_async_task_(OB_FAKE_WRITE_FOR_KEEP_ALIVE, write_thread_queue_, write_task_queue_size_);
->>>>>>> refs/remotes/origin/master
     }
 
     int ObUpdateServer::submit_handle_frozen()
@@ -5397,11 +5000,7 @@ namespace oceanbase
 
     template <class Queue>
     int ObUpdateServer::submit_async_task_(const PacketCode pcode, Queue& qthread, int32_t task_queue_size,
-<<<<<<< HEAD
         const int32_t version, common::ObDataBuffer& in_buff, onev_request_e* req,
-=======
-        const int32_t version, common::ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         const uint32_t channel_id, const int64_t timeout)
     {
       int ret = OB_SUCCESS;
@@ -5463,11 +5062,7 @@ namespace oceanbase
           ob_packet->set_channel_id(packet->get_channel_id());
           ob_packet->set_source_timeout(packet->get_source_timeout());
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> refs/remotes/origin/master
         uint32_t new_chid = atomic_inc(&ObPacket::global_chid);
         ob_packet->set_channel_id(new_chid);
         uint32_t *chid = GET_TSI_MULT(uint32_t, TSI_COMMON_PACKET_CHID_1);
@@ -5512,7 +5107,6 @@ namespace oceanbase
       if (!(ObiRole::MASTER == obi_role_.get_role()
             && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
             && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
             // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
             && election_role_.is_master()
             && is_rs_election_lease_valid()
@@ -5525,12 +5119,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "not master:is_lease_valid=%s, is_rs_election_lease_valid=%s",
                   STR_BOOL(is_lease_valid()), STR_BOOL(is_rs_election_lease_valid()));
         // modify:e
-=======
-            && is_lease_valid()))
-      {
-        ret = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valid=%s", STR_BOOL(is_lease_valid()));
->>>>>>> refs/remotes/origin/master
       }
 
       if (version != MY_VERSION)
@@ -5610,11 +5198,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5627,11 +5211,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_delay_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_delay_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5643,11 +5223,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_immediately_drop_memtable(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_immediately_drop_memtable(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5669,11 +5245,7 @@ namespace oceanbase
       return OB_SUCCESS;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_load_bypass(const int32_t version, onev_request_e* req, const uint32_t channel_id,
-=======
-    int ObUpdateServer::ups_load_bypass(const int32_t version, easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
                                         common::ObDataBuffer& out_buff, const int packet_code)
     {
       int ret = OB_SUCCESS;
@@ -5707,7 +5279,6 @@ namespace oceanbase
       if (!(ObiRole::MASTER == obi_role_.get_role()
             && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
             && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
             // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
             && election_role_.is_master()
             && is_rs_election_lease_valid()
@@ -5720,12 +5291,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "not master:is_lease_valid=%s, is_rs_election_lease_valid=%s",
                   STR_BOOL(is_lease_valid()), STR_BOOL(is_rs_election_lease_valid()));
         // modify:e
-=======
-            && is_lease_valid()))
-      {
-        ret = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valid=%s", STR_BOOL(is_lease_valid()));
->>>>>>> refs/remotes/origin/master
       }
       else if (OB_SUCCESS != (ret = ups_deserialize(sstable_id,
               buffer.get_data(), buffer.get_capacity(), buffer.get_position())))
@@ -5748,11 +5313,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_erase_sstable(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_erase_sstable(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5765,11 +5326,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_load_new_store(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_load_new_store(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5781,11 +5338,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_reload_all_store(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_reload_all_store(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5797,11 +5350,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_rs_get_max_log_seq(const int32_t version, onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer &out_buff)
-=======
-    int ObUpdateServer::ups_rs_get_max_log_seq(const int32_t version, easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer &out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       if (MY_VERSION != version)
@@ -5820,7 +5369,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
     // add by guojinwei [log timestamp][multi_cluster] 20150820:b
     // return max log timestamp to rs
     int ObUpdateServer::ups_rs_get_max_log_timestamp(const int32_t version, onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer &out_buff)
@@ -5879,9 +5427,6 @@ namespace oceanbase
     // add:e
 
     int ObUpdateServer::slave_ups_receive_keep_alive(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::slave_ups_receive_keep_alive(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(req);
@@ -5896,19 +5441,11 @@ namespace oceanbase
         TBSYS_LOG(WARN, "ups_receive_keep_alive(): NOT NEED anymore");
       }
 
-<<<<<<< HEAD
       onev_request_wakeup(req);
       return ret;
     }
 
     int ObUpdateServer::ups_clear_fatal_status(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-      easy_request_wakeup(req);
-      return ret;
-    }
-
-    int ObUpdateServer::ups_clear_fatal_status(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (MY_VERSION != version)
@@ -5927,11 +5464,7 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     int ObUpdateServer::ups_froce_report_frozen_version(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_froce_report_frozen_version(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5944,11 +5477,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_reload_store(const int32_t version, common::ObDataBuffer& in_buf,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -5970,11 +5499,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_umount_store(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -6001,11 +5526,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_slave_register(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
 
@@ -6069,11 +5590,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_slave_quit(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
 
@@ -6175,10 +5692,7 @@ namespace oceanbase
     int ObUpdateServer::response_result(int32_t ret_code, ObPacket &pkt)
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       //TBSYS_LOG(ERROR,"test::zhouhuan response_result ret_code=%d,packet_code=%d",ret_code, pkt.get_packet_code());
-=======
->>>>>>> refs/remotes/origin/master
       ret = response_result_(ret_code, pkt.get_packet_code(), pkt.get_api_version(),
                              pkt.get_request(), pkt.get_channel_id(), pkt.get_receive_ts());
       // 忽略前两个字段 trace_id和chid
@@ -6236,20 +5750,13 @@ namespace oceanbase
       if (NULL == my_buffer)
       {
         TBSYS_LOG(ERROR, "alloc thread buffer fail");
-<<<<<<< HEAD
         onev_request_wakeup(pkt.get_request());
-=======
-        easy_request_wakeup(pkt.get_request());
->>>>>>> refs/remotes/origin/master
         ret = OB_MEM_OVERFLOW;
       }
       else
       {
         ObDataBuffer out_buffer(my_buffer->current(), my_buffer->remain());
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan response_buffer buffer.capacity=%ld position=%ld",buffer.get_capacity(), buffer.get_position());
-=======
->>>>>>> refs/remotes/origin/master
         ret = response_data_(ret_code, buffer, pkt.get_packet_code(), pkt.get_api_version(),
                              pkt.get_request(), pkt.get_channel_id(), out_buffer, pkt.get_receive_ts(), NULL, ret_string);
       }
@@ -6257,11 +5764,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::response_result_(int32_t ret_code, int32_t cmd_type, int32_t func_version,
-<<<<<<< HEAD
                                          onev_request_e* req, const uint32_t channel_id, int64_t receive_ts, const char *ret_string/* = NULL*/)
-=======
-                                         easy_request_t* req, const uint32_t channel_id, int64_t receive_ts, const char *ret_string/* = NULL*/)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       common::ObResultCode result_msg;
@@ -6278,11 +5781,7 @@ namespace oceanbase
       else if (NULL == my_buffer)
       {
         TBSYS_LOG(ERROR, "alloc thread buffer fail");
-<<<<<<< HEAD
         onev_request_wakeup(req);
-=======
-        easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
         ret = OB_MEM_OVERFLOW;
       }
       else
@@ -6305,11 +5804,7 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
           onev_request_wakeup(req);
-=======
-          easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
           TBSYS_LOG(WARN, "send response fail ret=%d conn=%p channel_id=%u result_msg=%d cmd_type=%d func_version=%d",
               ret, req, channel_id, ret_code, cmd_type, func_version);
         }
@@ -6385,32 +5880,18 @@ namespace oceanbase
       {
         TBSYS_LOG(WARN, "transaction process time is too long, process_time=%ld cur_time=%ld response_num=%ld "
             "last_log_network_elapse=%ld last_log_disk_elapse=%ld trans_counter=%ld "
-<<<<<<< HEAD
             "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu alive_task_queue_size=%zu",
             trans_proc_time, tbsys::CTimeUtil::getTime(), last_idx - start_idx + 1,
             log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(), counter,
             read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size(), alive_thread_queue_.size());
-=======
-            "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu",
-            trans_proc_time, tbsys::CTimeUtil::getTime(), last_idx - start_idx + 1,
-            log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(), counter,
-            read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size());
->>>>>>> refs/remotes/origin/master
         counter = 0;
       }
       FILL_TRACE_LOG("process_time=%ld cur_time=%ld response_num=%ld "
                 "last_log_network_elapse=%ld last_log_disk_elapse=%ld trans_counter=%ld "
-<<<<<<< HEAD
                 "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu alive_task_queue_size=%zu",
                 trans_proc_time, tbsys::CTimeUtil::getTime(), last_idx - start_idx + 1,
                 log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(), counter,
                 read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size(), alive_thread_queue_.size());
-=======
-                "read_task_queue_size=%zu write_task_queue_size=%zu lease_task_queue_size=%zu",
-                trans_proc_time, tbsys::CTimeUtil::getTime(), last_idx - start_idx + 1,
-                log_mgr_.get_last_net_elapse(), log_mgr_.get_last_disk_elapse(), counter,
-                read_thread_queue_.size(), write_thread_queue_.size(), lease_thread_queue_.size());
->>>>>>> refs/remotes/origin/master
       OB_STAT_INC(UPDATESERVER, UPS_STAT_BATCH_COUNT, 1);
       OB_STAT_INC(UPDATESERVER, UPS_STAT_BATCH_TIMEU, GET_TRACE_TIMEU());
       FILL_TRACE_LOG("resp_ret=%d proc_ret=%d", resp_ret, proc_ret);
@@ -6548,11 +6029,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_reload_conf(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
 
@@ -6619,7 +6096,6 @@ namespace oceanbase
       else if (hb.self_lease_ >= lease_expire_time_us_)
       {
         lease_expire_time_us_ = hb.self_lease_;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         if ((hb.rs_election_lease_ != rs_election_lease_)
             || (hb.election_role_.get_state() != election_role_.get_state()))
@@ -6630,8 +6106,6 @@ namespace oceanbase
           TBSYS_LOG(INFO, "receive new rs election lease. rs_election_lease_=%ld, state=%s", rs_election_lease_, election_role_.get_state_str());
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       else if (OB_MAX_UPS_LEASE_DURATION_US == lease_expire_time_us_)
       {
@@ -6656,7 +6130,6 @@ namespace oceanbase
           TBSYS_LOG(INFO, "UPS obi_role change. obi_role=%s", hb.obi_role_.get_role_str());
           is_obi_change = true;
         }
-<<<<<<< HEAD
         // add by zcd [multi_cluster] 20150519:b
         if ((ObiRole::INIT == hb.obi_role_.get_role())
             && ObiRole::MASTER == obi_role_.get_role())
@@ -6680,8 +6153,6 @@ namespace oceanbase
           is_obi_change = false;
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         if (!(hb.ups_master_ == ups_master_))
         {
           TBSYS_LOG(INFO, "master_ups addr has been change. old_master=%s", ups_master_.to_cstring());
@@ -6711,7 +6182,6 @@ namespace oceanbase
          {
            TBSYS_LOG(INFO, "switch happen. master_master ====> slave_slave");
            err = master_switch_to_slave(true, true);
-<<<<<<< HEAD
            // add by guojinwei [lease between rs and ups][multi_cluster] 20150901:b
            if (OB_SUCCESS != err)
            {
@@ -6726,8 +6196,6 @@ namespace oceanbase
            //delete:e
           
            // add:e
-=======
->>>>>>> refs/remotes/origin/master
          }
          else if (ObiRole::SLAVE == obi_role_.get_role()
              && ObUpsRoleMgr::SLAVE == role_mgr_.get_role())
@@ -6753,7 +6221,6 @@ namespace oceanbase
            {
              TBSYS_LOG(INFO, "switch happen. master_master ====> slave_master");
              err = master_switch_to_slave(true, false);
-<<<<<<< HEAD
              // add by guojinwei [lease between rs and ups][multi_cluster] 20150901:b
              if (OB_SUCCESS != err)
              {
@@ -6767,8 +6234,6 @@ namespace oceanbase
              //need_restart_ = true;
              //delete:e
              // add:e
-=======
->>>>>>> refs/remotes/origin/master
            }
            else
            {
@@ -6841,11 +6306,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_rs_revoke_lease(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       common::ObResultCode result_msg;
@@ -6939,11 +6400,7 @@ namespace oceanbase
 
     //add :rs ups hb
     int ObUpdateServer::ups_rs_lease(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       UNUSED(channel_id);
@@ -6963,7 +6420,6 @@ namespace oceanbase
           TBSYS_LOG(WARN, "failed to deserialize hb_info, err=%d", err);
         }
       }
-<<<<<<< HEAD
       //add lbzhong [Commit Point] 20150909:b
       ObServer null_server;
       if(has_master_ups_)
@@ -7000,8 +6456,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       //根据心跳内容，进行处理
       if (OB_SUCCESS == err)
       {
@@ -7021,15 +6475,11 @@ namespace oceanbase
         {
           TBSYS_LOG(WARN, "fail to serialize hb_res");
         }
-<<<<<<< HEAD
         // modify by guojinwei [lease between rs and ups][multi_cluster] 20150914:b
         //if (OB_SUCCESS == err)
         if ((OB_SUCCESS == err)
             && (false == is_restarting_))
         // modify:e
-=======
-        if (OB_SUCCESS == err)
->>>>>>> refs/remotes/origin/master
         {
           err = client_manager_.post_request(root_server_, OB_RS_UPS_HEARTBEAT_RESPONSE, hb_res.MY_VERSION, out_buff);
           if (OB_SUCCESS != err)
@@ -7038,7 +6488,6 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
       //delete chujiajia [log synchronization][multi_cluster] 20160527:b
       // add by guojinwei [lease between rs and ups][multi_cluster] 20150914:b
@@ -7052,18 +6501,11 @@ namespace oceanbase
       //}
       // add:e
       //delete:e
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return err;
     }
 
     /*  int ObUpdateServer::ups_change_vip(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
         {
         int ret = OB_SUCCESS;
 
@@ -7094,11 +6536,7 @@ namespace oceanbase
         }
      */
     int ObUpdateServer::ups_dump_text_memtable(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7127,11 +6565,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_dump_text_schemas(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7153,11 +6587,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_force_fetch_schema(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7173,11 +6603,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_memory_watch(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7200,11 +6626,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_memory_limit_set(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7236,11 +6658,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_priv_queue_conf_set(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7291,17 +6709,12 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_clear_active_memtable(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id)
-=======
-        easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (!(ObiRole::MASTER == obi_role_.get_role()
             && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
             && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
             // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
             && election_role_.is_master()
             && is_rs_election_lease_valid()
@@ -7314,12 +6727,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "not master:is_lease_valid=%s, is_rs_election_lease_valid=%s",
                   STR_BOOL(is_lease_valid()), STR_BOOL(is_rs_election_lease_valid()));
         // modify:e
-=======
-            && is_lease_valid()))
-      {
-        ret = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valid=%s", STR_BOOL(is_lease_valid()));
->>>>>>> refs/remotes/origin/master
       }
       if (version != MY_VERSION)
       {
@@ -7334,17 +6741,12 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_switch_commit_log(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (!(ObiRole::MASTER == obi_role_.get_role()
             && ObUpsRoleMgr::MASTER == role_mgr_.get_role()
             && ObUpsRoleMgr::ACTIVE == role_mgr_.get_state()
-<<<<<<< HEAD
             // add by guojinwei [lease between rs and ups][multi_cluster] 20151127:b
             && election_role_.is_master()
             && is_rs_election_lease_valid()
@@ -7357,12 +6759,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "not master:is_lease_valid=%s, is_rs_election_lease_valid=%s",
                   STR_BOOL(is_lease_valid()), STR_BOOL(is_rs_election_lease_valid()));
         // modify:e
-=======
-            && is_lease_valid()))
-      {
-        ret = OB_NOT_MASTER;
-        TBSYS_LOG(WARN, "not master:is_lease_valid=%s", STR_BOOL(is_lease_valid()));
->>>>>>> refs/remotes/origin/master
       }
       if (version != MY_VERSION)
       {
@@ -7372,7 +6768,6 @@ namespace oceanbase
       int proc_ret = OB_SUCCESS;
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160428:b
         //proc_ret = log_mgr_.switch_log_file(new_log_file_id);
         //TBSYS_LOG(INFO, "switch log file id ret=%d new_log_file_id=%lu", ret, new_log_file_id);
@@ -7419,21 +6814,13 @@ namespace oceanbase
             TBSYS_LOG(INFO, "switch commit log file id ret=%d new_log_file_id=%lu", ret, new_log_file_id);
           }
         }
-=======
-        proc_ret = log_mgr_.switch_log_file(new_log_file_id);
-        TBSYS_LOG(INFO, "switch log file id ret=%d new_log_file_id=%lu", ret, new_log_file_id);
->>>>>>> refs/remotes/origin/master
       }
       ret = response_data_(proc_ret, new_log_file_id, OB_UPS_SWITCH_COMMIT_LOG_RESPONSE, MY_VERSION,
           req, channel_id, out_buff);
       return ret;
     }
     int ObUpdateServer::ups_get_slave_info(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       common::ObResultCode result;
@@ -7464,11 +6851,7 @@ namespace oceanbase
     //*/
 
     int ObUpdateServer::ups_get_last_frozen_version(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7489,11 +6872,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get_table_time_stamp(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7519,11 +6898,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_enable_memtable_checksum(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_enable_memtable_checksum(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7538,11 +6913,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_disable_memtable_checksum(const int32_t version, onev_request_e* req, const uint32_t channel_id)
-=======
-    int ObUpdateServer::ups_disable_memtable_checksum(const int32_t version, easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7558,11 +6929,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_fetch_stat_info(const int32_t version,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7605,11 +6972,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get_schema(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7636,11 +6999,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_get_sstable_range_list(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       if (version != MY_VERSION)
@@ -7674,11 +7033,7 @@ namespace oceanbase
     }
 
     int ObUpdateServer::ups_set_config(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
                                        onev_request_e* req, const uint32_t channel_id)
-=======
-                                       easy_request_t* req, const uint32_t channel_id)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       int ret = OB_SUCCESS;
@@ -7710,11 +7065,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObUpdateServer::ups_get_config(const int32_t version, onev_request_e* req,
-=======
-    int ObUpdateServer::ups_get_config(const int32_t version, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
                                        const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       UNUSED(version);
@@ -7729,7 +7080,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add wenghaixing [secondary index.static_index]20151118
     int ObUpdateServer::ups_get_init_index(const int32_t version, ObDataBuffer &in_buff, onev_request_e
  *req,
@@ -7795,8 +7145,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObUpdateServer::low_priv_speed_control_(const int64_t scanner_size)
     {
       int ret = OB_SUCCESS;
@@ -8113,7 +7461,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
 
     // add by zhangcd [majority_count_init] 20151118:b
     int ObUpdateServer::ups_set_majority_count()
@@ -8198,7 +7545,5 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }

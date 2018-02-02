@@ -17,11 +17,7 @@
 #include "common/ob_define.h"
 #include "common/thread_buffer.h"
 #include "common/data_buffer.h"
-<<<<<<< HEAD
 #include "onev_io.h"
-=======
-#include "easy_io.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_yunti_proxy.h"
 #include "ob_proxy_reader.h"
 #include "common/ob_data_source_desc.h"
@@ -49,11 +45,7 @@ namespace oceanbase
             const int32_t packet_code,
             const int32_t version,
             const int32_t channel_id,
-<<<<<<< HEAD
             onev_request_e* req,
-=======
-            easy_request_t* req,
->>>>>>> refs/remotes/origin/master
             common::ObDataBuffer& in_buffer,
             common::ObDataBuffer& out_buffer,
             const int64_t timeout_time = 0);
@@ -61,11 +53,7 @@ namespace oceanbase
         int proxy_fetch_data(
             const int32_t version,
             const int32_t channel_id,
-<<<<<<< HEAD
             onev_request_e* req,
-=======
-            easy_request_t* req,
->>>>>>> refs/remotes/origin/master
             common::ObDataBuffer& in_buffer,
             common::ObDataBuffer& out_buffer,
             const int64_t timeout_time);
@@ -73,11 +61,7 @@ namespace oceanbase
         int proxy_fetch_range(
             const int32_t version,
             const int32_t channel_id,
-<<<<<<< HEAD
             onev_request_e* req,
-=======
-            easy_request_t* req,
->>>>>>> refs/remotes/origin/master
             common::ObDataBuffer& in_buffer,
             common::ObDataBuffer& out_buffer,
             const int64_t timeout_time);

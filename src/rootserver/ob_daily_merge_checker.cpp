@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  * @date  2016_01_24
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2012 Taobao Inc.
  *
@@ -361,7 +358,6 @@ void ObDailyMergeChecker::run(tbsys::CThread * thread, void * arg)
           root_server_->last_frozen_time_ = 0;
           // checkpointing after done merge
           root_server_->make_checkpointing();
-<<<<<<< HEAD
           //add wenghaixing [secondary index.static_index]201512/17
           int err = OB_SUCCESS;
           ObArray<uint64_t> index_list;
@@ -434,8 +430,6 @@ void ObDailyMergeChecker::run(tbsys::CThread * thread, void * arg)
         if (OB_SUCCESS != (err = root_server_->modify_staging_index()))
         {
           TBSYS_LOG(WARN, "fail to modify staging index status. ret=%d", err);
-=======
->>>>>>> refs/remotes/origin/master
         }
       }
     }

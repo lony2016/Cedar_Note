@@ -18,11 +18,7 @@
 #include "common/ob_malloc.h"
 #include "ob_update_server_main.h"
 #include <malloc.h>
-<<<<<<< HEAD
 #include "onev_palloc.h"
-=======
-#include "easy_pool.h"
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::updateserver;
@@ -37,11 +33,7 @@ int main(int argc, char** argv)
   mallopt(M_MMAP_MAX, DEFAULT_MMAP_MAX_VAL);
   ob_init_memory_pool();
   tbsys::WarningBuffer::set_warn_log_on(true);
-<<<<<<< HEAD
   //onev_pool_set_allocator(ob_malloc);
-=======
-  //easy_pool_set_allocator(ob_malloc);
->>>>>>> refs/remotes/origin/master
   ObUpdateServerMain* ups = ObUpdateServerMain::get_instance();
   int ret = OB_SUCCESS;
   if (NULL == ups)

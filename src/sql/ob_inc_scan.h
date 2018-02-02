@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 ECNU_DaSE.
 *
 * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -79,15 +76,12 @@ namespace oceanbase
         virtual ~ObIncScan();
         virtual void reset();
         virtual void reuse();
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief reset_iterator
          */
         virtual void reset_iterator(){}
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       public:
         // implement virtual function
         enum ObPhyOperatorType get_type() const
@@ -145,7 +139,6 @@ namespace oceanbase
         void set_hotspot(bool flag) { hotspot_ = flag; }
         int serialize(char* buf, const int64_t buf_len, int64_t& pos) const;
         int deserialize(const char* buf, const int64_t data_len, int64_t& pos);
-<<<<<<< HEAD
         /**
          * @brief serialize_template
          * special serialize for group execution
@@ -160,12 +153,6 @@ namespace oceanbase
         void set_scan_type(const ScanType scan_type) { scan_type_ = scan_type; }
         void set_values(uint64_t subquery, bool with_only_rowkey) {values_subquery_id_ = subquery;
           cons_get_param_with_rowkey_ = with_only_rowkey;}
-=======
-        int64_t get_serialize_size() const;
-        void set_scan_type(const ScanType scan_type) { scan_type_ = scan_type; }
-        void set_values(uint64_t subquery, bool with_only_rowkey) {values_subquery_id_ = subquery;
-          cons_get_param_with_rowkey_ = with_only_rowkey;};
->>>>>>> refs/remotes/origin/master
         common::ObGetParam* get_get_param();
         common::ObScanParam* get_scan_param();
         DECLARE_PHY_OPERATOR_ASSIGN;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_30
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_sql_session_info.h"
 #include "common/ob_define.h"
 #include "common/ob_mod_define.h"
@@ -27,11 +24,7 @@
 #include "common/ob_trace_log.h"
 #include "common/ob_statistics.h"
 #include "common/ob_common_stat.h"
-<<<<<<< HEAD
 #include "onev_connection.h"
-=======
-#include "easy_connection.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_sql_character_set.h"
 #include <utility>
 using namespace oceanbase::sql;
@@ -57,11 +50,8 @@ ObSQLSessionInfo::ObSQLSessionInfo()
    is_autocommit_(true),
    is_interactive_(false),
    last_active_time_(0),
-<<<<<<< HEAD
    curr_trans_start_time_(0),
    curr_trans_last_stmt_time_(0),
-=======
->>>>>>> refs/remotes/origin/master
    version_provider_(NULL),
    config_provider_(NULL),
    block_allocator_(SMALL_BLOCK_SIZE, common::OB_MALLOC_BLOCK_SIZE, ObMalloc(ObModIds::OB_SQL_SESSION_SBLOCK)),
@@ -597,7 +587,6 @@ int ObSQLSessionInfo::remove_variable(const ObString& var)
   return ret;
 }
 
-<<<<<<< HEAD
 //add zt 20151202:b
 int ObSQLSessionInfo::replace_vararray(const common::ObString &var, const common::ObArray<ObObj> &val)
 {
@@ -729,8 +718,6 @@ int ObSQLSessionInfo::get_variable_value(const common::ObString &var, int64_t id
 }
 //add zt 20511202:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObSQLSessionInfo::update_system_variable(const ObString& var, const ObObj& val)
 {
   int ret = OB_SUCCESS;

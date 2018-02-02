@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -27,8 +26,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
 *   (C) 2007-2010 Taobao Inc.
 *
@@ -81,7 +78,6 @@ namespace oceanbase
     const int64_t OB_SCHEMA_VERSION_FOUR = 4;
     const int64_t OB_SCHEMA_VERSION_FOUR_FIRST = 401;
     const int64_t OB_SCHEMA_VERSION_FOUR_SECOND = 402;
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         static const uint8_t META_PREC_MASK = 0x7F;
         static const uint8_t META_SCALE_MASK = 0x3F;
@@ -142,8 +138,6 @@ namespace oceanbase
 
     };
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     struct TableSchema;
     //these classes are so close in logical, so I put them together to make client have a easy life
@@ -176,7 +170,6 @@ namespace oceanbase
         return size_;
       }
 
-<<<<<<< HEAD
       //add longfei [assign] 2016-04-22 10:38:48
       int assign(const ObRowkeyInfo& other)
       {
@@ -210,8 +203,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       /**
        * get sum of every column's length.
        */
@@ -251,11 +242,7 @@ namespace oceanbase
       NEED_SERIALIZE_AND_DESERIALIZE;
     private:
       ObRowkeyColumn columns_[OB_MAX_ROWKEY_COLUMN_NUMBER];
-<<<<<<< HEAD
       int64_t size_;//slwang note:主键个数
-=======
-      int64_t size_;
->>>>>>> refs/remotes/origin/master
     };
 
 
@@ -265,7 +252,6 @@ namespace oceanbase
     class ObColumnSchemaV2
     {
       public:
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             struct ObDecimalHelper {
 
@@ -274,9 +260,6 @@ namespace oceanbase
 //                uint32_t reserved:19;
             };
             //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
         struct ObJoinInfo
         {
           ObJoinInfo() : join_table_(OB_INVALID_ID),left_column_count_(0) {}
@@ -307,7 +290,6 @@ namespace oceanbase
         bool        is_maintained()       const;
         uint64_t    get_column_group_id() const;
         bool        is_join_column() const;
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         uint32_t get_precision() const;
         uint32_t get_scale() const;
@@ -315,9 +297,6 @@ namespace oceanbase
         void set_scale(uint32_t scale);
 
         //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
         void set_table_id(const uint64_t id);
         void set_column_id(const uint64_t id);
         void set_column_name(const char *name);
@@ -347,13 +326,10 @@ namespace oceanbase
 
         inline bool is_nullable() const { return is_nullable_; }
         inline void set_nullable(const bool null) { is_nullable_ = null; }
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161124:b
         inline bool is_auto_increment() const { return auto_increment_; }
         inline void set_auto_increment(const bool auto_increment) { auto_increment_ = auto_increment; }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         inline const ObObj & get_default_value()  const { return default_value_; }
         inline void set_default_value(const ObObj& value) { default_value_ = value; }
 
@@ -362,12 +338,9 @@ namespace oceanbase
       private:
         bool maintained_;
         bool is_nullable_;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161124:b
         bool auto_increment_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         uint64_t table_id_;
         uint64_t column_group_id_;
@@ -380,14 +353,10 @@ namespace oceanbase
         ObObj default_value_;
         //join info
         ObJoinInfo join_info_;
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 
         ObDecimalHelper ob_decimal_helper_;
         //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
         //in mem
         ObColumnSchemaV2* column_group_next_;
     };
@@ -458,7 +427,6 @@ namespace oceanbase
 
         uint64_t get_create_time_column_id() const;
         uint64_t get_modify_time_column_id() const;
-<<<<<<< HEAD
         //longfei [create index]
         /**
          * @brief get_original_table_id
@@ -470,8 +438,6 @@ namespace oceanbase
          * @return index_status_
          */
         IndexStatus get_index_status() const;
-=======
->>>>>>> refs/remotes/origin/master
 
         void set_table_id(const uint64_t id);
         void set_max_column_id(const uint64_t id);
@@ -510,7 +476,6 @@ namespace oceanbase
 
         void set_create_time_column(uint64_t id);
         void set_modify_time_column(uint64_t id);
-<<<<<<< HEAD
 
         //longfei [create index]
         /**
@@ -524,8 +489,6 @@ namespace oceanbase
          */
         void set_index_status(IndexStatus status);
 
-=======
->>>>>>> refs/remotes/origin/master
         ObConsistencyLevel get_consistency_level() const;
         void set_consistency_level(int64_t consistency_level);
 
@@ -568,24 +531,18 @@ namespace oceanbase
         int64_t internal_ups_scan_size_;
         int64_t merge_write_sstable_version_;
         int64_t replica_count_;
-<<<<<<< HEAD
 
         // longfei [create index]
         uint64_t original_table_id_; ///< index table's original table
         IndexStatus index_status_; ///< index status
 
-=======
->>>>>>> refs/remotes/origin/master
         int64_t reserved_[TABLE_SCHEMA_RESERVED_NUM];
         int64_t version_;
         int64_t schema_version_;
         //in mem
         uint64_t create_time_column_id_;
         uint64_t modify_time_column_id_;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class ObSchemaSortByIdHelper;
@@ -612,23 +569,16 @@ namespace oceanbase
         const ObColumnSchemaV2* column_end() const;
         const char* get_app_name() const;
         int set_app_name(const char* app_name);
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         int get_cond_val_info(uint64_t tid,uint64_t cid,ObObjType &type,uint32_t &p,uint32_t &s,int32_t* idx = NULL) const;
         //add e
-=======
-
->>>>>>> refs/remotes/origin/master
         int64_t get_column_count() const;
         int64_t get_table_count() const;
 
         uint64_t get_max_table_id() const;
-<<<<<<< HEAD
         //add by qx [query optimization] 20170417 :b
         int get_index_columns(uint64_t table_id, uint64_t index_table_id, common::ObArray<uint64_t>& column_array) const;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         /**
          * @brief timestap is the version of schema,version_ is used for serialize syntax
          *
@@ -742,7 +692,6 @@ namespace oceanbase
         //rongxuan.lc@taobao.com
         int add_new_table_schema(const ObArray<TableSchema>& schema_array);
 
-<<<<<<< HEAD
       //longfei [create index]
       public:
         /**
@@ -844,8 +793,6 @@ namespace oceanbase
          */
         int get_all_avaiable_index_list(ObArray<uint64_t> &index_id_list) const;
 
-=======
->>>>>>> refs/remotes/origin/master
       public:
         bool parse_from_file(const char* file_name, tbsys::CConfig& config);
         bool parse_one_table(const char* section_name, tbsys::CConfig& config, ObTableSchema& schema);
@@ -919,7 +866,6 @@ namespace oceanbase
         bool check_table_expire_condition() const;
         bool check_compress_name() const;
         static const int64_t MAX_COLUMNS_LIMIT = OB_MAX_TABLE_NUMBER * OB_MAX_COLUMN_NUMBER;
-<<<<<<< HEAD
         static const int64_t DEFAULT_MAX_COLUMNS = 16 * OB_MAX_COLUMN_NUMBER;
         //add maoxx
         /**
@@ -977,9 +923,6 @@ namespace oceanbase
          */
         int column_hit_index_and_rowkey(uint64_t table_id, uint64_t cid, bool &hit_flag) const;
         //add e
-=======
-        static const int64_t DEFAULT_MAX_COLUMNS = 16 * OB_MAX_COLUMN_NUMBER;;
->>>>>>> refs/remotes/origin/master
 
       private:
         int replace_system_variable(char* expire_condition, const int64_t buf_size) const;
@@ -995,11 +938,8 @@ namespace oceanbase
         uint64_t  max_table_id_;
         int64_t   column_nums_;
         int64_t   table_nums_;
-<<<<<<< HEAD
         //longfei [create index]
         volatile bool is_id_index_hash_map_init_; ///< is id_index_hash_map init?
-=======
->>>>>>> refs/remotes/origin/master
 
         char app_name_[OB_MAX_APP_NAME_LENGTH];
 
@@ -1013,12 +953,9 @@ namespace oceanbase
         hash::ObHashMap<ObColumnNameKey,ObColumnInfo,hash::NoPthreadDefendMode> column_hash_map_;
         hash::ObHashMap<ObColumnIdKey,ObColumnInfo,hash::NoPthreadDefendMode> id_hash_map_;
 
-<<<<<<< HEAD
         //longfei [create index]
         hash::ObHashMap<uint64_t, IndexList,hash::NoPthreadDefendMode> id_index_hash_map_; ///< <table_id,index_list> hash map
 
-=======
->>>>>>> refs/remotes/origin/master
         int64_t column_group_nums_;
         ObColumnGroupHelper column_groups_[OB_MAX_COLUMN_GROUP_NUMBER * OB_MAX_TABLE_NUMBER];
     };

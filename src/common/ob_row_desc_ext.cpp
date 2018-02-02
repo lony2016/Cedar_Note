@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -37,10 +34,7 @@
  */
 #include "ob_row_desc_ext.h"
 using namespace oceanbase::common;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 ObRowDescExt::ObRowDescExt()
 {
 }
@@ -132,7 +126,6 @@ int ObRowDescExt::add_column_desc(const uint64_t table_id, const uint64_t column
   }
   return ret;
 }
-<<<<<<< HEAD
 
 //add zt 20151113:b
 DEFINE_SERIALIZE(ObRowDescExt)
@@ -196,5 +189,3 @@ DEFINE_GET_SERIALIZE_SIZE(ObRowDescExt)
 }
 
 //add zt 20151113:e
-=======
->>>>>>> refs/remotes/origin/master

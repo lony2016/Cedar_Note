@@ -126,56 +126,38 @@ do \
 %left '(' ')'
 %left '.'
 
-<<<<<<< HEAD
 /*add by zhujun*/
 %token PROCEDURE DECLARE ELSEIF OUT INOUT WHILE LOOP EXIT CONTINUE DO CALL ARRAY REVERSE
 /*zhounan unmark*/
 %token CURSOR OPEN FETCH CLOSE NEXT PRIOR FIRST LAST ABSOLUTE RELATIVE 
 
-=======
->>>>>>> refs/remotes/origin/master
 %token ADD AND ANY ALL ALTER AS ASC
 %token BETWEEN BEGI BIGINT BINARY BOOLEAN BOTH BY
 %token CASCADE CASE CHARACTER CLUSTER CNNOP COMMENT COMMIT
        CONSISTENT COLUMN COLUMNS CREATE CREATETIME
        CURRENT_USER CHANGE_OBI SWITCH_CLUSTER
 %token DATE DATETIME DEALLOCATE DECIMAL DEFAULT DELETE DESC DESCRIBE
-<<<<<<< HEAD
        DISTINCT DOUBLE DROP DUAL TRUNCATE /*add hxlong [Truncate Table]:20170403 add 'TRUNCATE'*/
-=======
-       DISTINCT DOUBLE DROP DUAL
->>>>>>> refs/remotes/origin/master
 %token ELSE END END_P ERROR EXCEPT EXECUTE EXISTS EXPLAIN
 %token FLOAT FOR FROM FULL FROZEN FORCE
 %token GLOBAL GLOBAL_ALIAS GRANT GROUP
 %token HAVING HINT_BEGIN HINT_END HOTSPOT
 %token IDENTIFIED IF IN INNER INTEGER INTERSECT INSERT INTO IS
-<<<<<<< HEAD
 %token JOIN SEMI_JOIN
 %token KEY
 %token LEADING LEFT LIMIT LIKE LOCAL LOCKED LOCKWJH
-=======
-%token JOIN
-%token KEY
-%token LEADING LEFT LIMIT LIKE LOCAL LOCKED
->>>>>>> refs/remotes/origin/master
 %token MEDIUMINT MEMORY MOD MODIFYTIME MASTER
 %token NOT NUMERIC
 %token OFFSET ON OR ORDER OPTION OUTER
 %token PARAMETERS PASSWORD PRECISION PREPARE PRIMARY
 %token READ_STATIC REAL RENAME REPLACE RESTRICT PRIVILEGES REVOKE RIGHT
-<<<<<<< HEAD
        ROLLBACK KILL READ_CONSISTENCY NO_GROUP LONG_TRANS //add by wdh 20160716 add by qx 20170318
-=======
-       ROLLBACK KILL READ_CONSISTENCY
->>>>>>> refs/remotes/origin/master
 %token SCHEMA SCOPE SELECT SESSION SESSION_ALIAS
        SET SHOW SMALLINT SNAPSHOT SPFILE START STATIC SYSTEM STRONG SET_MASTER_CLUSTER SET_SLAVE_CLUSTER SLAVE
 %token TABLE TABLES THEN TIME TIMESTAMP TINYINT TRAILING TRANSACTION TO
 %token UNION UPDATE USER USING
 %token VALUES VARCHAR VARBINARY
 %token WHERE WHEN WITH WORK PROCESSLIST QUERY CONNECTION WEAK
-<<<<<<< HEAD
 %token INDEX STORING /* add longfei [create index] [secondaryindex reconstruct] 20150917 e */
 /* add maoxx [bloomfilter_join] 20160406 */
 %token BLOOMFILTER_JOIN MERGE_JOIN
@@ -192,16 +174,12 @@ do \
 %token GATHER STATISTICS //add weixing [statistics build] 20161212
 //add maoxx [hash join single] 20170110
 %token HASH_JOIN
-=======
-
->>>>>>> refs/remotes/origin/master
 %token <non_reserved_keyword>
        AUTO_INCREMENT CHUNKSERVER COMPRESS_METHOD CONSISTENT_MODE
        EXPIRE_INFO GRANTS JOIN_INFO
        MERGESERVER REPLICA_NUM ROOTSERVER ROW_COUNT SERVER SERVER_IP
        SERVER_PORT SERVER_TYPE STATUS TABLE_ID TABLET_BLOCK_SIZE TABLET_MAX_SIZE
        UNLOCKED UPDATESERVER USE_BLOOM_FILTER VARIABLES VERBOSE WARNINGS
-<<<<<<< HEAD
 /*add by zhujun*/
 
 %type <node> create_procedure_stmt proc_decl proc_block 
@@ -220,9 +198,6 @@ do \
 %type <node> array_expr
 %type <node> array_vals_list array_val_list var_and_array_val
 //add zt 20151125:e
-=======
-
->>>>>>> refs/remotes/origin/master
 %type <node> sql_stmt stmt_list stmt
 %type <node> select_stmt insert_stmt update_stmt delete_stmt
 %type <node> create_table_stmt opt_table_option_list table_option
@@ -275,7 +250,6 @@ do \
 %type <non_reserved_keyword> unreserved_keyword
 %type <ival> consistency_level
 %type <node> opt_comma_list hint_options
-<<<<<<< HEAD
 %type <node> lock_table_stmt
 /* add [secondaryindex reconstruct] 20150925 longfei [create index] :b */
 %type <node> create_index_stmt opt_index_columns opt_storing opt_index_option_list opt_storing_columns index_option
@@ -296,9 +270,6 @@ do \
 /*add hxlong[truncate table] 20170304:b*/
 %type <node> truncate_table_stmt
 /*add 20170304:e*/
-=======
-
->>>>>>> refs/remotes/origin/master
 %start sql_stmt
 %%
 
@@ -326,7 +297,6 @@ stmt_list:
   ;
 
 stmt:
-<<<<<<< HEAD
 	create_procedure_stmt { $$ = $1; }
   | exec_procedure_stmt   { $$ = $1; }
   | show_procedure_stmt   { $$ = $1; }
@@ -352,14 +322,6 @@ stmt:
   | delete_stmt       { $$ = $1; }
   | drop_table_stmt   { $$ = $1; }
   | drop_index_stmt   { $$ = $1; }
-=======
-    select_stmt       { $$ = $1; }
-  | insert_stmt       { $$ = $1; }
-  | create_table_stmt { $$ = $1; }
-  | update_stmt       { $$ = $1; }
-  | delete_stmt       { $$ = $1; }
-  | drop_table_stmt   { $$ = $1; }
->>>>>>> refs/remotes/origin/master
   | explain_stmt      { $$ = $1; }
   | show_stmt         { $$ = $1; }
   | prepare_stmt      { $$ = $1; }
@@ -379,7 +341,6 @@ stmt:
   | commit_stmt { $$ = $1;}
   | rollback_stmt {$$ = $1;}
   | kill_stmt {$$ = $1;}
-<<<<<<< HEAD
   | lock_table_stmt {$$ = $1;}
   /*add weixing [statistics build]20161212*/
   |gather_statistics_stmt {$$ = $1;}
@@ -387,8 +348,6 @@ stmt:
   /*add hxlong[truncate table] 20170403:b*/
   | truncate_table_stmt { $$ = $1;}
   /*add:e*/
-=======
->>>>>>> refs/remotes/origin/master
   | /*EMPTY*/   { $$ = NULL; }
   ;
 
@@ -476,13 +435,10 @@ simple_expr:
     {
     	malloc_non_terminal_node($$, result->malloc_pool_, T_OP_EXISTS, 1, $2);
     }
-<<<<<<< HEAD
   | array_expr
     {
       $$ = $1;
     }
-=======
->>>>>>> refs/remotes/origin/master
   ;
 
 /* used by the expression that use range value, e.g. between and */
@@ -628,7 +584,6 @@ case_default:
   | /*EMPTY*/                { malloc_terminal_node($$, result->malloc_pool_, T_NULL); }
   ;
 
-<<<<<<< HEAD
 //add zt 20151125:b
 array_expr:
     TEMP_VARIABLE '(' INTNUM ')'
@@ -642,8 +597,6 @@ array_expr:
   ;
 //add zt 20151125:e
 
-=======
->>>>>>> refs/remotes/origin/master
 func_expr:
     function_name '(' '*' ')'
     {
@@ -766,7 +719,6 @@ func_expr:
     {
       if (strcasecmp($1->str_value_, "cast") == 0)
       {
-<<<<<<< HEAD
         /*modify fanqiushi DECIMAL OceanBase_BankCommV0.2 2014_6_16:b*/
         /*$5->value_ = $5->type_;
         $5->type_ = T_INT;*/
@@ -776,10 +728,6 @@ func_expr:
             $5->type_ = T_INT;
         }
         /*modify:e*/
-=======
-        $5->value_ = $5->type_;
-        $5->type_ = T_INT;
->>>>>>> refs/remotes/origin/master
         ParseNode *params = NULL;
         malloc_non_terminal_node(params, result->malloc_pool_, T_EXPR_LIST, 2, $3, $5);
         malloc_non_terminal_node($$, result->malloc_pool_, T_FUN_SYS, 2, $1, params);
@@ -898,7 +846,6 @@ update_asgn_factor:
   ;
 
 
-<<<<<<< HEAD
 // add longfei [create index] [secondaryindex reconstruct] 20150915:b 
 /*****************************************************************************
  *
@@ -1291,8 +1238,6 @@ cursor_close_stmt:
 
 
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	create grammar
@@ -1373,16 +1318,11 @@ data_type:
         malloc_terminal_node($$, result->malloc_pool_, T_TYPE_DECIMAL);
       else
         merge_nodes($$, result->malloc_pool_, T_TYPE_DECIMAL, $2);
-<<<<<<< HEAD
       /* modify xsl ECNU_DECIMAL 2017_2
       yyerror(&@1, result, "DECIMAL type is not supported");
       YYABORT;
       */
       //modify e
-=======
-      yyerror(&@1, result, "DECIMAL type is not supported");
-      YYABORT;
->>>>>>> refs/remotes/origin/master
     }
   | NUMERIC opt_decimal
     {
@@ -1592,7 +1532,6 @@ opt_equal_mark:
   ;
 
 
-<<<<<<< HEAD
 
 /*****************************************************************************
  *
@@ -1614,8 +1553,6 @@ gather_statistics_stmt:
     merge_nodes($$, result->malloc_pool_, T_COLUMN_LIST, $2);
   };
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	drop table grammar
@@ -1648,7 +1585,6 @@ table_list:
       malloc_non_terminal_node($$, result->malloc_pool_, T_LINK_NODE, 2, $1, $3);
     }
   ;
-<<<<<<< HEAD
 /*add hxlong[truncate table] 20170403:b*/
 /*****************************************************************************
  *
@@ -1700,9 +1636,6 @@ table_name:
 	{
 	  $$ = $1;
 	}
-=======
-
->>>>>>> refs/remotes/origin/master
 
 /*****************************************************************************
  *
@@ -1809,11 +1742,8 @@ insert_vals:
   ;
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	select grammar
@@ -1933,7 +1863,6 @@ select_clause:
   | select_with_parens	        { $$ = $1; }
   ;
 
-<<<<<<< HEAD
 
 /*Add by zz 2014-11-20 to apply select * into var from ....*/
 /*===========================================================
@@ -1970,8 +1899,6 @@ select_into_clause	:	SELECT opt_hint select_expr_list INTO argument_list FROM fr
 						}
 					;
 
-=======
->>>>>>> refs/remotes/origin/master
 simple_select:
     SELECT opt_hint opt_distinct select_expr_list
     FROM from_list
@@ -2168,18 +2095,14 @@ hint_option:
     {
       malloc_terminal_node($$, result->malloc_pool_, T_HOTSPOT);
     }
-<<<<<<< HEAD
   | SEMI_JOIN '(' relation_factor ',' relation_factor ',' relation_factor '.' relation_factor ',' relation_factor '.' relation_factor ')'
     {
       malloc_non_terminal_node($$, result->malloc_pool_, T_SEMI_JOIN, 6, $3, $5, $7, $9, $11, $13);
     }
-=======
->>>>>>> refs/remotes/origin/master
   | READ_CONSISTENCY '(' consistency_level ')'
     {
       malloc_terminal_node($$, result->malloc_pool_, T_READ_CONSISTENCY);
       $$->value_ = $3;
-<<<<<<< HEAD
     }  
     // add longfei 20151106
   | INDEX '(' relation_factor relation_factor ')'
@@ -2195,14 +2118,10 @@ hint_option:
       malloc_terminal_node($$, result->malloc_pool_, T_UNKOWN_HINT);
     }
     // add by zcd 20150601:e
-=======
-    }
->>>>>>> refs/remotes/origin/master
   | '(' opt_comma_list ')'
     {
       $$ = $2;
     }
-<<<<<<< HEAD
     /* add maoxx [bloomfilter_join] 20160406 */
   | JOIN '(' join_op_type_list ')'
     {
@@ -2221,8 +2140,6 @@ hint_option:
     {
       malloc_terminal_node($$, result->malloc_pool_, T_NO_QUERY_OPT);
     }
-=======
->>>>>>> refs/remotes/origin/master
   ;
 
 opt_comma_list:
@@ -2235,7 +2152,6 @@ opt_comma_list:
       $$ = NULL;
     }
   ;
-<<<<<<< HEAD
 
 /* add maoxx [bloomfilter_join] 20160406 */
 join_op_type_list:
@@ -2279,8 +2195,6 @@ join_op_type:
     }
    ;
 /* add e */
-=======
->>>>>>> refs/remotes/origin/master
  
 consistency_level:
   WEAK
@@ -2586,7 +2500,6 @@ join_type:
     {
       malloc_terminal_node($$, result->malloc_pool_, T_JOIN_INNER);
     }
-<<<<<<< HEAD
   //add by wanglei [semi join] 20170417:b
   | SEMI
     {
@@ -2601,8 +2514,6 @@ join_type:
       malloc_terminal_node($$, result->malloc_pool_, T_JOIN_SEMI_RIGHT);
     }
 	 //add by wanglei [semi join] 20170417:b
-=======
->>>>>>> refs/remotes/origin/master
   ;
 
 join_outer:
@@ -2640,20 +2551,14 @@ opt_verbose:
 /*****************************************************************************
  *
  *	show grammar
-<<<<<<< HEAD
  *  add show index : longfei [show index]
-=======
->>>>>>> refs/remotes/origin/master
  *
  *****************************************************************************/
 show_stmt:
     SHOW TABLES opt_show_condition
     { malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_TABLES, 1, $3); }
-<<<<<<< HEAD
   | SHOW INDEX ON relation_factor opt_show_condition
     {  malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_INDEX, 2, $4, $5); }
-=======
->>>>>>> refs/remotes/origin/master
   | SHOW COLUMNS FROM relation_factor opt_show_condition
     { malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_COLUMNS, 2, $4, $5); }
   | SHOW COLUMNS IN relation_factor opt_show_condition
@@ -2670,11 +2575,7 @@ show_stmt:
   | SHOW SCHEMA
     { malloc_terminal_node($$, result->malloc_pool_, T_SHOW_SCHEMA); }
   | SHOW CREATE TABLE relation_factor
-<<<<<<< HEAD
     { malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_CREATE_TABLE, 1, $4); }					
-=======
-    { malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_CREATE_TABLE, 1, $4); }
->>>>>>> refs/remotes/origin/master
   | DESCRIBE relation_factor opt_like_condition
     { malloc_non_terminal_node($$, result->malloc_pool_, T_SHOW_COLUMNS, 2, $2, $3); }
   | DESC relation_factor opt_like_condition
@@ -2710,16 +2611,12 @@ show_stmt:
       $$->value_ = $2;
     }
   ;
-<<<<<<< HEAD
 lock_table_stmt:
     LOCKWJH TABLE relation_factor
     {
       malloc_non_terminal_node($$, result->malloc_pool_, T_LOCK_TABLE, 1, $3);
     }
   ;
-=======
-
->>>>>>> refs/remotes/origin/master
 opt_limit:
     LIMIT INTNUM ',' INTNUM
     {
@@ -2779,10 +2676,7 @@ opt_full:
   | FULL
     { $$ = 1; }
   ;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	create user grammar
@@ -2870,10 +2764,7 @@ opt_for_user:
       $$ = NULL;
     }
 ;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	rename user grammar
@@ -2901,10 +2792,7 @@ rename_list:
       malloc_non_terminal_node($$, result->malloc_pool_, T_LINK_NODE, 2, $1, $3);
     }
 ;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	lock user grammar
@@ -2928,10 +2816,7 @@ lock_spec:
       $$->value_ = 0;
     }
 ;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
 *
 *  begin/start transaction grammer
@@ -2968,10 +2853,7 @@ begin_stmt:
       malloc_terminal_node($$, result->malloc_pool_, T_BEGIN);
       $$->value_ = $3;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
 *
 *  commit grammer
@@ -3096,15 +2978,12 @@ priv_type:
       malloc_terminal_node($$, result->malloc_pool_, T_PRIV_TYPE);
       $$->value_ = OB_PRIV_DROP;
     }
-<<<<<<< HEAD
     /*add hxlong [Truncate Table]:20170403 add 'TRUNCATE'*/
     | TRUNCATE
     {
       malloc_terminal_node($$, result->malloc_pool_, T_PRIV_TYPE);
       $$->value_ = OB_PRIV_DROP;
     }
-=======
->>>>>>> refs/remotes/origin/master
     | GRANT OPTION
     {
       malloc_terminal_node($$, result->malloc_pool_, T_PRIV_TYPE);
@@ -3152,10 +3031,7 @@ priv_level:
       malloc_non_terminal_node($$, result->malloc_pool_, T_PRIV_LEVEL, 1, $1);
     }
 ;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	revoke grammar
@@ -3211,10 +3087,7 @@ opt_on_priv_level:
       $$ = NULL;
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	prepare grammar
@@ -3245,11 +3118,8 @@ preparable_stmt:
   ;
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> refs/remotes/origin/master
 /*****************************************************************************
  *
  *	set grammar
@@ -3261,15 +3131,12 @@ variable_set_stmt:
       merge_nodes($$, result->malloc_pool_, T_VARIABLE_SET, $2);;
       $$->value_ = 2;
     }
-<<<<<<< HEAD
     //add zt 20151202:b
     | SET SET var_and_array_val
     {
       $$ = $3;
     }
     //add zt 20151202:e
-=======
->>>>>>> refs/remotes/origin/master
   ;
 
 var_and_val_list:
@@ -3331,7 +3198,6 @@ var_and_val:
       malloc_non_terminal_node($$, result->malloc_pool_, T_VAR_VAL, 2, $1, $3);
       $$->value_ = 2;
     }
-<<<<<<< HEAD
     //add zt 20151126:b
   | array_expr to_or_eq expr
     {
@@ -3353,10 +3219,6 @@ var_and_array_val:
     ;
 //add zt 20151202:e
 
-=======
-  ;
-
->>>>>>> refs/remotes/origin/master
 to_or_eq:
     TO      { $$ = NULL; }
   | COMP_EQ { $$ = NULL; }
@@ -3365,7 +3227,6 @@ to_or_eq:
 argument:
     TEMP_VARIABLE
     { $$ = $1; }
-<<<<<<< HEAD
   |
     array_expr
     { $$ = $1; }
@@ -3388,9 +3249,6 @@ array_val_list:
   ;
 //add zt 20151202:e
 
-=======
-  ;
->>>>>>> refs/remotes/origin/master
 
 
 /*****************************************************************************
@@ -3765,7 +3623,6 @@ unreserved_keyword:
   | WARNINGS
   ;
 
-<<<<<<< HEAD
 /*Add by zz 2014-11-20,this part was used by analyse prodedure*/
 
 /*****************************************************************************
@@ -4235,8 +4092,6 @@ show_procedure_stmt	:	SHOW PROCEDURE NAME
 					;
 					
 									
-=======
->>>>>>> refs/remotes/origin/master
 
 %%
 

@@ -122,15 +122,9 @@ namespace oceanbase
         const ObObj* get_obj_array(int64_t& array_size) const;
 
       protected:
-<<<<<<< HEAD
         ObRowkey rowkey_;//slwang note:该行中主键的情况
         ObRawRow raw_row_;
         const ObRowDesc *row_desc_;//slwang note:行描述
-=======
-        ObRowkey rowkey_;
-        ObRawRow raw_row_;
-        const ObRowDesc *row_desc_;
->>>>>>> refs/remotes/origin/master
     };
 
     inline const ObRowDesc* ObRow::get_row_desc() const

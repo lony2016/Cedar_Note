@@ -169,7 +169,6 @@ int oceanbase::mergeserver::ObMsSqlOperator::get_next_row(oceanbase::common::ObR
   }
   return err;
 }
-<<<<<<< HEAD
 //add wanglei [semi join in expr] 20161131:b
 int oceanbase::mergeserver::ObMsSqlOperator::set_param_only(const ObSqlScanParam & scan_param)
 {
@@ -187,6 +186,3 @@ int oceanbase::mergeserver::ObMsSqlOperator::set_param_only(const ObSqlScanParam
   return err;
 }
 //add wanglei [semi join in expr] 20161131:e
-=======
-
->>>>>>> refs/remotes/origin/master

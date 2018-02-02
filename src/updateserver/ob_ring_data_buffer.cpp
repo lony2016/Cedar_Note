@@ -70,11 +70,7 @@ namespace oceanbase
     {
       return ((pos >> block_size_shift_) + 1) << block_size_shift_;
     }
-<<<<<<< HEAD
     //modify by qx 20161229 :b
-=======
-
->>>>>>> refs/remotes/origin/master
     int ObRingDataBuffer::init(const int64_t n_blocks, const int64_t block_size_shift)
     {
       int err = OB_SUCCESS;
@@ -86,7 +82,6 @@ namespace oceanbase
       {
         err = OB_INVALID_ARGUMENT;
       }
-<<<<<<< HEAD
       /*as old block_size_shift default is 25 , i wan't hope block_size_shift_ value will less-than 25 */
       if(block_size_shift < 25)
       {
@@ -100,18 +95,12 @@ namespace oceanbase
       for (int64_t i = 0; OB_SUCCESS == err && i < n_blocks; i++)
       {
         if (OB_SUCCESS != (err = blocks_[i].init(1<<block_size_shift_)))
-=======
-      for (int64_t i = 0; OB_SUCCESS == err && i < n_blocks; i++)
-      {
-        if (OB_SUCCESS != (err = blocks_[i].init(1<<block_size_shift)))
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(ERROR, "blocks[%ld].init()=>%d", i, err);
         }
       }
       if (OB_SUCCESS == err)
       {
-<<<<<<< HEAD
         //block_size_shift_ = block_size_shift;   //delete by qx :20161229
         n_blocks_ = n_blocks;
       }
@@ -122,14 +111,6 @@ namespace oceanbase
       return err;
     }
     //modify :e
-=======
-        block_size_shift_ = block_size_shift;
-        n_blocks_ = n_blocks;
-      }
-      return err;
-    }
-
->>>>>>> refs/remotes/origin/master
     int64_t ObRingDataBuffer::get_start_pos() const
     {
       return start_pos_;

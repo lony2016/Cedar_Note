@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_READ_PARAM_H_
 #define OCEANBASE_SQL_READ_PARAM_H_
 
@@ -33,12 +30,9 @@
 #include "ob_scalar_aggregate.h"
 #include "ob_merge_groupby.h"
 #include "ob_sort.h"
-<<<<<<< HEAD
 // add by guojinwei [repeatable read] 20160310:b
 #include "common/ob_transaction.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 
 namespace oceanbase
@@ -63,13 +57,10 @@ namespace oceanbase
       virtual inline int set_table_id(const uint64_t& renamed_table_id, const uint64_t& table_id);
       virtual inline uint64_t get_renamed_table_id() const;
       virtual inline uint64_t get_table_id() const;
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160310:b
       virtual inline int set_trans_id(const ObTransID& trans_id);
       virtual const ObTransID &get_trans_id() const;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       // operator fields
       virtual int set_project(const ObProject &project);
       virtual int add_output_column(const ObSqlExpression& expr);
@@ -101,12 +92,9 @@ namespace oceanbase
       virtual int assign(const ObSqlReadParam* other);
       VIRTUAL_NEED_SERIALIZE_AND_DESERIALIZE;
 
-<<<<<<< HEAD
 
       int reset_project_and_filter();
 
-=======
->>>>>>> refs/remotes/origin/master
     protected:
       // RESERVE_PARAM_FIELD
       int serialize_reserve_param(char * buf, const int64_t buf_len, int64_t & pos) const;
@@ -125,12 +113,9 @@ namespace oceanbase
       uint64_t table_id_;
       uint64_t renamed_table_id_;
       bool only_static_data_;
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160310:b
       ObTransID trans_id_;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       ObProject project_;
       ObScalarAggregate *scalar_agg_;
@@ -204,7 +189,6 @@ namespace oceanbase
       return table_id_;
     }
 
-<<<<<<< HEAD
     // add by guojinwei [repeatable read] 20160310:b
     inline int ObSqlReadParam::set_trans_id(const ObTransID& trans_id)
     {
@@ -219,8 +203,6 @@ namespace oceanbase
     }
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     inline bool ObSqlReadParam::has_project() const
     {
       return has_project_;

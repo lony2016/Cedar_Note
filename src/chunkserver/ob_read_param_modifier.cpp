@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or 
@@ -191,16 +188,10 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int get_next_param(const ObScanParam &org_scan_param,
                        const ObScanner &prev_scan_result,
                        ObScanParam *scan_param,
                        ObMemBuf &range_buffer)
-=======
-    int get_next_param(
-        const ObScanParam &org_scan_param, const ObScanner &prev_scan_result, 
-        ObScanParam *scan_param, ObMemBuf &range_buffer)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       const ObReadParam &org_read_param = org_scan_param;
@@ -314,7 +305,6 @@ namespace oceanbase
           scan_param->set_scan_flag(org_scan_param.get_scan_flag());
         }
       }
-<<<<<<< HEAD
 
       //add wenghaixing [secondary index static_index_build.cs_scan]20151230
       scan_param->set_fake(org_scan_param.if_need_fake());
@@ -331,8 +321,6 @@ namespace oceanbase
       }
       //TBSYS_LOG(INFO,"test::whx set fake range [%s],range[%s]", to_cstring(*scan_param->get_fake_range()),to_cstring(*(scan_param->get_range())));
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       return err;
     }
 
@@ -442,7 +430,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int get_ups_param( common::ObScanParam & param, ObMemBuf &range_buffer )
     {
@@ -456,7 +443,5 @@ namespace oceanbase
       return err;
     }
     //mod:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase

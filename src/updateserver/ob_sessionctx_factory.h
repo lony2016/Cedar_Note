@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,8 +13,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_03_14
  */
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_sessionctx_factory.h updateserver / Oceanbase
@@ -45,11 +42,8 @@
 #include "ob_lock_mgr.h"
 #include "common/ob_fifo_allocator.h"
 
-<<<<<<< HEAD
 #include "ob_table_lock_mgr.h" // add wangjiahao [table lock] 20160616
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -155,16 +149,10 @@ namespace oceanbase
         RWSessionCtx(const SessionType type, SessionMgr &host, common::FIFOAllocator &fifo_allocator, const bool need_gen_mutator=true);
         virtual ~RWSessionCtx();
       public:
-<<<<<<< HEAD
         int precommit();
         void end(const bool need_rollback);
         void publish();
         int on_free();  // modify by qx 20170225 void on_free();
-=======
-        void end(const bool need_rollback);
-        void publish();
-        void on_free();
->>>>>>> refs/remotes/origin/master
         void *alloc(const int64_t size);
         void reset();
         virtual void kill();
@@ -229,13 +217,10 @@ namespace oceanbase
         TransUCInfo &get_uc_info();
         TEValueUCInfo *alloc_tevalue_uci();
         int init_lock_info(LockMgr& lock_mgr, const IsolationLevel isolation);
-<<<<<<< HEAD
         //add wangjiahao [tablelock] 20160616 :b
         int init_table_lock_info();
         SessionTableLockInfo* get_tblock_info(){return table_lock_info_;}
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         ILockInfo *get_lock_info();
         int64_t get_min_flying_trans_id();
         void flush_min_flying_trans_id();
@@ -245,13 +230,10 @@ namespace oceanbase
         void set_frozen();
         bool is_frozen() const;
         void reset_stmt();
-<<<<<<< HEAD
         //add by zhouhuan [scalablecommit] 20160426:b
         void set_group_id(int64_t group_id) { group_id_ = group_id ; }
         int64_t get_group_id() { return group_id_ ; }
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         common::ModulePageAllocator mod_;
         common::ModuleArena page_arena_;
@@ -274,13 +256,10 @@ namespace oceanbase
         uint64_t mark_stmt_checksum_;
         v4si mark_dml_count_;
         v4si dml_count_;
-<<<<<<< HEAD
         int64_t group_id_; //add by zhouhuan [scalablecommit] 20160426
         //add wangjiahao [tablelock] 20160616 :b
         SessionTableLockInfo* table_lock_info_;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class RPSessionCtx: public RWSessionCtx
@@ -294,7 +273,6 @@ namespace oceanbase
 
     class SessionCtxFactory : public ISessionCtxFactory
     {
-<<<<<<< HEAD
 //      static const int64_t ALLOCATOR_TOTAL_LIMIT = 5L * 1024L * 1024L * 1024L;
 //      static const int64_t ALLOCATOR_HOLD_LIMIT = static_cast<int64_t>(1.5 * 1024L * 1024L * 1024L); //1.5G //ALLOCATOR_TOTAL_LIMIT / 2;
       static const int64_t ALLOCATOR_TOTAL_LIMIT = 6L * 1024L * 1024L * 1024L;
@@ -303,11 +281,6 @@ namespace oceanbase
       static const int64_t ALLOCATOR_PAGE_SIZE = 16L * 1024L * 1024L;
       //static const int64_t ALLOCATOR_PAGE_SIZE = 4L * 1024L * 1024L;
       //modify :e
-=======
-      static const int64_t ALLOCATOR_TOTAL_LIMIT = 5L * 1024L * 1024L * 1024L;
-      static const int64_t ALLOCATOR_HOLD_LIMIT = static_cast<int64_t>(1.5 * 1024L * 1024L * 1024L); //1.5G //ALLOCATOR_TOTAL_LIMIT / 2;
-      static const int64_t ALLOCATOR_PAGE_SIZE = 16L * 1024L * 1024L;
->>>>>>> refs/remotes/origin/master
       public:
         SessionCtxFactory();
         ~SessionCtxFactory();
@@ -318,10 +291,7 @@ namespace oceanbase
         common::ModulePageAllocator mod_;
         common::ModuleArena allocator_;
         common::FIFOAllocator ctx_allocator_;
-<<<<<<< HEAD
         common::FIFOAllocator long_trans_ctx_allocator_;
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

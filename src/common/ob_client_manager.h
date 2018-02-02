@@ -18,11 +18,7 @@
 #ifndef OCEANBASE_COMMON_CLIENT_MANAGER_H_
 #define OCEANBASE_COMMON_CLIENT_MANAGER_H_
 
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 
 #include "data_buffer.h"
 #include "ob_server.h"
@@ -38,21 +34,13 @@ namespace oceanbase
         ObClientManager();
         ~ObClientManager();
       public:
-<<<<<<< HEAD
         int initialize(onev_io_e *eio, onev_io_handler_pe* handler, const int64_t max_request_timeout = 5000000);
-=======
-        int initialize(easy_io_t *eio, easy_io_handler_pt* handler, const int64_t max_request_timeout = 5000000);
->>>>>>> refs/remotes/origin/master
 
         int set_dedicate_thread_num(const int n);
         void set_error(const int err);
         int post_request_using_dedicate_thread(const ObServer& server, const int32_t pcode, const int32_t version,
                                                const int64_t timeout, const ObDataBuffer& in_buffer,
-<<<<<<< HEAD
                                                onev_io_process_pe handler, void* args, int thread_idx=0) const;
-=======
-                                               easy_io_process_pt handler, void* args, int thread_idx=0) const;
->>>>>>> refs/remotes/origin/master
         /**
          * post request (%in_buffer) to %server, and do not care repsonse from %server.
          */
@@ -63,11 +51,7 @@ namespace oceanbase
          * post request (%in_buffer) to %server
          */
         int post_request(const ObServer& server, const int32_t pcode, const int32_t version,
-<<<<<<< HEAD
             const int64_t timeout, const ObDataBuffer& in_buffer, onev_io_process_pe handler, void* args) const;
-=======
-            const int64_t timeout, const ObDataBuffer& in_buffer, easy_io_process_pt handler, void* args) const;
->>>>>>> refs/remotes/origin/master
 
         /**
          * send request (%in_buffer) to %server, and wait until %server response
@@ -104,25 +88,15 @@ namespace oceanbase
             const int64_t timeout, ObDataBuffer& in_buffer, ObDataBuffer& out_buffer) const;
 
         int post_next(const ObServer& server, const int64_t session_id, const int64_t timeout,
-<<<<<<< HEAD
             ObDataBuffer& in_buffer, onev_io_process_pe handler, void* args) const;
         int post_end_next(const ObServer& server, const int64_t session_id, const int64_t timeout,
             ObDataBuffer& in_buffer, onev_io_process_pe handler, void* args) const;
-=======
-            ObDataBuffer& in_buffer, easy_io_process_pt handler, void* args) const;
-        int post_end_next(const ObServer& server, const int64_t session_id, const int64_t timeout,
-            ObDataBuffer& in_buffer, easy_io_process_pt handler, void* args) const;
->>>>>>> refs/remotes/origin/master
 
       private:
         /**
          * send request async
          * handler callback will called when response received or timeout
-<<<<<<< HEAD
          * This function will return OB_PACKET_NOT_SEND due to libonev internal error
-=======
-         * This function will return OB_PACKET_NOT_SEND due to libeasy internal error
->>>>>>> refs/remotes/origin/master
          * such as too many doing request
          *
          * @param server       dest server
@@ -141,11 +115,7 @@ namespace oceanbase
                             const int32_t pcode, const int32_t version,
                             const int64_t session_id, const int64_t timeout,
                             const ObDataBuffer& in_buffer,
-<<<<<<< HEAD
                             onev_io_process_pe handler, void* args) const;
-=======
-                            easy_io_process_pt handler, void* args) const;
->>>>>>> refs/remotes/origin/master
 
         /**
          * send request to server and wait for response
@@ -170,35 +140,21 @@ namespace oceanbase
          * @param timeout            timeout in microsecond(10^-6s)
          * @param in_buffer          data to send
          * @param size               packet size
-<<<<<<< HEAD
          * @param onev_session_e*&   session created
-=======
-         * @param easy_session_t*&   session created
->>>>>>> refs/remotes/origin/master
          */
         int create_session(const ObServer& server,
                            const int32_t pcode, const int32_t version,
                            const int64_t timeout, const ObDataBuffer& in_buffer,
-<<<<<<< HEAD
                            int64_t size, onev_session_e *& session) const;
 
         int post_session_using_dedicate_thread(onev_session_e* s, int thread_idx = 0) const;
-=======
-                           int64_t size, easy_session_t *& session) const;
-
-        int post_session_using_dedicate_thread(easy_session_t* s, int thread_idx = 0) const;
->>>>>>> refs/remotes/origin/master
         /**
          * post packet in session
          * to addr not wait for response
          *
          * @param s  session to be post
          */
-<<<<<<< HEAD
         int post_session(onev_session_e* s) const;
-=======
-        int post_session(easy_session_t* s) const;
->>>>>>> refs/remotes/origin/master
 
         /**
          * send packet in session and wait for response
@@ -206,11 +162,7 @@ namespace oceanbase
          * @param s  session to be send
          * @return   pointer to response buffer
          */
-<<<<<<< HEAD
         void* send_session(onev_session_e *s) const;
-=======
-        void* send_session(easy_session_t *s) const;
->>>>>>> refs/remotes/origin/master
 
         void destroy();
       private:
@@ -218,13 +170,8 @@ namespace oceanbase
         int32_t inited_;
         int dedicate_thread_num_;
         mutable int64_t max_request_timeout_;
-<<<<<<< HEAD
         onev_io_e* eio_;
         onev_io_handler_pe* handler_;
-=======
-        easy_io_t* eio_;
-        easy_io_handler_pt* handler_;
->>>>>>> refs/remotes/origin/master
     };
 
   } // end namespace chunkserver

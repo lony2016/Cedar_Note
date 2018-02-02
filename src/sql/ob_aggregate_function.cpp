@@ -623,7 +623,6 @@ int ObAggregateFunction::calc_aggr_cell(const ObItemType aggr_fun, const ObObj &
           else
           {
             ret = res1.add(oprand_clone, result);
-<<<<<<< HEAD
             //add xsl ECNU_DECIMAL 2017_5
             uint32_t len = 1;
             if(const_cast<ObDecimal &>(result.get_decimal()).get_words()[0].table[1] != 0)
@@ -632,8 +631,6 @@ int ObAggregateFunction::calc_aggr_cell(const ObItemType aggr_fun, const ObObj &
             }
             result.set_len(len);
             //add e
-=======
->>>>>>> refs/remotes/origin/master
             if (OB_SUCCESS == ret)
             {
               res1 = result;
@@ -693,16 +690,10 @@ int ObAggregateFunction::get_result(const ObRow *&row)
           {
             res_cell->set_null();
           }
-<<<<<<< HEAD
 
           else
           {
                 ret = aggr_cell->to(*res_cell);
-=======
-          else
-          {
-            ret = aggr_cell->to(*res_cell);
->>>>>>> refs/remotes/origin/master
           }
           break;
         case T_FUN_AVG:
@@ -715,11 +706,7 @@ int ObAggregateFunction::get_result(const ObRow *&row)
             ret = aggr_cell->div(*aux_cell, result, did_int_div_as_double_);
             if (OB_SUCCESS == ret)
             {
-<<<<<<< HEAD
                     ret = result.to(*res_cell);
-=======
-              ret = result.to(*res_cell);
->>>>>>> refs/remotes/origin/master
             }
           }
           break;

@@ -52,11 +52,7 @@ int64_t ObRowDesc::get_idx(const uint64_t table_id, const uint64_t column_id) co
   return ret;
 }
 
-<<<<<<< HEAD
 int ObRowDesc::add_column_desc(const uint64_t table_id, const uint64_t column_id)//slwang note:设置行描述
-=======
-int ObRowDesc::add_column_desc(const uint64_t table_id, const uint64_t column_id)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   if (cells_desc_count_ >= MAX_COLUMNS_COUNT)
@@ -81,7 +77,6 @@ int ObRowDesc::add_column_desc(const uint64_t table_id, const uint64_t column_id
   return ret;
 }
 
-<<<<<<< HEAD
 /*
  * Remove elements with specific value 
  * add by lxb on 2016/12/27
@@ -116,8 +111,6 @@ int ObRowDesc::remove_column_desc(const uint64_t table_id, const uint64_t column
   return ret;
 }
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObRowDesc::reset()
 {
   cells_desc_count_ = 0;
@@ -165,21 +158,13 @@ int ObRowDesc::hash_find(const uint64_t table_id, const uint64_t column_id, int6
   return ret;
 }
 
-<<<<<<< HEAD
 int ObRowDesc::hash_insert(const uint64_t table_id, const uint64_t column_id, const int64_t index)//slwang note:此处是把cells_desc_数组中的元素和对应索引插入到hash_map_中
-=======
-int ObRowDesc::hash_insert(const uint64_t table_id, const uint64_t column_id, const int64_t index)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   Desc desc;
   desc.table_id_ = table_id;
   desc.column_id_ = column_id;
-<<<<<<< HEAD
   ret = hash_map_.insert(desc, index);//slwang note
-=======
-  ret = hash_map_.insert(desc, index);
->>>>>>> refs/remotes/origin/master
   if (OB_DUPLICATE_COLUMN == ret)
   {
     TBSYS_LOG(WARN, "duplicated cell desc, tid=%lu cid=%lu new_idx=%ld",
@@ -188,7 +173,6 @@ int ObRowDesc::hash_insert(const uint64_t table_id, const uint64_t column_id, co
   return ret;
 }
 
-<<<<<<< HEAD
 /*
  * Remove elements with specific value 
  * add by lxb on 2016/12/27
@@ -207,8 +191,6 @@ int ObRowDesc::hash_remove(const uint64_t table_id, const uint64_t column_id)
   }
   return ret;
 }
-=======
->>>>>>> refs/remotes/origin/master
 
 ObRowDesc & ObRowDesc::operator = (const ObRowDesc & r)
 {

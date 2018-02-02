@@ -50,7 +50,6 @@ namespace oceanbase
          */
         int add_output_column(const ObSqlExpression& expr);
 
-<<<<<<< HEAD
         int add_main_output_column(const ObSqlExpression& expr);
         int cons_second_row_desc(ObRowDesc &row_desc);
          int set_second_row_desc(ObRowDesc *row_desc);
@@ -60,8 +59,6 @@ namespace oceanbase
         int add_index_filter_ll(ObSqlExpression* expr) ;
         int add_index_output_column_ll(ObSqlExpression& expr) ;
         //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
         /**
          * 设置table_id
          * @note 只有基本表被重命名的情况才会使两个不相同id，其实两者相同时base_table_id可以给个默认值。

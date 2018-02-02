@@ -23,11 +23,7 @@ namespace oceanbase
   namespace common
   {
     /// 行描述
-<<<<<<< HEAD
     class ObRowDesc//slwang note:对该行中的列的描述
-=======
-    class ObRowDesc
->>>>>>> refs/remotes/origin/master
     {
       public:
         struct Desc
@@ -88,15 +84,12 @@ namespace oceanbase
         /// 添加下一列的描述信息
         int add_column_desc(const uint64_t table_id, const uint64_t column_id);
 
-<<<<<<< HEAD
         /*
          * Remove elements with specific value 
          * add by lxb on 2016/12/27
          */
         int remove_column_desc(const uint64_t table_id, const uint64_t column_id);        
         
-=======
->>>>>>> refs/remotes/origin/master
         /// 重置
         void reset();
 
@@ -124,7 +117,6 @@ namespace oceanbase
         };
         int hash_find(const uint64_t table_id, const uint64_t column_id, int64_t & index) const;
         int hash_insert(const uint64_t table_id, const uint64_t column_id, const int64_t index);
-<<<<<<< HEAD
       
         /*
          * Remove elements with specific value 
@@ -132,21 +124,13 @@ namespace oceanbase
          */
         int hash_remove(const uint64_t table_id, const uint64_t column_id);        
         
-=======
->>>>>>> refs/remotes/origin/master
       private:
         static const int64_t MAX_COLUMNS_COUNT = common::OB_ROW_MAX_COLUMNS_COUNT; // 512
         static uint64_t HASH_COLLISIONS_COUNT;
         // data members
-<<<<<<< HEAD
         Desc cells_desc_[MAX_COLUMNS_COUNT];//slwang note:数组中存的是该行中(ObRowDesc)所有列元素(tid cid)
         int64_t cells_desc_count_;
         PlacementHashMap<Desc, int64_t> hash_map_;//slwang note:跟前面成员变量cells_desc_相关，此hash_map的key就是Desc(该行中某一列的tid,cid),value就是int64_t(存的是该列在Desc(cells_desc_[MAX_COLUMNS_COUNT])数组中的下标)
-=======
-        Desc cells_desc_[MAX_COLUMNS_COUNT];
-        int64_t cells_desc_count_;
-        PlacementHashMap<Desc, int64_t> hash_map_;
->>>>>>> refs/remotes/origin/master
         int64_t rowkey_cell_count_;
     };
 
@@ -184,15 +168,9 @@ namespace oceanbase
       int ret = OB_SUCCESS;
       uint64_t pos = 0;
       ret = search_(key, pos);
-<<<<<<< HEAD
       if (OB_SUCCESS == ret) // modify by lxb on 2017/03/21 for logical optimizer
       {
         flags_.del_member(static_cast<int32_t>(pos)); // modify by lxb on 2017/03/21 for logical optimizer
-=======
-      if (OB_SUCCESS = ret)
-      {
-        flags_.del_member(pos);
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }

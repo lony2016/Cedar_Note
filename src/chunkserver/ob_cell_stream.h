@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or 
@@ -136,7 +133,6 @@ namespace oceanbase
       // one rpc call for scan the row data from server
       int rpc_scan_row_data(const common::ObScanParam & param);
 
-<<<<<<< HEAD
       //add longfei [cons static index] 151204:b
       /**
        * @brief rpc_scan_row_data scan data from another cs, store the data in cur_result_
@@ -147,8 +143,6 @@ namespace oceanbase
       int rpc_scan_row_data(const ObScanParam &param, const ObServer &chunkserver);
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // one rpc call for get cell data from server
       int rpc_get_cell_data(const common::ObGetParam & param);
       

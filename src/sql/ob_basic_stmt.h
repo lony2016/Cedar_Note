@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +19,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -46,19 +43,15 @@ namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
     /**
      * @brief The ObBasicStmt class
      * basic statement class of logical plan has commen data menber and function menber of sub-class
      */
-=======
->>>>>>> refs/remotes/origin/master
     class ObBasicStmt
     {
     public:
       enum StmtType
       {
-<<<<<<< HEAD
 	    //zhounan unmark:b
         T_CURSOR_DECLARE,
         T_CURSOR_FETCH,
@@ -77,8 +70,6 @@ namespace oceanbase
         T_CURSOR_OPEN,
         T_CURSOR_CLOSE,
 		//add:e
-=======
->>>>>>> refs/remotes/origin/master
         T_NONE,
         T_SELECT,
         T_INSERT,
@@ -89,7 +80,6 @@ namespace oceanbase
         T_CREATE_TABLE,
         T_DROP_TABLE,
         T_ALTER_TABLE,
-<<<<<<< HEAD
       //add wangjiahao [table lock] 20160616 :b
         T_LOCK_TABLE,
       //add :e
@@ -103,11 +93,6 @@ namespace oceanbase
         //add longfei
         T_SHOW_INDEX,
         //add:e
-=======
-
-        // show statements
-        T_SHOW_TABLES,
->>>>>>> refs/remotes/origin/master
         T_SHOW_COLUMNS,
         T_SHOW_VARIABLES,
         T_SHOW_TABLE_STATUS,
@@ -139,7 +124,6 @@ namespace oceanbase
         T_KILL,
         T_ALTER_SYSTEM,
         T_CHANGE_OBI,
-<<<<<<< HEAD
 
         // add longfei [create index] [secondaryindex reconstruct] 20150916:b
         // secondary index related
@@ -170,8 +154,6 @@ namespace oceanbase
         //add weixing [statistics build] 20161212:b
         T_GAHTHER_STATISTICS,
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       };
 
       ObBasicStmt()
@@ -199,13 +181,8 @@ namespace oceanbase
       void print_indentation(FILE* fp, int32_t level) const;
 
     private:
-<<<<<<< HEAD
       StmtType  stmt_type_;  ///<  statement type
       uint64_t  query_id_;  ///<  query id
-=======
-      StmtType  stmt_type_;
-      uint64_t  query_id_;
->>>>>>> refs/remotes/origin/master
     };
 
     inline void ObBasicStmt::set_stmt_type(StmtType stmt_type)

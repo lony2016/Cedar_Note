@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -35,27 +32,20 @@
  *   Zhifeng YANG <zhuweng.yzf@taobao.com>
  *
  */
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef _OB_VALUES_H
 #define _OB_VALUES_H 1
 
 #include "sql/ob_single_child_phy_operator.h"
 #include "common/ob_row_store.h"
-<<<<<<< HEAD
 //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 #include "common/ob_se_array.h"
 #include "common/ob_define.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   class ObValuesKeyInfo{
 
@@ -95,8 +85,6 @@ namespace oceanbase
       return ret;
   }
   //add e
-=======
->>>>>>> refs/remotes/origin/master
     class ObValues: public ObSingleChildPhyOperator
     {
       public:
@@ -113,7 +101,6 @@ namespace oceanbase
         virtual int get_next_row(const common::ObRow *&row);
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
         virtual int64_t to_string(char* buf, const int64_t buf_len) const;
-<<<<<<< HEAD
         /**
          * @brief get_row_desc_template
          * get next row descriptor
@@ -144,11 +131,6 @@ namespace oceanbase
         int get_rowkey_schema(uint64_t tid,uint64_t cid,common::ObObjType& type,uint32_t& p,uint32_t& s);
         typedef common::ObSEArray<ObValuesKeyInfo, common::OB_MAX_ROWKEY_COLUMN_NUMBER> RowkeyInfo;
         //add e
-=======
-        enum ObPhyOperatorType get_type() const{return PHY_VALUES;}
-        DECLARE_PHY_OPERATOR_ASSIGN;
-        NEED_SERIALIZE_AND_DESERIALIZE;
->>>>>>> refs/remotes/origin/master
       private:
         // types and constants
         int load_data();
@@ -162,7 +144,6 @@ namespace oceanbase
         common::ObRowDesc row_desc_;
         common::ObRow curr_row_;
         common::ObRowStore row_store_;
-<<<<<<< HEAD
         //add by zt 20160118:b
         bool is_open_;  ///<  is open
         int64_t static_data_id_;  ///<  static data id
@@ -171,8 +152,6 @@ namespace oceanbase
         bool is_need_fix_obvalues;
         RowkeyInfo obj_array_;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace sql
 } // end namespace oceanbase

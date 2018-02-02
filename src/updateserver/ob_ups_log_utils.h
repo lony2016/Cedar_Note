@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -38,21 +35,17 @@
 #include "common/ob_define.h"
 #include "common/ob_log_entry.h"
 #include "common/ob_log_cursor.h"
-<<<<<<< HEAD
 //add lbzhong [Commit Point] 20150820:b
 #include "common/file_utils.h"
 #include "common/file_directory_utils.h"
 
 using namespace oceanbase::common;
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
   namespace updateserver
   {
-<<<<<<< HEAD
     //add lbzhong [Commit Point] 20150820:b
     //
     // @brief write commitpoint file
@@ -250,8 +243,6 @@ namespace oceanbase
       return err;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     enum ReplayType
     {
       RT_LOCAL = 0,
@@ -296,20 +287,15 @@ namespace oceanbase
     int replay_single_log_func(ObUpsMutator& mutator, CommonSchemaManagerWrapper& schema, ObUpsTableMgr* table_mgr, common::LogCommand cmd, const char* log_data, int64_t data_len, const int64_t commit_id, const ReplayType replay_type);
     int replay_local_log_func(const volatile bool& stop, const char* log_dir,
                               const common::ObLogCursor& start_cursor, common::ObLogCursor& end_cursor,
-<<<<<<< HEAD
                               ObLogReplayWorker& replay_worker
                               //add lbzhong [Commit Point] 20150930:b
                               ,const int64_t commit_seq
                               //add:e
                               );
-=======
-                              ObLogReplayWorker& replay_worker);
->>>>>>> refs/remotes/origin/master
     int replay_local_log_func(const volatile bool& stop, const char* log_dir, const common::ObLogCursor& start_cursor,
                               common::ObLogCursor& end_cursor, IObLogApplier* log_applier);
     int replay_log_in_buf_func(const char* log_data, int64_t data_len, IObLogApplier* log_applier);
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160524:b
     /**
      * @brief get tmp log data checksum
@@ -326,8 +312,6 @@ namespace oceanbase
                                  const ObLogCursor& start_cursor,
                                  ObLogCursor& end_cursor);
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     int serialize_log_entry(char* buf, const int64_t len, int64_t& pos, common::ObLogEntry& entry,
                             const char* log_data, const int64_t data_len);
@@ -339,7 +323,6 @@ namespace oceanbase
                             const char* log_data, const int64_t data_len);
 
     int parse_log_buffer(const char* log_data, const int64_t len,
-<<<<<<< HEAD
                          int64_t& start_id, int64_t& end_id
                          //add chujiajia [log synchronization][multi_cluster] 20160530:b
                          , int64_t& master_cmt_log_id
@@ -416,16 +399,6 @@ namespace oceanbase
     int get_cursor_by_log_id(const char* log_dir, const int64_t log_id, const common::ObLogCursor& start_cursor, common::ObLogCursor& end_cursor);
     int get_checksum_by_log_id(const char* log_dir, const int64_t log_id, const common::ObLogCursor& start_cursor, common::ObLogCursor& end_cursor, int64_t &checksum);
     //add:e
-=======
-                         int64_t& start_id, int64_t& end_id);
-    int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos,
-                        int64_t& start_id, int64_t& end_id);
-    int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos,
-                        int64_t& start_id, int64_t& end_id, bool& is_file_end);
-    int trim_log_buffer(const int64_t offset, const int64_t align_bits,
-                        const char* log_data, const int64_t len, int64_t& end_pos,
-                        int64_t& start_id, int64_t& end_id, bool& is_file_end);
->>>>>>> refs/remotes/origin/master
  } // end namespace updateserver
 } // end namespace oceanbase
 #endif /* __OB_UPDATESERVER_OB_UPS_LOG_UTILS_H__ */

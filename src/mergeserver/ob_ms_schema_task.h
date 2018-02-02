@@ -30,10 +30,7 @@ namespace oceanbase
   namespace mergeserver
   {
     class ObMergerSchemaProxy;
-<<<<<<< HEAD
     class ObProcedureManager;
-=======
->>>>>>> refs/remotes/origin/master
     /// @brief check and fetch new schema timer task
     class ObMergerSchemaTask : public common::ObTimerTask
     {
@@ -79,7 +76,6 @@ namespace oceanbase
     {
       return ((NULL != schema_proxy_) && (NULL != schema_));
     }
-<<<<<<< HEAD
 
     class ObMergerProcedureTask : public common::ObTimerTask
     {
@@ -127,8 +123,6 @@ namespace oceanbase
     {
       return (NULL != pp_mgr_);
     }
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

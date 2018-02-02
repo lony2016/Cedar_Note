@@ -49,7 +49,6 @@ namespace oceanbase
         data_type_ = common::ObMinType;
         type_length_ = -1;
         precision_ = -1;
-<<<<<<< HEAD
         //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*
          *如果用户建表时decimal只有一个参数，则scale默认为0
@@ -57,9 +56,6 @@ namespace oceanbase
         //scale_ = -1;    //old code
         scale_=0;
         //modify:e
-=======
-        scale_ = -1;
->>>>>>> refs/remotes/origin/master
         not_null_ = false;
         atuo_increment_ = false;
         primary_key_id_ = 0;
@@ -223,10 +219,7 @@ namespace oceanbase
         }
         case common::ObDecimalType:
         {
-<<<<<<< HEAD
           /*
-=======
->>>>>>> refs/remotes/origin/master
           common::ObNumber val;
           default_value_.get_decimal(val);
           char buf[common::OB_MAX_TOKEN_BUFFER_LENGTH]; // just find a long enough macro
@@ -234,7 +227,6 @@ namespace oceanbase
           print_indentation(fp, level);
           fprintf(fp, "default value : %.*s\n", static_cast<int32_t>(len), buf);
           break;
-<<<<<<< HEAD
           */
 
           //modify xsl ECNU_DECIMAL 2017_2
@@ -250,8 +242,6 @@ namespace oceanbase
             //modify e
             //modify:e
           break;
-=======
->>>>>>> refs/remotes/origin/master
         }
         default:
           /* do nothing */

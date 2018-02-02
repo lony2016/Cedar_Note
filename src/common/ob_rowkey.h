@@ -174,15 +174,10 @@ namespace oceanbase
           ObObj* obj_ptr = NULL;
           char* varchar_ptr = NULL;
           ObString varchar_val;
-<<<<<<< HEAD
           //add xsl ECNU_DECIMAL 2016_12
           uint64_t *decimal_val=NULL;
           //add e
           int32_t varchar_len = 0;
-=======
-          int32_t varchar_len = 0;
-
->>>>>>> refs/remotes/origin/master
           if (NULL == (ptr = (char*)allocator.alloc(total_len)))
           {
             ret = OB_ALLOCATE_MEMORY_FAILED;
@@ -208,7 +203,6 @@ namespace oceanbase
               obj_ptr[i].set_varchar(varchar_val);
               varchar_ptr += varchar_len;
             }
-<<<<<<< HEAD
             //modify xsl ECNU_DECIMAL 2016_12
             //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             else if(obj_ptr_[i].get_type() == ObDecimalType){
@@ -220,8 +214,6 @@ namespace oceanbase
             }
             //add e
             //modify e
-=======
->>>>>>> refs/remotes/origin/master
           }
 
           if (OB_SUCCESS == ret)

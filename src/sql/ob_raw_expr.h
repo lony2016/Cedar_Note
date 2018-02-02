@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_RAWEXPR_H_
 #define OCEANBASE_SQL_RAWEXPR_H_
 #include "common/ob_bit_set.h"
@@ -28,22 +25,16 @@
 #include "common/ob_string.h"
 #include "common/ob_string_buf.h"
 
-<<<<<<< HEAD
 // add by lxb on 2017/02/15 for logical optimizer
 #include <map>
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
     // add by lxb on 2017/02/15 for logical optimizer
     class ObSelectStmt;
     
-=======
->>>>>>> refs/remotes/origin/master
     class ObTransformer;
     class ObLogicalPlan;
     class ObPhysicalPlan;
@@ -71,7 +62,6 @@ namespace oceanbase
       bool is_range_filter() const;
       // Only format like "T1.c1 = T2.c1", not "T1.c1 - T2.c1 = 0"
       bool is_join_cond() const;
-<<<<<<< HEAD
       //add by qx [query optimization] 20170314 :b
       bool is_join_cond_opt() const;
       bool is_one_side_const() const;
@@ -80,8 +70,6 @@ namespace oceanbase
 
       bool is_semi_join_cond() const; // wangyanzhao, pull up sublink 20170322
 
-=======
->>>>>>> refs/remotes/origin/master
       bool is_aggr_fun() const;
       virtual int fill_sql_expression(
           ObSqlExpression& inter_expr,
@@ -89,7 +77,6 @@ namespace oceanbase
           ObLogicalPlan *logical_plan = NULL,
           ObPhysicalPlan *physical_plan = NULL) const = 0;
       virtual void print(FILE* fp, int32_t level) const = 0;
-<<<<<<< HEAD
       /**
        * @brief get_raw_var
        * push expressin to stack
@@ -108,9 +95,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type) = 0;
       
-=======
-
->>>>>>> refs/remotes/origin/master
     private:
       ObItemType  type_;
       common::ObObjType result_type_;
@@ -137,7 +121,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       virtual void get_raw_var(ObIArray<const ObRawExpr *> &exprs) const
       {
         exprs.push_back(this);
@@ -154,13 +137,10 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       oceanbase::common::ObObj value_;
     };
 
-<<<<<<< HEAD
     //add zt 20151125:b
     /**
      * @brief The ObArrayRawExpr class
@@ -249,8 +229,6 @@ namespace oceanbase
     };
     //add zt 20151125:e
 
-=======
->>>>>>> refs/remotes/origin/master
     class ObCurTimeExpr : public ObRawExpr
     {
       public:
@@ -262,7 +240,6 @@ namespace oceanbase
             ObLogicalPlan *logical_plan = NULL,
             ObPhysicalPlan *physical_plan = NULL) const;
         void print(FILE* fp, int32_t level) const;
-<<<<<<< HEAD
         
         // add by lxb on 2017/02/15 for logical optimizer
         virtual int optimize_sql_expression(
@@ -274,8 +251,6 @@ namespace oceanbase
             uint64_t &real_table_id,
             std::map<uint64_t, uint64_t> alias_table_hashmap,
             int type);
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class ObUnaryRefRawExpr : public ObRawExpr
@@ -299,7 +274,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
       int get_name(common::ObString& name) const;
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/15 for logical optimizer
       virtual int optimize_sql_expression(
@@ -311,8 +285,6 @@ namespace oceanbase
           uint64_t &real_table_id,
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
-=======
->>>>>>> refs/remotes/origin/master
 
     private:
       uint64_t id_;
@@ -341,7 +313,6 @@ namespace oceanbase
           ObLogicalPlan *logical_plan = NULL,
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/15 for logical optimizer
       virtual int optimize_sql_expression(
@@ -353,8 +324,6 @@ namespace oceanbase
           uint64_t &real_table_id,
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
-=======
->>>>>>> refs/remotes/origin/master
 
     private:
       uint64_t first_id_;
@@ -382,7 +351,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       //add zt: 20151104
       /**
        * @brief get_raw_var
@@ -406,8 +374,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObRawExpr *expr_;
     };
@@ -434,7 +400,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       //add zt: 20151104 b
       /**
        * @brief get_raw_var
@@ -458,8 +423,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObRawExpr *first_expr_;
       ObRawExpr *second_expr_;
@@ -494,7 +457,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       //add zt: 20151104 b
       /**
        * @brief get_raw_var
@@ -520,8 +482,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObRawExpr *first_expr_;
       ObRawExpr *second_expr_;
@@ -551,7 +511,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       //add zt: 20151104 b
       /**
        * @brief get_raw_var
@@ -578,8 +537,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       oceanbase::common::ObVector<ObRawExpr*> exprs_;
     };
@@ -622,7 +579,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
 
       //add zt: 20151104 b
       /**
@@ -656,8 +612,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObRawExpr *arg_expr_;
       oceanbase::common::ObVector<ObRawExpr*> when_exprs_;
@@ -689,7 +643,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
 
       //add zt: 20151104 b
       /**
@@ -714,8 +667,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       // NULL means '*'
       ObRawExpr* param_expr_;
@@ -745,7 +696,6 @@ namespace oceanbase
           ObPhysicalPlan *physical_plan = NULL) const;
       void print(FILE* fp, int32_t level) const;
 
-<<<<<<< HEAD
       //add zt: 20151104 b
       /**
        * @brief get_raw_var
@@ -772,8 +722,6 @@ namespace oceanbase
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
       
-=======
->>>>>>> refs/remotes/origin/master
     private:
       common::ObString func_name_;
       common::ObVector<ObRawExpr*> exprs_;
@@ -814,7 +762,6 @@ namespace oceanbase
           ObTransformer *transformer = NULL,
           ObLogicalPlan *logical_plan = NULL,
           ObPhysicalPlan *physical_plan = NULL);
-<<<<<<< HEAD
 
       void print(FILE* fp, int32_t level, int32_t index = 0) const;
       //add dhc [join_without_pushdown_is_null/query_optimzier] 20151214:b
@@ -843,9 +790,6 @@ namespace oceanbase
           uint64_t &real_table_id,
           std::map<uint64_t, uint64_t> alias_table_hashmap,
           int type);
-=======
-      void print(FILE* fp, int32_t level, int32_t index = 0) const;
->>>>>>> refs/remotes/origin/master
 
     private:
       uint64_t  expr_id_;
@@ -857,13 +801,10 @@ namespace oceanbase
       bool      is_columnlized_;
       common::ObBitSet<>  tables_set_;
       ObRawExpr*  expr_;
-<<<<<<< HEAD
 
       //add dhc [join_without_pushdown_is_null/query_optimizer] 20151214:b
       bool      can_push_down_with_outerjoin_;//true表示此表达式在join语句中时，也可以下压给cs；false表示不能下压
       //add 20151214:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
   }

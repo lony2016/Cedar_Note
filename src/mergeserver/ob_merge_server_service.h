@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_26
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_MERGESERVER_SERVICE_H_
 #define OCEANBASE_MERGESERVER_SERVICE_H_
 
@@ -38,19 +35,12 @@
 #include "ob_ms_ups_task.h"
 #include "ob_ms_sql_proxy.h"
 #include "ob_query_cache.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_merge_server_config.h"
 #include "common/ob_privilege_manager.h"
 #include "common/ob_statistics.h"
 #include "ob_get_privilege_task.h"
-<<<<<<< HEAD
 #include "common/ob_name_code_map.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -93,7 +83,6 @@ namespace oceanbase
         int register_root_server(void);
 
         sql::ObSQLSessionMgr* get_sql_session_mgr() const;
-<<<<<<< HEAD
         //add by wangdonghui :b
         /**
          * @brief get_sql_proxy_
@@ -102,8 +91,6 @@ namespace oceanbase
          */
         ObMsSQLProxy get_sql_proxy_() const;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         void set_sql_session_mgr(sql::ObSQLSessionMgr* mgr);
         void set_sql_id_mgr(sql::ObSQLIdMgr *mgr) {sql_id_mgr_ = mgr;};
         /* reload config after update local configuration succ */
@@ -114,11 +101,7 @@ namespace oceanbase
           const int32_t packet_code,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -133,7 +116,6 @@ namespace oceanbase
         common::ObTabletLocationCacheProxy *get_cache_proxy() const {return cache_proxy_;}
         common::ObStatManager *get_stat_manager() const { return service_monitor_; }
 
-<<<<<<< HEAD
         //add huangcc [statistic information cache] 20170317:b
         mergeserver::ObMsSQLProxy *get_sql_proxy() {return &sql_proxy_;}
         //add:e
@@ -174,8 +156,6 @@ namespace oceanbase
         }
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
         const common::ObVersion get_frozen_version() const
         {
           return frozen_version_;
@@ -195,22 +175,14 @@ namespace oceanbase
         int ms_list_sessions(
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer);
         // list sessions
         int ms_kill_session(
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer);
         // kill sql session
@@ -218,16 +190,11 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us
           );
-<<<<<<< HEAD
         //add weixing [statistics build v1]20170406:b
         int ms_fetch_collection_list(
             const int64_t receive_time,
@@ -238,18 +205,12 @@ namespace oceanbase
             common::ObDataBuffer& out_buffer,
             const int64_t timeout_us);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         // heartbeat
         int ms_heartbeat(
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -258,11 +219,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -271,11 +228,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -284,11 +237,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -297,11 +246,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -310,11 +255,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -322,11 +263,7 @@ namespace oceanbase
           const int64_t start_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -335,7 +272,6 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
@@ -383,14 +319,10 @@ namespace oceanbase
           const int32_t version,
           const int32_t channel_id,
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
 
-<<<<<<< HEAD
         //add :e
 
         //add by wdh 20160730 :b
@@ -406,11 +338,6 @@ namespace oceanbase
         //add :e
         int send_sql_response(
           onev_request_e* req,
-=======
-
-        int send_sql_response(
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& out_buffer,
           ObSQLResultSet &result,
           int32_t channel_id,
@@ -420,11 +347,7 @@ namespace oceanbase
           const int64_t start_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -432,11 +355,7 @@ namespace oceanbase
         int do_timeouted_req(
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer);
 
@@ -445,11 +364,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -459,11 +374,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -472,11 +383,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -485,11 +392,7 @@ namespace oceanbase
           const int64_t receive_time,
           const int32_t version,
           const int32_t channel_id,
-<<<<<<< HEAD
           onev_request_e* req,
-=======
-          easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           common::ObDataBuffer& in_buffer,
           common::ObDataBuffer& out_buffer,
           const int64_t timeout_us);
@@ -511,13 +414,10 @@ namespace oceanbase
         // instance role type
         common::ObiRole instance_role_;
 
-<<<<<<< HEAD
         //add by qx 20160830 :b
         bool ups_state_;  ///<  ups online or offline state flag
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         static const uint64_t MAX_INNER_TABLE_COUNT = 32;
         static const uint64_t MAX_ROOT_SERVER_ACCESS_COUNT = 32;
@@ -534,10 +434,7 @@ namespace oceanbase
         ObMergerRootRpcProxy * root_rpc_;
         ObMergerUpsTask fetch_ups_task_;
         ObMergerSchemaTask fetch_schema_task_;
-<<<<<<< HEAD
         ObMergerProcedureTask fetch_procedure_task_;  //add wangdonghui [dev compile] 20160730
-=======
->>>>>>> refs/remotes/origin/master
         ObMergerLeaseTask check_lease_task_;
         ObMergerMonitorTask monitor_task_;
         ObTabletLocationCache *location_cache_;
@@ -549,11 +446,8 @@ namespace oceanbase
         common::ObPrivilegeManager *privilege_mgr_;
         ObGetPrivilegeTask update_privilege_task_;
         sql::ObSQLIdMgr *sql_id_mgr_;
-<<<<<<< HEAD
 
 
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline void ObMergeServerService::extend_lease(const int64_t delay)
@@ -570,7 +464,6 @@ namespace oceanbase
     {
       return sql_session_mgr_;
     }
-<<<<<<< HEAD
     //add by wangdonghui 20160320 :b
     /**
      * @brief ObMergeServerService::get_sql_proxy_
@@ -582,8 +475,6 @@ namespace oceanbase
         return sql_proxy_;
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
     inline void ObMergeServerService::set_sql_session_mgr(sql::ObSQLSessionMgr* mgr)
     {

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -298,7 +295,6 @@ namespace oceanbase
            * version, chunkserver will not read dynamic data from
            * udpateserver.
            */
-<<<<<<< HEAD
           //add wenghaixing [secondary index static_index_build.cs_scan] 20151231
           if(scan_param.if_need_fake())
           {
@@ -315,9 +311,6 @@ namespace oceanbase
           else if (table_schema->get_consistency_level() == STATIC)
           //if (table_schema->get_consistency_level() == STATIC)
           //modify e
-=======
-          if (table_schema->get_consistency_level() == STATIC)
->>>>>>> refs/remotes/origin/master
           {
             org_version_range = scan_param.get_version_range();
             is_full_dump =

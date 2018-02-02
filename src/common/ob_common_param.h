@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_COMMON_COMMON_PARAM_H_
 #define OCEANBASE_COMMON_COMMON_PARAM_H_
 
@@ -26,12 +23,9 @@
 #include "ob_object.h"
 #include "ob_range.h"
 #include "ob_rowkey.h"
-<<<<<<< HEAD
 // add by guojinwei [repeatable read] 20160311:b
 #include "ob_transaction.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -94,7 +88,6 @@ namespace oceanbase
 
       void set_is_read_consistency(const bool cons);
       bool get_is_read_consistency()const;
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160311:b
       /*
        * @brief set function of transaction ID
@@ -107,8 +100,6 @@ namespace oceanbase
        */
       ObTransID get_trans_id(void) const;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       void reset(void);
 
@@ -125,12 +116,9 @@ namespace oceanbase
       int8_t is_read_master_;
       int8_t is_result_cached_;
       ObVersionRange version_range_;
-<<<<<<< HEAD
       // add by guojinwei [repeatalbe read] 20160311:b
       ObTransID trans_id_;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     struct ScanFlag

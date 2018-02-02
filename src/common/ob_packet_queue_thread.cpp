@@ -14,18 +14,11 @@
 
 #include "ob_packet_queue_thread.h"
 #include "ob_atomic.h"
-<<<<<<< HEAD
 #include "onev_io.h"
 #include "ob_profile_log.h"
 #include "ob_profile_type.h"
 #include "ob_tsi_factory.h"
 #include <sys/syscall.h>
-=======
-#include "easy_io.h"
-#include "ob_profile_log.h"
-#include "ob_profile_type.h"
-#include "ob_tsi_factory.h"
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 
@@ -201,13 +194,8 @@ bool ObPacketQueueThread::wakeup_next_thread(ObPacket* packet)
   if (hash::HASH_EXIST != hash_ret)
   {
     // no thread wait for this packet;
-<<<<<<< HEAD
     // packet will not handled by server just tell libonev request is done
     onev_request_wakeup(packet->get_request());
-=======
-    // packet will not handled by server just tell libeasy request is done
-    easy_request_wakeup(packet->get_request());
->>>>>>> refs/remotes/origin/master
     ret = false;
   }
   else
@@ -420,10 +408,7 @@ void ObPacketQueueThread::run(tbsys::CThread* thread, void* args)
   *host = host_;
   ObPacket* packet = NULL;
   void *task = NULL;
-<<<<<<< HEAD
   TBSYS_LOG(INFO, "test::zhouhuan1 lease or store thread tid = [%ld]",syscall(SYS_gettid));
-=======
->>>>>>> refs/remotes/origin/master
   while (!_stop)
   {
     if (OB_SUCCESS != queue_.pop(task, &timeout_))

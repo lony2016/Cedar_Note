@@ -2,7 +2,6 @@
 const char* get_type_name(int type)
 {
 	switch(type){
-<<<<<<< HEAD
 	case T_CURSOR_DECLARE : return "T_CURSOR_DECLARE";
 	case T_CURSOR_FETCH : return "T_CURSOR_FETCH";
 	case T_CURSOR_FETCH_INTO : return "T_CURSOR_FETCH_INTO";
@@ -21,8 +20,6 @@ const char* get_type_name(int type)
 	case T_CURSOR_CLOSE : return "T_CURSOR_CLOSE";
 	case T_CURSOR_FETCH_NEXT : return "T_CURSOR_FETCH_NEXT";
 	case T_CURSOR_FETCH_NEXT_INTO : return "T_CURSOR_FETCH_NEXT_INTO";
-=======
->>>>>>> refs/remotes/origin/master
 	case T_INT : return "T_INT";
 	case T_STRING : return "T_STRING";
 	case T_BINARY : return "T_BINARY";
@@ -132,29 +129,21 @@ const char* get_type_name(int type)
 	case T_VALUE_VECTOR : return "T_VALUE_VECTOR";
 	case T_JOINED_TABLE : return "T_JOINED_TABLE";
 	case T_JOIN_INNER : return "T_JOIN_INNER";
-<<<<<<< HEAD
 	case T_JOIN_SEMI : return "T_JOIN_SEMI";
 	case T_JOIN_SEMI_LEFT : return "T_JOIN_SEMI_LEFT";
 	case T_JOIN_SEMI_RIGHT : return "T_JOIN_SEMI_RIGHT";
-=======
->>>>>>> refs/remotes/origin/master
 	case T_JOIN_FULL : return "T_JOIN_FULL";
 	case T_JOIN_LEFT : return "T_JOIN_LEFT";
 	case T_JOIN_RIGHT : return "T_JOIN_RIGHT";
 	case T_CASE : return "T_CASE";
 	case T_WHEN : return "T_WHEN";
 	case T_CREATE_TABLE : return "T_CREATE_TABLE";
-<<<<<<< HEAD
 	case T_CREATE_INDEX : return "T_CREATE_INDEX"; // add longfei [create index] [secondaryindex reconstruct] 20150916:e
 	case T_TABLE_ELEMENT_LIST : return "T_TABLE_ELEMENT_LIST";
 	case T_INDEX_ELEMENT_LIST : return "T_INDEX_ELEMENT_LIST"; // add longfei [create index] [secondaryindex reconstruct] 20150916:e
 	case T_INDEX_STORING_LIST : return "T_INDEX_STORING_LIST"; // add longfei [create index] [secondaryindex reconstruct] 20150921:e
 	case T_TABLE_OPTION_LIST : return "T_TABLE_OPTION_LIST";
 	case T_INDEX_OPTION_LIST : return "T_INDEX_OPTION_LIST"; // add longfei [create index] [secondaryindex reconstruct] 20150916:e
-=======
-	case T_TABLE_ELEMENT_LIST : return "T_TABLE_ELEMENT_LIST";
-	case T_TABLE_OPTION_LIST : return "T_TABLE_OPTION_LIST";
->>>>>>> refs/remotes/origin/master
 	case T_PRIMARY_KEY : return "T_PRIMARY_KEY";
 	case T_COLUMN_DEFINITION : return "T_COLUMN_DEFINITION";
 	case T_COLUMN_ATTRIBUTES : return "T_COLUMN_ATTRIBUTES";
@@ -177,11 +166,8 @@ const char* get_type_name(int type)
 	case T_CONSISTENT_MODE : return "T_CONSISTENT_MODE";
 	case T_DROP_TABLE : return "T_DROP_TABLE";
 	case T_TABLE_LIST : return "T_TABLE_LIST";
-<<<<<<< HEAD
 	case T_DROP_INDEX : return "T_DROP_INDEX"; // add longfei [drop index] 20151024:e
 	case T_INDEX_LIST : return "T_INDEX_LIST"; // add longfei [drop index] 20151024:e
-=======
->>>>>>> refs/remotes/origin/master
 	case T_ALTER_TABLE : return "T_ALTER_TABLE";
 	case T_ALTER_ACTION_LIST : return "T_ALTER_ACTION_LIST";
 	case T_TABLE_RENAME : return "T_TABLE_RENAME";
@@ -199,10 +185,7 @@ const char* get_type_name(int type)
 	case T_CLUSTER : return "T_CLUSTER";
 	case T_SERVER_ADDRESS : return "T_SERVER_ADDRESS";
 	case T_SHOW_TABLES : return "T_SHOW_TABLES";
-<<<<<<< HEAD
 	case T_SHOW_INDEX : return "T_SHOW_INDEX";
-=======
->>>>>>> refs/remotes/origin/master
 	case T_SHOW_VARIABLES : return "T_SHOW_VARIABLES";
 	case T_SHOW_COLUMNS : return "T_SHOW_COLUMNS";
 	case T_SHOW_SCHEMA : return "T_SHOW_SCHEMA";
@@ -240,7 +223,6 @@ const char* get_type_name(int type)
 	case T_READ_STATIC : return "T_READ_STATIC";
 	case T_HOTSPOT : return "T_HOTSPOT";
 	case T_READ_CONSISTENCY : return "T_READ_CONSISTENCY";
-<<<<<<< HEAD
 	case T_LONG_TRANS : return "T_LONG_TRANS"; //add by qx 21070317
 	case T_NO_GROUP : return "T_NO_GROUP";//add by wdh 20160716
 	case T_USE_INDEX : return "T_USE_INDEX";// add longfei
@@ -291,10 +273,6 @@ const char* get_type_name(int type)
 	case T_VAR_ARRAY_VAL : return "T_VAR_ARRAY_VAL";
     case T_OP_LEFT_SEMI : return "T_OP_LEFT_SEMI";
     case T_OP_LEFT_ANTI_SEMI : return "T_OP_LEFT_ANTI_SEMI";
-=======
-	case T_KILL : return "T_KILL";
-	case T_MAX : return "T_MAX";
->>>>>>> refs/remotes/origin/master
 	default:return "Unknown";
 	}
 }

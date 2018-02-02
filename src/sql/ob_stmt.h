@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -20,8 +19,6 @@
  * @author maoxiaoxiao <51151500034@ecnu.edu.cn>
  * @date 2016_07_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_STMT_H_
 #define OCEANBASE_SQL_STMT_H_
 #include "common/ob_row_desc.h"
@@ -33,7 +30,6 @@
 #include "parse_node.h"
 
 namespace oceanbase
-<<<<<<< HEAD
 { 
   namespace sql
   {
@@ -140,9 +136,6 @@ namespace oceanbase
     /*add e*/
   }
 
-=======
-{
->>>>>>> refs/remotes/origin/master
   namespace sql
   {
     struct ObQueryHint
@@ -151,7 +144,6 @@ namespace oceanbase
       {
         hotspot_ = false;
         read_consistency_ = common::NO_CONSISTENCY;
-<<<<<<< HEAD
         //add by wdh 20160716
         no_query_opt_ = false;//add by qx [query optimizer] 20170412
         not_use_index_ = false;
@@ -178,12 +170,6 @@ namespace oceanbase
       common::ObVector<ObJoinOPTypeArray> join_op_type_array_;
       /*add e*/
       bool is_has_hint_; // add by lxb [logical optimizer] 20170602
-=======
-      }
-
-      bool    hotspot_;
-      common::ObConsistencyLevel    read_consistency_;
->>>>>>> refs/remotes/origin/master
     };
     
     struct TableItem
@@ -197,15 +183,9 @@ namespace oceanbase
       
       enum TableType
     	{
-<<<<<<< HEAD
         BASE_TABLE, //0
         ALIAS_TABLE, //1
         GENERATED_TABLE, //2
-=======
-    	  BASE_TABLE,
-        ALIAS_TABLE,
-        GENERATED_TABLE,
->>>>>>> refs/remotes/origin/master
     	};
 
       // if real table id, it is valid for all threads,
@@ -297,23 +277,15 @@ namespace oceanbase
           const common::ObString& alias_name, 
           uint64_t& table_id,
           const TableItem::TableType type,
-<<<<<<< HEAD
           const uint64_t ref_id = common::OB_INVALID_ID,
           bool is_optimizer = false /*add by wangyanzhao 2017/1/18*/);
-=======
-          const uint64_t ref_id = common::OB_INVALID_ID);
->>>>>>> refs/remotes/origin/master
       int add_column_item(
           ResultPlan& result_plan,
           const oceanbase::common::ObString& column_name,
           const oceanbase::common::ObString* table_name = NULL,
-<<<<<<< HEAD
           ColumnItem** col_item = NULL,
           ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170622
           );
-=======
-          ColumnItem** col_item = NULL);
->>>>>>> refs/remotes/origin/master
       int add_column_item(const ColumnItem& column_item);
       ColumnItem* get_column_item(
         const common::ObString* table_name,
@@ -334,7 +306,6 @@ namespace oceanbase
         OB_ASSERT(0 <= index && index < table_items_.size());
         return table_items_[index];
       }
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/12
       common::ObVector<TableItem>& get_table_items()
@@ -342,8 +313,6 @@ namespace oceanbase
         return table_items_;
       }
       
-=======
->>>>>>> refs/remotes/origin/master
       uint64_t get_condition_id(int32_t index) const 
       {
         OB_ASSERT(0 <= index && index < where_expr_ids_.size());
@@ -351,7 +320,6 @@ namespace oceanbase
       }
       uint64_t get_table_item(
         const common::ObString& table_name,
-<<<<<<< HEAD
         TableItem** table_item = NULL,
         ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170609
         ) const ;
@@ -363,11 +331,6 @@ namespace oceanbase
         return column_items_;
       }
       
-=======
-        TableItem** table_item = NULL) const ;
-      int32_t get_table_bit_index(uint64_t table_id) const ;
-
->>>>>>> refs/remotes/origin/master
       common::ObVector<uint64_t>& get_where_exprs() 
       {
         return where_expr_ids_;
@@ -416,7 +379,6 @@ namespace oceanbase
       }
 
       virtual void print(FILE* fp, int32_t level, int32_t index = 0);
-<<<<<<< HEAD
       
       // add by lxb on 2017/03/21 for logical optimizer
       common::ObRowDesc* get_table_hash()
@@ -428,13 +390,6 @@ namespace oceanbase
       common::ObStringBuf* name_pool_;
       common::ObVector<TableItem>    table_items_;  // from (what)
       common::ObVector<ColumnItem>   column_items_; // select (what)
-=======
-
-    protected:
-      common::ObStringBuf* name_pool_;
-      common::ObVector<TableItem>    table_items_;
-      common::ObVector<ColumnItem>   column_items_;
->>>>>>> refs/remotes/origin/master
 
     private:
       //uint64_t  where_expr_id_;

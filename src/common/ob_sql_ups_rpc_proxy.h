@@ -33,10 +33,7 @@ namespace oceanbase
 
         virtual int sql_ups_get(const ObGetParam & get_param, ObNewScanner & new_scanner, const int64_t timeout) = 0;
         virtual int sql_ups_scan(const ObScanParam & scan_param, ObNewScanner & new_scanner, const int64_t timeout) = 0;
-<<<<<<< HEAD
         virtual int check_incremental_data_range( int64_t table_id, ObVersionRange &version, ObVersionRange &new_range)= 0;//add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

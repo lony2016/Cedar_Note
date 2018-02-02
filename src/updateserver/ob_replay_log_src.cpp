@@ -17,11 +17,7 @@ namespace oceanbase
 {
   namespace updateserver
   {
-<<<<<<< HEAD
     ObReplayLogSrc::ObReplayLogSrc(): read_pos_(0), log_buffer_(NULL), prefetch_log_task_submitter_(NULL),log_buffer_for_prefetch_(common::OB_MAX_THREAD_BUFFER_SIZE)
-=======
-    ObReplayLogSrc::ObReplayLogSrc(): read_pos_(0), log_buffer_(NULL), prefetch_log_task_submitter_(NULL)
->>>>>>> refs/remotes/origin/master
     {}
 
     ObReplayLogSrc::~ObReplayLogSrc()
@@ -207,7 +203,6 @@ namespace oceanbase
         my_buffer->reset();
         buf = my_buffer->current();
         len = my_buffer->remain();
-<<<<<<< HEAD
 
         //add by qx 20170303 :b
         //fix maybe happened error
@@ -218,10 +213,6 @@ namespace oceanbase
         end_cursor = start_cursor;
       }
       //TBSYS_LOG(WARN,"test::zhouhuan prefetch_log start_cursor=[%s]",to_cstring(start_cursor));
-=======
-        end_cursor = start_cursor;
-      }
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != err)
       {}
       else if (start_cursor.log_id_ <= 0)
@@ -268,10 +259,7 @@ namespace oceanbase
           {
             ((ObLogCursor&)prefetch_log_cursor_) = end_cursor;
           }
-<<<<<<< HEAD
         //TBSYS_LOG(WARN,"test::zhouhuan prefetch_log_cursor=[%s]",to_cstring(end_cursor));
-=======
->>>>>>> refs/remotes/origin/master
       }
       TBSYS_LOG(DEBUG, "prefetch_log(start_cursor=%s)=>%d", start_cursor.to_str(), err);
       return err;

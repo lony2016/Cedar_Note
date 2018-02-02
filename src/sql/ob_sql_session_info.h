@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_30
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *
  * This program is free software; you can redistribute it and/or modify
@@ -49,11 +46,7 @@
 #include "common/ob_list.h"
 #include "common/page_arena.h"
 #include "common/ob_pool.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "common/ob_pooled_allocator.h"
 #include "common/ob_cur_time.h"
 #include "ob_ps_store.h"
@@ -167,11 +160,7 @@ namespace oceanbase
         const char* get_peer_addr() const{return addr_;}
         uint64_t get_session_id() const{return session_id_;}
         void set_session_id(uint64_t id){session_id_ = id;}
-<<<<<<< HEAD
         void set_conn(onev_connection_e *conn){conn_ = conn;}
-=======
-        void set_conn(easy_connection_t *conn){conn_ = conn;}
->>>>>>> refs/remotes/origin/master
         int set_ps_store(ObPsStore *store);
         void set_current_result_set(ObResultSet *cur_result_set){cur_result_set_ = cur_result_set;}
         void set_query_start_time(int64_t time) {cur_query_start_time_ = time;}
@@ -184,11 +173,7 @@ namespace oceanbase
         const common::ObString get_current_query_string() const;
         int64_t get_query_start_time() const {return cur_query_start_time_;}
         const ObSQLSessionState get_session_state() const{return state_;}
-<<<<<<< HEAD
         onev_connection_e *get_conn() const{return conn_;}
-=======
-        easy_connection_t *get_conn() const{return conn_;}
->>>>>>> refs/remotes/origin/master
         const char* get_session_state_str()const;
         void set_session_state(ObSQLSessionState state) {state_ = state;}
         const common::ObString& get_user_name(){return user_name_;}
@@ -219,7 +204,6 @@ namespace oceanbase
         int store_params_type(int64_t stmt_id, const common::ObIArray<obmysql::EMySQLFieldType> &params_type);
         int replace_variable(const common::ObString& var, const common::ObObj& val);
         int remove_variable(const common::ObString& var);
-<<<<<<< HEAD
 
         //add zt 20151202:b
         /**
@@ -265,8 +249,6 @@ namespace oceanbase
         int get_variable_value(const common::ObString &var, int64_t idx, const common::ObObj* &val) const;
         //add zt 20151202:e
 
-=======
->>>>>>> refs/remotes/origin/master
         int update_system_variable(const common::ObString& var, const common::ObObj& val);
         int load_system_variable(const common::ObString& name, const common::ObObj& type, const common::ObObj& value);
         int get_variable_value(const common::ObString& var, common::ObObj& val) const;
@@ -306,13 +288,10 @@ namespace oceanbase
         void update_last_active_time() { last_active_time_ = tbsys::CTimeUtil::getTime(); }
         bool is_timeout();
         uint16_t get_charset();
-<<<<<<< HEAD
         void set_curr_trans_start_time(int64_t t) {curr_trans_start_time_ = t;};
         int64_t get_curr_trans_start_time() const {return curr_trans_start_time_;};
         void set_curr_trans_last_stmt_time(int64_t t) {curr_trans_last_stmt_time_ = t;};
         int64_t get_curr_trans_last_stmt_time() const {return curr_trans_last_stmt_time_;};
-=======
->>>>>>> refs/remotes/origin/master
       private:
         int insert_ps_session_info(uint64_t sql_id, int64_t pcount, uint64_t &new_sql_id, bool has_cur_time=false);
       private:
@@ -330,11 +309,7 @@ namespace oceanbase
         uint64_t next_stmt_id_;
         ObResultSet *cur_result_set_;
         ObSQLSessionState state_;
-<<<<<<< HEAD
         onev_connection_e *conn_;
-=======
-        easy_connection_t *conn_;
->>>>>>> refs/remotes/origin/master
         char addr_[MAX_IPADDR_LENGTH];
         int64_t cur_query_start_time_;
         char cur_query_[MAX_CUR_QUERY_LEN];
@@ -343,11 +318,8 @@ namespace oceanbase
         bool is_autocommit_;
         bool is_interactive_;
         int64_t last_active_time_;
-<<<<<<< HEAD
         int64_t curr_trans_start_time_;
         int64_t curr_trans_last_stmt_time_;
-=======
->>>>>>> refs/remotes/origin/master
         const common::ObVersionProvider *version_provider_;
         const ObSQLConfigProvider *config_provider_;
 
@@ -375,7 +347,6 @@ namespace oceanbase
         common::ObPooledAllocator<ObResultSet, common::ObWrapperAllocator> result_set_pool_;
         common::ObPooledAllocator<ObPsSessionInfo, common::ObWrapperAllocator> ps_session_info_pool_;
         common::ObPooledAllocator<ObObj, common::ObWrapperAllocator> ps_session_info_param_pool_;
-<<<<<<< HEAD
 
         //add zt 20151202:b
         struct ObVarArray
@@ -387,8 +358,6 @@ namespace oceanbase
         const static int VAR_ARRAY_COUNT = 5;  ///<  array variable count
         ObSEArray<ObVarArray, VAR_ARRAY_COUNT>  var_arrays_;  ///<  variable array
         //add zt 20151202:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline const common::ObString ObSQLSessionInfo::get_current_query_string() const

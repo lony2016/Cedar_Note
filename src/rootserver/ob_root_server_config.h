@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2015 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -23,8 +22,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -76,15 +73,12 @@ namespace oceanbase
         DEF_TIME(monitor_row_checksum_interval, "1800s", "compare row checksum between master cluster and slave master");
         DEF_TIME(monitor_row_checksum_timeout, "3s", "get master checksum timeout");
         DEF_TIME(monitor_drop_table_interval, "600s", "[1s,]", "delete droped table in daily merge check interval");
-<<<<<<< HEAD
         //add wenghaixing, [secondary index.static_index] 20151216:b
         DEF_TIME(monitor_create_index_timeout, "1800s", "[1s,]", "create single static index timeout");
         //add:e
         //add wenghaixing, [secondary index.static_index] 20150119:b
         DEF_INT(index_immediate_effect, "0","[0,1]" ,"create index while merge");
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         DEF_INT(tablet_replicas_num, "3", "[1,3]", "tablet replicas num");
         DEF_INT(io_thread_count, "4", "[1,100]", "io thread count");
         DEF_INT(read_thread_count, "20", "[10,100]", "read thread count");
@@ -147,7 +141,6 @@ namespace oceanbase
 
         DEF_IP(master_root_server_ip, "0.0.0.0", "master OceanBase instance vip address");
         DEF_INT(master_root_server_port, "0", "master OceanBase instance listen port");
-<<<<<<< HEAD
 
         // add by zcd [multi_cluster] 20150416:b
         // 加入rootserver的config条目__all_cluster_rs_ip
@@ -161,8 +154,6 @@ namespace oceanbase
         DEF_INT(set_auto_elect_flag_delay, "10000000", "set auto_elect_flag delay after timer start");
         // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

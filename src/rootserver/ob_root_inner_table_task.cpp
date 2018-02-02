@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
   * (C) 2007-2010 Taobao Inc.
   *
   * This program is free software; you can redistribute it and/or modify
@@ -124,7 +121,6 @@ int ObRootInnerTableTask::modify_all_server_table(const ObRootAsyncTaskQueue::Ob
       TBSYS_LOG(INFO, "process inner task succ:task_id[%lu], timestamp[%ld], sql[%s]",
           task.get_task_id(), task.get_task_timestamp(), buf);
     }
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     /// output the error message and the failed SQL
     else
@@ -138,9 +134,6 @@ int ObRootInnerTableTask::modify_all_server_table(const ObRootAsyncTaskQueue::Ob
     TBSYS_LOG(INFO, "modify the __all_server failed! task_id[%lu], timestamp[%ld], sql[%s]", task.get_task_id(), task.get_task_timestamp(), buf);
   }
   // add:e
-=======
-  }
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -169,7 +162,6 @@ int ObRootInnerTableTask::modify_all_cluster_table(const ObRootAsyncTaskQueue::O
   }
   else if (task.type_ == OBI_ROLE_CHANGE)
   {
-<<<<<<< HEAD
     if (OB_SUCCESS == ret)
     {
       // modify by zcd [multi_cluster] 20150406:b
@@ -237,12 +229,6 @@ int ObRootInnerTableTask::modify_master_cluster_root_server_ip(const ObRootAsync
       snprintf(buf, sizeof (buf), sql_temp, ip_buf,
                task.server_.get_port());
     }
-=======
-    const char * sql_temp = "REPLACE INTO %s"
-      "(cluster_id, cluster_role)"
-      "VALUES(%d, %d);";
-    snprintf(buf, sizeof (buf), sql_temp, OB_ALL_CLUSTER, cluster_id_, task.cluster_role_);
->>>>>>> refs/remotes/origin/master
   }
   else
   {
@@ -262,7 +248,6 @@ int ObRootInnerTableTask::modify_master_cluster_root_server_ip(const ObRootAsync
   }
   return ret;
 }
-<<<<<<< HEAD
 // add:e
 
 // add by guojinwei [obi role switch][multi_cluster] 20150916:b
@@ -294,8 +279,6 @@ int ObRootInnerTableTask::modify_all_cluster_table_with_id(const ObRootAsyncTask
   return ret;
 }
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 void ObRootInnerTableTask::runTimerTask(void)
 {
@@ -345,7 +328,6 @@ int ObRootInnerTableTask::process_head_task(void)
         ret = modify_all_cluster_table(task);
         break;
       }
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150405:b
     case CHANGE_MASTER_CLUSTER_ROOTSERVER:
       {
@@ -360,8 +342,6 @@ int ObRootInnerTableTask::process_head_task(void)
       }
       break;
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
     default:
       {
         ret = OB_ERROR;

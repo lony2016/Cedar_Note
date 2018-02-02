@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -78,7 +75,6 @@ namespace oceanbase
       string_buf_.clear();
     }
 
-<<<<<<< HEAD
     //add longfei [cons static index] 151207:b
     void ObSSTableRow::set_rowkey_obj_count(const int64_t count)
     {
@@ -86,8 +82,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObSSTableRow::set_obj_count(const int64_t obj_count,
                                     const bool sparse_format)
     {
@@ -174,7 +168,6 @@ namespace oceanbase
       return obj;
     }
 
-<<<<<<< HEAD
     //add maoxx
     ObObj* ObSSTableRow::get_obj_without_const(const int32_t index)
     {
@@ -206,8 +199,6 @@ namespace oceanbase
     //add e
 
 
-=======
->>>>>>> refs/remotes/origin/master
     const ObObj* ObSSTableRow::get_row_objs(int64_t& obj_count)
     {
       obj_count = obj_count_;

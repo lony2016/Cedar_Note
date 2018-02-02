@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -13,8 +12,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
   * (C) 2007-2010 Taobao Inc.
   *
   * This program is free software; you can redistribute it and/or modify
@@ -32,15 +29,11 @@
 #include "ob_root_ms_provider.h"
 #include "ob_chunk_server_manager.h"
 #include "ob_root_sql_proxy.h"
-<<<<<<< HEAD
 #include "ob_root_worker.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::rootserver;
 
-<<<<<<< HEAD
 // modify by zcd [multi_cluster] 20150405:b
 ObRootSQLProxy::ObRootSQLProxy(ObChunkServerManager & server_manager, ObRootServerConfig & config, ObRootRpcStub & rpc_stub, ObRootWorker &root_worker)
     :ms_provider_(server_manager), rpc_stub_(rpc_stub)
@@ -49,12 +42,6 @@ ObRootSQLProxy::ObRootSQLProxy(ObChunkServerManager & server_manager, ObRootServ
   // modify by zcd [multi_cluster] 20150405:b
   ms_provider_.init(config, rpc_stub, root_worker);
   // modify:e
-=======
-ObRootSQLProxy::ObRootSQLProxy(ObChunkServerManager & server_manager, ObRootServerConfig & config, ObRootRpcStub & rpc_stub)
-    :ms_provider_(server_manager), rpc_stub_(rpc_stub)
-{
-  ms_provider_.init(config, rpc_stub);
->>>>>>> refs/remotes/origin/master
 }
 
 ObRootSQLProxy::~ObRootSQLProxy()

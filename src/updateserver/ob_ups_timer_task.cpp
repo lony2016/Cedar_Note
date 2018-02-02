@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_25
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -86,7 +83,6 @@ namespace oceanbase
         ups.submit_lease_task();
       }
     }
-<<<<<<< HEAD
 
     // add by zhangcd [majority_count_init] 20151118:b
     void ObUpsSetMajorityCountTask::runTimerTask()
@@ -108,7 +104,5 @@ namespace oceanbase
       }
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }

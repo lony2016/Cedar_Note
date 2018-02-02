@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -48,20 +45,14 @@ namespace oceanbase
   namespace sql
   {
     struct ObStmtPrepareResult;
-<<<<<<< HEAD
 
     class ObTransformer;  //add zt 20151119
-=======
->>>>>>> refs/remotes/origin/master
     // this class is the main interface for sql module
     class ObSql
     {
       public:
-<<<<<<< HEAD
         //add zt 20151119 bad design, in order to visit the copy_plan function
         friend class ObTransformer;  ///< friend class in order to visit the copy_plan function
-=======
->>>>>>> refs/remotes/origin/master
         /**
          * execute the SQL statement directly
          *
@@ -138,7 +129,6 @@ namespace oceanbase
         static bool process_special_stmt_hook(const common::ObString &stmt, ObResultSet &result, ObSqlContext &context);
         static int do_privilege_check(const common::ObString & username, const ObPrivilege **pp_privilege, ObLogicalPlan *plan);
         static bool no_enough_memory();
-<<<<<<< HEAD
 
         //add zt 20151117:b
         /**
@@ -169,8 +159,6 @@ namespace oceanbase
         static void deblank(ObString &string);
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // data members
     };

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -17,8 +16,6 @@
  *         zhangcd<zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2012 Taobao Inc.
  *
@@ -61,7 +58,6 @@ namespace oceanbase
     static const int OB_RS_ADMIN_INIT_CLUSTER = 19;
     static const int OB_RS_ADMIN_CLEAN_ROOT_TABLE = 20;
     static const int OB_RS_ADMIN_CHECK_SCHEMA = 21;
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     /// allocate two numbers for the rs_admin tools
     static const int OB_RS_ADMIN_SET_OBI_MASTER_RS = 22;
@@ -73,8 +69,6 @@ namespace oceanbase
     //add weixing[statistics build v1]20170330:b
     static const int OB_RS_ADMIN_GATHER_STATISTICS = 25;
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace rootserver
 } // end namespace oceanbase
 

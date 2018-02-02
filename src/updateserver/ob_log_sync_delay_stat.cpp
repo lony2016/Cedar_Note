@@ -201,13 +201,9 @@ namespace oceanbase
             && 0 == (catchup_seq_ & 1))
         {
           catchup_seq_++;
-<<<<<<< HEAD
           //del chujiajia [log synchronization][multi_cluster] 20160524:b
           //set_state_as_replaying_log();
           //del:e
-=======
-          set_state_as_replaying_log();
->>>>>>> refs/remotes/origin/master
           TBSYS_LOG(WARN, "slave replay log: SYNC->NOT_SYNC [log_id=%ld, master_id=%ld, mutation_time=%ld, now=%ld]",
                     log_id, master_log_id, mutation_time, now_us);
         }

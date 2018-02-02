@@ -67,11 +67,7 @@ int ObFileService::initialize(ObBaseServer* server,
 int ObFileService::handle_send_file_request(
   const int32_t version,
   const int32_t channel_id,
-<<<<<<< HEAD
   onev_request_e* request,
-=======
-  easy_request_t* request,
->>>>>>> refs/remotes/origin/master
   common::ObDataBuffer& in_buffer,
   common::ObDataBuffer& out_buffer)
 {
@@ -279,11 +275,7 @@ void ObFileService::dec_concurrency_count()
 
 int ObFileService::receive_file_pre(ObFileAppender& file_appender,
     int64_t& file_size, ObString& file_path, ObString& tmp_file_path,
-<<<<<<< HEAD
     onev_request_e* request, ObDataBuffer& in_buffer,
-=======
-    easy_request_t* request, ObDataBuffer& in_buffer,
->>>>>>> refs/remotes/origin/master
     ObDataBuffer& out_buffer, int32_t& response_cid, const int64_t session_id)
 {
   int err = OB_SUCCESS;
@@ -459,11 +451,7 @@ int ObFileService::receive_file_pre(ObFileAppender& file_appender,
 }
 
 int ObFileService::receive_file_block(ObFileAppender& file_appender,
-<<<<<<< HEAD
     char* block_buf, onev_request_e* request, ObDataBuffer& in_buffer,
-=======
-    char* block_buf, easy_request_t* request, ObDataBuffer& in_buffer,
->>>>>>> refs/remotes/origin/master
     ObDataBuffer& out_buffer, int32_t & response_cid, const int64_t session_id)
 {
   int err = OB_SUCCESS;
@@ -544,11 +532,7 @@ int ObFileService::receive_file_block(ObFileAppender& file_appender,
 
 
 int ObFileService::receive_file_end(ObString& file_path, ObString& tmp_file_path,
-<<<<<<< HEAD
     const int64_t file_size, onev_request_e* request, ObDataBuffer& out_buffer,
-=======
-    const int64_t file_size, easy_request_t* request, ObDataBuffer& out_buffer,
->>>>>>> refs/remotes/origin/master
     int32_t& response_cid, const int64_t session_id)
 {
   int ret = OB_SUCCESS;
@@ -622,11 +606,7 @@ int ObFileService::receive_file_end(ObString& file_path, ObString& tmp_file_path
 
 int ObFileService::receive_file_loop(ObString& file_path, ObString& tmp_file_path,
     const int64_t file_size, ObFileAppender& file_appender,
-<<<<<<< HEAD
     onev_request_e* request, ObDataBuffer& out_buffer,
-=======
-    easy_request_t* request, ObDataBuffer& out_buffer,
->>>>>>> refs/remotes/origin/master
     int32_t& response_cid, const int64_t session_id)
 {
   int ret = OB_SUCCESS;

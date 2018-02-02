@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -13,8 +12,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
   * (C) 2007-2010 Taobao Inc.
   *
   * This program is free software; you can redistribute it and/or modify
@@ -47,7 +44,6 @@ namespace oceanbase
     class ObRootSQLProxy
     {
     public:
-<<<<<<< HEAD
       // modify by zcd [multi_cluster] 20150405:b
       /**
        * @brief the constructed function of class ObRootSQLProxy
@@ -58,18 +54,12 @@ namespace oceanbase
        */
       ObRootSQLProxy(ObChunkServerManager & server_manager, ObRootServerConfig &config, ObRootRpcStub & rpc_stub, ObRootWorker &root_worker);
       // modify:e
-=======
-      ObRootSQLProxy(ObChunkServerManager & server_manager, ObRootServerConfig &config, ObRootRpcStub & rpc_stub);
->>>>>>> refs/remotes/origin/master
       virtual ~ObRootSQLProxy();
     public:
       // exectue sql query
       int query(const int64_t retry_times, const int64_t timeout, const common::ObString & sql);
       int query(const bool query_master_cluster, const int64_t retry_times, const int64_t timeout, const common::ObString & sql);
-<<<<<<< HEAD
       friend class ObRootInnerTableTask;
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObRootMsProvider ms_provider_;
       ObRootRpcStub & rpc_stub_;

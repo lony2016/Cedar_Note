@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2015_01_19
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -46,11 +43,8 @@
 #include "sstable/ob_sstable_reader.h"
 #include "compactsstable/ob_compactsstable_mem.h"
 
-<<<<<<< HEAD
 using namespace oceanbase::sstable;
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace chunkserver
@@ -93,15 +87,11 @@ namespace oceanbase
     class ObTablet
     {
       public:
-<<<<<<< HEAD
         //mod longfei [cons static index] 151121:b
         //static const int64_t MAX_SSTABLE_PER_TABLET = 1;
         static const int64_t MAX_SSTABLE_PER_TABLET = 2;
         //mod e
 
-=======
-        static const int64_t MAX_SSTABLE_PER_TABLET = 1;
->>>>>>> refs/remotes/origin/master
         static const int64_t TABLET_ARRAY_BLOCK_SIZE = 256;
         static const int64_t MAX_COMPACTSSTABLE_PER_TABLET = 8;
       public:
@@ -114,7 +104,6 @@ namespace oceanbase
         template <typename Reader>
           int find_sstable(const common::ObRowkey& key, 
               Reader* sstable[], int32_t &size) const ;
-<<<<<<< HEAD
         //add longfei [cons static index] 151202:b
         template <typename Reader>
           int find_loc_idx_sstable(const common::ObNewRange& range,
@@ -137,8 +126,6 @@ namespace oceanbase
          */
         int load_local_sstable(const int64_t tablet_version = 0);
           //add e
-=======
->>>>>>> refs/remotes/origin/master
 
         int find_sstable(const sstable::ObSSTableId & sstable_id,
             sstable::ObSSTableReader* &reader) const;
@@ -228,7 +215,6 @@ namespace oceanbase
         inline bool is_with_next_brother() const { return with_next_brother_ > 0; }
         inline int32_t get_merge_count() const { return merge_count_; }
         inline void inc_merge_count() { ++merge_count_; }
-<<<<<<< HEAD
         //__sync_add_and_fetch相当于(++i),自动加上线程锁,保证原子性
         inline int64_t inc_ref()
         {
@@ -238,10 +224,6 @@ namespace oceanbase
         {
           return __sync_sub_and_fetch(&ref_count_, 1);
         }
-=======
-        inline int64_t inc_ref() { return __sync_add_and_fetch(&ref_count_, 1); }
-        inline int64_t dec_ref() { return __sync_sub_and_fetch(&ref_count_, 1); }
->>>>>>> refs/remotes/origin/master
         inline int32_t get_compactsstable_num() {return compactsstable_num_;}
         int add_compactsstable(compactsstable::ObCompactSSTableMemNode* cache);
         compactsstable::ObCompactSSTableMemNode* get_compactsstable_list();
@@ -341,7 +323,6 @@ namespace oceanbase
         return ret;
       }
 
-<<<<<<< HEAD
       //add longfei [cons static index] 151202:b
     template <typename Reader>
       int ObTablet::find_loc_idx_sstable(const common::ObNewRange& range,
@@ -377,8 +358,6 @@ namespace oceanbase
         }
         return ret;
       }
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

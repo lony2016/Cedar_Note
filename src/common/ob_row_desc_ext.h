@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -59,7 +56,6 @@ namespace oceanbase
         int64_t get_column_num() const;
         
         int add_column_desc(const uint64_t table_id, const uint64_t column_id, const ObObj &data_type);
-<<<<<<< HEAD
 
         //add zt 20151113:b
         /**
@@ -77,8 +73,6 @@ namespace oceanbase
          */
         NEED_SERIALIZE_AND_DESERIALIZE;
         //add zt 20151113:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // data members
         ObRowDesc row_desc_;

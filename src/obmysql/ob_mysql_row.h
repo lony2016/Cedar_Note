@@ -140,13 +140,9 @@ namespace oceanbase {
          * @return 成功返回OB_SUCCESS， 失败返回oceanbase error code
          */
         int float_cell_str(const ObObj &obj, char *buf, const int64_t len, int64_t &pos) const;
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         bool check_decimal(ObString os,uint32_t p,uint32_t s)const;
         //add e
-=======
-
->>>>>>> refs/remotes/origin/master
       private:
         const common::ObRow *row_;
         mutable MYSQL_PROTOCOL_TYPE type_;

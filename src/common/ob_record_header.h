@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -71,16 +68,12 @@ namespace oceanbase
       int16_t header_length_;  // header length
       int16_t version_;        // version
       int16_t header_checksum_;// header checksum
-<<<<<<< HEAD
       //add by lbzhong [Max Log Timestamp] 20150824:b
       int64_t timestamp_;       // reserved,must be 0
       //add:e
       //add chujiajia [log synchronization][multi_cluster] 20160326:b
       int64_t max_cmt_id_;     ///< max commited log id
       //add:e
-=======
-      int64_t reserved_;       // reserved,must be 0
->>>>>>> refs/remotes/origin/master
       int32_t data_length_;    // length before compress
       int32_t data_zlength_;   // length after compress, if without compresssion 
                                // data_length_= data_zlength_
@@ -91,7 +84,6 @@ namespace oceanbase
       {
         int64_t pos = 0;
         databuff_printf(buf, buf_len, pos, "[RecordHeader] magic=%hd header_length=%hd version=%hd "
-<<<<<<< HEAD
                         "header_checksum=%hd timestamp=%ld max_cmt_id=%ld, data_length=%d data_zlength=%d",
                         magic_, header_length_, version_,
                         header_checksum_, timestamp_,
@@ -99,11 +91,6 @@ namespace oceanbase
                         max_cmt_id_,
                         //add:e
                         data_length_, data_zlength_);
-=======
-                        "header_checksum=%hd reserved=%ld data_length=%d data_zlength=%d",
-                        magic_, header_length_, version_,
-                        header_checksum_, reserved_, data_length_, data_zlength_);
->>>>>>> refs/remotes/origin/master
         return pos;
       }
       
@@ -118,11 +105,7 @@ namespace oceanbase
       }
       int64_t get_reserved()
       {
-<<<<<<< HEAD
         return timestamp_;
-=======
-        return reserved_;
->>>>>>> refs/remotes/origin/master
       }
 
       /**

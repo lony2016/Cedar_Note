@@ -99,13 +99,10 @@ int ObTabletRead::get_next_row(const ObRow *&row)
   }
   else
   {
-<<<<<<< HEAD
     //add longfei 2016-03-31 09:59:53
     //看看tablet read 这颗计划树
     TBSYS_LOG(DEBUG, "debug::longfei>>>exec tree: %s", to_cstring(*op_root_));
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     ret = op_root_->get_next_row(row);
     if(OB_SUCCESS != ret && OB_ITER_END != ret)
     {

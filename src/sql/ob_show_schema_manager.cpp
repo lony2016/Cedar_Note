@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -105,7 +102,6 @@ int ObShowSchemaManager::add_show_tables_schema(ObSchemaManagerV2& schema_mgr)
   return ret;
 }
 
-<<<<<<< HEAD
 int ObShowSchemaManager::add_show_index_schema(ObSchemaManagerV2& schema_mgr)
 {
   int ret = OB_SUCCESS;
@@ -150,8 +146,6 @@ int ObShowSchemaManager::add_show_index_schema(ObSchemaManagerV2& schema_mgr)
 }
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObShowSchemaManager::add_show_variables_schema(ObSchemaManagerV2& schema_mgr)
 {
   int ret = OB_SUCCESS;
@@ -492,12 +486,9 @@ int ObShowSchemaManager::add_show_schema(ObSchemaManagerV2& schema_mgr, int32_t 
     case ObBasicStmt::T_SHOW_TABLES:
       ret = add_show_tables_schema(schema_mgr);
       break;
-<<<<<<< HEAD
     case ObBasicStmt::T_SHOW_INDEX:
       ret = add_show_index_schema(schema_mgr);
       break;
-=======
->>>>>>> refs/remotes/origin/master
     case ObBasicStmt::T_SHOW_VARIABLES:
       ret = add_show_variables_schema(schema_mgr);
       break;

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,8 +12,6 @@
  * @date     2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -32,13 +29,10 @@
 #include "ob_merge_join.h"
 #include "common/utility.h"
 #include "common/ob_row_util.h"
-<<<<<<< HEAD
 //add fanqiushi [semi_join] [0.1] 20150826:b
 #include "ob_sort.h"
 #include "ob_table_rpc_scan.h"
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
@@ -47,16 +41,12 @@ ObMergeJoin::ObMergeJoin()
    last_left_row_(NULL),
    last_right_row_(NULL),
    right_cache_is_valid_(false),
-<<<<<<< HEAD
    is_right_iter_end_(false),
    //add fanqiushi [semi_join] [0.1] 20150826:b
    is_semi_join_(false),
    right_table_id_(OB_INVALID_ID),
    right_cid_(OB_INVALID_ID)
    //add:e
-=======
-   is_right_iter_end_(false)
->>>>>>> refs/remotes/origin/master
 {
 }
 
@@ -98,15 +88,12 @@ void ObMergeJoin::reset()
   other_join_conds_.clear();
   left_op_ = NULL;
   right_op_ = NULL;
-<<<<<<< HEAD
   //add fanqiushi [semi_join] [0.1] 20150826:b
   is_semi_join_ = false;
   right_table_id_ = OB_INVALID_ID;
   right_cid_ = OB_INVALID_ID;
   filter_set_.clear();
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void ObMergeJoin::reuse()
@@ -131,15 +118,12 @@ void ObMergeJoin::reuse()
   other_join_conds_.clear();
   left_op_ = NULL;
   right_op_ = NULL;
-<<<<<<< HEAD
   //add fanqiushi [semi_join] [0.1] 20150826:b
   is_semi_join_ = false;
   right_table_id_ = OB_INVALID_ID;
   right_cid_ = OB_INVALID_ID;
   filter_set_.clear();
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObMergeJoin::set_join_type(const ObJoin::JoinType join_type)
@@ -185,7 +169,6 @@ int ObMergeJoin::get_next_row(const ObRow *&row)
   return (this->*(this->ObMergeJoin::get_next_row_func_))(row);
 }
 
-<<<<<<< HEAD
 //add fanqiushi [semi_join] [0.1] 20150826:b
 int ObMergeJoin::change_right_semi_join_op()
 {
@@ -259,8 +242,6 @@ int ObMergeJoin::do_semi_open()
 
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObMergeJoin::open()
 {
   int ret = OB_SUCCESS;
@@ -272,7 +253,6 @@ int ObMergeJoin::open()
     TBSYS_LOG(WARN, "merge join can not work without equijoin conditions");
     ret = OB_NOT_SUPPORTED;
   }
-<<<<<<< HEAD
   //modify fanqiushi [semi_join] [0.1] 20150826:b
   /*else if (OB_SUCCESS != (ret = ObJoin::open()))
   {
@@ -300,12 +280,6 @@ int ObMergeJoin::open()
     TBSYS_LOG(WARN, "failed to open child ops, err=%d", ret);
   }
   //modify:e
-=======
-  else if (OB_SUCCESS != (ret = ObJoin::open()))
-  {
-    TBSYS_LOG(WARN, "failed to open child ops, err=%d", ret);
-  }
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = left_op_->get_row_desc(left_row_desc)))
   {
     TBSYS_LOG(WARN, "failed to get child row desc, err=%d", ret);
@@ -663,11 +637,8 @@ int ObMergeJoin::inner_get_next_row(const common::ObRow *&row)
       else
       {
         ret = right_op_->get_next_row(right_row);
-<<<<<<< HEAD
 //        if(right_row != NULL)
 //            TBSYS_LOG(INFO,"xushilei,test::right_row=[%s]",to_cstring(*right_row));   //test xsl semi_join
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           if (OB_ITER_END == ret)
@@ -727,10 +698,7 @@ int ObMergeJoin::inner_get_next_row(const common::ObRow *&row)
         }
         else if (is_qualified)
         {
-<<<<<<< HEAD
 //            TBSYS_LOG(INFO,"xushilei,test::curr_row=[%s]",to_cstring(curr_row_));   //test xsl semi_join
-=======
->>>>>>> refs/remotes/origin/master
           // output
           row = &curr_row_;
           last_left_row_ = left_row;
@@ -1776,7 +1744,6 @@ int ObMergeJoin::normal_get_next_row(const ObRow *&row)
 // LEFT_SEMI_JOIN
 int ObMergeJoin::left_semi_get_next_row(const ObRow *&row)
 {
-<<<<<<< HEAD
   int ret = OB_SUCCESS;
   const ObRow *left_row = NULL;
   const ObRow *right_row = NULL;
@@ -1840,43 +1807,6 @@ int ObMergeJoin::left_semi_get_next_row(const ObRow *&row)
   }
   
   return ret;
-=======
-  row = NULL;
-/*
-  // 省略边界条件
-  const ObRow *left_row = NULL;
-  const ObRow *right_row = NULL;
-  left_op_->get_next_row(left_row);
-  if (last_right_row_有效)
-  {
-    right_row = last_right_row_;
-    last_right_row_ = NULL;
-  }
-  else
-  {
-    right_op_->get_next_row(right_row);
-  }
-  while(两个子运算符还有数据没有迭代完)
-  {
-    if (left_row和right_row在等值join条件上相等)
-    {
-      row = left_row;
-      last_right_row_ = right_row;
-      break;
-    }
-    else if(left_row在等值join条件上 < right_row)
-    {
-      left_op_->get_next_row(left_row);
-    }
-    else
-    {
-      // left_row在等值join条件上 > right_row
-      right_op_->get_next_row(right_row);
-    }
-  }
-*/
-  return OB_SUCCESS;
->>>>>>> refs/remotes/origin/master
 
 }
 
@@ -1924,7 +1854,6 @@ int ObMergeJoin::right_semi_get_next_row(const ObRow *&row)
 // LEFT_ANTI_SEMI_JOIN
 int ObMergeJoin::left_anti_semi_get_next_row(const ObRow *&row)
 {
-<<<<<<< HEAD
   int ret = OB_SUCCESS;
   const ObRow *left_row = NULL;
   const ObRow *right_row = NULL;
@@ -2027,50 +1956,6 @@ int ObMergeJoin::left_anti_semi_get_next_row(const ObRow *&row)
   return ret;
 }
 
-=======
-  row = NULL;
-/*
-  // 省略边界条件
-  const ObRow *left_row = NULL;
-  const ObRow *right_row = NULL;
-  left_op_->get_next_row(left_row);
-  if (last_right_row_有效)
-  {
-    right_row = last_right_row_;
-    last_right_row_ = NULL;
-  }
-  else
-  {
-    right_op_->get_next_row(right_row);
-  }
-  while(两个子运算符还有数据没有迭代完，既left_row和right_row都有效)
-  {
-    if (left_row和right_row在等值join条件上相等)
-    {
-      left_op_->get_next_row(left_row);
-    }
-    else if(left_row在等值join条件上 < right_row)
-    {
-      row = left_row_;
-      last_right_row_ = right_row;
-      break;
-    }
-    else
-    {
-      // left_row在等值join条件上 > right_row
-      right_op_->get_next_row(right_row);
-    }
-  }
-  if (没有找到行要输出
-      && left_row有效)
-  {
-    row = left_row;             // left_op_还有数据
-  }
-*/
-  return OB_SUCCESS;
-
-}
->>>>>>> refs/remotes/origin/master
 
 // RIGHT_ANTI_SEMI_JOIN
 int ObMergeJoin::right_anti_semi_get_next_row(const ObRow *&row)

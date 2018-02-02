@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -135,7 +132,6 @@ int ObMsSQLProxy::init_sql_env(ObSqlContext &context, int64_t &schema_version,
   {
     session.set_version_provider(ms_service_);
     session.set_config_provider(&ms_service_->get_config());
-<<<<<<< HEAD
 
     // add by zcd [multi_cluster] 20150406:b
     /// fix the bug: when we execute sql like 'alter system' through OB_SQL_EXECUTE RPC function,
@@ -163,8 +159,6 @@ int ObMsSQLProxy::init_sql_env(ObSqlContext &context, int64_t &schema_version,
     session.load_system_variable(name_str_ob_tx_idle_timeout, type_ob_tx_idle_timeout, value_ob_tx_idle_timeout);
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     context.session_info_ = &session;
     context.session_info_->set_current_result_set(&result);
 
@@ -174,13 +168,10 @@ int ObMsSQLProxy::init_sql_env(ObSqlContext &context, int64_t &schema_version,
     context.rs_rpc_proxy_ = root_rpc_;      // thread safe singleton
     context.merge_service_ = ms_service_;
     context.disable_privilege_check_ = true;
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150406:b
     context.merger_schema_mgr_ = schema_mgr_;
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     // reuse memory pool for parser
     context.session_info_->get_parser_mem_pool().reuse();
     context.session_info_->get_transformer_mem_pool().start_batch_alloc();
@@ -204,7 +195,6 @@ int ObMsSQLProxy::cleanup_sql_env(ObSqlContext &context, ObSQLResultSet &rs)
   context.session_info_->get_transformer_mem_pool().end_batch_alloc(true);
   return ret;
 }
-<<<<<<< HEAD
 
 //add by zt 20160321 modified by wangdonghui
 int ObMsSQLProxy::init_sql_env_for_cache(ObSqlContext &context, int64_t &schema_version,
@@ -253,5 +243,3 @@ int ObMsSQLProxy::init_sql_env_for_cache(ObSqlContext &context, int64_t &schema_
   return ret;
 }
 //end
-=======
->>>>>>> refs/remotes/origin/master

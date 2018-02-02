@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -30,17 +29,11 @@
  *
  * @date 2016_07_29
  */
-=======
->>>>>>> refs/remotes/origin/master
 
 #ifndef OCEANBASE_PACKET_H_
 #define OCEANBASE_PACKET_H_
 
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_record_header.h" // for ObRecordHeader
 #include "data_buffer.h"
 //#include "ob_malloc.h"
@@ -177,7 +170,6 @@ namespace oceanbase
       OB_CS_SHOW_DISK = 247,
       OB_CS_SHOW_DISK_RESPONSE = 248,
 
-<<<<<<< HEAD
       //add by wangdonghui 20160304 :b
       OB_FETCH_PROCEDURE = 249,
       OB_FETCH_PROCEDURE_RESPONSE = 250,
@@ -186,8 +178,6 @@ namespace oceanbase
       OB_CHECK_INCREMENTAL_RANGE = 251,
       OB_CHECK_INCREMENTAL_RANGE_RESPONSE = 252,
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       OB_CS_GET_MIGRATE_DEST_LOC = 260,
       OB_CS_GET_MIGRATE_DEST_LOC_RESPONSE = 261,
       OB_CS_DUMP_TABLET_IMAGE = 262,
@@ -316,7 +306,6 @@ namespace oceanbase
       OB_ALTER_TABLE = 504,
       OB_ALTER_TABLE_RESPONSE = 505,
 
-<<<<<<< HEAD
       //add by wangdonghui 20160121 :b
       OB_CREATE_PROCEDURE = 506,
       OB_CREATE_PROCEDURE_RESPONSE = 507,
@@ -366,8 +355,6 @@ namespace oceanbase
       OB_DROP_INDEX = 562,
       OB_DROP_INDEX_RESPONSE = 563,      // trigger event
 
-=======
->>>>>>> refs/remotes/origin/master
       // trigger event
       OB_HANDLE_TRIGGER_EVENT = 600,
       OB_HANDLE_TRIGGER_EVENT_RESPONSE = 601,
@@ -457,7 +444,6 @@ namespace oceanbase
       OB_UPS_KILL_SESSION_RESPONSE = 1310,
       OB_UPS_ASYNC_CHECK_SSTABLE_CHECKSUM = 1311,
 
-<<<<<<< HEAD
       //add lbzhong [Commit Point] 20150522:b
       /**
        * @brief for server to restart
@@ -465,8 +451,6 @@ namespace oceanbase
       OB_UPS_RESTART_SERVER = 1312,
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       OB_GET_CLOG_STAT = 1340,
       OB_GET_CLOG_STAT_RESPONSE = 1341,
 
@@ -562,7 +546,6 @@ namespace oceanbase
       OB_RS_NOTIFY_SWITCH_SCHEMA = 9015,
       OB_RS_NOTIFY_SWITCH_SCHEMA_RESPONSE = 9016,
 
-<<<<<<< HEAD
       //add chujiajia [rs_election][multi_cluster] 20150823:b
       OB_RS_ELECTION = 9600,
       OB_RS_ELECTION_RESPONSE = 9601,
@@ -585,14 +568,11 @@ namespace oceanbase
       OB_RS_SET_AUTO_ELECT_FLAG_RESPONSE = 9611,
       // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       /// network session
       OB_SESSION_NEXT_REQUEST = 9999,
       OB_SESSION_NEXT_RESPONSE = 10000,
       OB_SESSION_END = 10001,
 
-<<<<<<< HEAD
       //add maoxx
       OB_INDEX_JOB = 12000, ///<job of constructing index
       OB_GET_COLUMN_CHECKSUM = 12005, ///<get column checksum
@@ -619,8 +599,6 @@ namespace oceanbase
       OB_FETCH_COLLECTION_STAT_REPONSE = 12027,
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       OB_PACKET_NUM, // do not fill value
     };
 
@@ -687,13 +665,8 @@ namespace oceanbase
 
         ObPacket* get_next() const;
 
-<<<<<<< HEAD
         onev_request_e* get_request() const;
         void set_request(onev_request_e *r);
-=======
-        easy_request_t* get_request() const;
-        void set_request(easy_request_t *r);
->>>>>>> refs/remotes/origin/master
 
         int serialize();
         /*serialize packet to buffer*/
@@ -764,11 +737,7 @@ namespace oceanbase
         ObDataBuffer buffer_; // user buffer holder
         ObDataBuffer inner_buffer_; // packet inner buffer
         ObRecordHeader header_;
-<<<<<<< HEAD
         onev_request_e *req_;       //request pointer for sendreponse
-=======
-        easy_request_t *req_;       //request pointer for sendreponse
->>>>>>> refs/remotes/origin/master
 
         ObPacket* _next;         //tbnet::Packet* _next  ObPacketQueue using _next;
         int64_t expire_time_;    //compatible with tbnet packet int64_t _expireTime;

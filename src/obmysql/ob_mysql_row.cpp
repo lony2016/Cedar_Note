@@ -9,7 +9,6 @@ namespace oceanbase {
     {
 
     }
-<<<<<<< HEAD
     //add by  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     bool ObMySQLRow::check_decimal(ObString os,uint32_t pre,uint32_t scale)const{
         char* s=os.ptr();
@@ -50,8 +49,6 @@ namespace oceanbase {
         return is_right;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     int ObMySQLRow::serialize(char *buf, const int64_t len, int64_t &pos) const
     {
       int64_t cell_index = 0;
@@ -230,7 +227,6 @@ namespace oceanbase {
       return ret;
     }
 
-<<<<<<< HEAD
     //modify xsl ECNU_DECIMAL 2016_12
      int ObMySQLRow::decimal_cell_str(const ObObj &obj, char *buf, const int64_t len, int64_t &pos) const
      {
@@ -285,23 +281,6 @@ namespace oceanbase {
          return ret;
      }
      //add e
-=======
-    int ObMySQLRow::decimal_cell_str(const ObObj &obj, char *buf, const int64_t len, int64_t &pos) const
-    {
-      int ret = OB_SUCCESS;
-      uint64_t length = 0;
-      ObNumber num;
-
-      if (OB_SUCCESS == (ret = obj.get_decimal(num)))
-      {
-        /* skip 1 byte to store length */
-        length = num.to_string(buf + pos + 1, len - pos - 1);
-        ObMySQLUtil::store_length(buf, len, length, pos);
-        pos += length;
-      }
-      return ret;
-    }
->>>>>>> refs/remotes/origin/master
 
     int ObMySQLRow::datetime_cell_str(const ObObj &obj, char *buf, const int64_t len, int64_t &pos) const
     {

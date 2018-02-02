@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -105,12 +102,9 @@ int ObTabletGet::create_plan(const ObSchemaManagerV2 &schema_mgr)
     get_param_.reset(true);
     get_param_.set_is_result_cached(sql_get_param_->get_is_result_cached());
     get_param_.set_is_read_consistency(sql_get_param_->get_is_read_consistency());
-<<<<<<< HEAD
     // add by guojinwei [repeatable read] 20160312:b
     get_param_.set_trans_id(sql_get_param_->get_trans_id());
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
     for (int64_t i = 0; OB_SUCCESS == ret && i < sql_get_param_->get_row_size(); i ++)
     {
       cell_info.row_key_ = *(sql_get_param_->operator[](i));
@@ -281,12 +275,9 @@ int ObTabletGet::need_incremental_data(
     else
     {
       get_param_.set_is_read_consistency(sql_get_param_->get_is_read_consistency());
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160312:b
       get_param_.set_trans_id(sql_get_param_->get_trans_id());
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       op_ups_multi_get->set_row_desc(ups_mget_row_desc_);
       op_ups_multi_get->set_get_param(get_param_);
     }

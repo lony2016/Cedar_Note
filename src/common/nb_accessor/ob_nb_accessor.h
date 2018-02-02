@@ -27,11 +27,7 @@
 #include "common/hash/ob_hashmap.h"
 #include "common/ob_rowkey.h"
 #include "common/ob_simple_condition.h"
-<<<<<<< HEAD
 #include "common/ob_onev_array.h"
-=======
-#include "common/ob_easy_array.h"
->>>>>>> refs/remotes/origin/master
 #include "common/ob_mutator_helper.h"
 #include "common/roottable/ob_scan_helper.h"
 #include "nb_scan_cond.h"
@@ -59,12 +55,9 @@ namespace common
 
       //按照条件删除给定表单中的列，目前不能保证一致性
       int delete_row(const char* table_name, const SC& rowkey_columns, const ScanConds& scan_conds);
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161201:b
       int delete_auto_increment_row(const char* table_name, const SC& rowkey_columns, const ScanConds& scan_conds);
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       int scan(QueryRes*& res, const char* table_name, const ObNewRange& range, const SC& select_columns, const ScanConds& scan_conds);
       int scan(QueryRes*& res, const char* table_name, const ObNewRange& range, const SC& select_columns);

@@ -213,22 +213,14 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     const char *inet_ntoa_r(onev_addr_e addr)
-=======
-    const char *inet_ntoa_r(easy_addr_t addr)
->>>>>>> refs/remotes/origin/master
     {
       static const int64_t BUFFER_SIZE = 64;
       static __thread char buffers[2][BUFFER_SIZE];
       static __thread uint64_t i = 0;
       char *buffer = buffers[i++ % 2];
       buffer[0] = '\0';
-<<<<<<< HEAD
       return onev_inet_addr_to_str(&addr, buffer, BUFFER_SIZE);
-=======
-      return easy_inet_addr_to_str(&addr, buffer, BUFFER_SIZE);
->>>>>>> refs/remotes/origin/master
     }
 
     void SwitchSKeyDuty::runTimerTask()

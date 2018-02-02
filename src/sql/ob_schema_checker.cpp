@@ -211,7 +211,6 @@ bool ObSchemaChecker::is_rowkey_column(const ObString& table_name, const ObStrin
   return is_rowkey;
 }
 
-<<<<<<< HEAD
 int ObSchemaChecker::is_index_full(uint64_t table_id,bool& is_full)
 {
   //bool ret=false;
@@ -242,6 +241,4 @@ int ObSchemaChecker::is_index_full(uint64_t table_id,bool& is_full)
   return ret;
 }
 
-=======
->>>>>>> refs/remotes/origin/master
 

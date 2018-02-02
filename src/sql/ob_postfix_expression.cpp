@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -20,8 +19,6 @@
  * @date 2016_07_28
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2011 Taobao Inc.
  *
@@ -53,13 +50,10 @@
 #include "sql/ob_item_type_str.h"
 #include "ob_result_set.h"
 #include "ob_sql_session_info.h"
-<<<<<<< HEAD
 //add fanqiushi [semi_join] [0.1] 20150910:b
 #include "common/ob_array.h"
 //add:e
 #include "ob_sp_procedure.h" //add zt 20151109:be
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::sql;
 
@@ -67,7 +61,6 @@ namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
     //add longfei
     ObObj& ObPostfixExpression::get_expr_by_index(int64_t index)
     {
@@ -147,8 +140,6 @@ namespace oceanbase
      }
      //add e
      //modify e
-=======
->>>>>>> refs/remotes/origin/master
     bool ObPostfixExpression::ExprUtil::is_column_idx(const ObObj &obj)
     {
       int64_t val = 0;
@@ -245,7 +236,6 @@ namespace oceanbase
           obj.get_bool(value_.bool_);
           break;
         case ObDecimalType:
-<<<<<<< HEAD
           //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           /*
            *该函数是将参数Obj里面的值存到ExprItem里面
@@ -262,9 +252,6 @@ namespace oceanbase
            len = obj.get_nwords();
           //TBSYS_LOG(INFO,"xushilei,test assign dec=[%s]",to_cstring(dec));//add xsl
            //modify:e
-=======
-          ret = OB_NOT_SUPPORTED;
->>>>>>> refs/remotes/origin/master
           break;
         default:
           ret = OB_ERR_UNEXPECTED;
@@ -273,15 +260,9 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     /*     鍒濆鍖栨暟瀛﹁繍绠楁搷浣滆皟鐢ㄨ〃 */
     op_call_func_t ObPostfixExpression::call_func[T_MAX_OP - T_MIN_OP - 1] = {
       /*   WARNING: 下面的顺序不可以调换��
-=======
-    /*     初始化数学运算操作调用表 */
-    op_call_func_t ObPostfixExpression::call_func[T_MAX_OP - T_MIN_OP - 1] = {
-      /*   WARNING: 下面的顺序不可以调换，
->>>>>>> refs/remotes/origin/master
        *   需要与(ob_item_tpye.h) ExprType enum定义对应
        */
       ObPostfixExpression::minus_func, /* T_OP_NEG */
@@ -360,14 +341,10 @@ namespace oceanbase
     {
       1,
       TWO_OR_THREE,
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //2,   //old code
       TWO_OR_FOUR,
      //modify:e
-=======
-      2,
->>>>>>> refs/remotes/origin/master
       0,
       3,/*trim*/
       1,
@@ -387,12 +364,8 @@ namespace oceanbase
        did_int_div_as_double_(false),
        str_buf_(ObModIds::OB_SQL_EXPR, DEF_STRING_BUF_SIZE),
        owner_op_(NULL),
-<<<<<<< HEAD
        calc_buf_(ObModIds::OB_SQL_EXPR_CALC, DEF_STRING_BUF_SIZE),
        bloom_filter_(NULL) //add weixing [implementation of sub_query]20160111
-=======
-       calc_buf_(ObModIds::OB_SQL_EXPR_CALC, DEF_STRING_BUF_SIZE)
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -428,7 +401,6 @@ namespace oceanbase
               TBSYS_LOG(WARN, "failed to add item, err=%d", ret);
             }
           }
-<<<<<<< HEAD
           //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           else if(ObDecimalType==other.expr_[i].get_type())
           {
@@ -450,8 +422,6 @@ namespace oceanbase
 
           }
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
           else
           {
             if (OB_SUCCESS != (ret = expr_.push_back(other.expr_[i])))
@@ -460,12 +430,9 @@ namespace oceanbase
             }
           }
         }
-<<<<<<< HEAD
         //add weixing [implementation of sub_query]20160111
         this->bloom_filter_ = other.bloom_filter_;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       }
       return *this;
     }
@@ -532,12 +499,8 @@ namespace oceanbase
     {
       int ret = OB_SUCCESS;
       ObObj item_type;
-<<<<<<< HEAD
       ObObj obj;
       ObObj obj2;
-=======
-      ObObj obj, obj2;
->>>>>>> refs/remotes/origin/master
       ObSqlSysFunc sys_func;
       switch(item.type_)
       {
@@ -571,7 +534,6 @@ namespace oceanbase
           {}
           break;
         case T_DECIMAL:
-<<<<<<< HEAD
           //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           /*
           *     生成后缀表达式，将值存到obj2里面，再把obj2放到后缀表达式的数组expr_中
@@ -595,11 +557,6 @@ namespace oceanbase
           }
           break;
           //modify e
-=======
-          TBSYS_LOG(WARN, "literal as decimal not support yet");
-          ret = OB_NOT_SUPPORTED;
-          break;
->>>>>>> refs/remotes/origin/master
         case T_INT:
           item_type.set_int(CONST_OBJ);
           obj.set_int(item.value_.int_);
@@ -653,7 +610,6 @@ namespace oceanbase
           else if (OB_SUCCESS != (ret = expr_.push_back(obj2)))
           {}
           break;
-<<<<<<< HEAD
         //add zt 20151126:b
         case T_ARRAY:
           item_type.set_int(ARRAY_VAR);
@@ -668,8 +624,6 @@ namespace oceanbase
           {}
           break;
         //add zt 20151126:e
-=======
->>>>>>> refs/remotes/origin/master
         case T_NULL:
           item_type.set_int(CONST_OBJ);
           obj.set_null();
@@ -690,7 +644,6 @@ namespace oceanbase
           {}
           break;
         case T_REF_QUERY:
-<<<<<<< HEAD
         // mod weixing [implementation of sub_query]20160119:b
 //          TBSYS_LOG(ERROR, "TODO... not implement yet");
 //          ret = OB_NOT_SUPPORTED;
@@ -705,10 +658,6 @@ namespace oceanbase
           TBSYS_LOG(ERROR,"expr_ push back obj failed");
         }
         //mod 20160119:e
-=======
-          TBSYS_LOG(ERROR, "TODO... not implement yet");
-          ret = OB_NOT_SUPPORTED;
->>>>>>> refs/remotes/origin/master
           break;
         case T_OP_EXISTS:
         case T_OP_POS:
@@ -738,11 +687,8 @@ namespace oceanbase
         case T_OP_CNN:
         case T_OP_IN:
         case T_OP_NOT_IN:
-<<<<<<< HEAD
         case T_OP_LEFT_SEMI: // added by wangyanzhao, pull up sublink, 20170322
         case T_OP_LEFT_ANTI_SEMI: // added by wangyanzhao, pull up sublink, 20170322
-=======
->>>>>>> refs/remotes/origin/master
         case T_OP_ARG_CASE:
         case T_OP_CASE:
         case T_OP_ROW:
@@ -804,7 +750,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add fanqiushi [semi_join] [0.1] 20150910:b
     int ObPostfixExpression::set_for_semi_join(common::ObArray<common::ObObj> *tmp_set,uint64_t tid,uint64_t cid)
     {
@@ -938,8 +883,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObPostfixExpression::merge_expr(const ObPostfixExpression &expr1, const ObPostfixExpression &expr2, const ExprItem &op)
     {
       int ret = OB_SUCCESS;
@@ -968,14 +911,10 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //mod weixing [implementation of sub_query]20160111
     //int ObPostfixExpression::calc(const common::ObRow &row, const ObObj *&composite_val)
     int ObPostfixExpression::calc(const common::ObRow &row, const ObObj *&composite_val, hash::ObHashMap<common::ObRowkey, common::ObRowkey, common::hash::NoPthreadDefendMode>* hash_map, bool second_check)
     //mod e
-=======
-    int ObPostfixExpression::calc(const common::ObRow &row, const ObObj *&composite_val)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       int64_t type = 0;
@@ -985,12 +924,9 @@ namespace oceanbase
       int idx = 0;
       ObExprObj result;
       int idx_i = 0;
-<<<<<<< HEAD
       //add weixing [implementation of sub_query]20160116
       int sub_query_idx = 0;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       ObPostExprExtraParams *extra_params = GET_TSI_MULT(ObPostExprExtraParams, TSI_SQL_EXPR_EXTRA_PARAMS_1);
       // get the stack for calculation
       ObPostfixExpressionCalcStack *stack = GET_TSI_MULT(ObPostfixExpressionCalcStack, TSI_SQL_EXPR_STACK_1);
@@ -1009,7 +945,6 @@ namespace oceanbase
       const ObObj *var = NULL;
       while (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         // 获得数据类型:列id、数字、操作符、结束标��
         if (OB_SUCCESS != (ret = expr_[idx++].get_int(type)))
         {
@@ -1021,33 +956,18 @@ namespace oceanbase
         //else if(type <= BEGIN_TYPE || type >= END_TYPE)
         else if(type <= BEGIN_TYPE || type > QUERY_ID)
         /*modify e*/
-=======
-        // 获得数据类型:列id、数字、操作符、结束标记
-        if (OB_SUCCESS != (ret = expr_[idx++].get_int(type)))
-        {
-          TBSYS_LOG(WARN, "fail to get int value. unexpected! ret=%d idx=%d", ret, idx-1);
-          ret = OB_ERR_UNEXPECTED;
-          break;
-        }
-        else if(type <= BEGIN_TYPE || type >= END_TYPE)
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(WARN, "unsupported operand type [type:%ld]", value);
           ret = OB_ERR_UNEXPECTED;
           break;
         }
-<<<<<<< HEAD
         else if (END == type)   // expr_涓互END绗﹀彿琛ㄧず缁撴潫
-=======
-        else if (END == type)   // expr_中以END符号表示结束
->>>>>>> refs/remotes/origin/master
         {
           if (idx_i != 1)
           {
             TBSYS_LOG(WARN, "calculation stack must be empty. check the code for bugs. idx_i=%d", idx_i);
             ret = OB_ERR_UNEXPECTED;
           }
-<<<<<<< HEAD
           else //idx_i==1?
           {
               //modify xsl ECNU_DECIMAL 2016.12
@@ -1082,15 +1002,6 @@ namespace oceanbase
                   }
               }
               //modify:e
-=======
-          else if (OB_SUCCESS != (ret = stack_[--idx_i].to(result_)))
-          {
-            TBSYS_LOG(WARN, "failed to convert exprobj to obj, err=%d", ret);
-          }
-          else
-          {
-            composite_val = &result_;
->>>>>>> refs/remotes/origin/master
           }
           break;
         }
@@ -1162,7 +1073,6 @@ namespace oceanbase
                 TBSYS_LOG(WARN, "Can not get value ObObj. err=%d", ret);
               }
               break;
-<<<<<<< HEAD
             //add zt 20151126:b
             case ARRAY_VAR:
             {
@@ -1195,10 +1105,6 @@ namespace oceanbase
             //add zt 20151126:e
             case OP:
               // 鏍规嵁OP鐨勭被鍨嬶紝浠庡爢鏍堜腑寮瑰嚭1涓垨澶氫釜鎿嶄綔鏁帮紝杩涜璁＄畻
-=======
-            case OP:
-              // 根据OP的类型，从堆栈中弹出1个或多个操作数，进行计算
->>>>>>> refs/remotes/origin/master
               if (OB_SUCCESS != (ret = expr_[idx++].get_int(value)))
               {
                 TBSYS_LOG(WARN,"get operator type failed [err:%d]", ret);
@@ -1238,7 +1144,6 @@ namespace oceanbase
                 }
                 else
                 {
-<<<<<<< HEAD
                   //add weixing [implementation of sub_query]20160111
                   bool special_process = false;
                   if ((T_OP_IN == value ||T_OP_NOT_IN == value) && (NULL != bloom_filter_ || NULL != hash_map))
@@ -1295,21 +1200,6 @@ namespace oceanbase
                       TBSYS_LOG(WARN, "call calculation function error [value:%ld, idx_i:%d, err:%d]",
                                 value, idx_i, ret);
                     }
-=======
-                  if (OB_LIKELY(OB_SUCCESS == (ret = (this->call_func[value - T_MIN_OP - 1])(stack_, idx_i, result, *extra_params))))
-                  {
-                    stack_[idx_i++] = result;
-                  }
-                  else if (OB_NO_RESULT == ret)
-                  {
-                    // nop
-                    ret = OB_SUCCESS;
-                  }
-                  else
-                  {
-                    TBSYS_LOG(WARN, "call calculation function error [value:%ld, idx_i:%d, err:%d]",
-                              value, idx_i, ret);
->>>>>>> refs/remotes/origin/master
                   }
                 }
               }
@@ -1324,7 +1214,6 @@ namespace oceanbase
                 stack_[idx_i++] = result;
               }
               break;
-<<<<<<< HEAD
             //add weixing [implementation of sub_query]20160116
             case QUERY_ID:
               if(OB_SUCCESS != (ret = expr_[idx++].get_int(value)))
@@ -1339,8 +1228,6 @@ namespace oceanbase
               }
               break;
             //add e
-=======
->>>>>>> refs/remotes/origin/master
             default:
               ret = OB_ERR_UNEXPECTED;
               TBSYS_LOG(WARN,"unexpected [type:%ld]", type);
@@ -1354,7 +1241,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add by zt 20160616:b
     const SpProcedure * get_running_procedure(const ObPhysicalPlan *plan)
     {
@@ -1381,22 +1267,11 @@ namespace oceanbase
       if (type != PARAM_IDX && type != SYSTEM_VAR && type != TEMP_VAR && type != CUR_TIME_OP
             && type != ARRAY_VAR //add zt 20151126
           )
-=======
-    int ObPostfixExpression::get_var_obj(
-        ObPostExprNodeType type,
-        const ObObj& expr_node,
-        const ObObj*& val) const
-    {
-      int ret = OB_SUCCESS;
-      ObResultSet *result_set = NULL;
-      if (type != PARAM_IDX && type != SYSTEM_VAR && type != TEMP_VAR && type != CUR_TIME_OP)
->>>>>>> refs/remotes/origin/master
       {
         val = &expr_node;
       }
       else
       {
-<<<<<<< HEAD
         //add by zt: 20160615 :b
         const SpProcedure *proc = NULL;
         if( !owner_op_ || ! owner_op_->get_phy_plan() )
@@ -1442,10 +1317,6 @@ namespace oceanbase
         //add by zt: 20160615 :e
         if (!owner_op_ || !owner_op_->get_phy_plan()
                   || !(result_set = owner_op_->get_phy_plan()->get_result_set()))
-=======
-        if (!owner_op_ || !owner_op_->get_phy_plan()
-          || !(result_set = owner_op_->get_phy_plan()->get_result_set()))
->>>>>>> refs/remotes/origin/master
         {
           ret = OB_ERR_UNEXPECTED;
           TBSYS_LOG(WARN, "Can not get result set.err=%d", ret);
@@ -1481,21 +1352,13 @@ namespace oceanbase
             TBSYS_LOG(ERROR, "Can not get variable name");
           }
           else if (type == SYSTEM_VAR
-<<<<<<< HEAD
                    && (val = session_info->get_sys_variable_value(var_name)) == NULL)
-=======
-            && (val = session_info->get_sys_variable_value(var_name)) == NULL)
->>>>>>> refs/remotes/origin/master
           {
             ret = OB_ERR_VARIABLE_UNKNOWN;
             TBSYS_LOG(USER_ERROR, "System variable %.*s does not exists", var_name.length(), var_name.ptr());
           }
           else if (type == TEMP_VAR
-<<<<<<< HEAD
                    && (val = session_info->get_variable_value(var_name)) == NULL)
-=======
-            && (val = session_info->get_variable_value(var_name)) == NULL)
->>>>>>> refs/remotes/origin/master
           {
             ret = OB_ERR_VARIABLE_UNKNOWN;
             TBSYS_LOG(USER_ERROR, "Variable %.*s does not exists", var_name.length(), var_name.ptr());
@@ -1513,7 +1376,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add zt 20151126:b
     int ObPostfixExpression::get_array_var(const ObObj &expr_node, int64_t idx_type, const ObObj &idx_val, const ObObj *&val) const
     {
@@ -1606,8 +1468,6 @@ namespace oceanbase
 
     //add zt 20151126:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObPostfixExpression::is_const_expr(bool &is_type) const
     {
       return check_expr_type((int64_t)CONST_OBJ, is_type, 3);
@@ -1739,11 +1599,7 @@ namespace oceanbase
     }
 
     bool ObPostfixExpression::is_simple_condition(bool real_val, uint64_t &column_id, int64_t &cond_op,
-<<<<<<< HEAD
                                                   ObObj &const_val, ObPostExprNodeType *val_type) const//slwang note: ???
-=======
-                                                  ObObj &const_val, ObPostExprNodeType *val_type) const
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       int64_t type_val = -1;
@@ -1758,11 +1614,7 @@ namespace oceanbase
           if (ObIntType != expr_[0].get_type())
           {
             // not int val, pass
-<<<<<<< HEAD
             break;//slwang note:以下都必须是int类型才算简单的条件？？
-=======
-            break;
->>>>>>> refs/remotes/origin/master
           }
           else if(OB_SUCCESS != (err = expr_[0].get_int(type_val)))
           {
@@ -1998,7 +1850,6 @@ namespace oceanbase
       return is_simple_cond_type;
     }
 
-<<<<<<< HEAD
     //add zt 20151109:b
     int ObPostfixExpression::serialize_variables(
         char *buf, const int64_t buf_len, int64_t &pos,
@@ -2068,22 +1919,6 @@ namespace oceanbase
       else
       {
         for (i = 0; i < expr_.count(); i++)
-=======
-
-    DEFINE_SERIALIZE(ObPostfixExpression)
-    {
-      int ret = OB_SUCCESS;
-      int i = 0;
-      ObObj obj;
-      obj.set_int(expr_.count());
-      if (OB_SUCCESS != (ret = obj.serialize(buf, buf_len, pos)))
-      {
-        TBSYS_LOG(WARN, "fail to serialize postfix expression size. ret=%d", ret);
-      }
-      else
-      {
-        for (i = 0; i < expr_.count(); i++)
->>>>>>> refs/remotes/origin/master
         {
           int64_t type = BEGIN_TYPE;
           int64_t num = 0;
@@ -2093,12 +1928,8 @@ namespace oceanbase
             ret = OB_ERR_UNEXPECTED;
             break;
           }
-<<<<<<< HEAD
           //add zt 20151121:b
           else if( type == CUR_TIME_OP )
-=======
-          else if (type == PARAM_IDX || type == SYSTEM_VAR || type == TEMP_VAR || type == CUR_TIME_OP)
->>>>>>> refs/remotes/origin/master
           {
             ObObj new_type;
             new_type.set_int(CONST_OBJ);
@@ -2120,7 +1951,6 @@ namespace oceanbase
               TBSYS_LOG(WARN, "fail to serialize expr[%d]. ret=%d", i, ret);
               break;
             }
-<<<<<<< HEAD
           }
           //add zt 20151121:e
           //else if( type == PARAM_IDX || type == SYSTEM_VAR || type == TEMP_VAR || type == CUR_TIME_OP )  //delete by zt
@@ -2162,8 +1992,6 @@ namespace oceanbase
               break;
             }
             //add zt 20151109:e
-=======
->>>>>>> refs/remotes/origin/master
             continue;
           }
           else if (type == OP)
@@ -2185,14 +2013,10 @@ namespace oceanbase
           {
             num = 3;
           }
-<<<<<<< HEAD
           // mod weixing [implementation of sub_query]20160119:b
           //else if (type == CONST_OBJ)
           else if (type == CONST_OBJ||type == QUERY_ID)
           //mod e
-=======
-          else if (type == CONST_OBJ)
->>>>>>> refs/remotes/origin/master
           {
             num = 2;
           }
@@ -2230,7 +2054,6 @@ namespace oceanbase
     bool ObPostfixExpression::is_simple_in_expr(bool real_val, const ObRowkeyInfo &info, ObIArray<ObRowkey> &rowkey_array,
         common::PageArena<ObObj,common::ModulePageAllocator> &rowkey_objs_allocator) const
     {
-<<<<<<< HEAD
         //del wanglei [semi join in expr] 20161131:b
         //      int err = OB_SUCCESS;
         //      int64_t rowkey_column_count = 0;
@@ -2412,165 +2235,6 @@ namespace oceanbase
         return is_simple_expr ;
         //add wanglei [semi join in expr] 20161131:e
 
-=======
-      int err = OB_SUCCESS;
-      int64_t rowkey_column_count = 0;
-      int64_t index = 0;
-      int64_t len = expr_.count();
-      int64_t dim = 0, dim2 = 0;
-      int64_t row_count = 0;
-      int64_t row = 0;
-      int64_t val_idx = 0;
-      bool is_simple_expr = false;
-      ObRowkey rowkey;
-      ObObj *rowkey_objs = NULL;
-      ObRowkeyColumn rowkey_column;
-      int64_t cid = OB_INVALID_ID;
-      if (len > 16)
-      {
-        // check 1: (OP, T_OP_IN, 2), (END)
-        if (!ExprUtil::is_end(expr_.at(len-1)) || !ExprUtil::is_value(expr_.at(len-2), 2L) ||
-            !ExprUtil::is_op_of_type(expr_.at(len-3), T_OP_IN) || !ExprUtil::is_op(expr_.at(len-4)))
-        {
-          // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld. %d, %d, %d, %d", len,
-          //    ExprUtil::is_end(expr_.at(len-1)), ExprUtil::is_value(expr_.at(len-2), 2L),
-          //    ExprUtil::is_op_of_type(expr_.at(len-3), T_OP_IN), ExprUtil::is_op(expr_.at(len-4)));
-        }
-        // check 2: (OP, T_OP_ROW, row_count)
-        // support getting multi row,
-        // for example, (a,b) in ((1,2), (3,4), (5,6)), row_count = 3, dim = 2
-        else if (OB_SUCCESS != expr_.at(len-5).get_int(row_count) || !ExprUtil::is_op_of_type(expr_.at(len-6), T_OP_ROW) ||
-            !ExprUtil::is_op(expr_.at(len-7)))
-        {
-          // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld", len);
-        }
-        // check 3: (OP, T_OP_ROW, dim)
-        else if (OB_SUCCESS != expr_.at(len-8).get_int(dim) || !ExprUtil::is_op_of_type(expr_.at(len-9), T_OP_ROW) ||
-            !ExprUtil::is_op(expr_.at(len-10)))
-        {
-          // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld", len);
-        }
-        else
-        {
-          const int64_t single_row_len = dim * 2 + 3;
-          len = (len - 7) - (row_count * single_row_len);  // support multi row, 'dim' columns, each column takes two objects
-          val_idx = len;
-          OB_ASSERT(dim > 0);
-          OB_ASSERT(len > 6);
-          if (dim <= 0 || len <= 6)
-          {
-            // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld", len);
-          }
-          // check 4: (OP, T_OP_LEFT_PARAM_END, 2)
-          else if (!ExprUtil::is_value(expr_.at(len-1), 2L) || !ExprUtil::is_op_of_type(expr_.at(len-2), T_OP_LEFT_PARAM_END) ||
-              !ExprUtil::is_op(expr_.at(len-3)))
-          {
-            // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld", len);
-          }
-          // check 5: (OP, T_OP_ROW, ?)
-          else if (OB_SUCCESS != expr_.at(len-4).get_int(dim2) || !ExprUtil::is_op_of_type(expr_.at(len-5), T_OP_ROW) ||
-              !ExprUtil::is_op(expr_.at(len-6)))
-          {
-            // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld.%ld, %d, %d", len,
-            //    dim2, ExprUtil::is_op_of_type(expr_.at(len-5), T_OP_ROW), ExprUtil::is_op(expr_.at(len-6)));
-          }
-          else if (dim != dim2)
-          {
-            // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld. dim=%ld", len, dim);
-          }
-          else if (dim >= info.get_size())
-          {
-            len = len - (dim * 3 + 6); // 3 = COLUMN_IDX, TID, CID
-            if (len == 0)
-            {
-              // extra values from expression
-              // extra 1: rowkey columns
-              int64_t size = info.get_size();
-              for (index = 0; index < size && index < dim && OB_SUCCESS == err; index++)
-              {
-                if (OB_SUCCESS != (err = info.get_column(index, rowkey_column)))
-                {
-                  TBSYS_LOG(ERROR, "get rowkey column fail. index=%ld, size=%ld", index, size);
-                }
-                else
-                {
-                  if (OB_SUCCESS != expr_.at(index * 3 + 2).get_int(cid)) // 3=COLUMN_REF, TID, CID
-                  {
-                    TBSYS_LOG(ERROR, "fail to get int value from expr_.at(2)");
-                  }
-                  if (rowkey_column.column_id_ == static_cast<uint64_t>(cid))
-                  {
-                    rowkey_column_count++;
-                  }
-                  else
-                  {
-                    break;
-                  }
-                }
-              }
-              if ((OB_SUCCESS == err) && (rowkey_column_count == size))
-              {
-                if (NULL != (rowkey_objs = rowkey_objs_allocator.alloc(row_count * rowkey_column_count * sizeof(ObObj))))
-                {
-                  for (row = 0; row < row_count; row++)
-                  {
-                    // extra 2: values
-                    for (index = 0; index < rowkey_column_count; index++)
-                    {
-                      // TODO: check every T_OP_ROW dim, all must be equal. currently skipped this step
-                      const int64_t type_offset = val_idx + row * single_row_len + (index * 2);
-                      const int64_t val_offset = val_idx + row * single_row_len + (index * 2 + 1); // 2=CONST,VALUE
-                      int64_t type = 0;
-                      const ObObj *val = NULL;
-                      if (OB_SUCCESS != (err = expr_.at(type_offset).get_int(type)))
-                      {
-                        TBSYS_LOG(ERROR, "Can not get value type. err=%d", err);
-                      }
-                      else if (real_val)
-                      {
-                        if (OB_SUCCESS != (err = get_var_obj(static_cast<ObPostExprNodeType>(type), expr_.at(val_offset), val)))
-                        {
-                          TBSYS_LOG(ERROR, "Can not get value. err=%d", err);
-                        }
-                        else
-                        {
-                          rowkey_objs[index] = *val;
-                        }
-                      }
-                      else
-                      {
-                        rowkey_objs[index] = expr_.at(val_offset);
-                      }
-                      // TBSYS_LOG(DEBUG, "index=%ld, at=%ld, val=%s", index, offset, to_cstring(rowkey_objs[index]));
-                    }
-                    rowkey.assign(rowkey_objs, rowkey_column_count);
-                    if (OB_SUCCESS!= (err = rowkey_array.push_back(rowkey)))
-                    {
-                      TBSYS_LOG(ERROR, "fail to push rowkey to array. err=%d", err);
-                    }
-                    rowkey_objs += rowkey_column_count;
-                  }
-                }
-                else
-                {
-                  TBSYS_LOG(ERROR, "fail to alloc memory");
-                  err = OB_ALLOCATE_MEMORY_FAILED;
-                }
-                if (OB_SUCCESS == err)
-                {
-                  is_simple_expr = true;
-                }
-              }
-            }
-            else
-            {
-              // TBSYS_LOG(DEBUG, "not simple in expr. len=%ld. dim=%ld", len, dim);
-            }
-          }
-        }
-      }
-      return is_simple_expr;
->>>>>>> refs/remotes/origin/master
     }
 
     DEFINE_DESERIALIZE(ObPostfixExpression)
@@ -2602,11 +2266,7 @@ namespace oceanbase
           int expr_count = static_cast<int32_t>(val);
           for (i = 0; i < expr_count; i++)
           {
-<<<<<<< HEAD
             if (OB_SUCCESS != (ret = obj.deserialize(buf, data_len, pos)))    //xsl序列化入口
-=======
-            if (OB_SUCCESS != (ret = obj.deserialize(buf, data_len, pos)))
->>>>>>> refs/remotes/origin/master
             {
               TBSYS_LOG(WARN, "fail to deserialize obj. ret=%d. buf=%p, data_len=%ld, pos=%ld",
                   ret, buf, data_len, pos);
@@ -2623,7 +2283,6 @@ namespace oceanbase
                 TBSYS_LOG(WARN, "failed to add item, err=%d", ret);
               }
             }
-<<<<<<< HEAD
             //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             else if(ObDecimalType==obj.get_type())
             {
@@ -2644,8 +2303,6 @@ namespace oceanbase
                 //TBSYS_LOG(ERROR,"DEFINE_DESERIALIZE");
             }
             //add e
-=======
->>>>>>> refs/remotes/origin/master
             else
             {
               if (OB_SUCCESS != (ret = expr_.push_back(obj)))
@@ -2659,10 +2316,7 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //TODO COMMENT BY ZT, serialize methods have changed, we have to update the get_serialize methods
-=======
->>>>>>> refs/remotes/origin/master
     DEFINE_GET_SERIALIZE_SIZE(ObPostfixExpression)
     {
       int64_t size = 0;
@@ -3286,37 +2940,23 @@ namespace oceanbase
 
     inline int ObPostfixExpression::in_func(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params)
     {
-<<<<<<< HEAD
       // in的算��
       //
       // ��.
-=======
-      // in的算法
-      //
-      // 例1.
->>>>>>> refs/remotes/origin/master
       // 2 IN (3, 4) 的后缀表达式为
       // [栈顶] 2, 3, 4, Row(2), IN(2)
       // in_row_operator_中数据的layout为：
       // 2 3 4
       // width = 1
       //
-<<<<<<< HEAD
       // ��.
-=======
-      // 例2.
->>>>>>> refs/remotes/origin/master
       // (1, 3) IN ((3, 4), (1, 2))的后缀表达式为
       // [栈顶] 1, 3, Row(2), 3, 4, Row(2), 1, 2, Row(2), Row(2), IN(2)
       // in_row_operator_中数据的layout为：
       // 1 3 3 4 1 2
       // width = 2
       //
-<<<<<<< HEAD
       // 显然，根据width，取出前width个数，逐个往后比较即可计算得到in的结��
-=======
-      // 显然，根据width，取出前width个数，逐个往后比较即可计算得到in的结果
->>>>>>> refs/remotes/origin/master
       // note: 1. 该后缀表达式计算中，左操作数先出栈 2. 最后一个T_OP_ROW操作被实际上忽略
       //
       int ret = OB_SUCCESS;
@@ -3347,7 +2987,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add weixing [implementatioin of sub_query]20160116
     inline int ObPostfixExpression::in_sub_query_func(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params, ObBloomFilterV1* bloom_filter, hash::ObHashMap<common::ObRowkey, common::ObRowkey, common::hash::NoPthreadDefendMode>* hash_map, int &sub_query_idx, bool second_check)
     {
@@ -3389,8 +3028,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObPostfixExpression::not_like_func(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params)
     {
       int err = OB_SUCCESS;
@@ -3602,7 +3239,6 @@ namespace oceanbase
 
     inline int ObPostfixExpression::sys_func_cast(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params)
     {
-<<<<<<< HEAD
         //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*int err = OB_SUCCESS;
         if (OB_UNLIKELY(NULL == stack_i || NULL == params.str_buf_))
@@ -3701,42 +3337,6 @@ namespace oceanbase
         }
         return err;
         //modify:e
-=======
-      int err = OB_SUCCESS;
-      if (OB_UNLIKELY(NULL == stack_i || NULL == params.str_buf_))
-      {
-        TBSYS_LOG(WARN, "stack_i=%p, str_buf_=%p.", stack_i, params.str_buf_);
-        err = OB_INVALID_ARGUMENT;
-      }
-      else if (OB_UNLIKELY(idx_i < 2))
-      {
-        TBSYS_LOG(WARN, "no enough operand in the stack. current size:%d", idx_i);
-        err = OB_INVALID_ARGUMENT;
-      }
-      else
-      {
-        int64_t literal_type = 0;
-        int32_t dest_type = 0;
-        if (OB_SUCCESS != (err = stack_i[idx_i-1].get_int(literal_type)))
-        {
-          TBSYS_LOG(WARN, "fail to get int value. actual type = %d. err=%d", stack_i[idx_i-1].get_type(), err);
-        }
-        else
-        {
-          // convert literal data type to inner data type
-          dest_type = convert_item_type_to_obj_type(static_cast<ObItemType>(literal_type));
-          if (OB_SUCCESS == err)
-          {
-            if (OB_SUCCESS != (err = stack_i[idx_i-2].cast_to(dest_type, result, *params.str_buf_)))
-            {
-              TBSYS_LOG(WARN, "fail to cast data from type %d to type %d. err=%d", stack_i[idx_i-2].get_type(), dest_type, err);
-            }
-          }
-        }
-        idx_i -= 2;
-      }
-      return err;
->>>>>>> refs/remotes/origin/master
     }
 
     inline int ObPostfixExpression::sys_func_current_timestamp(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params)
@@ -4021,7 +3621,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add weixing [implementation of sub_query]20160116
     int ObPostfixExpression::get_result(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params,
     common::ObBloomFilterV1* bloom_filter,
@@ -4127,8 +3726,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObPostfixExpression::arg_case_func(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params)
     {
       int ret = OB_SUCCESS;
@@ -4254,15 +3851,12 @@ namespace oceanbase
       int64_t value = 0;
       int64_t value2 = 0;
       int64_t sys_func = 0;
-<<<<<<< HEAD
       //add fanqiushi [semi_join] [0.1] 20150910:b
       /*for(int i=0;i<expr_.count();i++)
       {
         TBSYS_LOG(ERROR,"expr_[idx]=%s,idx=%d", to_cstring(expr_[i]),i);
       }*/
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       while(idx < expr_.count() && OB_SUCCESS == err)
       {
         expr_[idx++].get_int(type);
@@ -4325,7 +3919,6 @@ namespace oceanbase
             databuff_printf(buf, buf_len, pos, "@");
             pos += expr_[idx++].to_string(buf+pos, buf_len-pos);
             break;
-<<<<<<< HEAD
             //add zt 20151208:b
           case ARRAY_VAR:
             databuff_printf(buf, buf_len, pos, "@");
@@ -4334,10 +3927,6 @@ namespace oceanbase
             //add zt 20151208:e
           case OP:
             // 鏍规嵁OP鐨勭被鍨嬶紝浠庡爢鏍堜腑寮瑰嚭1涓垨澶氫釜鎿嶄綔鏁帮紝杩涜璁＄畻
-=======
-          case OP:
-            // 根据OP的类型，从堆栈中弹出1个或多个操作数，进行计算
->>>>>>> refs/remotes/origin/master
             if (OB_SUCCESS != (err = expr_[idx++].get_int(value)))
             {
               TBSYS_LOG(WARN,"get_int error [err:%d]", err);
@@ -4375,7 +3964,6 @@ namespace oceanbase
               }
             }
             break;
-<<<<<<< HEAD
           //weixing [implementation of sub_query]20160119:b
           case QUERY_ID:
             if (OB_SUCCESS  != (err = expr_[idx++].get_int(value)))
@@ -4388,8 +3976,6 @@ namespace oceanbase
             }
             break;
           //add e
-=======
->>>>>>> refs/remotes/origin/master
           default:
             databuff_printf(buf, buf_len, pos, "unexpected [type:%ld]", type);
             err = OB_ERR_UNEXPECTED;
@@ -4400,7 +3986,6 @@ namespace oceanbase
       return pos;
     }
 
-<<<<<<< HEAD
     int64_t ObPostfixExpression::get_type_num(int64_t idx,int64_t type) const
     {
       int64_t num = 0;
@@ -5256,7 +4841,5 @@ namespace oceanbase
     }
 
     //add dhc :e
-=======
->>>>>>> refs/remotes/origin/master
   } /* sql */
 } /* namespace */

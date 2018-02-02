@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
   * (C) 2007-2010 Taobao Inc.
   *
   * This program is free software; you can redistribute it and/or modify
@@ -60,7 +57,6 @@ namespace oceanbase
       int modify_all_server_table(const ObRootAsyncTaskQueue::ObSeqTask & task);
       // update all cluster table
       int modify_all_cluster_table(const ObRootAsyncTaskQueue::ObSeqTask & task);
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150405:b
       // update the master_cluster_root_server_ip
       int modify_master_cluster_root_server_ip(const ObRootAsyncTaskQueue::ObSeqTask & task);
@@ -73,8 +69,6 @@ namespace oceanbase
        */
       int modify_all_cluster_table_with_id(const ObRootAsyncTaskQueue::ObSeqTask & task);
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       // every run process task timeout
       const static int64_t MAX_TIMEOUT = 2000000; // 2s

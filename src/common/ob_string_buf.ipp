@@ -130,7 +130,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
     //add xsl ECNU_DECIMAL 2016_12
 
     template <typename PageAllocatorT, typename PageArenaT>
@@ -190,22 +189,10 @@ namespace oceanbase
     int ObStringBufT<PageAllocatorT, PageArenaT> :: write_obj(const ObObj& obj, ObObj* stored_obj)
     {
       int err = OB_SUCCESS;
-=======
-
-    template <typename PageAllocatorT, typename PageArenaT>
-    int ObStringBufT<PageAllocatorT, PageArenaT> :: write_obj(const ObObj& obj, ObObj* stored_obj)
-    {
-      int err = OB_SUCCESS;
-
->>>>>>> refs/remotes/origin/master
       if (NULL != stored_obj)
       {
         *stored_obj = obj;
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       ObObjType type = obj.get_type();
       if (ObVarcharType == type)
       {
@@ -221,7 +208,6 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL 2016_12
       //add fanqiushi DECIMAL OceanBase_BankCommV0.3 2014_7_19:b
       else if (ObDecimalType == type)
@@ -244,11 +230,5 @@ namespace oceanbase
     }
 
 
-=======
-
-      return err;
-    }
-
->>>>>>> refs/remotes/origin/master
   }
 }

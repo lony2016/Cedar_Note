@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -20,8 +19,6 @@
  *
  * @date 2016_07_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_schema.h"
 #include "common/ob_scanner.h"
 #include "common/ob_schema_manager.h"
@@ -371,11 +368,7 @@ int ObMergerRootRpcProxy::create_table(bool if_not_exists, const common::TableSc
     ret = rpc_stub_->create_table(CREATE_DROP_TABLE_TIME_OUT, root_server_, if_not_exists, table_schema);
     if (ret != OB_SUCCESS)
     {
-<<<<<<< HEAD
       TBSYS_LOG(WARN, "failed to create table[%s], err=%d", table_schema.table_name_, ret);
-=======
-      TBSYS_LOG(WARN, "failed to create table, err=%d", ret);
->>>>>>> refs/remotes/origin/master
     }
     else
     {
@@ -407,7 +400,6 @@ int ObMergerRootRpcProxy::drop_table(bool if_exists, const common::ObStrings & t
   }
   return ret;
 }
-<<<<<<< HEAD
 //add hxlong [Truncate Table]:20170403:b
 int ObMergerRootRpcProxy::truncate_table(bool if_exists, const common::ObStrings & tables, const common::ObString & user, const common::ObString & comment)
 {
@@ -432,9 +424,6 @@ int ObMergerRootRpcProxy::truncate_table(bool if_exists, const common::ObStrings
   return ret;
 }
 //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
 int ObMergerRootRpcProxy::alter_table(const common::AlterTableSchema& alter_schema)
 {
   int ret = OB_SUCCESS;
@@ -457,7 +446,6 @@ int ObMergerRootRpcProxy::alter_table(const common::AlterTableSchema& alter_sche
   }
   return ret;
 }
-<<<<<<< HEAD
 
 //add by wangdonghui 20160121 :b
 int ObMergerRootRpcProxy::create_procedure(bool if_not_exists, const common::ObString & proc_name, const common::ObString & proc_source_code)
@@ -509,8 +497,6 @@ int ObMergerRootRpcProxy::drop_procedure(bool if_exists, const common::ObString 
   return ret;
 }
 //add :e
-=======
->>>>>>> refs/remotes/origin/master
 int ObMergerRootRpcProxy::set_obi_role(const ObServer &rs, const int64_t timeout, const ObiRole &obi_role)
 {
   int ret = OB_SUCCESS;
@@ -548,7 +534,6 @@ int ObMergerRootRpcProxy::fetch_master_ups(const ObServer &rootserver, ObServer 
   }
   return ret;
 }
-<<<<<<< HEAD
 
 // longfei [drop index]
 /**
@@ -579,5 +564,3 @@ int ObMergerRootRpcProxy::drop_index(bool if_exists, const common::ObStrings & i
   }
   return ret;
 }
-=======
->>>>>>> refs/remotes/origin/master

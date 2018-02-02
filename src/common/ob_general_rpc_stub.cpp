@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -24,8 +23,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -61,13 +58,10 @@
 #include "sql/ob_ups_result.h"
 #include "sql/ob_physical_plan.h"
 
-<<<<<<< HEAD
 //add by wangdonghui 20160304 :b
 #include "common/ob_name_code_map.h"
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
@@ -80,17 +74,12 @@ namespace oceanbase
     {
     }
 
-<<<<<<< HEAD
     //modify wenghaixing [secondary index.static_index]20160118
     /*int ObGeneralRpcStub::register_server(const int64_t timeout, const ObServer & root_server,
-=======
-    int ObGeneralRpcStub::register_server(const int64_t timeout, const ObServer & root_server,
->>>>>>> refs/remotes/origin/master
         const ObServer & merge_server, const bool is_merger, int32_t & status, const char* server_version) const
     {
       return send_3_return_1(root_server, timeout, OB_SERVER_REGISTER,
                              DEFAULT_VERSION, merge_server, is_merger, server_version, status);
-<<<<<<< HEAD
     }*/
     int ObGeneralRpcStub::register_server(const int64_t timeout, const ObServer & root_server,
                                           const ObServer & chunk_server, const bool is_merger,
@@ -123,9 +112,6 @@ namespace oceanbase
       return ret;
     }
     //modify e
-=======
-    }
->>>>>>> refs/remotes/origin/master
 
     int ObGeneralRpcStub::register_merge_server(const int64_t timeout,
                                                 const common::ObServer & root_server,
@@ -184,7 +170,6 @@ namespace oceanbase
       return send_1_return_1(update_server, timeout, OB_UPS_GET_TABLE_TIME_STAMP,
           DEFAULT_VERSION, frozen_version, frozen_time);
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int ObGeneralRpcStub::check_incremental_data_range(
         const int64_t timeout, const ObServer & root_server,
@@ -194,9 +179,6 @@ namespace oceanbase
           table_id, range, new_range);
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     // fetch schema current version
     int ObGeneralRpcStub::fetch_schema_version(
         const int64_t timeout, const common::ObServer & root_server,
@@ -213,7 +195,6 @@ namespace oceanbase
           version, only_core_tables, schema);
     }
 
-<<<<<<< HEAD
     //add by wangdonghui 20160304 fetch procedure :b
     int ObGeneralRpcStub::fetch_procedure(
         const int64_t timeout, const ObServer & root_server,
@@ -223,20 +204,15 @@ namespace oceanbase
     }
 
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
     int ObGeneralRpcStub::fetch_tablet_location(
         const int64_t timeout, const ObServer & root_server,
         const uint64_t root_table_id, const uint64_t table_id,
         const ObRowkey & row_key, ObScanner & scanner) const
     {
-<<<<<<< HEAD
       TBSYS_LOG(DEBUG,">>>timeout[%ld],table_id[%ld],rs[%s],rowkey[%s]",timeout,
                 table_id,
                 to_cstring(root_server),
                 to_cstring(row_key));
-=======
->>>>>>> refs/remotes/origin/master
       ObCellInfo cell;
       // cell info not root table id
       UNUSED(root_table_id);
@@ -305,7 +281,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong[Truncate Table]:20170403:b
     int ObGeneralRpcStub::truncate_table(const int64_t timeout, const common::ObServer & root_server,
         bool if_exists, const common::ObStrings &tables, const common::ObString& user, const common::ObString & comment) const
@@ -355,9 +330,6 @@ namespace oceanbase
       return ret;
     }
     //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
     int ObGeneralRpcStub::set_obi_role(const ObServer &rs, const int64_t timeout, const ObiRole &obi_role) const
     {
       int ret = OB_SUCCESS;
@@ -1196,7 +1168,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObGeneralRpcStub::drop_index(const int64_t timeout, const common::ObServer & root_server,
         bool if_exists, const common::ObStrings &indexs) const
     {
@@ -1264,7 +1235,5 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,8 +13,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_03_14
  */
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_sessionctx_factory.cpp updateserver / Oceanbase
@@ -39,10 +36,7 @@
 #include "ob_sessionctx_factory.h"
 #include "ob_update_server_main.h"
 
-<<<<<<< HEAD
 #define UPS ObUpdateServerMain::get_instance()->get_update_server()
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -67,12 +61,8 @@ namespace oceanbase
                                                                uc_info_(),
                                                                lock_info_(NULL),
                                                                publish_callback_list_(),
-<<<<<<< HEAD
                                                                free_callback_list_(),
                                                                group_id_(-1) //add by zhouhuan [scalablecommit] 20160426
-=======
-                                                               free_callback_list_()
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -80,7 +70,6 @@ namespace oceanbase
     {
     }
 
-<<<<<<< HEAD
     int RWSessionCtx::precommit()
     {
       int ret = OB_SUCCESS;
@@ -91,8 +80,6 @@ namespace oceanbase
       OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_LTIME, tbsys::CTimeUtil::getTime() - begin_time);
       return ret;
     }
-=======
->>>>>>> refs/remotes/origin/master
     void RWSessionCtx::end(const bool need_rollback)
     {
       if (!commit_done_)
@@ -119,7 +106,6 @@ namespace oceanbase
       publish_callback_list_.callback(rollback, *this);
     }
 
-<<<<<<< HEAD
     int RWSessionCtx::on_free()
     {
       bool rollback = false;
@@ -128,12 +114,6 @@ namespace oceanbase
       int ret = free_callback_list_.callback(rollback, *this);
       return ret;
       //modify :e
-=======
-    void RWSessionCtx::on_free()
-    {
-      bool rollback = false;
-      free_callback_list_.callback(rollback, *this);
->>>>>>> refs/remotes/origin/master
     }
 
     int RWSessionCtx::add_publish_callback(ISessionCallback *callback, void *data)
@@ -170,10 +150,7 @@ namespace oceanbase
       checksum_callback_.reset();
       checksum_callback_list_.reset();
       dml_count_ = v4si_zero;
-<<<<<<< HEAD
       group_id_ = -1; //add by zhouhuan
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObUpsMutator &RWSessionCtx::get_ups_mutator()
@@ -211,7 +188,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add wangjiahao [tablelock] 20160616 :b
     int RWSessionCtx::init_table_lock_info()
     {
@@ -229,8 +205,6 @@ namespace oceanbase
     }
     //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
     ILockInfo *RWSessionCtx::get_lock_info()
     {
       return lock_info_;
@@ -263,14 +237,10 @@ namespace oceanbase
 
     void RWSessionCtx::kill()
     {
-<<<<<<< HEAD
       //mod chujiajia [log synchronization][multi_cluster] 20160923:b
       //if (ST_ALIVE != ATOMIC_CAS(&stat_, ST_ALIVE, ST_KILLING))
       if (ObiRole::MASTER == UPS.get_obi_role().get_role() && ST_ALIVE != ATOMIC_CAS(&stat_, ST_ALIVE, ST_KILLING))
       //mod:e
-=======
-      if (ST_ALIVE != ATOMIC_CAS(&stat_, ST_ALIVE, ST_KILLING))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(WARN, "session will not be killed sd=%u stat=%d session_start_time=%ld stmt_start_time=%ld session_timeout=%ld stmt_timeout=%ld",
                   get_session_descriptor(), stat_, get_session_start_time(), get_stmt_start_time(), get_session_timeout(), get_stmt_timeout());
@@ -308,7 +278,6 @@ namespace oceanbase
 
     SessionCtxFactory::SessionCtxFactory() : mod_(ObModIds::OB_UPS_SESSION_CTX),
                                              allocator_(ALLOCATOR_PAGE_SIZE, mod_),
-<<<<<<< HEAD
                                              ctx_allocator_(),
                                              long_trans_ctx_allocator_() //add by qx 20170314
     {
@@ -317,11 +286,6 @@ namespace oceanbase
       if (OB_SUCCESS != ctx_allocator_.init(ALLOCATOR_TOTAL_LIMIT, ALLOCATOR_HOLD_LIMIT, ALLOCATOR_PAGE_SIZE))
       //if (OB_SUCCESS != ctx_allocator_.init(OB_ALLOCATOR_TOTAL_LIMIT, OB_ALLOCATOR_HOLD_LIMIT, ALLOCATOR_PAGE_SIZE))
       // modify :e
-=======
-                                             ctx_allocator_()
-    {
-      if (OB_SUCCESS != ctx_allocator_.init(ALLOCATOR_TOTAL_LIMIT, ALLOCATOR_HOLD_LIMIT, ALLOCATOR_PAGE_SIZE))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR, "init allocator fail");
       }
@@ -329,7 +293,6 @@ namespace oceanbase
       {
         ctx_allocator_.set_mod_id(ObModIds::OB_UPS_SESSION_CTX);
       }
-<<<<<<< HEAD
       //add by qx 20170314 :b
       if (OB_SUCCESS != long_trans_ctx_allocator_.init(ALLOCATOR_TOTAL_LIMIT, ALLOCATOR_HOLD_LIMIT, ALLOCATOR_PAGE_SIZE))
       {
@@ -340,8 +303,6 @@ namespace oceanbase
         ctx_allocator_.set_mod_id(ObModIds::OB_UPS_SESSION_CTX);
       }
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     SessionCtxFactory::~SessionCtxFactory()
@@ -375,7 +336,6 @@ namespace oceanbase
           ret = new(buffer) RWSessionCtx(type, host, ctx_allocator_);
         }
         break;
-<<<<<<< HEAD
       case ST_LONG_READ_WRITE:
         buffer = allocator_.alloc(sizeof(RWSessionCtx));
         if (NULL != buffer)
@@ -383,8 +343,6 @@ namespace oceanbase
           ret = new(buffer) RWSessionCtx(type, host, long_trans_ctx_allocator_);
         }
         break;
-=======
->>>>>>> refs/remotes/origin/master
       default:
         TBSYS_LOG(WARN, "invalid session type=%d", type);
         break;

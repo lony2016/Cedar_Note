@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -105,11 +102,8 @@ namespace oceanbase
       //        @manager the real schema pointer returned
       int get_schema(const uint64_t table_id, const int64_t timestamp, const common::ObSchemaManagerV2 ** manager);
 
-<<<<<<< HEAD
       virtual int check_incremental_data_range(
           int64_t table_id, ObVersionRange &version, ObVersionRange &new_range); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
       // fetch new schema if find new version
       int fetch_schema_version(int64_t & timestamp);
 
@@ -130,12 +124,9 @@ namespace oceanbase
       {
         return rpc_stub_;
       }
-<<<<<<< HEAD
       //add huangcc [statistic info materialization] 20170208:b
       int ups_mutate(const ObMutator & mutate_param, const bool has_data, ObScanner & scanner);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       int64_t get_rpc_timeout(void) const
       {
         return rpc_timeout_;
@@ -206,7 +197,6 @@ namespace oceanbase
                            const common::ObServerType server_type = common::MERGE_SERVER,
                            const int64_t time_out = 0);
 
-<<<<<<< HEAD
       // add longfei [cons static index] 151204
       /**
        * @brief cs_cs_scan scan data from chunk server
@@ -224,8 +214,6 @@ namespace oceanbase
                              const int64_t time_out = 0);
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // get data from update server
       // param  @get_param get param
       //        @scanner return result
@@ -299,7 +287,6 @@ namespace oceanbase
                          const common::ObServerType server_type,
                          const int64_t time_out = 0);
 
-<<<<<<< HEAD
       //add longfei [cons static index] 151204:b
       template<class T, class RpcT>
       int cs_scan_(RpcT *rpc_stub,
@@ -316,8 +303,6 @@ namespace oceanbase
                           const int64_t time_out = 0);
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // find master update server from server list
       void update_ups_info(const common::ObUpsList & list);
 
@@ -352,7 +337,6 @@ namespace oceanbase
       // check if need retry ups when got a error code
       inline bool check_need_retry_ups(const int rc);
 
-<<<<<<< HEAD
       //add longfei [cons static index] 151204
       /**
        * @brief check_need_retry_cs
@@ -362,8 +346,6 @@ namespace oceanbase
       inline bool check_need_retry_cs(const int rc);
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       /// max len
       static const int64_t MAX_RANGE_LEN = 128;
       static const int64_t MAX_ROWKEY_LEN = 8;
@@ -411,7 +393,6 @@ namespace oceanbase
       }
       return need_retry;
     }
-<<<<<<< HEAD
 
     //add longfei [cons static index] 151202:b
     inline bool ObMergerRpcProxy::check_need_retry_cs(const int rc)
@@ -424,8 +405,6 @@ namespace oceanbase
       return need_retry;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

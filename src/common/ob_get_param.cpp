@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -572,7 +569,6 @@ namespace oceanbase
       deep_copy_args_ = deep_copy_args;
     }
 
-<<<<<<< HEAD
     void ObGetParam::reset_cells()
     {
       cell_size_ = 0;
@@ -593,8 +589,6 @@ namespace oceanbase
 //      deep_copy_args_ = deep_copy_args;
     }
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObGetParam::serialize_flag(char* buf, const int64_t buf_len, int64_t& pos,
       const int64_t flag) const
     {

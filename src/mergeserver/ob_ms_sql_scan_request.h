@@ -26,27 +26,20 @@
 #include "ob_ms_sql_sub_scan_request.h"
 #include "ob_ms_sql_operator.h"
 #include "common/location/ob_tablet_location_range_iterator.h"
-<<<<<<< HEAD
 #include "sql/ob_rpc_scan.h"
 #include "sql/ob_sql_read_strategy.h" //add wanglei [semi join multi thread] 20170417
-=======
-
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
   {
     class ObTabletLocationCacheProxy;
   }
-<<<<<<< HEAD
   //add wanglei [semi join] 20161130:b
   namespace sql
   {
      class ObRpcScan;
   }
   //add wanglei [semi join] 20161130:e
-=======
->>>>>>> refs/remotes/origin/master
   namespace mergeserver
   {
     class ObMsSqlRpcEvent;
@@ -90,7 +83,6 @@ namespace oceanbase
       {
         return merger_operator_.get_whole_result_row_count();
       }
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20170417:b
       int init_ex(const uint64_t count, const uint32_t mod_id,  ObRpcScan *rpc_scan = NULL, ObSessionManager * session_mgr = NULL);
       int set_request_param_only(ObSqlScanParam &scan_param, const ObRpcScanHint &hint);
@@ -100,8 +92,6 @@ namespace oceanbase
                                              ObSqlReadStrategy *get_sql_read_trategy
                                              );
       //add wanglei [semi join multi thread] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObMsSqlSubScanRequest * alloc_sub_scan_request();
       int find_sub_scan_request(ObMsSqlRpcEvent * agent_event, bool &belong_to_this, bool &is_first,
@@ -128,13 +118,10 @@ namespace oceanbase
       ObTabletLocationRangeIterator org_req_range_iter_;
       int64_t sharding_limit_count_;
       bool inited_;
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       sql::ObRpcScan *rpc_scan_;
       bool is_end_;
       //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline const int32_t ObMsSqlScanRequest::get_total_sub_request_count() const

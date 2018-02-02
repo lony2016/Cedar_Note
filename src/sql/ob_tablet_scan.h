@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -98,11 +95,7 @@ namespace oceanbase
         virtual ObPhyOperatorType get_type() const { return PHY_TABLET_SCAN; }
 
         inline int get_tablet_range(ObNewRange& range);
-<<<<<<< HEAD
         inline int get_scan_range(ObNewRange& range); //add hxlong [Truncate Table]:20170318
-=======
-
->>>>>>> refs/remotes/origin/master
         virtual int create_plan(const ObSchemaManagerV2 &schema_mgr);
 
         bool has_incremental_data() const;
@@ -112,7 +105,6 @@ namespace oceanbase
         {
           scan_context_ = scan_context;
         }
-<<<<<<< HEAD
         // add longfei [cons static index] 151130:b
         /**
          * @brief ObTabletScan::build_sstable_scan_param_pub make build_sstable_scan_param() public
@@ -125,8 +117,6 @@ namespace oceanbase
             const ObSqlScanParam &sql_scan_param,
             sstable::ObSSTableScanParam &sstable_scan_param) const;
         // add e
-=======
->>>>>>> refs/remotes/origin/master
 
       private:
         // disallow copy
@@ -139,7 +129,6 @@ namespace oceanbase
             ObTabletJoin::TableJoinInfo &table_join_info,
             int64_t start_data_version,
             int64_t end_data_version);
-<<<<<<< HEAD
         int need_incremental_data(
             ObArray<uint64_t> &basic_columns,
             ObTabletJoin::TableJoinInfo &table_join_info,
@@ -151,11 +140,6 @@ namespace oceanbase
                                          int64_t start_version,
                                          int64_t end_version,
                                          ObVersionRange &range); //add hxlong [Truncate Table]:20170318
-=======
-        int build_sstable_scan_param(ObArray<uint64_t> &basic_columns,
-            const ObSqlScanParam &sql_scan_param, sstable::ObSSTableScanParam &sstable_scan_param) const;
-        int set_ups_scan_range(const ObNewRange &scan_range);
->>>>>>> refs/remotes/origin/master
 
       private:
         // data members
@@ -182,7 +166,6 @@ namespace oceanbase
       ret = op_sstable_scan_.get_tablet_range(range);
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int ObTabletScan::get_scan_range(ObNewRange& range)
     {
@@ -191,9 +174,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     void ObTabletScan::set_sql_scan_param(const ObSqlScanParam &sql_scan_param)
     {
       sql_scan_param_ = &sql_scan_param;

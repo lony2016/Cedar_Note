@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  */
 
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_COMMON_OB_OBJECT_H_
 #define OCEANBASE_COMMON_OB_OBJECT_H_
 
@@ -29,13 +26,9 @@
 #include "ob_action_flag.h"
 #include "ob_obj_type.h"
 #include "ob_number.h"
-<<<<<<< HEAD
 //add   fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 #include "Ob_Decimal.h"
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace tests
@@ -51,18 +44,11 @@ namespace oceanbase
     {
       uint32_t type_:8;
       uint32_t dec_vscale_:6;
-<<<<<<< HEAD
       uint32_t dec_precision_:7;
       uint32_t dec_scale_:6;
       uint32_t op_flag_:2;
       uint32_t dec_nwords_:3; // the actual nwords is dec_nwords_ + 1, so the range of nwords is [1, 8]
       //uint32_t dec_neg:1;
-=======
-      uint32_t op_flag_:2;
-      uint32_t dec_precision_:7;
-      uint32_t dec_scale_:6;
-      uint32_t dec_nwords_:3; // the actual nwords is dec_nwords_ + 1, so the range of nwords is [1, 8]
->>>>>>> refs/remotes/origin/master
     };
 
     union _ObjValue
@@ -136,10 +122,7 @@ namespace oceanbase
         void dump(const int32_t log_level = TBSYS_LOG_LEVEL_DEBUG) const;
         void print_value(FILE* fd);
         int64_t to_string(char* buffer, const int64_t length) const;
-<<<<<<< HEAD
         int64_t to_string_v2(std::string &s) const;//add gaojt [ListAgg][JHOBv0.1]20150104
-=======
->>>>>>> refs/remotes/origin/master
         //
         NEED_SERIALIZE_AND_DESERIALIZE;
         /*
@@ -171,7 +154,6 @@ namespace oceanbase
         int get_varchar(ObString& value) const;
         int get_bool(bool &value) const;
 
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         int get_decimal(ObString& value) const;
         int set_decimal(const ObString& value);
@@ -204,27 +186,20 @@ namespace oceanbase
         int from_hash(TTCInt &tc,const char* buf, int64_t buf_len)const ;
         //add e
         //int set_decimal(const ObNumber &num, int8_t precision = 38, int8_t scale = 0, bool is_add = false);
-=======
-        int set_decimal(const ObNumber &num, int8_t precision = 38, int8_t scale = 0, bool is_add = false);
->>>>>>> refs/remotes/origin/master
         int get_decimal(ObNumber &num) const;
         int get_decimal(ObNumber &num, bool &is_add) const;
         /*
          *   获取数据类型
          */
         ObObjType get_type(void) const;
-<<<<<<< HEAD
         //add dhc[in post-expression optimization/query optimizer]@20151121:b
         int obj_copy(ObObj&) const;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         int32_t get_val_len() const;
         void set_val_len(const int32_t val_len);
         bool need_deep_copy()const;
         bool is_true() const;
-<<<<<<< HEAD
         //add by wdh 20160704 :b
         /**
          * @brief is_numerical
@@ -233,8 +208,6 @@ namespace oceanbase
          */
         bool is_numerical() const;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         static const char* get_sql_type(ObObjType type);
         /*
          *   计算obj内数据的校验和
@@ -312,7 +285,6 @@ namespace oceanbase
         const char *varchar_val;
         bool bool_val;
         uint32_t *dec_words_;
-<<<<<<< HEAD
         //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         const char* word;
         //modify e
@@ -321,8 +293,6 @@ namespace oceanbase
         //TTInt *tt;
         uint64_t *ii;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       } value_;
     };
 
@@ -471,7 +441,6 @@ namespace oceanbase
       meta_.op_flag_ = INVALID_OP_FLAG;
       value_.createtime_val = value;
     }
-<<<<<<< HEAD
     // add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         inline uint32_t ObObj::get_precision() const
         {
@@ -514,9 +483,6 @@ namespace oceanbase
         }
 
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     inline void ObObj::set_bool(const bool value)
     {
       meta_.type_ = ObBoolType;
@@ -761,7 +727,6 @@ namespace oceanbase
           || (meta_.type_ == ObCreateTimeType)
           || (meta_.type_ == ObModifyTimeType));
     }
-<<<<<<< HEAD
     // add by wdh 20160704 :b
     inline bool ObObj::is_numerical() const
     {
@@ -770,9 +735,6 @@ namespace oceanbase
              ||(meta_.type_ == ObDoubleType));
     }
     //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
     inline bool ObObj::can_compare(const ObObj & other) const
     {
       bool ret = false;
@@ -810,7 +772,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //modify xsl ECNU_DECIMAL 2016_11
     //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
    template <typename AllocatorT>
@@ -901,28 +862,6 @@ namespace oceanbase
        return ret;
    }
    //modify e
-=======
-    template <typename AllocatorT>
-    int ob_write_obj(AllocatorT &allocator, const ObObj &src, ObObj &dst)
-    {
-      int ret = OB_SUCCESS;
-      if (OB_UNLIKELY(ObVarcharType != src.get_type()))
-      {
-        dst = src;
-      }
-      else
-      {
-        ObString str;
-        ObString str_clone;
-        src.get_varchar(str);
-        if (OB_SUCCESS == (ret = ob_write_string(allocator, str, str_clone)))
-        {
-          dst.set_varchar(str_clone);
-        }
-      }
-      return ret;
-    }
->>>>>>> refs/remotes/origin/master
   }
 }
 

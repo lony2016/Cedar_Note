@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -959,7 +956,6 @@ int ObRootBalancer::do_rereplication_by_table(const uint64_t table_id, bool &sca
       }
       else
       {
-<<<<<<< HEAD
         //mod longfei [cons static index] 151227:b
 //        TBSYS_LOG(ERROR, "find table not in root table:role[%d], master[%d], table_id[%lu]",
 //            root_server_->get_obi_role().get_role(), root_server_->is_master(), table_id);
@@ -1007,10 +1003,6 @@ int ObRootBalancer::do_rereplication_by_table(const uint64_t table_id, bool &sca
           OB_DELETE(ObSchemaManagerV2, ObModIds::OB_RS_SCHEMA_MANAGER, schema_mgr);
         }
         //mod e
-=======
-        TBSYS_LOG(ERROR, "find table not in root table:role[%d], master[%d], table_id[%lu]",
-            root_server_->get_obi_role().get_role(), root_server_->is_master(), table_id);
->>>>>>> refs/remotes/origin/master
       }
     }
     else
@@ -1903,7 +1895,6 @@ namespace oceanbase
   } // end namespace rootserver
 } // end namespace oceanbase
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static_index]20151216
 bool ObRootBalancer::check_create_index_over()
 {
@@ -1918,8 +1909,6 @@ bool ObRootBalancer::check_create_index_over()
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObRootBalancer::nb_print_shutting_down_progress(char *buf, const int64_t buf_len, int64_t& pos)
 {
   int ret = OB_SUCCESS;
@@ -3467,7 +3456,6 @@ int ObRootBalancer::check_replica_count_for_import(int64_t tablet_version)
     }
     else
     {
-<<<<<<< HEAD
       //add wenghaixing, [secondary index static_index_build] 20160126:b
       common::ObSchemaManagerV2* out_schema = OB_NEW(ObSchemaManagerV2, ObModIds::OB_RS_SCHEMA_MANAGER);
       if (NULL == out_schema)
@@ -3491,9 +3479,6 @@ int ObRootBalancer::check_replica_count_for_import(int64_t tablet_version)
       //del wenghaixing, [secondary index static_index_build] 20160126:b
       //ret = root_table_->check_tablet_version_merged(tablet_version, min_replica_count, is_merged);
       //del:e
-=======
-      ret = root_table_->check_tablet_version_merged(tablet_version, min_replica_count, is_merged);
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != ret)
       {
         TBSYS_LOG(WARN, "failed to check_tablet_version_merged, tablet_version=%ld min_replica_count=%ld, ret=%d",

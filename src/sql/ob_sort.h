@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,8 +12,6 @@
  * @date     2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -51,7 +48,6 @@ namespace oceanbase
         int64_t get_sort_column_size() const;
         void set_mem_size_limit(const int64_t limit);
         int set_run_filename(const common::ObString &filename);
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150826:b
         /**
         * @brief get an array of distinct values of left table.
@@ -61,8 +57,6 @@ namespace oceanbase
         */
         common::ObArray<common::ObObj>& get_filer_set();
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         virtual int open();
         virtual int close();
@@ -73,13 +67,9 @@ namespace oceanbase
 
         int64_t get_mem_size_limit() const;
         const common::ObArray<ObSortColumn>& get_sort_columns() const;
-<<<<<<< HEAD
         //add wanglei [semi join] 20170417:b
         int open_without_sort();
         //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
         DECLARE_PHY_OPERATOR_ASSIGN;
         NEED_SERIALIZE_AND_DESERIALIZE;
       private:

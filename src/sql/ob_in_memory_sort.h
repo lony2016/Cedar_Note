@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -14,8 +13,6 @@
  * @date     2015_08_19
  */
  /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -56,10 +53,6 @@ namespace oceanbase
 
       NEED_SERIALIZE_AND_DESERIALIZE;
     };
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
     class ObInMemorySort: public ObSortHelper
     {
       public:
@@ -75,12 +68,9 @@ namespace oceanbase
         int get_next_compact_row(common::ObString &compact_row);
         int get_next_row(common::ObRow &row);
         const common::ObRowDesc* get_row_desc() const;
-<<<<<<< HEAD
         //add yushengjuan [semi_join] [0.1] 20150829:b
         common::ObArray<const common::ObRowStore::StoredRow*>& get_sorted_element();
         //add:end
-=======
->>>>>>> refs/remotes/origin/master
 
         int64_t get_row_count() const;
         int64_t get_used_mem_size() const;
@@ -105,7 +95,6 @@ namespace oceanbase
     {
       return row_desc_;
     }
-<<<<<<< HEAD
 
     //add yushengjuan [semi_join] [0.1] 20150829:b
     inline common::ObArray<const common::ObRowStore::StoredRow*>& ObInMemorySort::get_sorted_element()
@@ -113,8 +102,6 @@ namespace oceanbase
     	return sort_array_;
 	}
     //add:end
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace sql
 } // end namespace oceanbase
 

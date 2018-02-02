@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2015 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -65,7 +62,6 @@ namespace oceanbase
         int get_row_desc(const common::ObRowDesc *&row_desc) const;
         int64_t to_string(char* buf, const int64_t buf_len) const;
         void set_phy_plan(ObPhysicalPlan *the_plan);
-<<<<<<< HEAD
         void set_input_values(uint64_t subquery) {input_values_subquery_ = subquery;}
         enum ObPhyOperatorType get_type() const{return PHY_INSERT_DB_SEM_FILTER;}
         //add maoxx
@@ -75,10 +71,6 @@ namespace oceanbase
         void reset_iterator() { insert_values_.reset_iterator();}
         //add e
 
-=======
-        void set_input_values(uint64_t subquery) {input_values_subquery_ = subquery;};
-        enum ObPhyOperatorType get_type() const{return PHY_INSERT_DB_SEM_FILTER;}
->>>>>>> refs/remotes/origin/master
         DECLARE_PHY_OPERATOR_ASSIGN;
         NEED_SERIALIZE_AND_DESERIALIZE;
       private:

@@ -464,11 +464,8 @@ namespace oceanbase
         }
       }
       TBSYS_LOG(DEBUG, "get_log(start_cursor=%s, end_id=%ld, read_count=%ld)=>%d", start_cursor.to_str(), end_cursor.log_id_, read_count, err);
-<<<<<<< HEAD
       //TBSYS_LOG(WARN,"test::zhouhuan RemoteLogSrc get_log start_cursor=[%s] end_cursor=[%s], read_count=%ld ret=%d",
        //         to_cstring(start_cursor), to_cstring(end_cursor), read_count, err);
-=======
->>>>>>> refs/remotes/origin/master
       return err;
     }
   } // end namespace updateserver

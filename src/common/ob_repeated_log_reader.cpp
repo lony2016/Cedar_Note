@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -49,15 +46,12 @@ int ObRepeatedLogReader::read_log(LogCommand &cmd, uint64_t &log_seq, char *&log
 {
   int ret = OB_SUCCESS;
 
-<<<<<<< HEAD
   // add by zhangcd [log_reader] 20151215:b
   timestamp_ = 0;
   // add:e
   //add chujiajia [log synchronization][multi_cluster] 20160326:b
   max_cmt_id_ = 0;
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   ObLogEntry entry;
   if (!is_initialized_)
   {
@@ -179,15 +173,12 @@ int ObRepeatedLogReader::read_log(LogCommand &cmd, uint64_t &log_seq, char *&log
       last_log_seq_ = entry.seq_;
       cmd = static_cast<LogCommand>(entry.cmd_);
       log_seq = entry.seq_;
-<<<<<<< HEAD
       // add by zhangcd [log_reader] 20151215:b
       timestamp_ = entry.header_.timestamp_;
       // add:e
       //add chujiajia [log synchronization][multi_cluster] 20160326:b
       max_cmt_id_ = entry.header_.max_cmt_id_;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       log_data = log_buffer_.get_data() + log_buffer_.get_position();
       data_len = entry.get_log_data_len();
       log_buffer_.get_position() += data_len;
@@ -208,7 +199,6 @@ int ObRepeatedLogReader::read_log(LogCommand &cmd, uint64_t &log_seq, char *&log
   return ret;
 }
 
-<<<<<<< HEAD
 //add lbzhong [Max Log Timestamp] 20150824:b
 int ObRepeatedLogReader::read_log(LogCommand &cmd, uint64_t &log_seq, int64_t& timestamp)
 {
@@ -239,5 +229,3 @@ int ObRepeatedLogReader::read_log_for_data_checksum(LogCommand &cmd, uint64_t &l
   return OB_SUCCESS;
 }
 //add:e
-=======
->>>>>>> refs/remotes/origin/master

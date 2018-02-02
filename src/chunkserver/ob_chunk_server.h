@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
 / *   (C) 2007-2010 Taobao Inc.
-=======
- *   (C) 2007-2010 Taobao Inc.
->>>>>>> refs/remotes/origin/master
  *
  *   Version: 0.1 $date
  *

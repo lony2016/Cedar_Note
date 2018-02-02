@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,8 +13,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_07_24
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -224,10 +221,6 @@ namespace oceanbase
         const uint64_t column_id, const ObObj& value, const int return_flag)
     {
       int err = OB_SUCCESS;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       ObMutatorCellInfo mutation;
 
       mutation.cell_info.table_id_ = table_id;
@@ -250,7 +243,6 @@ namespace oceanbase
 
       return err;
     }
-<<<<<<< HEAD
     //add by qx 20170210 :b
     int ObMutator :: update(const uint64_t table_id, const ObRowkey& row_key,
         const uint64_t column_id, const ObObj& value, bool is_row_changed, const int return_flag)
@@ -279,8 +271,6 @@ namespace oceanbase
       return err;
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
     int ObMutator :: insert(const ObString& table_name, const ObRowkey& row_key,
         const ObString& column_name, const ObObj& value, const int return_flag)
@@ -509,7 +499,6 @@ namespace oceanbase
 
       return err;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int ObMutator :: trun_tab(const uint64_t table_id, const common::ObString & table_name, const common::ObString & user_name, const common::ObString & comment)
     {
@@ -571,8 +560,6 @@ namespace oceanbase
       return err;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     int ObMutator :: add_row_barrier()
     {
@@ -590,15 +577,12 @@ namespace oceanbase
     {
       return add_cell(cell, CHANGED_UNKNOW, NO_BARRIER, OB_DML_UNKNOW);
     }
-<<<<<<< HEAD
     //add by qx 20170210
     int ObMutator::add_cell(const ObMutatorCellInfo& cell, bool is_row_changed)
     {
       return add_cell(cell,is_row_changed? CHANGED:NOCHANGED, NO_BARRIER, OB_DML_UNKNOW);
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
     int ObMutator :: add_cell(const ObMutatorCellInfo& cell,
                               const RowChangedStat row_changed_stat,
@@ -617,13 +601,9 @@ namespace oceanbase
       }
       else
       {
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160520
         //err = copy_cell_(cell, cur_node->cell, row_changed_stat, store_size);
         err = copy_cell_(cell, cur_node->cell, row_changed_stat, store_size, barrier_flag);
-=======
-        err = copy_cell_(cell, cur_node->cell, row_changed_stat, store_size);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != err)
         {
           TBSYS_LOG(WARN, "failed to copy cell, err=%d", err);
@@ -649,7 +629,6 @@ namespace oceanbase
 
       if (OB_SUCCESS == err)
       {
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160425:b
         //cell_store_size_ += store_size;
         //TBSYS_LOG(ERROR, "test::whx cell store size %ld,type %d, barrier_flag %d", cell_store_size_, cur_node->dml_type, cur_node->barrier_flag);
@@ -667,9 +646,6 @@ namespace oceanbase
           cell_store_size_ += store_size;
         }
         //modify:e
-=======
-        cell_store_size_ += store_size;
->>>>>>> refs/remotes/origin/master
       }
 
       return err;
@@ -869,7 +845,6 @@ namespace oceanbase
             err = tmp_obj.serialize(buf, buf_len, pos);
           }
         }
-<<<<<<< HEAD
         //add  whx
        // int64_t val = 0,tmp = pos;
         while (OB_SUCCESS == err && NULL != node)
@@ -877,22 +852,13 @@ namespace oceanbase
           //val += pos-tmp;
           //tmp = pos;
           //TBSYS_LOG(ERROR,"test::whx lag = %ld",val);
-=======
-
-        while (OB_SUCCESS == err && NULL != node)
-        {
->>>>>>> refs/remotes/origin/master
           if (NO_BARRIER != node->barrier_flag)
           {
             if (ROWKEY_BARRIER & node->barrier_flag)
             {
               last_row_key.assign(NULL, 0);
             }
-<<<<<<< HEAD
             if (ROW_DML_TYPE & node-> barrier_flag)
-=======
-            if (ROW_DML_TYPE & node->barrier_flag)
->>>>>>> refs/remotes/origin/master
             {
               err = serialize_flag_(buf, buf_len, pos, ObActionFlag::DML_TYPE_FIELD);
               {
@@ -942,17 +908,11 @@ namespace oceanbase
             else
             {
               // serialize table id
-<<<<<<< HEAD
               //TBSYS_LOG(ERROR, "test::whx last tid = %ld, new tid = %ld", last_table_id, node->cell.cell_info.table_id_);
               if (last_table_id != node->cell.cell_info.table_id_)
               {
                 table_changed = true;
                 //int64_t p = pos;
-=======
-              if (last_table_id != node->cell.cell_info.table_id_)
-              {
-                table_changed = true;
->>>>>>> refs/remotes/origin/master
                 err = serialize_flag_(buf, buf_len, pos, ObActionFlag::TABLE_NAME_FIELD);
                 if (OB_SUCCESS == err)
                 {
@@ -960,10 +920,7 @@ namespace oceanbase
                   tmp_obj.set_int(node->cell.cell_info.table_id_);
                   err = tmp_obj.serialize(buf, buf_len, pos);
                 }
-<<<<<<< HEAD
                 //BSYS_LOG(ERROR, "test::whx seri p =>%ld", pos-p);
-=======
->>>>>>> refs/remotes/origin/master
               }
             }
 
@@ -973,19 +930,13 @@ namespace oceanbase
               if (table_changed
                   || 0 != node->cell.cell_info.row_key_.compare(last_row_key))
               {
-<<<<<<< HEAD
                 //int64_t tmp = pos;
-=======
->>>>>>> refs/remotes/origin/master
                 err = serialize_flag_(buf, buf_len, pos, ObActionFlag::FORMED_ROW_KEY_FIELD);
                 if (OB_SUCCESS == err)
                 {
                   err = node->cell.cell_info.row_key_.serialize(buf, buf_len, pos);
                 }
-<<<<<<< HEAD
                 //TBSYS_LOG(ERROR, "test::whx seri len=>%ld", pos-tmp);
-=======
->>>>>>> refs/remotes/origin/master
               }
             }
 
@@ -999,7 +950,6 @@ namespace oceanbase
               // serialize del row
               err = serialize_flag_(buf, buf_len, pos, ObActionFlag::OP_DEL_ROW);
             }
-<<<<<<< HEAD
             //add hxlong [Truncate Table]:20170318:b
             else if (ObExtendType == type
                 && ObActionFlag::OP_TRUN_TAB == tmp_ext_val)
@@ -1008,8 +958,6 @@ namespace oceanbase
               err = serialize_flag_(buf, buf_len, pos, ObActionFlag::OP_TRUN_TAB);
             }
             //add:e
-=======
->>>>>>> refs/remotes/origin/master
             else
             {
               // serialize column param
@@ -1028,38 +976,26 @@ namespace oceanbase
                   {
                     tmp_obj.reset();
                     tmp_obj.set_int(node->cell.cell_info.column_id_);
-<<<<<<< HEAD
                     //int64_t t2 = pos;
                     err = tmp_obj.serialize(buf, buf_len, pos);
                     //TBSYS_LOG(ERROR, "test::whx seri len = %ld",pos-t2);
-=======
-                    err = tmp_obj.serialize(buf, buf_len, pos);
->>>>>>> refs/remotes/origin/master
                   }
                 }
 
                 // serialize op type
                 if (OB_SUCCESS == err)
                 {
-<<<<<<< HEAD
                  // int64_t m = pos;
                   err = node->cell.op_type.serialize(buf, buf_len, pos);
                   //TBSYS_LOG(ERROR, "test::whx seri m len = %ld", pos-m);
-=======
-                  err = node->cell.op_type.serialize(buf, buf_len, pos);
->>>>>>> refs/remotes/origin/master
                 }
 
                 // serialize column value
                 if (OB_SUCCESS == err)
                 {
-<<<<<<< HEAD
                   //int64_t t3 = pos;
                   err = node->cell.cell_info.value_.serialize(buf, buf_len, pos);
                   //TBSYS_LOG(ERROR, "test::whx seri len = %ld", pos-t3);
-=======
-                  err = node->cell.cell_info.value_.serialize(buf, buf_len, pos);
->>>>>>> refs/remotes/origin/master
                 }
               }
             }
@@ -1231,11 +1167,7 @@ namespace oceanbase
                   }
                   break;
 
-<<<<<<< HEAD
                  case ObActionFlag::TABLE_NAME_FIELD:
-=======
-                case ObActionFlag::TABLE_NAME_FIELD:
->>>>>>> refs/remotes/origin/master
                   // deserialize table name
                   err = tmp_obj.deserialize(buf, buf_len, pos);
                   if (OB_SUCCESS == err)
@@ -1264,18 +1196,9 @@ namespace oceanbase
                       get_rowkey_info_from_sm(schema_manager_, cur_cell.cell_info.table_id_,
                           cur_cell.cell_info.table_name_, rowkey_info_);
                     }
-<<<<<<< HEAD
 //                    TBSYS_LOG(INFO, "get_rowkey_info, table_id=%lu, table_name=%s, rowkey_info_size=%ld, err=%d, schema_manager_=%p",
 //                        cur_cell.cell_info.table_id_, to_cstring(cur_cell.cell_info.table_name_),
 //                        rowkey_info_.get_size(), err, schema_manager_);
-=======
-
-                    /*
-                    TBSYS_LOG(INFO, "get_rowkey_info, table_id=%lu, table_name=%s, rowkey_info_size=%ld, err=%d, schema_manager_=%p",
-                        cur_cell.cell_info.table_id_, to_cstring(cur_cell.cell_info.table_name_),
-                        rowkey_info_.get_size(), err, schema_manager_);
-                        */
->>>>>>> refs/remotes/origin/master
                   }
                   is_row_changed = true;
                   break;
@@ -1315,7 +1238,6 @@ namespace oceanbase
                   break;
 
                 case ObActionFlag::OP_DEL_ROW:
-<<<<<<< HEAD
                 case ObActionFlag::OP_TRUN_TAB: //add hxlong [Truncate Table]:20170318
                   cur_cell.cell_info.column_name_.assign(NULL, 0);
                   cur_cell.cell_info.column_id_ = common::OB_INVALID_ID;
@@ -1327,12 +1249,6 @@ namespace oceanbase
                   //add hxlong [bugfix:: illegal op type of DEL_ROW MUTATOR]:20170615:b
                   cur_cell.op_type.set_ext(common::ObActionFlag::OP_UPDATE);
                   //add:e
-=======
-                  cur_cell.cell_info.column_name_.assign(NULL, 0);
-                  cur_cell.cell_info.column_id_ = common::OB_INVALID_ID;
-                  cur_cell.cell_info.value_.reset();
-                  cur_cell.cell_info.value_.set_ext(ObActionFlag::OP_DEL_ROW);
->>>>>>> refs/remotes/origin/master
                   err = add_cell(cur_cell, is_row_changed ? CHANGED : NOCHANGED, NO_BARRIER, dml_type);
                   is_row_changed = false;
                   if (OB_SUCCESS != err)
@@ -1340,10 +1256,6 @@ namespace oceanbase
                     TBSYS_LOG(WARN, "failed to add cell, err=%d", err);
                   }
                   break;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
                 case ObActionFlag::UPDATE_COND_PARAM_FIELD:
                   err = OB_NOT_SUPPORTED;
                   TBSYS_LOG(ERROR, "not support UPDATE_COND_PARAM_FIELD[%ld]", ext_val);
@@ -1390,17 +1302,13 @@ namespace oceanbase
 
     int64_t ObMutator :: get_serialize_size(void) const
     {
-<<<<<<< HEAD
       //TBSYS_LOG(ERROR,"test::zhouhuan Mutator size cell_store_size=[%ld]", cell_store_size_);
-=======
->>>>>>> refs/remotes/origin/master
       int64_t store_size = cell_store_size_ + get_obj_serialize_size_(ObActionFlag::MUTATOR_PARAM_FIELD, true)
         + get_obj_serialize_size_(ObActionFlag::END_PARAM_FIELD, true);
       store_size += get_obj_serialize_size_(ObActionFlag::MUTATOR_TYPE_FIELD, true) + get_obj_serialize_size_(type_, false);
       return store_size;
     }
 
-<<<<<<< HEAD
     //modify by zhouhuan[scalablecommit] 20160520
     //int ObMutator :: copy_cell_(const ObMutatorCellInfo& src_cell, ObMutatorCellInfo& dst_cell,
     //                            RowChangedStat row_changed_stat, int64_t& store_size)
@@ -1638,206 +1546,6 @@ namespace oceanbase
             last_row_key_ = dst_cell.cell_info.row_key_;
             last_table_id_ = dst_cell.cell_info.table_id_;
           }
-=======
-    int ObMutator :: copy_cell_(const ObMutatorCellInfo& src_cell, ObMutatorCellInfo& dst_cell,
-                                RowChangedStat row_changed_stat, int64_t& store_size)
-    {
-      int err = OB_SUCCESS;
-      store_size = 0;
-
-      int64_t ext_val = 0;
-      int64_t type = src_cell.cell_info.value_.get_type();
-      if (ObExtendType == type)
-      {
-        src_cell.cell_info.value_.get_ext(ext_val);
-      }
-
-      if (ObExtendType == type
-          && (ObActionFlag::OP_USE_OB_SEM == ext_val
-            || ObActionFlag::OP_USE_DB_SEM == ext_val))
-      {
-        dst_cell.cell_info.reset();
-        dst_cell.cell_info.value_.reset();
-        dst_cell.cell_info.value_.set_ext(ext_val);
-        store_size += (get_obj_serialize_size_(ObActionFlag::OBDB_SEMANTIC_FIELD, true)
-            + dst_cell.cell_info.value_.get_serialize_size());
-      }
-      else
-      {
-        bool table_changed = false;
-        // store table name or table id
-        if (0 != src_cell.cell_info.table_name_.length())
-        {
-          if (USE_ID == id_name_type_)
-          {
-            TBSYS_LOG(WARN, "invalid status, should use name");
-            err = OB_ERROR;
-          }
-          else
-          {
-            id_name_type_ = USE_NAME;
-            dst_cell.cell_info.table_id_ = common::OB_INVALID_ID;
-            // store table name
-            if (0 == src_cell.cell_info.table_name_.compare(last_table_name_))
-            {
-              dst_cell.cell_info.table_name_ = last_table_name_;
-            }
-            else
-            {
-              table_changed = true;
-              err = str_buf_.write_string(src_cell.cell_info.table_name_,
-                  &(dst_cell.cell_info.table_name_));
-              if (OB_SUCCESS != err)
-              {
-                TBSYS_LOG(WARN, "failed to store table name, err=%d", err);
-              }
-              else
-              {
-                store_size += (get_obj_serialize_size_(ObActionFlag::TABLE_NAME_FIELD, true)
-                    + get_obj_serialize_size_(dst_cell.cell_info.table_name_));
-              }
-            }
-          }
-        }
-        else
-        {
-          if (USE_NAME == id_name_type_)
-          {
-            TBSYS_LOG(WARN, "invalid status, should use id");
-            err = OB_ERROR;
-          }
-          else
-          {
-            id_name_type_ = USE_ID;
-            dst_cell.cell_info.table_name_.assign(NULL, 0);
-            // store table id
-            if (last_table_id_ == src_cell.cell_info.table_id_)
-            {
-              dst_cell.cell_info.table_id_ = last_table_id_;
-            }
-            else
-            {
-              table_changed = true;
-              dst_cell.cell_info.table_id_ = src_cell.cell_info.table_id_;
-              store_size += (get_obj_serialize_size_(ObActionFlag::TABLE_NAME_FIELD, true)
-                  + get_obj_serialize_size_(dst_cell.cell_info.table_id_, false));
-            }
-          }
-        }
-
-        // store row key
-        if (OB_SUCCESS == err)
-        {
-          if (NOCHANGED == row_changed_stat)
-          {
-            dst_cell.cell_info.row_key_ = last_row_key_;
-          }
-          else if (!table_changed && CHANGED_UNKNOW == row_changed_stat
-                  && 0 == src_cell.cell_info.row_key_.compare(last_row_key_))
-          {
-            dst_cell.cell_info.row_key_ = last_row_key_;
-          }
-          else
-          {
-            err = str_buf_.write_string(src_cell.cell_info.row_key_,
-                &(dst_cell.cell_info.row_key_));
-            if (OB_SUCCESS != err)
-            {
-              TBSYS_LOG(WARN, "failed to store row key, err=%d", err);
-            }
-            else
-            {
-              store_size += (get_obj_serialize_size_(ObActionFlag::ROW_KEY_FIELD, true)
-                  + get_obj_serialize_size_(dst_cell.cell_info.row_key_));
-            }
-          }
-        }
-
-        if (OB_SUCCESS != err)
-        {
-          // does nothing
-        }
-        else if (ObExtendType == type && ObActionFlag::OP_DEL_ROW == ext_val)
-        {
-          // delete row
-          dst_cell.cell_info.column_id_ = common::OB_INVALID_ID;
-          dst_cell.cell_info.column_name_.assign(NULL, 0);
-          dst_cell.cell_info.value_.reset();
-          dst_cell.cell_info.value_.set_ext(ext_val);
-          store_size += get_obj_serialize_size_(ObActionFlag::OP_DEL_ROW, true);
-        }
-        else
-        {
-          // store column name
-          if (0 != src_cell.cell_info.column_name_.length())
-          {
-            if (USE_ID == id_name_type_)
-            {
-              TBSYS_LOG(WARN, "invalid status, should use name");
-              err = OB_ERROR;
-            }
-            else
-            {
-              id_name_type_ = USE_NAME;
-              dst_cell.cell_info.column_id_ = common::OB_INVALID_ID;
-
-              err = str_buf_.write_string(src_cell.cell_info.column_name_,
-                  &(dst_cell.cell_info.column_name_));
-              if (OB_SUCCESS != err)
-              {
-                TBSYS_LOG(WARN, "failed to store column name, err=%d", err);
-              }
-              else
-              {
-                store_size += get_obj_serialize_size_(dst_cell.cell_info.column_name_);
-              }
-            }
-          }
-          else
-          {
-            if (USE_NAME == id_name_type_)
-            {
-              TBSYS_LOG(WARN, "invalid status, should use id");
-              err = OB_ERROR;
-            }
-            else
-            {
-              id_name_type_ = USE_ID;
-              dst_cell.cell_info.column_name_.assign(NULL, 0);
-              //store column id
-              dst_cell.cell_info.column_id_ = src_cell.cell_info.column_id_;
-              store_size += get_obj_serialize_size_(dst_cell.cell_info.column_id_, false);
-            }
-          }
-
-          // store op type
-          if (OB_SUCCESS == err)
-          {
-            dst_cell.op_type = src_cell.op_type;
-            store_size += dst_cell.op_type.get_serialize_size();
-          }
-
-          if (OB_SUCCESS == err)
-          {
-            // store column value
-            err = str_buf_.write_obj(src_cell.cell_info.value_, &(dst_cell.cell_info.value_));
-            if (OB_SUCCESS != err)
-            {
-              TBSYS_LOG(WARN, "failed to store column value, err=%d", err);
-            }
-            else
-            {
-              store_size += dst_cell.cell_info.value_.get_serialize_size();
-            }
-          }
-        }
-
-        if (OB_SUCCESS == err)
-        {
-          last_table_name_ = dst_cell.cell_info.table_name_;
-          last_row_key_ = dst_cell.cell_info.row_key_;
-          last_table_id_ = dst_cell.cell_info.table_id_;
->>>>>>> refs/remotes/origin/master
         }
       }
 

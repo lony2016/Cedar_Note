@@ -43,11 +43,7 @@ void ObMySQLLoginer::set_privilege_manager(ObPrivilegeManager *privilege_mgr)
 {
   privilege_mgr_ = privilege_mgr;
 }
-<<<<<<< HEAD
 int ObMySQLLoginer::login(onev_connection_e* c, sql::ObSQLSessionInfo *& session)
-=======
-int ObMySQLLoginer::login(easy_connection_t* c, sql::ObSQLSessionInfo *& session)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   OB_ASSERT(server_ != NULL);
@@ -96,11 +92,7 @@ ThreadSpecificBuffer::Buffer* ObMySQLLoginer::get_buffer() const
   return buffer_.get_buffer();
 }
 
-<<<<<<< HEAD
 int ObMySQLLoginer::handshake(onev_connection_e* c)
-=======
-int ObMySQLLoginer::handshake(easy_connection_t* c)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   if (NULL == c)
@@ -155,11 +147,7 @@ int ObMySQLLoginer::handshake(easy_connection_t* c)
   return ret;
 }
 
-<<<<<<< HEAD
 int ObMySQLLoginer::parse_packet(onev_connection_e* c)
-=======
-int ObMySQLLoginer::parse_packet(easy_connection_t* c)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   int read_size = OB_MYSQL_PACKET_HEADER_SIZE;
@@ -239,11 +227,7 @@ int ObMySQLLoginer::parse_packet(easy_connection_t* c)
   return ret;
 }
 
-<<<<<<< HEAD
 int ObMySQLLoginer::insert_new_session(onev_connection_e* c, sql::ObSQLSessionInfo *&session)
-=======
-int ObMySQLLoginer::insert_new_session(easy_connection_t* c, sql::ObSQLSessionInfo *&session)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   session->set_session_id(c->seq);
@@ -273,11 +257,7 @@ int ObMySQLLoginer::insert_new_session(easy_connection_t* c, sql::ObSQLSessionIn
   return ret;
 }
 
-<<<<<<< HEAD
 int ObMySQLLoginer::check_privilege(onev_connection_e* c, sql::ObSQLSessionInfo *&session)
-=======
-int ObMySQLLoginer::check_privilege(easy_connection_t* c, sql::ObSQLSessionInfo *&session)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   int send_err = OB_SUCCESS;

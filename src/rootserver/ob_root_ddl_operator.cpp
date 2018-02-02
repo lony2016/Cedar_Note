@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -20,8 +19,6 @@
  * @date  2016_07_26
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_root_ddl_operator.h"
 #include "ob_root_server2.h"
 #include "common/ob_range.h"
@@ -74,15 +71,11 @@ int ObRootDDLOperator::create_table(const TableSchema & table_schema)
       }
     }
   }
-<<<<<<< HEAD
   //modify wenghaixing [secondary index.static_index]20160119
   if ((OB_SUCCESS == ret && OB_INVALID_ID == table_schema.original_table_id_)
           || (OB_SUCCESS == ret && OB_INVALID_ID != table_schema.original_table_id_ && root_server_->get_config().index_immediate_effect))
   //if (OB_SUCCESS == ret)
   //modify e
-=======
-  if (OB_SUCCESS == ret)
->>>>>>> refs/remotes/origin/master
   {
     // step 3. select cs for create empty tablet
     ret = create_empty_tablet(table_schema);
@@ -107,7 +100,6 @@ int ObRootDDLOperator::create_table(const TableSchema & table_schema)
           table_schema.table_name_, table_schema.table_id_);
     }
   }
-<<<<<<< HEAD
   /*
   //add hushuang[scalable commit]20160710
   if(OB_SUCCESS == ret)
@@ -139,8 +131,6 @@ int ObRootDDLOperator::create_table(const TableSchema & table_schema)
   sleep(1);
   //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -198,7 +188,6 @@ bool ObRootDDLOperator::insert_schema_table(const TableSchema & table_schema)
   return succ;
 }
 
-<<<<<<< HEAD
 //add by wangdonghui 20160125 :b
 bool ObRootDDLOperator::insert_procedure_table(const common::ObString & proc_name, const common::ObString & proc_source_code)
 {
@@ -235,8 +224,6 @@ bool ObRootDDLOperator::delete_procedure(const common::ObString & proc_name)
 }
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObRootDDLOperator::allocate_table_id(TableSchema & table_schema)
 {
   int ret = OB_SUCCESS;
@@ -297,12 +284,9 @@ int ObRootDDLOperator::update_max_table_id(const uint64_t table_id)
     }
     else
     {
-<<<<<<< HEAD
       //add zhuyanchao
       sleep(1);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       uint64_t new_max_id = 0;
       ret = schema_client_->get_max_used_table_id(new_max_id);
       if (ret != OB_SUCCESS)
@@ -627,7 +611,6 @@ int ObRootDDLOperator::modify_table_id(common::TableSchema &table_schema, const 
   }
   return ret;
 }
-<<<<<<< HEAD
 //add by wangdonghui 20160125 :b
 int ObRootDDLOperator::create_procedure(const common::ObString & proc_name, const common::ObString & proc_sourcr_code)
 {
@@ -672,6 +655,3 @@ int ObRootDDLOperator::drop_procedure(const common::ObString & proc_name)
   return ret;
 }
 //add :e
-=======
-
->>>>>>> refs/remotes/origin/master

@@ -146,7 +146,6 @@ namespace oceanbase
           }
           return ret;
         };
-<<<<<<< HEAD
         //add maoxx [hash join single] 20170614
         inline int get_multiple(ObHashTableNode<pair_type>*& bucket_node, const _key_type &key, _value_type &value) const
         {
@@ -192,8 +191,6 @@ namespace oceanbase
           return ret;
         };
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         // flag默认为0表示不覆盖已有元素 非0表示覆盖已有元素
         // 返回  -1  表示set调用出错, (无法分配新结点等)
         // 其他均表示插入成功：插入成功分下面三个状态
@@ -206,7 +203,6 @@ namespace oceanbase
           pair_type pair(key, value);
           return ht_.set(key, pair, flag, broadcast, overwrite_key);
         };
-<<<<<<< HEAD
         //add maoxx [hash join single] 20170614
         inline int set_multiple(const _key_type &key, const _value_type &value)
         {
@@ -219,8 +215,6 @@ namespace oceanbase
           return ht_.modify_multiple(bucket_node, key, pair);
         };
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         template <class _callback>
         // 返回  -1表示有错误发生
         // 返回  HASH_EXIST表示结点存在

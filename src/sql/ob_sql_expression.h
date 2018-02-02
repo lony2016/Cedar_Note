@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -26,9 +25,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,10 +54,7 @@ namespace oceanbase
     class ObSqlExpression: public common::DLink
     {
       public:
-<<<<<<< HEAD
         typedef ObSEArray<ObObj, 64> ExprArray;//add wanglei [semi join] 20170417
-=======
->>>>>>> refs/remotes/origin/master
         ObSqlExpression();
         virtual ~ObSqlExpression();
 
@@ -74,7 +67,6 @@ namespace oceanbase
         const uint64_t get_column_id() const;
         const uint64_t get_table_id() const;
 
-<<<<<<< HEAD
         /**
          * @brief set_table_id
          * @param tid
@@ -86,13 +78,6 @@ namespace oceanbase
         /**
          * 设置表达??
          * @param expr [in] 表达式，表达方式与实现相关，目前定义为后缀表达??
-=======
-        void set_aggr_func(ObItemType aggr_fun, bool is_distinct);
-        int get_aggr_column(ObItemType &aggr_fun, bool &is_distinct) const;
-        /**
-         * 设置表达式
-         * @param expr [in] 表达式，表达方式与实现相关，目前定义为后缀表达式
->>>>>>> refs/remotes/origin/master
          *
          * @return error code
          */
@@ -102,7 +87,6 @@ namespace oceanbase
         void reset();
 
         /**
-<<<<<<< HEAD
          * 获取解码后的表达??
          */
         inline const ObPostfixExpression &get_decoded_expression() const;
@@ -121,35 +105,19 @@ namespace oceanbase
          * 根据表达式语义对row的值进行计??
          *
          * @param row [in] 输入??
-=======
-         * 获取解码后的表达式
-         */
-        inline const ObPostfixExpression &get_decoded_expression() const;
-        inline bool is_equijoin_cond(ExprItem::SqlCellInfo &c1, ExprItem::SqlCellInfo &c2) const;
-        /**
-         * 根据表达式语义对row的值进行计算
-         *
-         * @param row [in] 输入行
->>>>>>> refs/remotes/origin/master
          * @param result [out] 计算结果
          *
          * @return error code
          */
-<<<<<<< HEAD
         //mod weixing [implementation of sub_query]20160116
         //int calc(const common::ObRow &row, const common::ObObj *&result);
         int calc(const common::ObRow &row, const common::ObObj *&result, hash::ObHashMap<common::ObRowkey, common::ObRowkey, common::hash::NoPthreadDefendMode>* hash_map = NULL, bool second_check = false);
         //mod e
         /// 打印表达??
-=======
-        int calc(const common::ObRow &row, const common::ObObj *&result);
-        /// 打印表达式
->>>>>>> refs/remotes/origin/master
         int64_t to_string(char* buf, const int64_t buf_len) const;
 
         // check expression type
         inline int is_const_expr(bool &is_const_type) const;
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150910:b
         /**
         * @brief create a new expression to filter the data of right table.
@@ -168,8 +136,6 @@ namespace oceanbase
          */
         inline int is_var_expr(bool &is_var_type, ObObj &var_name) const; //add by zt 20160617
 
-=======
->>>>>>> refs/remotes/origin/master
         inline int is_column_index_expr(bool &is_idx_type) const;
         inline int is_simple_condition(bool &is_simple_cond_type) const;
         inline int get_column_index_expr(uint64_t &tid, uint64_t &cid, bool &is_idx_type) const;
@@ -182,7 +148,6 @@ namespace oceanbase
         inline bool is_empty() const;
         inline void set_owner_op(ObPhyOperator *owner_op);
         inline ObPhyOperator* get_owner_op();
-<<<<<<< HEAD
         //add wanglei [semi join in expr ] 20170417:b
         inline bool is_in_expr_with_ex_rowkey(bool real_val, const ObRowkeyInfo &info, ObIArray<ObRowkey> &rowkey_array,
                     common::PageArena<ObObj,common::ModulePageAllocator> &allocator) const;
@@ -217,9 +182,6 @@ namespace oceanbase
         */
         int64_t get_sub_query_num(){return sub_query_num_;};
 
-=======
-        NEED_SERIALIZE_AND_DESERIALIZE;
->>>>>>> refs/remotes/origin/master
       public:
         static ObSqlExpression* alloc();
         static void free(ObSqlExpression* ptr);
@@ -232,7 +194,6 @@ namespace oceanbase
         bool is_aggr_func_;
         bool is_distinct_;
         ObItemType aggr_func_;
-<<<<<<< HEAD
         int64_t sub_query_num_ ;						//count current expression's sub_query num
 
         //add weixing [implement of sub_query]20160106
@@ -240,8 +201,6 @@ namespace oceanbase
         bool use_bloom_filter_;
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // method
         int serialize_basic_param(char* buf, const int64_t buf_len, int64_t& pos) const;
@@ -266,7 +225,6 @@ namespace oceanbase
       column_id_ = OB_INVALID_ID;
       table_id_ = OB_INVALID_ID;
       is_aggr_func_ = is_distinct_ = false;
-<<<<<<< HEAD
       //add weixing [implementation of sub_query]20160106
       if(use_bloom_filter_)
       {
@@ -275,8 +233,6 @@ namespace oceanbase
       }
       //add e
       sub_query_num_ = 0;
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     inline void ObSqlExpression::set_int_div_as_double(bool did)
@@ -300,7 +256,6 @@ namespace oceanbase
       return table_id_;
     }
 
-<<<<<<< HEAD
     // add longfei [secondary index select] 20151102 :b
     inline void ObSqlExpression::set_table_id(uint64_t tid)
     {
@@ -308,8 +263,6 @@ namespace oceanbase
     }
     // add e
 
-=======
->>>>>>> refs/remotes/origin/master
     inline int ObSqlExpression::get_aggr_column(ObItemType &aggr_fun, bool &is_distinct) const
     {
       int ret = OB_SUCCESS;
@@ -339,7 +292,6 @@ namespace oceanbase
       return post_expr_;
     }
 
-<<<<<<< HEAD
     inline ObPostfixExpression &ObSqlExpression::get_decoded_expression_v2()
     {
       return post_expr_;
@@ -352,8 +304,6 @@ namespace oceanbase
     }
     /*add e*/
 
-=======
->>>>>>> refs/remotes/origin/master
     inline bool ObSqlExpression::is_equijoin_cond(ExprItem::SqlCellInfo &c1, ExprItem::SqlCellInfo &c2) const
     {
       return post_expr_.is_equijoin_cond(c1, c2);
@@ -363,7 +313,6 @@ namespace oceanbase
       return post_expr_.is_const_expr(is_const_type);
     }
 
-<<<<<<< HEAD
     //add fanqiushi [semi_join] [0.1] 20150910:b
     inline void ObSqlExpression::set_post_expr(common::ObArray<common::ObObj> *tmp_set,uint64_t tid,uint64_t cid)
     {
@@ -379,8 +328,6 @@ namespace oceanbase
     }
     //add by zt 20160117:e
 
-=======
->>>>>>> refs/remotes/origin/master
     inline int ObSqlExpression::get_column_index_expr(uint64_t &tid, uint64_t &cid, bool &is_idx_type) const
     {
       return post_expr_.get_column_index_expr(tid, cid, is_idx_type);
@@ -423,7 +370,6 @@ namespace oceanbase
       reset();
       return post_expr_.merge_expr(expr1.post_expr_, expr2.post_expr_, op);
     }
-<<<<<<< HEAD
     //add wanglei [semi join in expr] 20161130:b
     inline bool ObSqlExpression::is_in_expr_with_ex_rowkey(bool real_val, const ObRowkeyInfo &info, ObIArray<ObRowkey> &rowkey_array,
         common::PageArena<ObObj,common::ModulePageAllocator>  &allocator) const
@@ -465,8 +411,6 @@ namespace oceanbase
         return post_expr_.is_expr_has_more_than_two_columns();
     }
     //add dhc [second index fix/query_optimizer]  20160425:e
-=======
->>>>>>> refs/remotes/origin/master
 
   } // end namespace sql
 } // end namespace oceanbase

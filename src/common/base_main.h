@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  *         zhangcd <zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
 *   (C) 2007-2010 Taobao Inc.
 *
@@ -77,30 +74,24 @@ namespace oceanbase
         char cmd_appname_[OB_MAX_APP_NAME_LENGTH];
         char cmd_devname_[OB_MAX_APP_NAME_LENGTH];
         char cmd_extra_config_[OB_MAX_EXTRA_CONFIG_LENGTH];
-<<<<<<< HEAD
 
         // add by zcd [multi_cluster] 20150416:b
         // 保存当前-s选项的内容
         char cmd_rs_cluster_ips_[1024];
         // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
         int32_t cmd_cluster_id_;
         int32_t cmd_rs_port_;
         int32_t cmd_master_rs_port_;
         int32_t cmd_port_;
         int32_t cmd_inner_port_;
         int32_t cmd_obmysql_port_;
-<<<<<<< HEAD
         //add chujiajia [rs_election][multi_cluster] 20150929:b
         int64_t cmd_rs_election_random_wait_time_;
         // add:e
         //add hushuang [scalable commit]20160630
         int64_t cmd_commit_group_size_;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         char cmd_ms_type_[OB_MAX_MS_TYPE_LENGTH];
         const char *pid_dir_;
         const char *log_dir_;

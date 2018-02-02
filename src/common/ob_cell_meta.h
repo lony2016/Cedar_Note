@@ -58,10 +58,7 @@ namespace oceanbase
       const static int64_t ES_NOT_EXIST_ROW     = 3;
       const static int64_t ES_NEW_ADD           = 4;
       const static int64_t ES_VALID             = 5;
-<<<<<<< HEAD
       const static int64_t ES_TRUN_TAB          = 6; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
 
       uint8_t type_:5;
       uint8_t attr_:3;
@@ -75,16 +72,12 @@ namespace oceanbase
     {
       uint16_t dec_precision_:7;
       uint16_t dec_scale_:6;
-<<<<<<< HEAD
       //delete fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       uint16_t dec_nwords_:3;
        //delete e
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //uint16_t dec_vscale_:6;
       //add e
-=======
-      uint16_t dec_nwords_:3;
->>>>>>> refs/remotes/origin/master
     };
   }
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,8 +13,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_03_14
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -55,12 +52,9 @@
 #include "ob_ups_log_utils.h"
 #include "ob_sessionctx_factory.h"
 #include "common/ob_new_scanner.h"
-<<<<<<< HEAD
 #include "common/ob_log_generator2.h"
 #include "common/ob_trace_log.h"
 #include "ob_table_lock.h" //add wangjiahao [tablelock] 20160328
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -88,10 +82,7 @@ namespace oceanbase
       public:
         virtual int apply(RWSessionCtx &session_ctx, common::ObIterator &iter, const common::ObDmlType dml_type) = 0;
         virtual UpsSchemaMgr &get_schema_mgr() = 0;
-<<<<<<< HEAD
         virtual TableLockMgr &get_table_lock_mgr() = 0;//add wangjiahao [tablelock] 20160328
-=======
->>>>>>> refs/remotes/origin/master
     };
     class ObUpsTableMgr : public ObIUpsTableMgr
     {
@@ -203,12 +194,8 @@ namespace oceanbase
       };
 
       public:
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160510
         ObUpsTableMgr(common::ObLogWriterV3/*ObILogWriter*/ &log_writer);
-=======
-        ObUpsTableMgr(common::ObILogWriter &log_writer);
->>>>>>> refs/remotes/origin/master
         ~ObUpsTableMgr();
         int init();
         int reg_table_mgr(SSTableMgr &sstable_mgr);
@@ -241,7 +228,6 @@ namespace oceanbase
         {
           return schema_mgr_;
         };
-<<<<<<< HEAD
         //add wangjiahao [table lock] 20160616 :b
         TableLockMgr &get_table_lock_mgr()
         {
@@ -249,8 +235,6 @@ namespace oceanbase
         }
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
         void dump_memtable(const common::ObString &dump_dir);
         void dump_schemas();
 
@@ -334,17 +318,12 @@ namespace oceanbase
         void set_warm_up_percent(const int64_t warm_up_percent);
         int get_schema(const uint64_t major_version, CommonSchemaManagerWrapper &sm);
         int get_sstable_range_list(const uint64_t major_version, const uint64_t table_id, TabletInfoList &ti_list);
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160421
         int fill_commit_log1(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer, FLogPos& cur_pos, int64_t& ref_cnt);
         //int fill_commit_log(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer);
         //int flush_commit_log(TraceLog::LogBuffer &tlog_buffer);
         int fill_commit_log(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer){UNUSED(ups_mutator);UNUSED(tlog_buffer); return OB_SUCCESS;};
         int flush_commit_log(TraceLog::LogBuffer &tlog_buffer){UNUSED(tlog_buffer); return OB_SUCCESS;};
-=======
-        int fill_commit_log(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer);
-        int flush_commit_log(TraceLog::LogBuffer &tlog_buffer);
->>>>>>> refs/remotes/origin/master
 
       private:
         int write_schema(const CommonSchemaManagerWrapper &schema_manager);
@@ -402,14 +381,10 @@ namespace oceanbase
         int check_permission_(common::ObMutator &mutator, const common::IToken &token);
         int trans_name2id_(common::ObMutator &mutator);
         int fill_commit_log_(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer);
-<<<<<<< HEAD
         int fill_commit_log1_(ObUpsMutator &ups_mutator, TraceLog::LogBuffer &tlog_buffer, FLogPos& cur_pos, int64_t& ref_cnt);//add by zhouhuan [scalablecommit] 20160503
         //modify by zhouhuan[scalablecommit] 20160511:b
         //int flush_commit_log_(TraceLog::LogBuffer &tlog_buffer);
         int flush_commit_log_(TraceLog::LogBuffer &tlog_buffer){UNUSED(tlog_buffer); return OB_SUCCESS;};
-=======
-        int flush_commit_log_(TraceLog::LogBuffer &tlog_buffer);
->>>>>>> refs/remotes/origin/master
         int handle_freeze_log_(ObUpsMutator &ups_mutator, const ReplayType replay_type);
 
       private:
@@ -424,12 +399,8 @@ namespace oceanbase
         TableMgr table_mgr_;
         bool check_checksum_;
         bool has_started_;
-<<<<<<< HEAD
         uint64_t last_bypass_checksum_; //add wangjiahao [dev_tablelock] 20160315
         TableLockMgr table_lock_mgr_;
-=======
-        uint64_t last_bypass_checksum_;
->>>>>>> refs/remotes/origin/master
     };
   }
 }

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,12 +34,8 @@
 #include "ob_ups_lock_filter.h"
 #include "ob_ups_inc_scan.h"
 #include "ob_memtable_modify.h"
-<<<<<<< HEAD
 #include "ob_memtable_lock.h" // add wangjiahao [table lock] 20160616
 #include "ob_ups_procedure.h" //add zt 20151111
-=======
-
->>>>>>> refs/remotes/origin/master
 #define new_operator(__type__, __allocator__, ...)      \
   ({                                                    \
     __type__ *ret = NULL;                               \
@@ -86,7 +79,6 @@ namespace oceanbase
           case PHY_UPS_MODIFY_WITH_DML_TYPE:
             ret = new_operator(MemTableModifyWithDmlType, allocator, *session_ctx_, *table_mgr_);
             break;
-<<<<<<< HEAD
           // add wangjiahao [table lock] 20160616 :b
           case PHY_UPS_LOCK_TABLE:
             ret = new_operator(MemTableLock, allocator, *session_ctx_, *table_mgr_);
@@ -97,8 +89,6 @@ namespace oceanbase
             ret = new_operator(ObUpsProcedure, allocator, *session_ctx_);
             break;
             //add zt 20151110:e
-=======
->>>>>>> refs/remotes/origin/master
           default:
             ret = ObPhyOperatorFactory::get_one(type, allocator);
             break;

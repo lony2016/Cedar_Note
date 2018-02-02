@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -17,8 +16,6 @@
  *         zhangcd <zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2013 Taobao Inc.
  *
@@ -99,15 +96,12 @@ namespace oceanbase
       printf("\tcs_create_table -o table_id=<table_id> -o table_version=<frozen_verson>\n");
       printf("\tget_obi_role\n");
       printf("\tset_obi_role -o OBI_SLAVE|OBI_MASTER\n");
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150416:b
       /// set the specific cluster as the master cluster
       printf("\tset_obi_master_rs\n");
       /// set the specific cluster as the master cluster before the initialization of OB
       printf("\tset_obi_master_first\n");
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       printf("\tget_config\n");
       printf("\tset_config -o config_name=config_value[,config_name2=config_value2[,...]]\n");
       printf("\tget_obi_config\n");
@@ -116,12 +110,9 @@ namespace oceanbase
       printf("\tset_ups_config -o ups_ip=<ups_ip>,ups_port=<ups_port>,ms_read_percentage=<percentage>,cs_read_percentage=<percentage>\n");
       printf("\tset_master_ups_config -o master_master_ups_read_percentage=<percentage>,slave_master_ups_read_percentage=<percentage>\n");
       printf("\tchange_ups_master -o ups_ip=<ups_ip>,ups_port=<ups_port>[,force]\n");
-<<<<<<< HEAD
       // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
       printf("\tset_auto_elect -o [true|false]\n");
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       printf("\timport_tablets -o table_id=<table_id>\n");
       printf("\tprint_root_table -o table_id=<table_id>\n");
       printf("\tprint_schema -o location=<location>\n");
@@ -294,7 +285,6 @@ namespace oceanbase
         }
       ,
         {
-<<<<<<< HEAD
           "set_obi_master_rs", OB_RS_ADMIN_SET_OBI_MASTER_RS, do_rs_admin
         }
       ,
@@ -309,8 +299,6 @@ namespace oceanbase
       ,
         // add:e
         {
-=======
->>>>>>> refs/remotes/origin/master
           "boot_recover", OB_RS_ADMIN_BOOT_RECOVER, do_rs_admin
         }
       ,
@@ -357,7 +345,6 @@ namespace oceanbase
         {
           "read_root_table_point", OB_RS_ADMIN_READ_ROOT_TABLE, read_root_table_point
         }
-<<<<<<< HEAD
       // add by guojinwei [new rs_admin command][multi_cluster] 20150901:b
       ,
         {
@@ -372,8 +359,6 @@ namespace oceanbase
         }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     enum
@@ -2342,7 +2327,6 @@ int do_drop_table_for_emergency(ObBaseClient &client, Arguments &args)
       return ret;
     }
 
-<<<<<<< HEAD
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     int do_set_auto_elect_flag(ObBaseClient &client, Arguments &args)
     {
@@ -2401,7 +2385,5 @@ int do_drop_table_for_emergency(ObBaseClient &client, Arguments &args)
       return ret;
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace rootserver
 }

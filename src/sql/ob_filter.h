@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -38,12 +35,9 @@
 #include "ob_single_child_phy_operator.h"
 #include "ob_sql_expression.h"
 #include "common/dlist.h"
-<<<<<<< HEAD
 //add maoxx
 #include "ob_multiple_get_merge.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -70,7 +64,6 @@ namespace oceanbase
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
         virtual int64_t to_string(char* buf, const int64_t buf_len) const;
         virtual ObPhyOperatorType get_type() const;
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief reset_iterator
@@ -88,9 +81,6 @@ namespace oceanbase
             filters_.remove_last ();
         }
         //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
         DECLARE_PHY_OPERATOR_ASSIGN;
         NEED_SERIALIZE_AND_DESERIALIZE;
       private:

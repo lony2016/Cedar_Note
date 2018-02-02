@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_session_mgr.h updateserver / Oceanbase
@@ -54,7 +51,6 @@
 #include "common/priority_packet_queue_thread.h"
 #include "ob_ups_mutator.h"
 #include "ob_inc_seq.h"
-<<<<<<< HEAD
 //add hushuang[scalablecommit]20160415
 #include "common/ob_commit_queue.h"
 //#include "ob_session_mgr.h"
@@ -67,10 +63,6 @@
 #define SetTxCAS(x, old_val, new_val) __sync_bool_compare_and_swap(x, old_val, new_val)
 //add e
 
-=======
-
-#define INVALID_SESSION_DESCRIPTOR IDMAP_INVALID_ID
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -92,10 +84,7 @@ namespace oceanbase
       ST_READ_ONLY = 0,
       ST_REPLAY = 1,
       ST_READ_WRITE = 2,
-<<<<<<< HEAD
       ST_LONG_READ_WRITE = 3, // add by qx 20170314 for long  transcations
-=======
->>>>>>> refs/remotes/origin/master
       SESSION_TYPE_NUM,
     };
 
@@ -109,10 +98,7 @@ namespace oceanbase
         virtual void free(BaseSessionCtx *ptr) = 0;
     };
 
-<<<<<<< HEAD
     class SessionTableLockInfo;
-=======
->>>>>>> refs/remotes/origin/master
     class BaseSessionCtx
     {
       public:
@@ -151,16 +137,10 @@ namespace oceanbase
         {
           // do nothing
         };
-<<<<<<< HEAD
         virtual int on_free() // on free  // modify by qx 20170225 void on_free();
         {
           // do nothing
           return OB_SUCCESS;
-=======
-        virtual void on_free() // on free
-        {
-          // do nothing
->>>>>>> refs/remotes/origin/master
         };
         virtual void reset()
         {
@@ -177,13 +157,10 @@ namespace oceanbase
           CLEAR_TRACE_BUF(tlog_buffer_);
           priority_ = common::PriorityPacketQueueThread::NORMAL_PRIV;
           last_proc_time_ = 0;
-<<<<<<< HEAD
           // add by guojinwei [repeatable read] 20160417:b
           trans_start_time_ = INT64_MAX;
           trans_descriptor_ = UINT32_MAX;
           // add:e
-=======
->>>>>>> refs/remotes/origin/master
         };
         virtual void kill()
         {
@@ -199,7 +176,6 @@ namespace oceanbase
           UNUSED(isolation);
           return common::OB_SUCCESS;
         };
-<<<<<<< HEAD
         //add wangjiahao [tablelock] 20160616 :b
         virtual int init_table_lock_info()
         {
@@ -211,8 +187,6 @@ namespace oceanbase
           return NULL;
         }
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         virtual int add_publish_callback(ISessionCallback *callback, void *data)
         {
           UNUSED(callback);
@@ -356,7 +330,6 @@ namespace oceanbase
         int64_t to_string(char* buf, int64_t len) const
         {
           int64_t pos = 0;
-<<<<<<< HEAD
           // modify by guojinwei [repeatable read] 20160417:b
           //common::databuff_printf(buf, len, pos, "Session type=%d trans_id=%ld start_time=%ld timeout=%ld stmt_start_time=%ld stmt_timeout=%ld idle_time=%ld last_active_time=%ld descriptor=%d",
           //                type_, trans_id_, session_start_time_, session_timeout_, stmt_start_time_, stmt_timeout_, session_idle_time_, last_active_time_, session_descriptor_);
@@ -369,10 +342,6 @@ namespace oceanbase
                                   last_active_time_, session_descriptor_,
                                   trans_start_time_, trans_descriptor_);
           // modify:e
-=======
-          common::databuff_printf(buf, len, pos, "Session type=%d trans_id=%ld start_time=%ld timeout=%ld stmt_start_time=%ld stmt_timeout=%ld idle_time=%ld last_active_time=%ld descriptor=%d",
-                          type_, trans_id_, session_start_time_, session_timeout_, stmt_start_time_, stmt_timeout_, session_idle_time_, last_active_time_, session_descriptor_);
->>>>>>> refs/remotes/origin/master
           return pos;
         }
 
@@ -420,7 +389,6 @@ namespace oceanbase
         {
           return last_proc_time_;
         };
-<<<<<<< HEAD
         // add by guojinwei [repeatable read] 20160417:b
         void set_trans_start_time(const int64_t trans_start_time)
         {
@@ -439,8 +407,6 @@ namespace oceanbase
           trans_descriptor_ = trans_descriptor;
         };
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       private:
         const SessionType type_;
@@ -461,13 +427,10 @@ namespace oceanbase
         int64_t conflict_processor_index_;
         common::PriorityPacketQueueThread::QueuePriority priority_;
         int64_t last_proc_time_;
-<<<<<<< HEAD
         // add by guojinwei [repeatable read] 20160417:b
         int64_t trans_start_time_;    ///< only for repeatable read
         uint32_t trans_descriptor_;   ///< only for repeatable read
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class CallbackMgr
@@ -581,14 +544,10 @@ namespace oceanbase
         bool lock_succ_;
     };
 
-<<<<<<< HEAD
     //mod by hushuang[scalablecommit] 20160415
     //class SessionMgr : public tbsys::CDefaultRunnable
     class SessionMgr : public common::ISessionMgr, public tbsys::CDefaultRunnable
     //mod e
-=======
-    class SessionMgr : public tbsys::CDefaultRunnable
->>>>>>> refs/remotes/origin/master
     {
       typedef common::ObFixedQueue<BaseSessionCtx> SessionCtxList;
       typedef common::ObIDMap<BaseSessionCtx, uint32_t> SessionCtxMap;
@@ -604,10 +563,7 @@ namespace oceanbase
         int init(const uint32_t max_ro_num,
                 const uint32_t max_rp_num,
                 const uint32_t max_rw_num,
-<<<<<<< HEAD
                 const  uint32_t max_lrw_num,  // add by qx 20170314 for long transcations
-=======
->>>>>>> refs/remotes/origin/master
                 ISessionCtxFactory *factory);
 
         void destroy();
@@ -617,16 +573,11 @@ namespace oceanbase
       public:
         int begin_session(const SessionType type, const int64_t start_time, const int64_t timeout, const int64_t idle_time, uint32_t &session_descriptor);
         int precommit(const uint32_t session_descriptor);
-<<<<<<< HEAD
 		//modify by zhouhuan [scalablecommit]
         //int end_session(const uint32_t session_descriptor, const bool rollback = true, const bool force = true,
         //                const uint64_t es_flag = (uint64_t)BaseSessionCtx::ES_ALL);
 		int end_session(const uint32_t session_descriptor, const bool rollback = true, const bool force = true,
         const uint64_t es_flag = (uint64_t)BaseSessionCtx::ES_ALL, const bool is_slave = false);
-=======
-        int end_session(const uint32_t session_descriptor, const bool rollback = true, const bool force = true,
-                        const uint64_t es_flag = (uint64_t)BaseSessionCtx::ES_ALL);
->>>>>>> refs/remotes/origin/master
         int update_commited_trans_id(BaseSessionCtx* ctx);
 
         template <class CTX>
@@ -650,7 +601,6 @@ namespace oceanbase
         IncSeq& get_trans_seq() { return trans_seq_; }
         void enable_start_write_session(){ allow_start_write_session_ = true; }
         void disable_start_write_session(){ allow_start_write_session_ = false; }
-<<<<<<< HEAD
         //add hushuang[scalablecommit]20160415
         virtual int update_published_trans_id(int64_t trans_id);///< used for update_published_trans_id of scalable commit
         virtual int update_commited_trans_id(int64_t trans_id);///< used for update_commited_trans_id of scalable commit
@@ -709,9 +659,6 @@ namespace oceanbase
           return ret;
         }
         //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       private:
         BaseSessionCtx *alloc_ctx_(const SessionType type);
         void free_ctx_(BaseSessionCtx *ctx);

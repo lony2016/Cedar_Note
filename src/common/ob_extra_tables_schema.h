@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -21,8 +20,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -60,15 +57,12 @@ namespace oceanbase
       static int first_tablet_entry_schema(TableSchema& table_schema);
       static int all_all_column_schema(TableSchema& table_schema);
       static int all_join_info_schema(TableSchema& table_schema);
-<<<<<<< HEAD
       /**
        * @brief all_secondary_index_schema: for __all_secondary_index's schema
        * @param table_schema
        * @return error code
        */
       static int all_secondary_index_schema(TableSchema& table_schema); //longfei [create index]
-=======
->>>>>>> refs/remotes/origin/master
     public:
       // other sys tables
       static int all_sys_stat_schema(TableSchema &table_schema);
@@ -81,7 +75,6 @@ namespace oceanbase
       static int all_cluster_schema(TableSchema& table_schema);
       static int all_server_schema(TableSchema& table_schema);
       static int all_client_schema(TableSchema& table_schema);
-<<<<<<< HEAD
       static int all_truncate_op_info(TableSchema &table_schema); //add hxlong [Truncate Table]:20170318
       //add lbzhong [auto_increment] 20161126:b
       static int all_auto_increment_schema(TableSchema &table_schema);
@@ -92,13 +85,10 @@ namespace oceanbase
       //add weixing [statistics build v1]20170331:b
       static int all_udi_mointor_list(TableSchema& table_schema);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       // virtual sys tables
       static int all_server_stat_schema(TableSchema &table_schema);
       static int all_server_session_schema(TableSchema &table_schema);
       static int all_statement_schema(TableSchema &table_schema);
-<<<<<<< HEAD
       //add maoxx
       /**
        * @brief all_index_service_schema
@@ -122,8 +112,6 @@ namespace oceanbase
 	  //add zhujun[2015-3-11]:b
       static int all_procedure_schema(TableSchema &table_schema);
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       ObExtraTablesSchema();
     };

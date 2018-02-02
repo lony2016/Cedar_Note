@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -39,14 +36,9 @@
 
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
-<<<<<<< HEAD
 using namespace oceanbase::mergeserver; // longfei for drop index
 ObDropTable::ObDropTable()
   :if_exists_(false), rpc_(NULL),has_indexs_(false)
-=======
-ObDropTable::ObDropTable()
-  :if_exists_(false), rpc_(NULL)
->>>>>>> refs/remotes/origin/master
 {
 }
 
@@ -58,22 +50,16 @@ void ObDropTable::reset()
 {
   if_exists_ = false;
   rpc_ = NULL;
-<<<<<<< HEAD
   // longfei [drop index]
   has_indexs_ = false;
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void ObDropTable::reuse()
 {
   if_exists_ = false;
   rpc_ = NULL;
-<<<<<<< HEAD
   // longfei [drop index]
   has_indexs_ = false;
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void ObDropTable::set_if_exists(bool if_exists)
@@ -81,7 +67,6 @@ void ObDropTable::set_if_exists(bool if_exists)
   if_exists_ = if_exists;
 }
 
-<<<<<<< HEAD
 const bool ObDropTable::get_if_exists() const
 {
   return if_exists_;
@@ -92,8 +77,6 @@ ObMergerRootRpcProxy* ObDropTable::get_rpc_stub() const
   return rpc_;
 }
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObDropTable::add_table_name(const ObString &tname)
 {
   return tables_.add_string(tname);
@@ -107,7 +90,6 @@ int ObDropTable::open()
     ret = OB_NOT_INIT;
     TBSYS_LOG(ERROR, "not init, rpc_=%p", rpc_);
   }
-<<<<<<< HEAD
   // add longfei [drop index] 20151028
   else if(has_indexs_ && OB_SUCCESS != (ret = rpc_->drop_index(if_exists_, all_indexs_)))
   {
@@ -117,11 +99,6 @@ int ObDropTable::open()
   else if (OB_SUCCESS != (ret = rpc_->drop_table(if_exists_, tables_)))
   {
     TBSYS_LOG(WARN, "failed to drop table, err=%d", ret);
-=======
-  else if (OB_SUCCESS != (ret = rpc_->drop_table(if_exists_, tables_)))
-  {
-    TBSYS_LOG(WARN, "failed to create table, err=%d", ret);
->>>>>>> refs/remotes/origin/master
   }
   else
   {
@@ -151,7 +128,6 @@ int64_t ObDropTable::to_string(char* buf, const int64_t buf_len) const
   databuff_printf(buf, buf_len, pos, "])\n");
   return pos;
 }
-<<<<<<< HEAD
 
 int ObDropTable::add_all_indexs(const ObString &idxname)
 {
@@ -171,5 +147,3 @@ bool ObDropTable::is_all_indexs_empty() const
     return false;
   }
 }
-=======
->>>>>>> refs/remotes/origin/master

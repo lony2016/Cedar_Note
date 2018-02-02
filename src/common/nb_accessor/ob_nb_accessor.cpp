@@ -558,10 +558,7 @@ int ObNbAccessor::delete_row(const char* table_name, const SC& rowkey_columns, c
   return ret;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObNbAccessor::update(const char* table_name, const ObRowkey& rowkey, const KV& kv)
 {
   return insert(table_name, rowkey, kv);
@@ -745,7 +742,6 @@ int ObNbAccessor::batch_end(BatchHandle& handle)
   }
   return ret;
 }
-<<<<<<< HEAD
 //add lbzhong [auto_increment] 20161201:b
 int ObNbAccessor::delete_auto_increment_row(const char* table_name, const SC& rowkey_columns, const ScanConds& scan_conds)
 {
@@ -883,7 +879,4 @@ int ObNbAccessor::delete_auto_increment_row(const char* table_name, const SC& ro
   return ret;
 }
 //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
 

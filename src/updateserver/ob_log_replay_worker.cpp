@@ -13,12 +13,8 @@
  */
 #include "ob_log_replay_worker.h"
 #include "ob_ups_log_utils.h"
-<<<<<<< HEAD
 #include "ob_update_server_main.h"
 #define UPS ObUpdateServerMain::get_instance()->get_update_server()
-=======
-
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -48,15 +44,9 @@ namespace oceanbase
       {
         err = OB_INIT_TWICE;
       }
-<<<<<<< HEAD
       else if (OB_SUCCESS != (err = allocator_.init(log_buf_limit + 1, log_buf_limit, 2*OB_LOG_BUFFER_MAX_SIZE)))
       {
         TBSYS_LOG(ERROR, "allocator.init(limit=%ld, page_size=%ld)=>%d", log_buf_limit, 2*OB_LOG_BUFFER_MAX_SIZE, err);
-=======
-      else if (OB_SUCCESS != (err = allocator_.init(log_buf_limit + 1, log_buf_limit, OB_MAX_PACKET_LENGTH)))
-      {
-        TBSYS_LOG(ERROR, "allocator.init(limit=%ld, page_size=%ld)=>%d", log_buf_limit, OB_MAX_PACKET_LENGTH, err);
->>>>>>> refs/remotes/origin/master
       }
       else if (OB_SUCCESS != (err = apply_worker_.init(n_worker, queue_len/n_worker, queue_rebalance, dynamic_rebalance)))
       {
@@ -72,12 +62,9 @@ namespace oceanbase
         queue_len_ = queue_len;
         flying_trans_no_limit_ = queue_len;
         log_applier_ = log_applier;
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160627:b
         master_cmt_log_id_ = 0;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         setThreadCount(1);
       }
       if (OB_SUCCESS != err)
@@ -151,7 +138,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160625:b
     int ObLogReplayWorker::update_replay_cursor_after_switch(const ObLogCursor& cursor)
     {
@@ -166,8 +152,6 @@ namespace oceanbase
     }
 	//add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObLogReplayWorker::start_log(const ObLogCursor& log_cursor)
     {
       int err = OB_SUCCESS;
@@ -187,14 +171,10 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
           //del chujiajia [log synchronization][multi_cluster] 20160625:b
           //err = OB_INIT_TWICE;
           //del:e
           TBSYS_LOG(WARN, "start_log(log_cursor=%s): ALREADY STARTED. start_log_=%s", log_cursor.to_str(), replay_cursor_.to_str());
-=======
-          err = OB_INIT_TWICE;
->>>>>>> refs/remotes/origin/master
         }
       }
       else if (OB_SUCCESS != (err = update_replay_cursor(log_cursor)))
@@ -251,15 +231,12 @@ namespace oceanbase
       }
       else if (0 == thread_id)
       {
-<<<<<<< HEAD
         //add chujiajia
         while(!(ObiRole::MASTER == UPS.get_obi_role().get_role()) && master_cmt_log_id_ < next_commit_log_id_)
         {
 
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != (err = do_commit(thread_id)))
         {
           TBSYS_LOG(ERROR, "do_commit(%ld)=>%d", thread_id, err);
@@ -323,7 +300,6 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
           //TBSYS_LOG(WARN,"test::zhouhuan Replay do_commit commit_queue_.get(task.log_id=%ld)",task->log_id_);
           set_next_commit_log_id(task->log_id_ + 1);
           if (task->is_last_log_of_batch())
@@ -343,22 +319,6 @@ namespace oceanbase
             //delete chujiajia [log synchronization][multi_cluster] 20160422:b
             //}
             //delete:e
-=======
-          set_next_commit_log_id(task->log_id_ + 1);
-          if (task->is_last_log_of_batch())
-          {
-            if (RT_APPLY == task->replay_type_ && OB_SUCCESS != (err = log_applier_->flush(*task)))
-            {
-              // 失败之后不释放
-              TBSYS_LOG(ERROR, "flush(end_id=%ld, %p[%ld])=>%d", task->log_id_,
-                        task->batch_buf_, task->batch_buf_len_, err);
-            }
-            else
-            {
-              set_next_flush_log_id(task->log_id_ + 1);
-              allocator_.free((void*)task->batch_buf_);
-            }
->>>>>>> refs/remotes/origin/master
           }
           if (OB_SUCCESS == err)
           {
@@ -405,10 +365,7 @@ namespace oceanbase
         }
         while(!_stop && OB_SUCCESS == err_ && OB_EAGAIN == (err = commit_queue_.add(task->log_id_, (void*)task)))
           ;
-<<<<<<< HEAD
         //TBSYS_LOG(WARN,"test::zhouhuan Replay commit_queue_.add(task.log_id=%ld)",task->log_id_);
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != err && OB_EAGAIN != err)
         {
           err_ = err;
@@ -524,10 +481,6 @@ namespace oceanbase
       int64_t new_pos = pos;
       bool check_integrity = true;
       bool is_barrier = true;
-<<<<<<< HEAD
-=======
-      //TBSYS_LOG(INFO, "submit(task.log_id[%ld], next_submit_log_id[%ld], next_commit_log_id[%ld])", task.log_id_, next_submit_log_id_, next_commit_log_id_);
->>>>>>> refs/remotes/origin/master
       if (_stop)
       {
         err = OB_CANCELED;
@@ -589,13 +542,8 @@ namespace oceanbase
         task.batch_buf_len_ = len;
         log_id = task.log_id_;
         task.profile_.enable_ = (TraceLog::get_log_level() <= TBSYS_LOG_LEVEL_INFO);
-<<<<<<< HEAD
         log_applier_->on_submit(task);
         //TBSYS_LOG(WARN, "test::zhouhuan submit(task.log_id[%ld], log_entry[%s])", task.log_id_, to_cstring(task.log_entry_));
-=======
-
-        log_applier_->on_submit(task);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != (err = apply_worker_.push(&task))
             && OB_EAGAIN != err)
         {
@@ -652,12 +600,9 @@ namespace oceanbase
                && OB_EAGAIN != err)
       {
         TBSYS_LOG(ERROR, "submit(next_submit_id=%ld)=>%d", next_submit_log_id_, err);
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160901:b
         err = OB_EAGAIN;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       else if (OB_EAGAIN == err)
       {
@@ -666,7 +611,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160530:b
     int64_t& ObLogReplayWorker::get_master_cmt_log_id()
     {
@@ -674,8 +618,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObLogReplayWorker::submit_batch(int64_t& log_id, const char* buf, int64_t len, const ReplayType replay_type)
     {
       int err = OB_SUCCESS;

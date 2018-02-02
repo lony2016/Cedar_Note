@@ -20,12 +20,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "ob_define.h"
-<<<<<<< HEAD
 //add xsl ECNU_DECIMAL 2016_12
 #include "Ob_Decimal.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 #include "tbsys.h"
 namespace oceanbase
 {
@@ -1754,7 +1751,6 @@ namespace oceanbase
         }
         return ret;
       }
-<<<<<<< HEAD
       //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       inline int encode_TTInt(char* buf, int64_t buf_len, int64_t &pos,
                               int64_t single_word) {
@@ -1973,9 +1969,6 @@ namespace oceanbase
 
       }
       //add e
-=======
-
->>>>>>> refs/remotes/origin/master
     } /* serialization */
   } /* common */
 } /* oceanbase*/

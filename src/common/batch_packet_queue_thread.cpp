@@ -22,22 +22,15 @@
 #include "ob_tsi_factory.h"
 #include "ob_profile_log.h"
 #include "ob_profile_type.h"
-<<<<<<< HEAD
 #include <sys/syscall.h>
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase {
 namespace common {
 
 
 // 构造
-<<<<<<< HEAD
 // add by qx 20161103,use my constructor for _queue ,BatchPacketQueueThread only used by updaterserver
 BatchPacketQueueThread::BatchPacketQueueThread() : tbsys::CDefaultRunnable(),_queue(OB_LOG_BUFFER_MAX_SIZE) {
-=======
-BatchPacketQueueThread::BatchPacketQueueThread() : tbsys::CDefaultRunnable() {
->>>>>>> refs/remotes/origin/master
     _stop = 0;
     _waitFinish = false;
     _handler = NULL;
@@ -51,14 +44,9 @@ BatchPacketQueueThread::BatchPacketQueueThread() : tbsys::CDefaultRunnable() {
 }
 
 // 构造
-<<<<<<< HEAD
 // add by qx 20161103,use my constructor for _queue ,BatchPacketQueueThread only used by updaterserver
 BatchPacketQueueThread::BatchPacketQueueThread(int threadCount, IBatchPacketQueueHandler *handler, void *args)
         : tbsys::CDefaultRunnable(threadCount),_queue(OB_LOG_BUFFER_MAX_SIZE) {
-=======
-BatchPacketQueueThread::BatchPacketQueueThread(int threadCount, IBatchPacketQueueHandler *handler, void *args)
-        : tbsys::CDefaultRunnable(threadCount) {
->>>>>>> refs/remotes/origin/master
     _stop = 0;
     _waitFinish = false;
     _handler = handler;
@@ -163,10 +151,7 @@ void BatchPacketQueueThread::run(tbsys::CThread *, void *) {
     int err = OB_SUCCESS;
     int64_t wait_us = 10000;
     ObPacket* tmp_packet = NULL;
-<<<<<<< HEAD
     TBSYS_LOG(INFO,"test::zhouhuan1 write or alive thread tid = [%ld]",syscall(SYS_gettid));
-=======
->>>>>>> refs/remotes/origin/master
     while (!_stop) {
         _cond.lock();
         while (!_stop)

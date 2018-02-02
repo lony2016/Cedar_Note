@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,11 +31,7 @@
  */
 #include "ob_ack_queue.h"
 #include "ob_result.h"
-<<<<<<< HEAD
 #include "onev_io.h"
-=======
-#include "easy_io.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_client_manager.h"
 
 namespace oceanbase
@@ -48,7 +41,6 @@ namespace oceanbase
     struct __ACK_QUEUE_UNIQ_TYPE__ {};
     typedef TypeUniqReg<ObAckQueue, __ACK_QUEUE_UNIQ_TYPE__> TUR;
 
-<<<<<<< HEAD
     // modify by guojinwei [log synchronization][multi_cluster] 20150819:b
     //void ObAckQueue::WaitNode::done(int err)
     void ObAckQueue::WaitNode::done(const ObLogPostResponse& response_data, int err)
@@ -72,12 +64,6 @@ namespace oceanbase
         slave_status_ = SLAVE_STAT_OFFLINE;
       }
       // add:e
-=======
-    void ObAckQueue::WaitNode::done(int err)
-    {
-      err_ = err;
-      receive_time_us_ = tbsys::CTimeUtil::getTime();
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != err)
       {
         TBSYS_LOG(ERROR, "wait response: err=%d, %s", err, to_cstring(*this));
@@ -91,7 +77,6 @@ namespace oceanbase
     int64_t ObAckQueue::WaitNode::to_string(char* buf, const int64_t len) const
     {
       int64_t pos = 0;
-<<<<<<< HEAD
       // modify by guojinwei [log synchronization][multi_cluster] 20150819:b
       //databuff_printf(buf, len, pos, "WaitNode: seq=[%ld,%ld], err=%d, server=%s, send_time=%ld, round_time=%ld, timeout=%ld",
       //                start_seq_, end_seq_, err_, to_cstring(server_), send_time_us_, receive_time_us_ - send_time_us_, timeout_us_);
@@ -105,14 +90,6 @@ namespace oceanbase
     //ObAckQueue::ObAckQueue(): callback_(NULL), client_mgr_(NULL), next_acked_seq_(0), lock_(0)
     ObAckQueue::ObAckQueue(): callback_(NULL), client_mgr_(NULL), next_acked_seq_(0), lock_(0), majority_count_(1)
     // modify:e
-=======
-      databuff_printf(buf, len, pos, "WaitNode: seq=[%ld,%ld], err=%d, server=%s, send_time=%ld, round_time=%ld, timeout=%ld",
-                      start_seq_, end_seq_, err_, to_cstring(server_), send_time_us_, receive_time_us_ - send_time_us_, timeout_us_);
-      return pos;
-    }
-
-    ObAckQueue::ObAckQueue(): callback_(NULL), client_mgr_(NULL), next_acked_seq_(0), lock_(0)
->>>>>>> refs/remotes/origin/master
     {
       OB_ASSERT(*TUR::value() == NULL);
       *TUR::value() = this;
@@ -121,7 +98,6 @@ namespace oceanbase
     ObAckQueue::~ObAckQueue()
     {}
 
-<<<<<<< HEAD
     // modify by guojinwei [log synchronization][multi_cluster] 20151117:b
     //int ObAckQueue::init(IObAsyncClientCallback* callback, const ObClientManager* client_mgr, int64_t queue_len)
     // modify by zhangcd [majority_count_init] 20151118:b
@@ -129,9 +105,6 @@ namespace oceanbase
     int ObAckQueue::init(IObAsyncClientCallback* callback, const ObClientManager* client_mgr, int64_t queue_len)
     // modify:e
     // modify:e
-=======
-    int ObAckQueue::init(IObAsyncClientCallback* callback, const ObClientManager* client_mgr, int64_t queue_len)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       if (NULL == callback || NULL == client_mgr || queue_len <= 0)
@@ -147,7 +120,6 @@ namespace oceanbase
       {
         callback_ = callback;
         client_mgr_ = client_mgr;
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
         // slave_count=>majority_count: 0=>1, 1=>2, 2=>2, 3=>3, 4=>3, ......
         // modify by zhangcd [majority_count_init] 20151118:b
@@ -159,8 +131,6 @@ namespace oceanbase
         majority_count_ = INT32_MAX;
         // modify:e
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       return err;
     }
@@ -181,7 +151,6 @@ namespace oceanbase
         }
         else if (OB_PROCESS_TIMEOUT == err)
         {
-<<<<<<< HEAD
           // add by guojinwei [log synchronization][multi_cluster] 20150819:b
           node.slave_status_ = SLAVE_STAT_OFFLINE;
           // add:e
@@ -225,16 +194,6 @@ namespace oceanbase
       }
 
       //TBSYS_LOG(ERROR,"test::zhouhuan get_next_ack, old_ack_seq=%ld, next_acked_seq_=%ld", old_ack_seq, next_acked_seq_);
-=======
-          callback_->handle_response(node);
-          err = OB_SUCCESS;
-        }
-        if (OB_SUCCESS == err)
-        {
-          next_acked_seq_ = node.start_seq_;
-        }
-      }
->>>>>>> refs/remotes/origin/master
       if (old_ack_seq != next_acked_seq_)
       {
         callback_->on_ack(node);
@@ -246,13 +205,10 @@ namespace oceanbase
                                     const int32_t pcode, const int64_t timeout_us, const ObDataBuffer& pkt_buffer, int64_t idx)
     {
       int err = OB_SUCCESS;
-<<<<<<< HEAD
       // add by guojinwei [log synchronization][multi_cluster] 20150819:b
       next_flush_seq_ = end_seq;
       //TBSYS_LOG(ERROR,"test::zhouhuan: next_flush_seq_=%ld, end_seq=%ld", next_flush_seq_, end_seq);
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       int64_t send_time_us = tbsys::CTimeUtil::getTime();
       ObServer null_server;
       if (NULL == servers || n_server < 0 || start_seq < 0 || end_seq < start_seq || timeout_us <= TIMEOUT_DELTA)
@@ -267,7 +223,6 @@ namespace oceanbase
           TBSYS_LOG(ERROR, "post(%s)=>%d", to_cstring(servers[i]), err);
         }
       }
-<<<<<<< HEAD
       // delete by guojinwei [log synchronization][multi_cluster] 20150819:b
       //if (OB_SUCCESS != err)
       //{}
@@ -287,18 +242,6 @@ namespace oceanbase
         get_next_acked_seq();
       }
       // add:e
-=======
-      if (OB_SUCCESS != err)
-      {}
-      else if (OB_SUCCESS != (err = post(null_server, end_seq, end_seq, send_time_us, pcode, timeout_us -TIMEOUT_DELTA, pkt_buffer, -1)))
-      {
-        TBSYS_LOG(ERROR, "post(fake)=>%d", err);
-      }
-      if (OB_SUCCESS == err && n_server <= 0)
-      {
-        get_next_acked_seq();
-      }
->>>>>>> refs/remotes/origin/master
       return err;
     }
 
@@ -342,7 +285,6 @@ namespace oceanbase
           }
           if (idx < 0 || OB_SUCCESS != err)
           {
-<<<<<<< HEAD
             // add by guojinwei [log synchronization][multi_cluster] 20150819:b
             ObLogPostResponse response_data;
             response_data.next_flush_log_id_ = 0;
@@ -352,9 +294,6 @@ namespace oceanbase
             //wait_queue_.done(wait_idx, wait_node, err);
             wait_queue_.done(wait_idx, response_data, wait_node, err);
             // modify:e
-=======
-            wait_queue_.done(wait_idx, wait_node, err);
->>>>>>> refs/remotes/origin/master
             callback_->handle_response(wait_node);
           }
           break;
@@ -365,15 +304,9 @@ namespace oceanbase
 
     int ObAckQueue::callback(void* data)
     {
-<<<<<<< HEAD
       int ret = ONEV_OK;
       int err = OB_SUCCESS;
       onev_request_e* r = (onev_request_e*)data;
-=======
-      int ret = EASY_OK;
-      int err = OB_SUCCESS;
-      easy_request_t* r = (easy_request_t*)data;
->>>>>>> refs/remotes/origin/master
       if (NULL == r || NULL == r->ms)
       {
         TBSYS_LOG(WARN, "request is null or r->ms is null");
@@ -387,12 +320,9 @@ namespace oceanbase
         ObPacket* packet = NULL;
         ObDataBuffer* response_buffer = NULL;
         ObResultCode result_code;
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
         ObLogPostResponse response_data;
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         int64_t pos = 0;
         if (NULL == (packet =(ObPacket*)r->ipacket))
         {
@@ -406,7 +336,6 @@ namespace oceanbase
         }
         else if (OB_SUCCESS != (err = result_code.deserialize(response_buffer->get_data() + response_buffer->get_position(), packet->get_data_length(), pos)))
         {
-<<<<<<< HEAD
           TBSYS_LOG(ERROR, "deserialize result_code failed:pos[%ld], err[%d], server=%s", pos, err, inet_ntoa_r(get_onev_addr(r)));
         }
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
@@ -434,18 +363,6 @@ namespace oceanbase
         if (OB_SUCCESS != (tmperr = wait_queue_.done((int64_t)r->user_data, response_data, node, err))
             && OB_ALREADY_DONE != tmperr)
         // modify:e
-=======
-          TBSYS_LOG(ERROR, "deserialize result_code failed:pos[%ld], err[%d], server=%s", pos, err, inet_ntoa_r(get_easy_addr(r)));
-        }
-        else
-        {
-          err = result_code.result_code_;
-        }
-        WaitNode node;
-        int tmperr = OB_SUCCESS;
-        if (OB_SUCCESS != (tmperr = wait_queue_.done((int64_t)r->user_data, node, err))
-            && OB_ALREADY_DONE != tmperr)
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(ERROR, "wait_queue.done()=>%d", tmperr);
         }
@@ -457,7 +374,6 @@ namespace oceanbase
       }
       if (NULL != r && NULL != r->ms)
       {
-<<<<<<< HEAD
         onev_destroy_session(r->ms);
       }
       return ret;
@@ -630,11 +546,5 @@ namespace oceanbase
       return ret;
     }
     // add:e
-=======
-        easy_session_destroy(r->ms);
-      }
-      return ret;
-    }
->>>>>>> refs/remotes/origin/master
   }; // end namespace common
 }; // end namespace oceanbase

@@ -23,7 +23,6 @@ namespace oceanbase
 {
   namespace common
   {
-<<<<<<< HEAD
     //add lbzhong [auto_increment] 20161213:b
     enum ObIteratorType
     {
@@ -31,8 +30,6 @@ namespace oceanbase
       ITERATOR_AUTO_INCREMENT, // 1
     };
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     // interface of iterator
     template <typename T>
     class ObIteratorTmpl
@@ -54,12 +51,9 @@ namespace oceanbase
         virtual int get_cell(T** cell) = 0;
         virtual int get_cell(T** cell, bool* is_row_changed) = 0;
         virtual int is_row_finished(bool* is_row_finished) {UNUSED(is_row_finished); return OB_NOT_IMPLEMENT;};
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161213:b
         virtual int get_type() const { return ITERATOR_UNKNOWN; }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
     typedef ObIteratorTmpl<ObCellInfo> ObIterator;
     typedef ObIteratorTmpl<ObInnerCellInfo> ObInnerIterator;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2012 Taobao Inc.
  *
@@ -67,15 +64,11 @@ const char *ObStatSingleton::ups_map[] = {
   "scan_qtime",
   "apply_qtime",
 
-<<<<<<< HEAD
   "idle_count",
-=======
->>>>>>> refs/remotes/origin/master
   "get_time",
   "scan_time",
   "trans_time",
   "trans_wtime",
-<<<<<<< HEAD
   //add by zt 20151211:b
 //  "trans_wtime_rec_thread",
 //  "trans_wtime_thread_handle",
@@ -104,12 +97,6 @@ const char *ObStatSingleton::ups_map[] = {
   "commit_fltime",
   "commit_putime",
 
-=======
-  "trans_htime",
-  "trans_ctime",
-  "trans_ftime",
-  "trans_rtime",
->>>>>>> refs/remotes/origin/master
   "apply_time",
   "batch_time",
   "merge_time",
@@ -180,17 +167,13 @@ const char *ObStatSingleton::ups_map[] = {
   "hl_trans_time",
 
   "lock_wait_time",
-<<<<<<< HEAD
   "lock_succ_count",
   "lock_fail_count",
-=======
->>>>>>> refs/remotes/origin/master
 
   "dml_replace_count",
   "dml_insert_count",
   "dml_update_count",
   "dml_delete_count",
-<<<<<<< HEAD
 
   //add zt by 20151214:b
   "ups_proc_count",
@@ -208,8 +191,6 @@ const char *ObStatSingleton::ups_map[] = {
   "exec_mem_sstable",
   "exec_merge"
   //add by zt 20151214:e
-=======
->>>>>>> refs/remotes/origin/master
 };
 
 const char *ObStatSingleton::cs_map[] = {
@@ -242,14 +223,11 @@ const char *ObStatSingleton::cs_map[] = {
 
   // cs version error
   "fail_cs_version_count",
-<<<<<<< HEAD
 
   "inc_query_get_count",
   "inc_query_get_time",
   "inc_query_scan_count",
   "inc_query_scan_time",
-=======
->>>>>>> refs/remotes/origin/master
 };
 
 const char *ObStatSingleton::sstable_map[] = {
@@ -281,7 +259,6 @@ const char *ObStatSingleton::ms_map[] = {
   // sql scan
   "scan_event_count",
   "scan_event_time",
-<<<<<<< HEAD
   "ups_execute_count",
   "ups_execute_time",
 
@@ -289,8 +266,6 @@ const char *ObStatSingleton::ms_map[] = {
   "procedure_ups_execute_count",
   "procedure_ups_execute_time",
 
-=======
->>>>>>> refs/remotes/origin/master
   // memory
   "ms_memory_limit",
   "ms_memory_total",
@@ -317,10 +292,7 @@ const char *ObStatSingleton::sql_map[] = {
 
   "sql_create_table_count",
   "sql_drop_table_count",
-<<<<<<< HEAD
   "sql_truncate_table_count", /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
 
   "sql_ps_allocator_count",
   "sql_insert_cache_hit",
@@ -368,11 +340,8 @@ const char *ObStatSingleton::obmysql_map[] = {
   "sql_update_time",
   "sql_delete_count",
   "sql_delete_time",
-<<<<<<< HEAD
   "sql_proc_count",
   "sql_proc_time",
-=======
->>>>>>> refs/remotes/origin/master
 
   "sql_query_bytes",
 
@@ -380,7 +349,6 @@ const char *ObStatSingleton::obmysql_map[] = {
   "sql_rollback_count",
   "sql_autocommit_on_count",
   "sql_autocommit_off_count",
-<<<<<<< HEAD
   "sql_cmd_received_count",
   "sql_cmd_process_count",
   "sql_cmd_wait_time_ms",
@@ -390,8 +358,6 @@ const char *ObStatSingleton::obmysql_map[] = {
 //  "multi_stmt_trans_stmt_interval",
   "multi_stmt_trans_stmt_count",
 
-=======
->>>>>>> refs/remotes/origin/master
 };
 
 

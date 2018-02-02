@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -55,10 +52,7 @@ namespace oceanbase
       READ_WRITE_TRANS = 1,
       INTERNAL_WRITE_TRANS = 2, // 不加锁,避免触发trigger
       REPLAY_TRANS = 3, // 不加锁，
-<<<<<<< HEAD
       LONG_READ_WRITE_TRANS = 4, // add by qx 20170314 for long transcations
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     struct ObTransReq
@@ -82,14 +76,10 @@ namespace oceanbase
     struct ObTransID
     {
       const static uint32_t INVALID_SESSION_ID = 0;
-<<<<<<< HEAD
       // modify by guojinwei [repeatable read] 20160310:b
       //ObTransID(): descriptor_(INVALID_SESSION_ID), ups_(), start_time_us_(0) {}
       ObTransID(): descriptor_(INVALID_SESSION_ID), ups_(), start_time_us_(0), trans_start_time_us_(0), isolation_level_(READ_COMMITED) {}
       // modify:e
-=======
-      ObTransID(): descriptor_(INVALID_SESSION_ID), ups_(), start_time_us_(0) {}
->>>>>>> refs/remotes/origin/master
       ~ObTransID() {}
       void reset();
       bool is_valid()const;
@@ -98,13 +88,10 @@ namespace oceanbase
       uint32_t descriptor_;
       common::ObServer ups_;
       int64_t start_time_us_;
-<<<<<<< HEAD
       // add by guojinwei [repeatalbe read] 20160310:b
       int64_t trans_start_time_us_;
       int32_t isolation_level_;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     struct ObEndTransReq

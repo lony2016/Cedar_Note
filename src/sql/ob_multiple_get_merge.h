@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -51,7 +48,6 @@ namespace oceanbase
         virtual void reset();
         virtual void reuse();
         int get_next_row(const ObRow *&row);
-<<<<<<< HEAD
         enum ObPhyOperatorType get_type() const{return PHY_MULTIPLE_GET_MERGE;}
         int64_t to_string(char *buf, int64_t buf_len) const;
         //add maoxx
@@ -60,10 +56,6 @@ namespace oceanbase
          */
         void reset_iterator();
         //add e
-=======
-        enum ObPhyOperatorType get_type() const{return PHY_MULTIPLE_GET_MERGE;};
-        int64_t to_string(char *buf, int64_t buf_len) const;
->>>>>>> refs/remotes/origin/master
 
         DECLARE_PHY_OPERATOR_ASSIGN;
       private:

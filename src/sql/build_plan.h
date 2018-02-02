@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -19,8 +18,6 @@
 
 
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef BUILD_PLAN_H
 #define BUILD_PLAN_H
 

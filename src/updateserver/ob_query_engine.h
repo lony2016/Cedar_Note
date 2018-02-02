@@ -118,7 +118,6 @@ namespace oceanbase
                 const bool reverse,
                 QueryEngineIterator &iter);
 
-<<<<<<< HEAD
         int scan_table(const TEKey &start_key,
                 const int min_key,
                 const int start_exclude,
@@ -127,8 +126,6 @@ namespace oceanbase
                 const int end_exclude,
                 const bool reverse,
                 QueryEngineIterator &iter); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         int clear();
 
         void dump2text(const char *fname);
@@ -140,7 +137,6 @@ namespace oceanbase
         int64_t hash_size() const;
         int64_t hash_bucket_using() const;
         int64_t hash_uninit_unit_num() const;
-<<<<<<< HEAD
         int get_table_truncate_stat (uint64_t table_id, bool &is_truncated); /*add hxlong [Truncate Table]:20170318*/
       private:
         bool inited_;
@@ -149,13 +145,6 @@ namespace oceanbase
         HashEngineAllocator hash_alloc_;
         keybtree_t keybtree_;
         keybtree_t table_keybtree_; //add hxlong [truncate table] 20170403
-=======
-      private:
-        bool inited_;
-        BtreeEngineAllocator btree_alloc_;
-        HashEngineAllocator hash_alloc_;
-        keybtree_t keybtree_;
->>>>>>> refs/remotes/origin/master
         keyhash_t keyhash_;
     };
 

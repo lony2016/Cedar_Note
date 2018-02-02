@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -46,10 +43,6 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
     char *&log_data, int64_t &data_len)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   ObLogEntry entry;
   if (!is_initialized_)
   {
@@ -57,10 +50,6 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
         "please initialize first");
     ret = OB_NOT_INIT;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     if (OB_SUCCESS != (ret = read_header(entry)) && OB_READ_NOTHING != ret)
@@ -68,10 +57,6 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
       TBSYS_LOG(ERROR, "read_header()=>%d", ret);
     }
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     if (log_buffer_.get_remain_data_len() < entry.get_log_data_len())
@@ -92,10 +77,6 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
       ret = OB_ERROR;
     }
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     if (last_log_seq_ != 0 &&
@@ -108,10 +89,6 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
       ret = OB_ERROR;
     }
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     last_log_seq_ = entry.seq_;
@@ -121,17 +98,12 @@ int ObDirectLogReader::read_log(LogCommand &cmd, uint64_t &log_seq,
     data_len = entry.get_log_data_len();
     log_buffer_.get_position() += data_len;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     TBSYS_LOG(DEBUG, "LOG ENTRY: SEQ[%lu] CMD[%d] DATA_LEN[%ld] POS[%ld]",
         entry.seq_, cmd, data_len, pos);
     pos += entry.header_.header_length_ + entry.header_.data_length_;
   }
-<<<<<<< HEAD
   return ret;
 }
 
@@ -342,9 +314,3 @@ int ObDirectLogReader::read_log_for_data_checksum(LogCommand &cmd, uint64_t &log
   return ret;
 }
 //add:e
-=======
-
-  return ret;
-}
-
->>>>>>> refs/remotes/origin/master

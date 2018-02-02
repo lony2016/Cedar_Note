@@ -76,11 +76,7 @@ namespace oceanbase
     extern bool is_in_range(const int64_t key, const common::ObVersionRange &version_range);
     extern bool is_range_valid(const common::ObVersionRange &version_range);
     extern int precise_sleep(const int64_t microsecond);
-<<<<<<< HEAD
     extern const char *inet_ntoa_r(onev_addr_e addr);
-=======
-    extern const char *inet_ntoa_r(easy_addr_t addr);
->>>>>>> refs/remotes/origin/master
     extern int64_t get_max_row_cell_num();
     extern int64_t get_table_available_warn_size();
     extern int64_t get_table_available_error_size();

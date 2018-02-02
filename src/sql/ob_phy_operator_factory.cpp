@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -20,10 +19,6 @@
 */
 
 /* (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
- *
->>>>>>> refs/remotes/origin/master
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * version 2 as published by the Free Software Foundation.
@@ -57,7 +52,6 @@
 #include "ob_row_count.h"
 #include "ob_when_filter.h"
 #include "ob_dual_table_scan.h"
-<<<<<<< HEAD
 //add maoxx
 #include "ob_index_trigger.h"
 //add e
@@ -70,8 +64,6 @@
 //add lbzhong [auto_increment] 20161218:b
 #include "ob_auto_increment_filter.h"
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase;
 using namespace sql;
@@ -109,14 +101,11 @@ ObPhyOperator *ObPhyOperatorFactory::get_one(ObPhyOperatorType phy_operator_type
       //ret = pool_insert_db_sem_filter_.alloc();
       ret = tc_rp_alloc(ObInsertDBSemFilter);
       break;
-<<<<<<< HEAD
     //add fanqiushi [semi_join] [0.1] 20150829:b
     case PHY_SEMI_LEFT_JOIN:
       ret = tc_rp_alloc(ObSemiLeftJoin);
       break;
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     case PHY_MEM_SSTABLE_SCAN:
       //ret = pool_mem_sstable_scan_.alloc();
       ret = tc_rp_alloc(ObMemSSTableScan);
@@ -141,7 +130,6 @@ ObPhyOperator *ObPhyOperatorFactory::get_one(ObPhyOperatorType phy_operator_type
       //ret = pool_multiple_scan_merge_.alloc();
       ret = tc_rp_alloc(ObMultipleScanMerge);
       break;
-<<<<<<< HEAD
     //add maoxx
     case PHY_INDEX_TRIGGER:
       ret = tc_rp_alloc(ObIndexTrigger);
@@ -152,8 +140,6 @@ ObPhyOperator *ObPhyOperatorFactory::get_one(ObPhyOperatorType phy_operator_type
       ret = tc_rp_alloc(ObAutoIncrementFilter);
       break;
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     //CASE_CLAUSE(PHY_PROJECT, ObProject);
     CASE_CLAUSE(PHY_LIMIT, ObLimit);
     //CASE_CLAUSE(PHY_FILTER, ObFilter);
@@ -202,15 +188,12 @@ void ObPhyOperatorFactory::release_one(ObPhyOperator *opt)
         //pool_insert_db_sem_filter_.free(dynamic_cast<ObInsertDBSemFilter*>(opt));
         tc_rp_free(dynamic_cast<ObInsertDBSemFilter*>(opt));
         break;
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150829:b
       case PHY_SEMI_LEFT_JOIN:
         //pool_insert_db_sem_filter_.free(dynamic_cast<ObInsertDBSemFilter*>(opt));
         tc_rp_free(dynamic_cast<ObSemiLeftJoin*>(opt));
         break;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       case PHY_MEM_SSTABLE_SCAN:
         //pool_mem_sstable_scan_.free(dynamic_cast<ObMemSSTableScan*>(opt));
         tc_rp_free(dynamic_cast<ObMemSSTableScan*>(opt));
@@ -235,7 +218,6 @@ void ObPhyOperatorFactory::release_one(ObPhyOperator *opt)
         //pool_multiple_scan_merge_.free(dynamic_cast<ObMultipleScanMerge*>(opt));
         tc_rp_free(dynamic_cast<ObMultipleScanMerge*>(opt));
         break;
-<<<<<<< HEAD
       //add maoxx
       case PHY_INDEX_TRIGGER:
         tc_rp_free(dynamic_cast<ObIndexTrigger*>(opt));
@@ -246,8 +228,6 @@ void ObPhyOperatorFactory::release_one(ObPhyOperator *opt)
         tc_rp_free(dynamic_cast<ObAutoIncrementFilter*>(opt));
         break;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       default:
         opt->~ObPhyOperator();
         break;

@@ -51,12 +51,9 @@ namespace oceanbase
       static const uint8_t F_WARNING_LIST = 0x03;
       static const uint8_t F_NEW_SCANNER = 0x04;
       static const uint8_t F_TRANS_ID = 0x05;
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161218:b
       static const uint8_t F_AUTO_VALUE = 0x06;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       struct StringNode
       {
         StringNode *next;
@@ -81,13 +78,10 @@ namespace oceanbase
         void reset_iter_warning();
         ObNewScanner &get_scanner();
         const ObTransID &get_trans_id() const {return trans_id_;};
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         void set_auto_value(const int64_t auto_value) { auto_value_ =  auto_value; }
         int64_t get_auto_value() const { return auto_value_; }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       public:
         void clear();
       public:
@@ -106,12 +100,9 @@ namespace oceanbase
         char *scanner_sel_buffer_;
         int64_t scanner_sel_length_;
         ObTransID trans_id_;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         int64_t auto_value_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace sql
 } // end namespace oceanbase

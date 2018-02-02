@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  * @date 2016_07_29
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -150,17 +147,10 @@ int ObResultSet::open()
       }
     }
     physical_plan_->set_timeout_timestamp(plan_timeout + tbsys::CTimeUtil::getTime());
-<<<<<<< HEAD
     ObPhyOperator *main_query = physical_plan_->get_main_query();//slwang note:
     ObPhyOperator *pre_query = physical_plan_->get_pre_query();//slwang note:对于from子查询而言，并没有把需要先执行的子查询插入到pre_query中，其得到的值为空
 
     if (NULL != pre_query)//slwang note: 当pre_query不为空时，有可能是ObGetCurTimePhyOperator::open()，而from子查询其值为空，是跳过此段代码的
-=======
-    ObPhyOperator *main_query = physical_plan_->get_main_query();
-    ObPhyOperator *pre_query = physical_plan_->get_pre_query();
-
-    if (NULL != pre_query)
->>>>>>> refs/remotes/origin/master
     {
       ret = pre_query->open();
       FILL_TRACE_LOG("pre_query finished");
@@ -168,13 +158,10 @@ int ObResultSet::open()
       {
         TBSYS_LOG(WARN, "failed to open pre_query, ret=%d", ret);
       }
-<<<<<<< HEAD
       else
       {
     	  TBSYS_LOG(INFO, "open pre_query success");
       }
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     if (OB_SUCCESS == ret)
@@ -186,7 +173,6 @@ int ObResultSet::open()
       }
       else
       {
-<<<<<<< HEAD
         ret = main_query->open();//slwang note
         FILL_TRACE_LOG("main_query finished");
         if (OB_SUCCESS != ret
@@ -194,11 +180,6 @@ int ObResultSet::open()
             && OB_ERR_AUTO_VALUE_NOT_SERVE != ret
             //add:e
             )
-=======
-        ret = main_query->open();
-        FILL_TRACE_LOG("main_query finished");
-        if (OB_SUCCESS != ret)
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(WARN, "failed to open main query, ret=%d", ret);
         }
@@ -246,7 +227,6 @@ int ObResultSet::reset()
   cur_time_ = NULL;
   errcode_ = 0;
   // don't set stmt_type_ = ObBasicStmt::T_NONE;
-<<<<<<< HEAD
   //add by qx 20170318 :b
   no_group_ = true;
   long_trans_ = false;
@@ -254,8 +234,6 @@ int ObResultSet::reset()
   //add lbzhong [auto_increment] 20161218:b
   auto_increment_ = false;
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -299,7 +277,6 @@ int ObResultSet::pre_assign_params_room(const int64_t& size, common::ObIAllocato
   return ret;
 }
 
-<<<<<<< HEAD
 //add zt 201151121:b
 //int ObResultSet::pre_assign_cur_time_room(common::ObObj *place_holder)
 //{
@@ -307,8 +284,6 @@ int ObResultSet::pre_assign_params_room(const int64_t& size, common::ObIAllocato
 //}
 //add zt 20151121:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObResultSet::pre_assign_cur_time_room(common::ObIAllocator &alloc)
 {
   int ret = OB_SUCCESS;
@@ -442,14 +417,10 @@ int ObResultSet::to_prepare(ObResultSet& other)
   other.my_session_ = my_session_;
   other.ps_trans_allocator_ = ps_trans_allocator_;
   other.query_string_id_ = query_string_id_;
-<<<<<<< HEAD
   other.stmt_hash_code_ = stmt_hash_code_; //add by zhutao
   other.no_group_ = no_group_;  //add  by zhutao
   other.long_trans_ = long_trans_; //add by qx 20170318
   other.cur_schema_version_ = cur_schema_version_; //add by wdh 20160822
-=======
-
->>>>>>> refs/remotes/origin/master
   this->statement_name_.reset();
   this->physical_plan_ = NULL;
   this->own_physical_plan_ = false;

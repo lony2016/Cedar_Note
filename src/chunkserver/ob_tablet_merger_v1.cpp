@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
 * Copyright (C) 2013-2016 DaSE .
 *
@@ -16,8 +15,6 @@
 * @date 2016_01_21
 */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Alibaba Group Holding Limited.
  *
@@ -203,7 +200,6 @@ namespace oceanbase
       ms_wrapper_(*(ObChunkServerMain::get_instance()->get_chunk_server().get_rpc_proxy()),
                   ObChunkServerMain::get_instance()->get_chunk_server().get_config().merge_timeout),
       merge_join_agent_(cs_proxy_)
-<<<<<<< HEAD
     {
       //add maoxx
       memset(column_checksum_.get_str(), 0, common::OB_MAX_COL_CHECKSUM_STR_LEN);
@@ -212,9 +208,6 @@ namespace oceanbase
       //add e
       is_static_truncated_ = false; /*add hxlong [Truncate Table]:20170318*/
     }
-=======
-    {}
->>>>>>> refs/remotes/origin/master
 
     int ObTabletMergerV1::init()
     {
@@ -281,7 +274,6 @@ namespace oceanbase
           row_.get_obj(i)->dump(TBSYS_LOG_LEVEL_ERROR);
         }
       }
-<<<<<<< HEAD
       //add maoxx
       if(OB_SUCCESS == ret)
       {
@@ -314,8 +306,6 @@ namespace oceanbase
         }
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -374,7 +364,6 @@ namespace oceanbase
 
       sstable_schema_.reset();
       tablet_array_.clear();
-<<<<<<< HEAD
 
       //add maoxx
       column_checksum_.reset();
@@ -382,8 +371,6 @@ namespace oceanbase
       max_data_table_cid_ = OB_INVALID_ID;
       //add e
       is_static_truncated_ = false; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
       return reset_local_proxy();
     }
 
@@ -441,11 +428,7 @@ namespace oceanbase
               *ms_wrapper_.get_ups_scan_cell_stream(),
               *ms_wrapper_.get_ups_get_cell_stream(),
               chunk_merge_.current_schema_,
-<<<<<<< HEAD
               mem_limit,0, unmerge_if_unchanged,is_static_truncated_))) /*add hxlong [Truncate Table]:20170318: param :is_static_truncate_*/
-=======
-              mem_limit,0, unmerge_if_unchanged)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR,"set request param for merge_join_agent failed [%d]",ret);
         merge_join_agent_.clear();
@@ -700,7 +683,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "convert table schema to sstable schema failed, table=%ld",
             tablet->get_range().table_id_);
       }
-<<<<<<< HEAD
       //add maoxx
       else if(OB_SUCCESS != (ret = is_index_or_with_index(tablet->get_range().table_id_)))
       {
@@ -724,8 +706,6 @@ namespace oceanbase
         }
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       if (OB_SUCCESS == ret)
       {
@@ -895,7 +875,6 @@ namespace oceanbase
               && (ret = finish_sstable(is_tablet_unchanged, new_tablet))!= OB_SUCCESS)
           {
             TBSYS_LOG(ERROR,"close sstable failed [%d]",ret);
-<<<<<<< HEAD
           }         
           //add maoxx
           else
@@ -903,9 +882,6 @@ namespace oceanbase
             column_checksum_.reset();
           }
           //add e
-=======
-          }
->>>>>>> refs/remotes/origin/master
 
           // not split, break
           if (OB_SUCCESS == ret && !is_first_column_group_splited)
@@ -1138,15 +1114,11 @@ namespace oceanbase
       }
 
       ObVersionRange version_range;
-<<<<<<< HEAD
       ObVersionRange new_range; //add hxlong [truncate table] 20170411
-=======
->>>>>>> refs/remotes/origin/master
       version_range.border_flag_.set_inclusive_end();
 
       version_range.start_version_ =  old_tablet_->get_data_version();
       version_range.end_version_   =  old_tablet_->get_data_version() + 1;
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
       ObMergerRpcProxy* rpc_proxy = THE_CHUNK_SERVER.get_rpc_proxy();
       if (NULL != rpc_proxy)
@@ -1177,11 +1149,6 @@ namespace oceanbase
         scan_param_.set_version_range(new_range);
         //mod:e
       //add:e
-=======
-
-      scan_param_.set_version_range(version_range);
-
->>>>>>> refs/remotes/origin/master
       int64_t size = 0;
       const ObSSTableSchemaColumnDef *col = sstable_schema_.get_group_schema(
           new_table_schema_->get_table_id(), column_group_id, size);
@@ -1204,10 +1171,7 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
       }//add hxlong [truncate table] 20170411
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -1389,7 +1353,6 @@ namespace oceanbase
         {
           if (is_tablet_unchanged)
           {
-<<<<<<< HEAD
             //add maoxx
               if((is_index_) || (!is_index_ && is_have_index_ && !is_have_init_index_))
               {
@@ -1408,8 +1371,6 @@ namespace oceanbase
                 }
               }
             //add e
-=======
->>>>>>> refs/remotes/origin/master
             tablet->set_disk_no(old_tablet_->get_disk_no());
             row_checksum = old_tablet_->get_row_checksum();
             ret = create_hard_link_sstable(sstable_size);
@@ -1421,7 +1382,6 @@ namespace oceanbase
           }
           else
           {
-<<<<<<< HEAD
             //add maoxx
               //如果表有增量，就把新算的列校验和发送系统表
               if(is_index_ || (!is_index_ && is_have_index_))
@@ -1440,8 +1400,6 @@ namespace oceanbase
                 }
               }
             //add e
-=======
->>>>>>> refs/remotes/origin/master
             trailer = &writer_.get_trailer();
             tablet->set_disk_no( (sstable_id_.sstable_file_id_) & DISK_NO_MASK);
           }
@@ -1632,7 +1590,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
 
     //add maoxx
     int ObTabletMergerV1::is_index_or_with_index(const uint64_t table_id)
@@ -2012,7 +1969,5 @@ namespace oceanbase
       return ret;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   } /* chunkserver */
 } /* oceanbase */

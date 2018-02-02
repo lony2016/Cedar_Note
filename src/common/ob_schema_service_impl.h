@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -22,8 +21,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -45,16 +42,12 @@
 #include "common/ob_table_id_name.h"
 #include "common/ob_schema_service.h"
 #include "common/hash/ob_hashmap.h"
-<<<<<<< HEAD
 //add maoxx
 #include "common/ob_column_checksum.h"
 //add e
 //add by wangdonghui
 #include "common/nb_accessor/nb_query_res.h"
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 class TestSchemaService_assemble_table_Test;
 class TestSchemaTable_generate_new_table_name_Test;
 class TestSchemaService_assemble_column_Test;
@@ -72,7 +65,6 @@ namespace oceanbase
     static ObString column_table_name = OB_STR(OB_ALL_COLUMN_TABLE_NAME);
     static ObString joininfo_table_name = OB_STR(OB_ALL_JOININFO_TABLE_NAME);
     static ObString privilege_table_name = OB_STR(OB_ALL_TABLE_PRIVILEGE_TABLE_NAME);
-<<<<<<< HEAD
     static ObString secondary_index_table_name = OB_STR(OB_ALL_SECONDAYR_INDEX_TABLE_NAME);//longfei [create index]
     //add lbzhong [auto_increment] 20161211:b
     static ObString auto_increment_table_name = OB_STR(OB_ALL_AUTO_INCREMENT_TABLE_NAME);
@@ -81,9 +73,6 @@ namespace oceanbase
     //add by wangdonghui 20160125 :b
     static ObString procedure_table_name = OB_STR(OB_ALL_PROCEDURE_TABLE_NAME);  ///< static string procedure table name
     //add :e
-=======
-    static ObString table_name_str = OB_STR("table_id");
->>>>>>> refs/remotes/origin/master
     static const char* const TMP_PREFIX = "tmp_";
 
     class ObSchemaServiceImpl : public ObSchemaService
@@ -95,7 +84,6 @@ namespace oceanbase
         int init(ObScanHelper* client_proxy, bool only_core_tables);
 
         virtual int get_table_schema(const ObString& table_name, TableSchema& table_schema);
-<<<<<<< HEAD
         //add by wangdonghui 20160308 :b
         /**
          * @brief get_procedure_info
@@ -105,8 +93,6 @@ namespace oceanbase
          */
         virtual int get_procedure_info(common::nb_accessor::QueryRes *&res_);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         virtual int create_table(const TableSchema& table_schema);
         virtual int drop_table(const ObString& table_name);
         virtual int alter_table(const AlterTableSchema& table_schema, const int64_t old_schema_version);
@@ -117,7 +103,6 @@ namespace oceanbase
         virtual int set_max_used_table_id(const uint64_t max_used_tid);
         virtual int prepare_privilege_for_table(const nb_accessor::TableRow* table_row,
             ObMutator *mutator, const int64_t table_id);
-<<<<<<< HEAD
         //add by wangdonghui 20160125 :b
         /**
          * @brief create_procedure
@@ -137,9 +122,6 @@ namespace oceanbase
          */
         int drop_procedure(const ObString& proc_name);
         //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
         friend class ::TestSchemaService_assemble_table_Test;
         friend class ::TestSchemaService_assemble_column_Test;
         friend class ::TestSchemaService_assemble_join_info_Test;
@@ -151,7 +133,6 @@ namespace oceanbase
         // for read
         int fetch_table_schema(const ObString& table_name, TableSchema& table_schema);
         int create_table_mutator(const TableSchema& table_schema, ObMutator* mutator);
-<<<<<<< HEAD
 
         //add by wangdonghui 20160125 :b
         /**
@@ -164,8 +145,6 @@ namespace oceanbase
          */
         int create_procedure_mutator(const common::ObString & proc_name, const common::ObString & proc_source_code, ObMutator* mutator);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int alter_table_mutator(const AlterTableSchema& table_schema, ObMutator* mutator, const int64_t old_schema_version);
         int assemble_table(const nb_accessor::TableRow* table_row, TableSchema& table_schema);
         int assemble_column(const nb_accessor::TableRow* table_row, ColumnSchema& column);
@@ -178,7 +157,6 @@ namespace oceanbase
         int reset_column_id_mutator(ObMutator* mutator, const AlterTableSchema & schema, const uint64_t max_column_id);
         int reset_schema_version_mutator(ObMutator* mutator, const AlterTableSchema & schema, const int64_t old_schema_version);
         int init_id_name_map();
-<<<<<<< HEAD
         int generate_new_table_name(char* buf, const uint64_t lenght, const char* table_name, const uint64_t table_name_length);
         //add lbzhong [auto_increment] 20161201:b
         int check_auto_increment(const TableSchema& table_schema, uint64_t& column_id);
@@ -248,9 +226,6 @@ namespace oceanbase
       virtual int get_cluster_count(int64_t &cc);
       //add e
 
-=======
-      int generate_new_table_name(char* buf, const uint64_t lenght, const char* table_name, const uint64_t table_name_length);
->>>>>>> refs/remotes/origin/master
 
 
       private:

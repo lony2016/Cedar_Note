@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -35,10 +32,7 @@
  */
 #include "ob_filter.h"
 #include "common/utility.h"
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
@@ -119,7 +113,6 @@ int ObFilter::get_next_row(const common::ObRow *&row)
   {
     const ObObj *result = NULL;
     bool did_output = true;
-<<<<<<< HEAD
     //test xsl semi_join
 //    if(child_op_ != NULL)
 //        TBSYS_LOG(INFO,"xushilei,child_op_=[%s]",to_cstring(*child_op_));
@@ -131,11 +124,6 @@ int ObFilter::get_next_row(const common::ObRow *&row)
 //        if(input_row != NULL)
 //            TBSYS_LOG(INFO,"xushilei,before_filter_input_row=[%s]",to_cstring(*input_row));
         //test xsl
-=======
-    while(OB_SUCCESS == ret
-          && OB_SUCCESS == (ret = child_op_->get_next_row(input_row)))
-    {
->>>>>>> refs/remotes/origin/master
       did_output = true;
       dlist_for_each(ObSqlExpression, p, filters_)
       {
@@ -149,13 +137,10 @@ int ObFilter::get_next_row(const common::ObRow *&row)
           did_output = false;
           break;
         }
-<<<<<<< HEAD
         //test xsl semi_join
 //        if(input_row != NULL)
 //            TBSYS_LOG(INFO,"xushilei,after_filter_input_row=[%s]",to_cstring(*input_row));
         //test xsl
-=======
->>>>>>> refs/remotes/origin/master
       } // end for
       if (did_output)
       {
@@ -191,7 +176,6 @@ int64_t ObFilter::to_string(char* buf, const int64_t buf_len) const
   return pos;
 }
 
-<<<<<<< HEAD
 //add maoxx
 void ObFilter::reset_iterator()
 {
@@ -203,8 +187,6 @@ void ObFilter::reset_iterator()
   }
 }
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 DEFINE_SERIALIZE(ObFilter)
 {

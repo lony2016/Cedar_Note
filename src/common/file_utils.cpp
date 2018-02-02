@@ -171,11 +171,7 @@ namespace oceanbase
       int64_t iRet = ::pwrite (fd_, data, size, offset);
       if (sync && iRet > 0)
       {
-<<<<<<< HEAD
         ::fsync(fd_);
-=======
-        ::sync();
->>>>>>> refs/remotes/origin/master
       }
       return iRet;
     }

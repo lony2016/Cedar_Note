@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -15,8 +14,6 @@
  * @author longfei <longfei@stu.ecnu.edu.cn>
  * @date 2016_01_21
  */
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_action_flag.h"
 #include "ob_malloc.h"
 #include "ob_scan_param.h"
@@ -62,15 +59,9 @@ namespace oceanbase
       is_binary_rowkey_format_ = false;
     }
 
-<<<<<<< HEAD
     ObScanParam::ObScanParam() : table_id_(OB_INVALID_ID),
     table_name_(), range_(),/*add longfei*/ fake_range_(), need_fake_range_(false),/*add e*/ scan_size_(0),
       scan_flag_(), schema_manager_(NULL), is_binary_rowkey_format_(false)
-=======
-    // ObScanParam
-    ObScanParam::ObScanParam() : table_id_(OB_INVALID_ID),
-    table_name_(), range_(), scan_size_(0), scan_flag_(), schema_manager_(NULL), is_binary_rowkey_format_(false)
->>>>>>> refs/remotes/origin/master
     {
       limit_offset_ = 0;
       limit_count_ = 0;
@@ -429,7 +420,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add longfei [cons static index] 151204:b
     int ObScanParam::set_fake_range(const ObNewRange &fake_range)
     {
@@ -461,8 +451,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObScanParam::set(const uint64_t& table_id, const ObString& table_name, const ObNewRange& range, bool deep_copy_args)
     {
       int err = OB_SUCCESS;
@@ -910,7 +898,6 @@ namespace oceanbase
         }
       }
 
-<<<<<<< HEAD
       //add longfei 151230 
       if (OB_SUCCESS == ret)
       {
@@ -938,8 +925,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // scan range
       if (OB_SUCCESS == ret)
       {
@@ -1012,7 +997,6 @@ namespace oceanbase
         get_rowkey_info_from_sm(schema_manager_, range_.table_id_, table_name_, rowkey_info);
       }
 
-<<<<<<< HEAD
       //add longfei decode
       //1.decode need_fake_range_
       int32_t bl = 0;
@@ -1090,8 +1074,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // scan range
       if (OB_SUCCESS == ret)
       {
@@ -1194,7 +1176,6 @@ namespace oceanbase
       }
       total_size += obj.get_serialize_size();
 
-<<<<<<< HEAD
       //add longfei 计算序列化大小
       //Added two int32, and a range of serialization size
       total_size += sizeof(int32_t);
@@ -1212,8 +1193,6 @@ namespace oceanbase
           fake_range_.end_key_.get_obj_ptr(), fake_range_.end_key_.get_obj_cnt());
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       // scan range
       obj.set_int(range_.border_flag_.get_data());
       total_size += obj.get_serialize_size();

@@ -167,13 +167,10 @@ namespace oceanbase
 
       TEKey(const uint64_t table_id, const UpsRowKey& row_key): table_id(table_id), row_key(row_key)
       {}
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318
       TEKey(const uint64_t table_id): table_id(table_id), row_key()
       {}
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       TEKey() : table_id(common::OB_INVALID_ID), row_key()
       {
       };

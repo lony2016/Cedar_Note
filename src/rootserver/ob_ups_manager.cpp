@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -60,22 +57,17 @@ ObUpsManager::ObUpsManager(ObRootRpcStub &rpc_stub, ObRootWorker *worker,
                            int64_t waiting_ups_register_duration,
                            const ObiRole &obi_role,
                            const volatile int64_t& schema_version,
-<<<<<<< HEAD
                            // modify by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
                            //const volatile int64_t &config_version)
                            const volatile int64_t &config_version,
                            const ObElectionRoleMgr &election_role)
                            // modify:e
-=======
-                           const volatile int64_t &config_version)
->>>>>>> refs/remotes/origin/master
   :queue_(NULL), rpc_stub_(rpc_stub), worker_(worker), obi_role_(obi_role), revoke_rpc_timeout_us_(revoke_rpc_timeout_us),
    lease_duration_us_(lease_duration), lease_reserved_us_(lease_reserved_us),
    ups_master_idx_(-1), waiting_ups_register_duration_(waiting_ups_register_duration),
    waiting_ups_finish_time_(0), schema_version_(schema_version), config_version_(config_version),
    master_master_ups_read_percentage_(-1), slave_master_ups_read_percentage_(-1),
    is_flow_control_by_ip_(false)
-<<<<<<< HEAD
    // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
    , election_role_(election_role)
    // add:e
@@ -83,9 +75,6 @@ ObUpsManager::ObUpsManager(ObRootRpcStub &rpc_stub, ObRootWorker *worker,
   //add by qx 20160830 :b
   set_all_ups_state(true);
   //add :e
-=======
-{
->>>>>>> refs/remotes/origin/master
 }
 
 ObUpsManager::~ObUpsManager()
@@ -365,7 +354,6 @@ int ObUpsManager::grant_lease(bool did_force /*=false*/)
         msg.obi_role_ = obi_role_;
         msg.schema_version_ = schema_version_;
         msg.config_version_ = config_version_;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
         msg.election_role_.set_role(election_role_.get_role());
         msg.election_role_.set_state(election_role_.get_state());
@@ -373,8 +361,6 @@ int ObUpsManager::grant_lease(bool did_force /*=false*/)
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         msg.rs_election_lease_ = get_rs_election_lease();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         int ret2 = send_granting_msg(ups_array_[i].addr_, msg);
         if (OB_SUCCESS != ret2)
@@ -587,12 +573,9 @@ void ObUpsManager::check_all_ups_offline()
     if (UPS_STAT_OFFLINE != ups_array_[i].stat_)
     {
       all_offline = false;
-<<<<<<< HEAD
       //add by qx 20160830 :b
       set_all_ups_state(true);
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
       break;
     }
   }
@@ -600,13 +583,10 @@ void ObUpsManager::check_all_ups_offline()
   {
     TBSYS_LOG(INFO, "all UPS offline");
     waiting_ups_finish_time_ = 0;
-<<<<<<< HEAD
 
     //add by qx 20160830 :b
     set_all_ups_state(false);
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 
@@ -620,13 +600,10 @@ int ObUpsManager::check_lease()
     int64_t now = tbsys::CTimeUtil::getTime();
     if (UPS_STAT_OFFLINE != ups_array_[i].stat_)
     {
-<<<<<<< HEAD
       //add by qx 20162831 :b
       // set ups_state_ is ture
       set_all_ups_state(true);
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
       if (now > ups_array_[i].lease_ + MAX_CLOCK_SKEW_US)
       {
         TBSYS_LOG(INFO, "ups is offline, ups=%s lease=%ld lease_duration=%ld now=%ld",
@@ -1105,7 +1082,6 @@ int ObUpsManager::send_obi_role()
   reset_ups_read_percent();
   return ret;
 }
-<<<<<<< HEAD
 
 // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
 int ObUpsManager::send_rs_election_lease(bool did_force/*=false*/)
@@ -1178,5 +1154,3 @@ bool ObUpsManager::need_renew_rs_election_lease(int64_t now, const ObUps &ups) c
 }
 
 // add:e
-=======
->>>>>>> refs/remotes/origin/master

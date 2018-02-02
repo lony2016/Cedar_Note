@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -215,7 +212,6 @@ namespace oceanbase
 
     DEFINE_DESERIALIZE(ObInsertDBSemFilter)
     {
-<<<<<<< HEAD
       //delete zt 20151113:b
       //return insert_values_.deserialize(buf, data_len, pos);;
       //delete zt 20151113:e
@@ -225,9 +221,6 @@ namespace oceanbase
       if( OB_SUCCESS == ret) insert_values_.set_phy_plan(my_phy_plan_); //inner op
       return ret;
       //add zt 20151113:e
-=======
-      return insert_values_.deserialize(buf, data_len, pos);;
->>>>>>> refs/remotes/origin/master
     }
 
     DEFINE_GET_SERIALIZE_SIZE(ObInsertDBSemFilter)

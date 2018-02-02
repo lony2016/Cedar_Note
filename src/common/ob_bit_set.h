@@ -32,18 +32,11 @@ namespace oceanbase
 
       ObBitSet(const ObBitSet &other);
       ObBitSet& operator=(const ObBitSet &other); 
-<<<<<<< HEAD
       bool operator==(const ObBitSet &other) const;//add dhc [query optimizer] 20170907
-=======
->>>>>>> refs/remotes/origin/master
 
     private:
       static const int32_t PER_BITMAPWORD_BITS = 32;
       static const int32_t MAX_BITMAPWORD = (N - 1) / PER_BITMAPWORD_BITS + 1;
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       BitSetWord bitset_words_[MAX_BITMAPWORD];
     };
 
@@ -164,13 +157,8 @@ namespace oceanbase
       {
         for (int32_t i = 0; i < MAX_BITMAPWORD; i ++)
         {
-<<<<<<< HEAD
           if ((other.get_bitset_word(i)) & ~(bitset_words_[i]))//slwang note:简化成 B&(~A)为真，即A没有B有时，即~A有B有做&运算才会为真时，返回false,说明 A不是B的超集
             return false;                                      //            对于t1 expr:t1.c1 = t2.c1显然t1 不是t1,t2的超集
-=======
-          if ((other.get_bitset_word(i)) & ~(bitset_words_[i]))
-            return false;
->>>>>>> refs/remotes/origin/master
         }
       }
       return ret;
@@ -252,7 +240,6 @@ namespace oceanbase
       }
       return *this;
     }
-<<<<<<< HEAD
 
     //add dhc [query optimizer] 20170907:b
     template <int32_t N>
@@ -261,8 +248,6 @@ namespace oceanbase
       return compare_bit(other,other.num_members());
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,11 +37,7 @@ namespace oceanbase
 {
   namespace common
   {
-<<<<<<< HEAD
     ObLogDataWriter::AppendBuffer::AppendBuffer(): file_pos_(-1), buf_(NULL), buf_end_(0), buf_limit_(OB_FLUSH_DISK_BUFFER_SIZE)
-=======
-    ObLogDataWriter::AppendBuffer::AppendBuffer(): file_pos_(-1), buf_(NULL), buf_end_(0), buf_limit_(DEFAULT_BUF_SIZE)
->>>>>>> refs/remotes/origin/master
     {}
 
     ObLogDataWriter::AppendBuffer::~AppendBuffer()
@@ -166,11 +159,7 @@ namespace oceanbase
       return pos;
     }
 
-<<<<<<< HEAD
     int ObLogDataWriter::init(const char* log_dir, const int64_t file_size, const int64_t du_percent,
-=======
-    int ObLogDataWriter::init(const char* log_dir, const int64_t file_size, int64_t du_percent,
->>>>>>> refs/remotes/origin/master
                               const int64_t log_sync_type,
                               MinAvailFileIdGetter* min_avail_file_id_getter)
     {
@@ -349,11 +338,8 @@ namespace oceanbase
                                const char* data, const int64_t len)
     {
       int err = OB_SUCCESS;
-<<<<<<< HEAD
       //TBSYS_LOG(ERROR,"test::zhouhuan: DataWriter:end_cusor_[%s], start_cursor=[%s], end_cursor=[%s]",
      //           to_cstring(end_cursor_), to_cstring(start_cursor), to_cstring(end_cursor));
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == log_dir_)
       {
         err = OB_NOT_INIT;
@@ -678,7 +664,6 @@ namespace oceanbase
       cursor = end_cursor_;
       return err;
     }
-<<<<<<< HEAD
     //add lbzhong [Commit Point] 20150820:b
     int ObLogDataWriter::write_eof(const ObLogCursor cursor)
     {
@@ -711,7 +696,5 @@ namespace oceanbase
       return err;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   }; // end namespace common
 }; // end namespace oceanbase

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -46,7 +43,6 @@ namespace oceanbase
         virtual int read_log(const int64_t file_id, const int64_t offset,
                             int64_t& start_id, int64_t& end_id,
                              char* buf, const int64_t len, int64_t& read_count, bool& is_file_end) = 0;
-<<<<<<< HEAD
         //add lbzhong [Commit Point] 20150820:b
         /**
          * @brief read commit log from log file
@@ -66,8 +62,6 @@ namespace oceanbase
                             int64_t& start_id, int64_t& end_id,
                              char* buf, const int64_t len, int64_t& read_count, bool& is_file_end, bool& has_committed_end, const int64_t commit_seq) = 0;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
 // 实现为每次重新打开指定的文件，定位到给定的偏移，读取日志，读取的日志拷贝到给定的缓冲区内.
@@ -88,7 +82,6 @@ namespace oceanbase
         virtual int read_log(const int64_t file_id, const int64_t offset,
                             int64_t& start_id, int64_t& end_id,
                              char* buf, const int64_t len, int64_t& read_count, bool& is_file_end);
-<<<<<<< HEAD
         //add lbzhong [Commit Point] 20150820:b
         /**
          * @brief [overwrite] read commit log from log file
@@ -108,8 +101,6 @@ namespace oceanbase
                             int64_t& start_id, int64_t& end_id,
                              char* buf, const int64_t len, int64_t& read_count, bool& is_file_end, bool& has_committed_end, const int64_t commit_seq);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       protected:
         bool is_inited() const;
       private:

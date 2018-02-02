@@ -16,7 +16,6 @@
 
 #include "utility.h"
 #include "ob_define.h"
-<<<<<<< HEAD
 #include "onev_inet.h"
 #include "ob_rowkey.h"
 #include "ob_common_param.h"
@@ -25,12 +24,6 @@
 #include "math.h"
 #include "ob_obj_cast.h"
 //add :e
-=======
-#include "easy_inet.h"
-#include "ob_rowkey.h"
-#include "ob_common_param.h"
-#include "ob_scanner.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -349,22 +342,14 @@ namespace oceanbase
       return buffer;
     }
 
-<<<<<<< HEAD
     const char *inet_ntoa_r(onev_addr_e addr)
-=======
-    const char *inet_ntoa_r(easy_addr_t addr)
->>>>>>> refs/remotes/origin/master
     {
       static const int64_t BUFFER_SIZE = 64;
       static __thread char buffers[2][BUFFER_SIZE];
       static __thread uint64_t i = 0;
       char *buffer = buffers[i++ % 2];
       buffer[0] = '\0';
-<<<<<<< HEAD
       return onev_inet_addr_to_str(&addr, buffer, BUFFER_SIZE);
-=======
-      return easy_inet_addr_to_str(&addr, buffer, BUFFER_SIZE);
->>>>>>> refs/remotes/origin/master
     }
 
     void databuff_printf(char *buf, const int64_t buf_len, int64_t& pos, const char* fmt, ...)
@@ -571,15 +556,9 @@ namespace oceanbase
       return static_cast<uint16_t>(((a >> 8) & 0xFFU) | ((a << 8) & 0xFF00U));
     }
 
-<<<<<<< HEAD
     onev_addr_e convert_addr_from_server(const ObServer *server)
     {
       onev_addr_e ret;
-=======
-    easy_addr_t convert_addr_from_server(const ObServer *server)
-    {
-      easy_addr_t ret;
->>>>>>> refs/remotes/origin/master
       if (server != NULL)
       {
         if (server->get_version() == ObServer::IPV4)
@@ -606,19 +585,11 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int64_t convert_addr_to_server(onev_addr_e addr)
     {
       int64_t server_id;
       char buffer[OB_SERVER_ADDR_STR_LEN];
       onev_inet_addr_to_str(&addr, buffer, OB_SERVER_ADDR_STR_LEN);
-=======
-    int64_t convert_addr_to_server(easy_addr_t addr)
-    {
-      int64_t server_id;
-      char buffer[OB_SERVER_ADDR_STR_LEN];
-      easy_inet_addr_to_str(&addr, buffer, OB_SERVER_ADDR_STR_LEN);
->>>>>>> refs/remotes/origin/master
       int port = 0;
       int x = 0;
       char *tmp = strchr(buffer, ':');
@@ -1078,7 +1049,6 @@ namespace oceanbase
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
     //add by qx [query optimization] 20170217 :b
     /*
      * Round to nearest integer, with halfway cases going to the nearest even.
@@ -1497,7 +1467,5 @@ namespace oceanbase
     //add :e
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase

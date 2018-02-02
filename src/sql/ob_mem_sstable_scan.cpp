@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -38,12 +35,9 @@
 
 #include "ob_mem_sstable_scan.h"
 #include "ob_table_rpc_scan.h"
-<<<<<<< HEAD
 #include "common/ob_common_stat.h"
 
 #include "ob_sp_procedure.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase;
 using namespace common;
@@ -86,7 +80,6 @@ int ObMemSSTableScan::open()
   else
   {
     cur_row_.set_row_desc(cur_row_desc_);
-<<<<<<< HEAD
 
     //add by zt 20160114:b
     if( proc_exec_ )
@@ -97,8 +90,6 @@ int ObMemSSTableScan::open()
       }
     }
     //add by zt 20160114:e
-=======
->>>>>>> refs/remotes/origin/master
   }
   return ret;
 }
@@ -106,13 +97,9 @@ int ObMemSSTableScan::open()
 int ObMemSSTableScan::get_next_row(const common::ObRow *&row)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
   int64_t start_ts = tbsys::CTimeUtil::getTime();
 //  ret = row_store_.get_next_row(cur_row_);  //delete by zt 20160114
   ret = row_store_ptr_->get_next_row(cur_row_); //add by zt 20160114, for template execution
-=======
-  ret = row_store_.get_next_row(cur_row_);
->>>>>>> refs/remotes/origin/master
   if (OB_ITER_END == ret)
   {
     TBSYS_LOG(DEBUG, "end of iteration");
@@ -126,10 +113,7 @@ int ObMemSSTableScan::get_next_row(const common::ObRow *&row)
     row = &cur_row_;
     TBSYS_LOG(DEBUG, "[MemSSTableScan] %s", to_cstring(cur_row_));
   }
-<<<<<<< HEAD
   OB_STAT_INC(UPDATESERVER, UPS_EXEC_MEM_SSTABLE, tbsys::CTimeUtil::getTime() - start_ts);
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -198,7 +182,6 @@ DEFINE_SERIALIZE(ObMemSSTableScan)
   int ret = OB_SUCCESS;
   const common::ObRowDesc *row_desc = NULL;
   ObValues *tmp_table = NULL;
-<<<<<<< HEAD
   //add by zt 20160114:b
   TBSYS_LOG(TRACE, "ups exec mode: %d", my_phy_plan_->is_group_exec());
   if( OB_SUCCESS != serialization::encode_bool(buf, buf_len, pos, my_phy_plan_->is_group_exec() ))
@@ -214,8 +197,6 @@ DEFINE_SERIALIZE(ObMemSSTableScan)
   }
   //add by zt 20160114:e
   else
-=======
->>>>>>> refs/remotes/origin/master
   if (common::OB_INVALID_ID == tmp_table_subquery_)
   {
     TBSYS_LOG(WARN, "tmp_table_ is NULL");
@@ -225,7 +206,6 @@ DEFINE_SERIALIZE(ObMemSSTableScan)
   {
     TBSYS_LOG(ERROR, "invalid subqeury id=%lu", tmp_table_subquery_);
   }
-<<<<<<< HEAD
   //add zt 20151203:b
   //make sure the tmp_table is opened
   //delete by zt 20160115 not necessary any more
@@ -236,8 +216,6 @@ DEFINE_SERIALIZE(ObMemSSTableScan)
 
 //  if( OB_SUCCESS != ret ) {}
   //add zt 20151203:e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = tmp_table->get_row_desc(row_desc)))
   {
     TBSYS_LOG(WARN, "failed to get row desc, err=%d", ret);
@@ -256,7 +234,6 @@ DEFINE_SERIALIZE(ObMemSSTableScan)
 DEFINE_DESERIALIZE(ObMemSSTableScan)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
   int64_t start_ts = tbsys::CTimeUtil::getTime();
   //add by zt 20160114:b
   if( OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, pos, &proc_exec_)))
@@ -277,8 +254,6 @@ DEFINE_DESERIALIZE(ObMemSSTableScan)
   }
   else
   //add by zt 20160114:e
-=======
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS != (ret = cur_row_desc_.deserialize(buf, data_len, pos)))
   {
     TBSYS_LOG(WARN, "fail to deserialize row desc:ret[%d]", ret);
@@ -290,7 +265,6 @@ DEFINE_DESERIALIZE(ObMemSSTableScan)
   else
   {
     from_deserialize_ = true;
-<<<<<<< HEAD
     row_store_ptr_ = &row_store_; //add by zt 20160114
   }
   TBSYS_LOG(TRACE, "success[%p], mode [%d], row_desc [%s], static_id [%ld]",
@@ -299,9 +273,6 @@ DEFINE_DESERIALIZE(ObMemSSTableScan)
             to_cstring(cur_row_desc_),
             tmp_table_subquery_);
   OB_STAT_INC(UPDATESERVER, UPS_GEN_MEM_SSTABLE, tbsys::CTimeUtil::getTime() - start_ts);
-=======
-  }
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -312,7 +283,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObMemSSTableScan)
   size += row_store_.get_serialize_size();
   return size;
 }
-<<<<<<< HEAD
 
 //add by zt 20160114:b
 int ObMemSSTableScan::serialize_template(char *buf, const int64_t buf_len, int64_t &pos) const
@@ -380,5 +350,3 @@ int ObMemSSTableScan::prepare_data()
   return ret;
 }
 //add by zt 20160114:e
-=======
->>>>>>> refs/remotes/origin/master

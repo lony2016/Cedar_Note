@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -25,9 +24,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,16 +54,12 @@
 using namespace oceanbase::rootserver;
 using namespace oceanbase::common;
 
-<<<<<<< HEAD
 
 // modify by zcd [multi_cluster] 20150406:b
 /// add the parameter root_worker
 //ObBootstrap::ObBootstrap(ObRootServer2 & root_server):root_server_(root_server), log_worker_(NULL)
 ObBootstrap::ObBootstrap(ObRootServer2 & root_server, ObRootWorker &root_worker):root_server_(root_server), log_worker_(NULL), root_worker_(&root_worker)
 // modify:e
-=======
-ObBootstrap::ObBootstrap(ObRootServer2 & root_server):root_server_(root_server), log_worker_(NULL)
->>>>>>> refs/remotes/origin/master
 {
   core_table_count_ = 0;
   sys_table_count_ = 0;
@@ -154,7 +146,6 @@ int ObBootstrap::create_all_core_tables()
       TBSYS_LOG(INFO, "create all_all_join_info tablet success.");
     }
   }
-<<<<<<< HEAD
   //3.create all_secondary_index tablet longfei [create index]
   if (OB_SUCCESS == ret)
   {
@@ -169,8 +160,6 @@ int ObBootstrap::create_all_core_tables()
       TBSYS_LOG(INFO, "create all_secondary_index tablet success.");
     }
   }
-=======
->>>>>>> refs/remotes/origin/master
   //4.init meta file
   if (OB_SUCCESS == ret)
   {
@@ -370,7 +359,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
       TBSYS_LOG(WARN, "failed to create empty tablet for __all_user, err=%d", ret);
     }
   }
-<<<<<<< HEAD
   //add hxlong [Truncate Table]:20170318:b
   // create table __all_truncate_op
   if (OB_SUCCESS == ret)
@@ -385,8 +373,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
     }
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   // create table __table_privileges
   if (OB_SUCCESS == ret)
   {
@@ -435,7 +421,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
       TBSYS_LOG(WARN, "failed to create table for __all_client, err=%d", ret);
     }
   }
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161126:b
   // create table __all_auto_increment
   if (OB_SUCCESS == ret)
@@ -450,8 +435,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
     }
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   // create table __all_server_stat
   if (OB_SUCCESS == ret)
   {
@@ -501,7 +484,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
       TBSYS_LOG(WARN, "failed to create table for __all_statement, err=%d", ret);
     }
   }
-<<<<<<< HEAD
   //add wenghaixing [secondary index.static_index]20151117
   if (OB_SUCCESS == ret)
   {
@@ -571,8 +553,6 @@ int ObBootstrap::bootstrap_sys_tables(void)
     }
   }
   //add e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -676,16 +656,11 @@ int ObBootstrap::init_all_cluster()
   {
     ObServer server;
     ObRootMsProvider ms_provider(const_cast<ObChunkServerManager&>(root_server_.get_server_manager()));
-<<<<<<< HEAD
     // modify by zcd [multi_cluster] 20150406:b
     ms_provider.init(const_cast<ObRootServerConfig&>(config),
         /*const_cast<ObRootRpcStub&>(root_server_.get_rpc_stub()));*/
         const_cast<ObRootRpcStub&>(root_server_.get_rpc_stub()), *root_worker_);
     // modify:e
-=======
-    ms_provider.init(const_cast<ObRootServerConfig&>(config),
-        const_cast<ObRootRpcStub&>(root_server_.get_rpc_stub()));
->>>>>>> refs/remotes/origin/master
     for (int64_t i = 0; i < config.retry_times; i++)
     {
       if (OB_SUCCESS != (ret = ms_provider.get_ms(server)))
@@ -933,15 +908,11 @@ int ObBootstrap::init_all_sys_param()
         acc,
         OB_READ_CONSISTENCY,
         ObIntType,
-<<<<<<< HEAD
 
         // modify by guojinwei [multi_cluster] 20151020:b
         //"3",
         "4",
         // modify:e
-=======
-        "3",
->>>>>>> refs/remotes/origin/master
         "read consistency level:4=STRONG, 3=WEAK, 2=FROZEN, 1=STATIC, 0=NONE");
     char version_comment[256];
     snprintf(version_comment, 256, "OceanBase %s (r%s) (Built %s %s)",
@@ -997,7 +968,6 @@ int ObBootstrap::init_all_sys_param()
         ObVarcharType,
         "gbk",
         "The Character set return to client");
-<<<<<<< HEAD
     //add by qx [query optimizer] 20170323 :b
     //add a query optimizer switch
     INSERT_ALL_SYS_PARAM_ROW(
@@ -1008,8 +978,6 @@ int ObBootstrap::init_all_sys_param()
          "true",
          "The flag represent a query optimizer switch");
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
 #undef INSERT_ALL_SYS_PARAM_ROW
   }
   return ret;

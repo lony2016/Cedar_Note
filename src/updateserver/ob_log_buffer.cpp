@@ -315,12 +315,8 @@ namespace oceanbase
                   log_buf->get_end_pos(), start_id, end_id, buf, len, err);
       }
       else if (OB_SUCCESS == err)
-<<<<<<< HEAD
       {
       }
-=======
-      {}
->>>>>>> refs/remotes/origin/master
       else
       {
         TBSYS_LOG(WARN, "append_to_log_buffer(%s, log_id=[%ld,%ld], buf=%p[%ld])", to_cstring(*log_buf), start_id, end_id, buf, len);

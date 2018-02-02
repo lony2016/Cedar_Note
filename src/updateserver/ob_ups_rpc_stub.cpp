@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -15,8 +14,6 @@
  * @author zhangcd<zhangcd_ecnu@ecnu.cn>
  * @date 2015_12_25
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -39,12 +36,9 @@
 #include "ob_update_server_main.h"
 #include "ob_fetched_log.h"
 #include "common/ob_trigger_msg.h"
-<<<<<<< HEAD
 // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
 #include "common/ob_cluster_mgr.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -1257,7 +1251,6 @@ namespace oceanbase
       }
       return err; 
     }
-<<<<<<< HEAD
 
     // add by zhangcd [majority_count_init] 20151118:b
     // modify by zhangcd [rs_election][auto_elect_flag] 20151129:b
@@ -1332,8 +1325,6 @@ namespace oceanbase
       return err;
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace updateserver
 }
 

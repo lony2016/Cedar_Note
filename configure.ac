@@ -43,7 +43,6 @@
     dnl tblib include path supplied
     AC_SUBST([TBLIB_ROOT])
 
-<<<<<<< HEAD
 	AC_MSG_CHECKING([onev-root])
     AC_ARG_WITH([onev-root],
            AS_HELP_STRING([--with-onev-root],
@@ -75,39 +74,6 @@
 	AC_MSG_RESULT([${ONEV_LIB_PATH}])
     dnl libonev include path supplied
     AC_SUBST([ONEV_LIB_PATH])
-=======
-	AC_MSG_CHECKING([easy-root])
-    AC_ARG_WITH([easy-root],
-           AS_HELP_STRING([--with-easy-root],
-           [libeasy installation path]),
-           EASY_ROOT=${withval})
-
-    if  ! test -d "${EASY_ROOT}/include"; then
-       AC_MSG_ERROR([EASY_ROOT have not been set, ${EASY_ROOT}/include])
-       exit 1;
-    fi
-	AC_MSG_RESULT([${EASY_ROOT}])
-    dnl libeasy include path supplied
-    AC_SUBST([EASY_ROOT])
-
-	AC_MSG_CHECKING([easy-lib-path])
-    AC_ARG_WITH([easy-lib-path],
-           AS_HELP_STRING([--with-easy-lib-path],
-           [libeasy.a path]),
-           EASY_LIB_PATH=${withval})
-
-    if test -z ${EASY_LIB_PATH};
-	then
-		EASY_LIB_PATH=${EASY_ROOT}/lib
-    fi
-    if  ! test -d "${EASY_LIB_PATH}"; then
-       AC_MSG_ERROR([EASY_LIB_PATH ${EASY_LIB_PATH} does not exist])
-       exit 1;
-    fi
-	AC_MSG_RESULT([${EASY_LIB_PATH}])
-    dnl libeasy include path supplied
-    AC_SUBST([EASY_LIB_PATH])
->>>>>>> refs/remotes/origin/master
 
     AC_ARG_WITH([release],
     AS_HELP_STRING([--with-release],

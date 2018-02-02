@@ -13,7 +13,6 @@ namespace oceanbase
     {
       friend class ObPacketQueueThread;
       public:
-<<<<<<< HEAD
         static const int64_t THREAD_BUFFER_SIZE = sizeof(ObPacket) + OB_MAX_PACKET_LENGTH;
       public:
       ObPacketQueue();
@@ -25,11 +24,6 @@ namespace oceanbase
        */
       ObPacketQueue(const int64_t thread_buffer_size);
       //add :e
-=======
-      static const int64_t THREAD_BUFFER_SIZE = sizeof(ObPacket) + OB_MAX_PACKET_LENGTH;
-      public:
-      ObPacketQueue();
->>>>>>> refs/remotes/origin/master
       ~ObPacketQueue();
 
       int init();

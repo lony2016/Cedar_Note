@@ -47,12 +47,9 @@ oceanbase::mergeserver::ObMsSqlSortedOperator::ObMsSqlSortedOperator()
 
 oceanbase::mergeserver::ObMsSqlSortedOperator::~ObMsSqlSortedOperator()
 {
-<<<<<<< HEAD
     //add wanglei [semi join in expr] 20161131:b
     used_rowkey_.clear();
     //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void oceanbase::mergeserver::ObMsSqlSortedOperator::reset()
@@ -62,12 +59,9 @@ void oceanbase::mergeserver::ObMsSqlSortedOperator::reset()
   seamless_result_count_  = 0;
   total_mem_size_used_ = 0;
   sharding_result_arr_.clear();
-<<<<<<< HEAD
   //add wanglei [semi join in expr] 20161131:b
   used_rowkey_.clear();
   //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int oceanbase::mergeserver::ObMsSqlSortedOperator::set_param(const ObSqlScanParam & scan_param)
@@ -76,7 +70,6 @@ int oceanbase::mergeserver::ObMsSqlSortedOperator::set_param(const ObSqlScanPara
   reset();
   scan_param_ = &scan_param;
   scan_range_ = *scan_param_->get_range();
-<<<<<<< HEAD
   //add wanglei [semi join in expr] 20161131:b
   first_scan_range_ = scan_range_;
   this->used_rowkey_.push_back(first_scan_range_);
@@ -92,11 +85,6 @@ int oceanbase::mergeserver::ObMsSqlSortedOperator::set_param_only(const ObSqlSca
     return err;
 }
 //add wanglei [semi join in expr] 20161131:e
-=======
-  return err;
-}
-
->>>>>>> refs/remotes/origin/master
 // note: keep in mind that "readed" scanners' rowkey buffer were freed already
 void oceanbase::mergeserver::ObMsSqlSortedOperator::sort(bool &is_finish, ObNewScanner * last_sharding_res)
 {
@@ -119,7 +107,6 @@ void oceanbase::mergeserver::ObMsSqlSortedOperator::sort(bool &is_finish, ObNewS
   std::sort(start, first+count);
   if (seamless_result_count_ <= 0)
   {
-<<<<<<< HEAD
       //del wanglei [semi join in expr] 20161131:b
             // no seamless result
 //              if ((sharding_result_arr_[0].sharding_query_range_->start_key_  == scan_range_.start_key_)
@@ -224,40 +211,6 @@ void oceanbase::mergeserver::ObMsSqlSortedOperator::sort(bool &is_finish, ObNewS
       }
   }
   //add wanglei [semi join in expr] 20161131:e
-=======
-    // no seamless result
-    if ((sharding_result_arr_[0].sharding_query_range_->start_key_  == scan_range_.start_key_)
-        || (sharding_result_arr_[0].sharding_query_range_->start_key_.is_min_row()))
-    {
-      seamless_result_count_ = 1;
-    }
-  }
-
-  if (seamless_result_count_ > 0)
-  {
-    // at lease one seamless result
-    for (seamless_result_idx = seamless_result_count_;
-         seamless_result_idx < sharding_result_arr_.count();
-        seamless_result_idx++)
-    {
-      if (sharding_result_arr_[seamless_result_idx - 1].last_row_key_
-          == sharding_result_arr_[seamless_result_idx].sharding_query_range_->start_key_)
-      {
-        seamless_result_count_ = seamless_result_idx + 1;
-        TBSYS_LOG(DEBUG, "prev last_row_key=%s, cur star_key_=%s, seamless=%ld",
-            to_cstring(sharding_result_arr_[seamless_result_idx - 1].last_row_key_),
-            to_cstring(sharding_result_arr_[seamless_result_idx].sharding_query_range_->start_key_),
-            seamless_result_count_
-            );
-      }
-      else
-      {
-        break;
-      }
-    }
-  }
-
->>>>>>> refs/remotes/origin/master
   if (seamless_result_count_ > 0) // implicates that startkey matched already
   {
     OB_ASSERT(NULL != last_sharding_res);

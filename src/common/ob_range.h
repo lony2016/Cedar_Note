@@ -25,10 +25,7 @@ namespace oceanbase
     class ObBorderFlag
     {
       public:
-<<<<<<< HEAD
         NEED_SERIALIZE_AND_DESERIALIZE; //add hxlong [Truncate Table]:20170318:b
-=======
->>>>>>> refs/remotes/origin/master
         static const int8_t INCLUSIVE_START = 0x1;
         static const int8_t INCLUSIVE_END = 0x2;
         static const int8_t MIN_VALUE = 0x4;
@@ -36,10 +33,7 @@ namespace oceanbase
 
       public:
         ObBorderFlag() : data_(0) {}
-<<<<<<< HEAD
         ObBorderFlag(int8_t data) : data_(data) {} //add hxlong [Truncate Table]:20170318:b
-=======
->>>>>>> refs/remotes/origin/master
         virtual ~ObBorderFlag() {}
 
         inline void set_inclusive_start() { data_ |= INCLUSIVE_START; }
@@ -70,10 +64,7 @@ namespace oceanbase
 
     struct ObVersion
     {
-<<<<<<< HEAD
       NEED_SERIALIZE_AND_DESERIALIZE; //add hxlong [Truncate Table]:20170318:b
-=======
->>>>>>> refs/remotes/origin/master
       ObVersion() : version_(0) {}
       ObVersion(int64_t version) : version_(version) {}
       union
@@ -81,13 +72,8 @@ namespace oceanbase
         int64_t version_;
         struct
         {
-<<<<<<< HEAD
           int64_t major_           : 32; //int32_t mod hxlong [Truncate Table]:20170318
           int64_t minor_           : 16; //int32_t mod hxlong [Truncate Table]:20170318
-=======
-          int32_t major_           : 32;
-          int16_t minor_           : 16;
->>>>>>> refs/remotes/origin/master
           int16_t is_final_minor_  : 16;
         };
       };
@@ -158,18 +144,12 @@ namespace oceanbase
 
       int64_t to_string(char * buf, const int64_t buf_len) const
       {
-<<<<<<< HEAD
           //mod hxlong [Truncate Table]:20170318:b
           //int64_t pos = snprintf(buf, buf_len, "%d-%hd-%hd",
           int64_t pos = snprintf(buf, buf_len, "%ld-%ld-%hd",
                                  major_, minor_, is_final_minor_);
           //mod:e
           return pos;
-=======
-        int64_t pos = snprintf(buf, buf_len, "%d-%hd-%hd",
-                               major_, minor_, is_final_minor_);
-        return pos;
->>>>>>> refs/remotes/origin/master
       }
     };
 
@@ -182,10 +162,7 @@ namespace oceanbase
 
     struct ObVersionRange
     {
-<<<<<<< HEAD
       NEED_SERIALIZE_AND_DESERIALIZE; //add hxlong [Truncate Table]:20170318:b
-=======
->>>>>>> refs/remotes/origin/master
       ObBorderFlag border_flag_;
       ObVersion start_version_;
       ObVersion end_version_;
@@ -275,7 +252,6 @@ namespace oceanbase
           }
           else if (border_flag_.is_min_value())
           {
-<<<<<<< HEAD
             //mod hxlong [Truncate Table]:20170318:b
             //len = snprintf(buf,buf_len,"%s,%d-%hd-%hd%s",lb,
             len = snprintf(buf,buf_len,"%s,%ld-%ld-%hd%s",lb,
@@ -298,21 +274,6 @@ namespace oceanbase
                            start_version_.major_,start_version_.minor_,start_version_.is_final_minor_,
                            end_version_.major_,end_version_.minor_,end_version_.is_final_minor_,rb);
             //mod:e
-=======
-            len = snprintf(buf,buf_len,"%s,%d-%hd-%hd%s",lb,
-                           end_version_.major_,end_version_.minor_,end_version_.is_final_minor_,rb);
-          }
-          else if (border_flag_.is_max_value())
-          {
-            len = snprintf(buf,buf_len,"%s%d-%hd-%hd, %s",lb,
-                           start_version_.major_,start_version_.minor_,start_version_.is_final_minor_,rb);
-          }
-          else
-          {
-            len = snprintf(buf,buf_len,"%s %d-%hd-%hd,%d-%hd-%hd %s",lb,
-                           start_version_.major_,start_version_.minor_,start_version_.is_final_minor_,
-                           end_version_.major_,end_version_.minor_,end_version_.is_final_minor_,rb);
->>>>>>> refs/remotes/origin/master
           }
           if (len < 0 || len > buf_len)
           {

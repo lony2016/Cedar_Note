@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  * @date 2016_07_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -37,10 +34,7 @@
 #include "ob_ups_executor.h"
 #include "common/utility.h"
 #include "common/ob_trace_log.h"
-<<<<<<< HEAD
 #include "common/ob_common_stat.h"
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
@@ -80,11 +74,7 @@ void ObUpsExecutor::reuse()
   reset();
 }
 
-<<<<<<< HEAD
 int ObUpsExecutor::open()//slwang note:
-=======
-int ObUpsExecutor::open()
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   // quiz: why there are two diffrent result sets?
@@ -104,7 +94,6 @@ int ObUpsExecutor::open()
     outer_result_set = my_result_set->get_session()->get_current_result_set();
     my_result_set->set_session(outer_result_set->get_session()); // be careful!
     session = my_phy_plan_->get_result_set()->get_session();
-<<<<<<< HEAD
     inner_plan_->set_result_set(my_result_set);
     //add lbzhong [auto_increment] 20161218:b
     if (my_result_set->is_auto_increment())
@@ -116,10 +105,6 @@ int ObUpsExecutor::open()
     //set inner_plan timeout_timestamp in order to terminate the long running in subquery.
     inner_plan_->set_timeout_timestamp(this->my_phy_plan_->get_timeout_timestamp());
  //add :e
-=======
-
-    inner_plan_->set_result_set(my_result_set);
->>>>>>> refs/remotes/origin/master
     inner_plan_->set_curr_frozen_version(my_phy_plan_->get_curr_frozen_version());
     local_result_.clear();
     // When read_only is enabled, the server permits no updates except for system tables.
@@ -141,13 +126,10 @@ int ObUpsExecutor::open()
         TBSYS_LOG(DEBUG, "execute sub query %d", i);
         if (OB_SUCCESS != (ret = aux_query->open()))
         {
-<<<<<<< HEAD
 //add wangjiahao [dev_update_more] 20151204 :b
           //No data to update, About!
           if (ret != OB_NO_RESULT)
 //add :e
-=======
->>>>>>> refs/remotes/origin/master
           TBSYS_LOG(WARN, "failed to execute sub-query, err=%d i=%d", ret, i);
           break;
         }
@@ -160,7 +142,6 @@ int ObUpsExecutor::open()
   {
     start_new_trans = (!session->get_autocommit() && !session->get_trans_id().is_valid());
     inner_plan_->set_start_trans(start_new_trans);
-<<<<<<< HEAD
     //add by qx 210170317 :b
     //TBSYS_LOG(ERROR,"outer result set[%p] = %d  no group =%d my rs[%p] =%d no group = %d",
     //          outer_result_set,outer_result_set->get_long_trans(),outer_result_set->get_no_group(), my_result_set,my_result_set->get_long_trans(), my_result_set->get_no_group());
@@ -174,8 +155,6 @@ int ObUpsExecutor::open()
       inner_plan_->get_trans_req().type_ = READ_WRITE_TRANS;
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
     if (start_new_trans
         && (OB_SUCCESS != (ret = set_trans_params(session, inner_plan_->get_trans_req()))))
     {
@@ -190,10 +169,7 @@ int ObUpsExecutor::open()
   int64_t remain_us = 0;
   if (OB_LIKELY(OB_SUCCESS == ret))
   {
-<<<<<<< HEAD
     int64_t begin_time_us = tbsys::CTimeUtil::getTime();
-=======
->>>>>>> refs/remotes/origin/master
     if (my_phy_plan_->is_timeout(&remain_us))
     {
       ret = OB_PROCESS_TIMEOUT;
@@ -205,12 +181,9 @@ int ObUpsExecutor::open()
     }
     else if (OB_SUCCESS != (ret = rpc_->ups_plan_execute(remain_us, *inner_plan_, local_result_)))
     {
-<<<<<<< HEAD
       int64_t elapsed_us = tbsys::CTimeUtil::getTime() - begin_time_us;
       OB_STAT_INC(MERGESERVER, SQL_UPS_EXECUTE_COUNT);
       OB_STAT_INC(MERGESERVER, SQL_UPS_EXECUTE_TIME, elapsed_us);
-=======
->>>>>>> refs/remotes/origin/master
       TBSYS_LOG(WARN, "failed to execute plan on updateserver, err=%d", ret);
       if (OB_TRANS_ROLLBACKED == ret)
       {
@@ -223,20 +196,15 @@ int ObUpsExecutor::open()
     }
     else
     {
-<<<<<<< HEAD
       int64_t elapsed_us = tbsys::CTimeUtil::getTime() - begin_time_us;
       OB_STAT_INC(MERGESERVER, SQL_UPS_EXECUTE_COUNT);
       OB_STAT_INC(MERGESERVER, SQL_UPS_EXECUTE_TIME, elapsed_us);
       ret = local_result_.get_error_code();
 //      TBSYS_LOG(INFO, "test transid, start_trans[%d], trans_id[%s]", start_new_trans, to_cstring(local_result_.get_trans_id()));
-=======
-      ret = local_result_.get_error_code();
->>>>>>> refs/remotes/origin/master
       if (start_new_trans && local_result_.get_trans_id().is_valid())
       {
         FILL_TRACE_LOG("ups_err=%d ret_trans_id=%s", ret, to_cstring(local_result_.get_trans_id()));
         session->set_trans_id(local_result_.get_trans_id());
-<<<<<<< HEAD
         int64_t now = tbsys::CTimeUtil::getTime();
         OB_STAT_INC(OBMYSQL, SQL_MULTI_STMT_TRANS_COUNT);
         OB_STAT_INC(OBMYSQL, SQL_MULTI_STMT_TRANS_STMT_COUNT);
@@ -251,13 +219,6 @@ int ObUpsExecutor::open()
         TBSYS_LOG(WARN, "ups execute plan failed, err=%d trans_id=%s",
                   ret, to_cstring(local_result_.get_trans_id()));
         }//add lbzhong [auto_increment] 20161130:b:e
-=======
-      }
-      if (OB_SUCCESS != ret)
-      {
-        TBSYS_LOG(WARN, "ups execute plan failed, err=%d trans_id=%s",
-                  ret, to_cstring(local_result_.get_trans_id()));
->>>>>>> refs/remotes/origin/master
         if (OB_TRANS_ROLLBACKED == ret)
         {
           TBSYS_LOG(USER_ERROR, "transaction is rolled back");
@@ -268,12 +229,9 @@ int ObUpsExecutor::open()
       }
       else
       {
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161216:b
         my_phy_plan_->get_result_set()->set_auto_value(local_result_.get_auto_value());
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         TBSYS_LOG(DEBUG, "affected_rows=%ld warning_count=%ld",
                   local_result_.get_affected_rows(), local_result_.get_warning_count());
         outer_result_set->set_affected_rows(local_result_.get_affected_rows());
@@ -304,12 +262,9 @@ int ObUpsExecutor::open()
       }
     }
   }
-<<<<<<< HEAD
 //add wangjiahao [dev_update_more] 20151204 :b
   if (ret == OB_NO_RESULT) ret = OB_SUCCESS;
 //add :e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -386,7 +341,6 @@ int ObUpsExecutor::get_next_row(const common::ObRow *&row)
   return ret;
 }
 
-<<<<<<< HEAD
 //add zt 20151107:b
 int ObUpsExecutor::get_next_row_for_sp(const common::ObRow *&row, const ObRowDesc &fake_row_desc)
 {
@@ -412,8 +366,6 @@ int ObUpsExecutor::get_next_row_for_sp(const common::ObRow *&row, const ObRowDes
 //add zt 20151107:e
 
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObUpsExecutor::make_fake_desc(const int64_t column_num)
 {
   int ret = OB_SUCCESS;

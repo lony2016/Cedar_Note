@@ -24,7 +24,6 @@ using namespace oceanbase::updateserver;
 ObUpdateServerConfig::ObUpdateServerConfig()
   : total_memory_limit_bk_(0)
 {
-<<<<<<< HEAD
   //add by qx 20161105 :b
   //load ups config and set buffer size before obupdateserver object created
   if (load_config() != OB_SUCCESS)
@@ -32,8 +31,6 @@ ObUpdateServerConfig::ObUpdateServerConfig()
     TBSYS_LOG(ERROR, "Load updateserver buffer size config fail!");
   }
   //add :e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 ObUpdateServerConfig::~ObUpdateServerConfig()
@@ -244,7 +241,6 @@ int64_t ObUpdateServerConfig::get_total_memory_limit(const int64_t phy_mem_size_
   fprintf(stdout, "phy_mem_size=%ld total_memory_limit=%ld\n", phy_mem_size_gb, ret);
   return ret;
 }
-<<<<<<< HEAD
 
 int ObUpdateServerConfig::load_config()
 {
@@ -329,5 +325,3 @@ int ObUpdateServerConfig::load_config()
   }
   return ret;
 }
-=======
->>>>>>> refs/remotes/origin/master

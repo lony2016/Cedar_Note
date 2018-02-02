@@ -49,11 +49,7 @@ namespace oceanbase
       }
       TBSYS_LOG(WARN, "task threads stoped.");
       ObBaseServer::destroy();
-<<<<<<< HEAD
       TBSYS_LOG(WARN, "libonev timer thread stoped.");
-=======
-      TBSYS_LOG(WARN, "libeasy timer thread stoped.");
->>>>>>> refs/remotes/origin/master
     }
 
     int ObSingleServer::set_min_left_time(const int64_t left_time)
@@ -253,11 +249,7 @@ namespace oceanbase
       ThreadSpecificBuffer::Buffer* my_buffer = my_thread_buffer.get_buffer();
       ObDataBuffer out_buff(my_buffer->current(), my_buffer->remain());
       result_msg.result_code_ = OB_DISCARD_PACKET;
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(base_packet->get_request());
-=======
-      easy_addr_t addr = get_easy_addr(base_packet->get_request());
->>>>>>> refs/remotes/origin/master
       if (MY_VERSION != base_packet->get_api_version())
       {
         result_msg.result_code_ = OB_ERROR_FUNC_VERSION;
@@ -282,11 +274,7 @@ namespace oceanbase
       }
       else
       {
-<<<<<<< HEAD
         onev_request_wakeup(base_packet->get_request());
-=======
-        easy_request_wakeup(base_packet->get_request());
->>>>>>> refs/remotes/origin/master
       }
       return false;
     }
@@ -295,11 +283,7 @@ namespace oceanbase
     {
       if (NULL != base_packet)
       {
-<<<<<<< HEAD
         onev_request_wakeup(base_packet->get_request());
-=======
-        easy_request_wakeup(base_packet->get_request());
->>>>>>> refs/remotes/origin/master
       }
     }
 

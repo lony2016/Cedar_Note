@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -25,8 +24,6 @@
  *
  * @date 2016_07_29
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -51,11 +48,8 @@
 #include <stdlib.h>
 #include <openssl/md5.h>
 
-<<<<<<< HEAD
 #include "ob_buffer_size_define.h"
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
@@ -180,23 +174,16 @@ namespace oceanbase
 
     const int OB_RPC_SEND_ERROR = -121;
     const int OB_RPC_POST_ERROR = -122;
-<<<<<<< HEAD
     const int OB_LIBONEV_ERROR = -123;
-=======
-    const int OB_LIBEASY_ERROR = -123;
->>>>>>> refs/remotes/origin/master
     const int OB_CONNECT_ERROR = -124;
     const int OB_NOT_FREE = -125;
     const int OB_INIT_SQL_CONTEXT_ERROR = -126;
     const int OB_SKIP_INVALID_ROW = -127;
-<<<<<<< HEAD
     //add by zhouhuan [Session frozen] 20160419:b
     const int OB_SESSION_FROZEN = -128;
     const int OB_GROUP_SWITCHED = -129;
     const int GROUP_ARRAY_SIZE = 30;
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     const int OB_SYS_CONFIG_TABLE_ERROR = -131;
     const int OB_READ_CONFIG_ERROR = -132;
@@ -213,12 +200,9 @@ namespace oceanbase
     const int OB_STMT_EXPIRED = -149;
     const int OB_DISCARD_PACKET = -150;
 
-<<<<<<< HEAD
     const int OB_SP_EXIT = -151;//add by wdh 20160624
     const int OB_OPERATION_NOT_ALLOWED = -152; //add dragon [Bugfix#12] 2017-3-8
     const int OB_TABLE_UPDATE_LOCKED = -153; //add hxlong [Truncate Table]:20170403
-=======
->>>>>>> refs/remotes/origin/master
 
     //error code for chunk server -1001 ---- -2000
     const int OB_CS_CACHE_NOT_HIT = -1001;   // 缓存没有命中
@@ -229,10 +213,6 @@ namespace oceanbase
 
     const int OB_GET_NEXT_COLUMN = -1011;
     const int OB_GET_NEXT_ROW = -1012; // for internal use, scan next row.
-<<<<<<< HEAD
-=======
-    //const int OB_DESERIALIZE_ERROR = -1013;//反序列化失败
->>>>>>> refs/remotes/origin/master
     const int OB_INVALID_ROW_KEY = -1014;//不合法的rowKey
     const int OB_SEARCH_MODE_NOT_IMPLEMENT = -1015; // search mode not implement, internal error
     const int OB_INVALID_BLOCK_INDEX = -1016; // illegal block index data, internal error
@@ -258,15 +238,12 @@ namespace oceanbase
     const int OB_COLUMN_GROUP_NOT_FOUND = -1039;
     const int OB_NO_IMPORT_SSTABLE = -1040;
     const int OB_IMPORT_SSTABLE_NOT_EXIST = -1041;
-<<<<<<< HEAD
     //add longfei [cons static index] 151202:b
     const int OB_CS_STATIC_INDEX_TIMEOUT = -1042;
     const int OB_TABLET_HAS_NO_LOCAL_SSTABLE = -1043;
     const int OB_TABLET_FOR_INDEX_ALL_FAILED = -1044;
     const int OB_INDEX_BUILD_FAILED = -1045;
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     //error code for update server -2001 ---- -3000
     const int OB_UPS_TRANS_RUNNING = -2001;     // 事务正在执行
@@ -280,7 +257,6 @@ namespace oceanbase
     const int OB_UPS_CHANGE_MASTER_TIMEOUT = -2009;
     const int OB_FORCE_TIME_OUT = -2010;
     const int OB_BEGIN_TRANS_LOCKED = -2011;
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160603:b
     const int OB_NOT_EQUAL = -2012;
     const int OB_NOTIFY_EQUAL = -2013;
@@ -288,8 +264,6 @@ namespace oceanbase
     //add by qx 20170225 :b
     const int OB_RS_OFFLINE = -2014;    ///<slave cluster rs offline need kill ups to prohibit replay log
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
     //error code for root server -3001 ---- -4000
     const int OB_ERROR_TIME_STAMP = -3001;
@@ -326,12 +300,9 @@ namespace oceanbase
     const int OB_MULTIPLE_MASTER_CLUSTERS_NOT_EXIST = -3033;
     const int OB_MASTER_CLUSTER_ALREADY_EXISTS = -3034;
     const int OB_CREATE_TABLE_TWICE = -3035;
-<<<<<<< HEAD
     //add by pangtianze [rs_election] 20151120:b
     const int OB_RS_LEADER_SETTED_WHEN_STARTING = -3036;
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     const int OB_DATA_SOURCE_NOT_EXIST = -3100;
     const int OB_DATA_SOURCE_TABLE_NOT_EXIST = -3101;
@@ -360,10 +331,7 @@ namespace oceanbase
     const int OB_NO_NEW_SCHEMA = -4009;        // no new schema when parse error
     const int OB_MS_SUB_REQ_TOO_MANY = -4010; // too many sub scan request
     const int OB_TOO_MANY_BLOOM_FILTER_TASK = -4011;
-<<<<<<< HEAD
     const int OB_QUERY_OPT_HAVE_SYSTEM_TABLE = -4012;//add by dhc query_optimizer
-=======
->>>>>>> refs/remotes/origin/master
 
     // SQL specific error code, -5000 ~ -6000
     const int OB_ERR_SQL_START = -5000;
@@ -438,7 +406,6 @@ namespace oceanbase
     const int OB_ERR_PROTOCOL_NOT_RECOGNIZE = -5068;
     const int OB_ERR_WRITE_AUTH_ERROR = -5069; //write auth packet to client failed 来自监控的连接会立马断开
     const int OB_ERR_PARSE_JOIN_INFO = -5070;
-<<<<<<< HEAD
     //add zhuyanchao[secondary index table name]
     const int OB_ERR_INVALID_TABLE_NAME = -5071;
     const int OB_ERR_INVALID_INDEX_NAME = -5072;
@@ -515,13 +482,6 @@ namespace oceanbase
     //add :e
 
 
-=======
-
-    const int OB_ERR_PS_TOO_MANY_PARAM = -5080;
-    const int OB_ERR_READ_ONLY = -5081;
-
-    const int OB_ERR_SQL_END = -5999;
->>>>>>> refs/remotes/origin/master
 #define IS_SQL_ERR(e) ((OB_ERR_SQL_END <= e && OB_ERR_SQL_START >= e) \
                       || OB_ERR_EXCLUSIVE_LOCK_CONFLICT == e \
                       || OB_ERR_SHARED_LOCK_CONFLICT == e)
@@ -558,10 +518,7 @@ namespace oceanbase
     const int64_t OB_MAX_DEBUG_MSG_LEN = 1024;
     const int64_t OB_MAX_COMPRESSOR_NAME_LENGTH = 128;
     const int64_t OB_MAX_TABLE_NAME_LENGTH = 256;
-<<<<<<< HEAD
     const int64_t OB_MAX_DATBASE_NAME_LENGTH = 16; //add hxlong [truncate table] 20170403
-=======
->>>>>>> refs/remotes/origin/master
     const int64_t OB_MAX_FILE_NAME_LENGTH = 512;
     const int64_t OB_MAX_SECTION_NAME_LENGTH = 128;
     const int64_t OB_MAX_FLAG_NAME_LENGTH = 128;
@@ -593,15 +550,10 @@ namespace oceanbase
     const int64_t OB_MAX_CIPHER_LENGTH = MD5_DIGEST_LENGTH * 2;
 
     const int64_t OB_MAX_RESULT_MESSAGE_LENGTH = 1024;
-<<<<<<< HEAD
     //delete by qx 20161106 :b
     //defined in ob_buffer_size_define.h now
     //const int64_t OB_MAX_LOG_BUFFER_SIZE = 1966080L;  // 1.875MB
     //delete :e
-=======
-    const int64_t OB_MAX_LOG_BUFFER_SIZE = 1966080L;  // 1.875MB
-
->>>>>>> refs/remotes/origin/master
     const int32_t OB_SAFE_COPY_COUNT = 3;
     const int32_t OB_DEC_AND_LOCK = 2626; /* used by remoe_plan in ObPsStore */
     // OceanBase Log Synchronization Type
@@ -610,7 +562,6 @@ namespace oceanbase
     const int64_t OB_LOG_DELAYED_SYNC = 2;
     const int64_t OB_LOG_NOT_PERSISTENT = 4;
 
-<<<<<<< HEAD
     // add by guojinwei [commit point for log replay][multi_cluster] 20151127:b
     /// commit point synchronization type
     const int64_t OB_COMMIT_POINT_ASYNC = 0;
@@ -626,8 +577,6 @@ namespace oceanbase
     const int64_t OB_DEFAULT_AUTO_INCREMENT_VALUE = 0;
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     const int64_t OB_MAX_UPS_LEASE_DURATION_US = INT64_MAX;
 
     const int64_t OB_EXECABLE = 1;
@@ -643,12 +592,8 @@ namespace oceanbase
     const int64_t OB_DEFAULT_STMT_TIMEOUT = 3L * 1000L * 1000L; // 1s
     const int64_t OB_DEFAULT_INTERNAL_TABLE_QUERY_TIMEOUT = 10L * 1000L * 1000L; // 10s
     static const int64_t CORE_SCHEMA_VERSION = 1984;
-<<<<<<< HEAD
     //static const int64_t CORE_TABLE_COUNT = 3;
     static const int64_t CORE_TABLE_COUNT = 4; ///< change core_table_count form 3 to 4 by longfei
-=======
-    static const int64_t CORE_TABLE_COUNT = 3;
->>>>>>> refs/remotes/origin/master
 
     //Oceanbase network protocol
     /*  4bytes    4bytes        4bytes       4bytes
@@ -727,12 +672,9 @@ namespace oceanbase
     const char* const OB_ALL_SERVER = "__all_server";
     const char* const OB_ALL_CLIENT = "__all_client";
     const char* const OB_TABLES_SHOW_TABLE_NAME = "__tables_show";
-<<<<<<< HEAD
     const char* const OB_INDEX_SHOW_TABLE_NAME = "__index_show";
 
     const char* const OB_TRUNCATE_OP_TABLE_NAME = "__all_truncate_op"; //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
     const char* const OB_VARIABLES_SHOW_TABLE_NAME = "__variables_show";
     const char* const OB_CREATE_TABLE_SHOW_TABLE_NAME = "__create_table_show";
     const char* const OB_TABLE_STATUS_SHOW_TABLE_NAME = "__table_status_show";
@@ -741,7 +683,6 @@ namespace oceanbase
     const char* const OB_SERVER_STATUS_SHOW_TABLE_NAME = "__server_status_show";
     const char* const OB_PARAMETERS_SHOW_TABLE_NAME = "__parameters_show";
     const char* const OB_ALL_STATEMENT_TABLE_NAME = "__all_statement";
-<<<<<<< HEAD
     const char* const OB_ALL_SECONDAYR_INDEX_TABLE_NAME = "__all_secondary_index"; //longfei [create index]
     //add maoxx
     const char* const OB_INDEX_SERVICE_INFO_TABLE_NAME = "__index_service_info";
@@ -763,8 +704,6 @@ namespace oceanbase
     //add weixing [statistics build v1]20170401:b
     const char* const OB_UDI_MONITOR_TABLE_NAME = "__all_udi_monitor_list";
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     // internal params
     const char* const OB_GROUP_AGG_PUSH_DOWN_PARAM = "ob_group_agg_push_down_param";
@@ -790,7 +729,6 @@ namespace oceanbase
     static const uint64_t OB_ALL_SYS_CONFIG_TID = 11;
     static const uint64_t OB_ALL_SYS_CONFIG_STAT_TID = 12;
     static const uint64_t OB_ALL_CLIENT_TID = 13;
-<<<<<<< HEAD
     static const uint64_t OB_ALL_SECONDARY_INDEX_TID = 14;// longfei [create index]
     static const uint64_t OB_ALL_TRUNCATE_OP_TID = 15; //add hxlong [Truncate Table]:20170403:b
     //add lbzhong [auto_increment] 20161126:b
@@ -804,8 +742,6 @@ namespace oceanbase
     //add e
 
 
-=======
->>>>>>> refs/remotes/origin/master
     ///////////////////////////////////////////////////////////
     //                 VIRUTAL TABLES                        //
     ///////////////////////////////////////////////////////////
@@ -822,7 +758,6 @@ namespace oceanbase
     static const uint64_t OB_ALL_SERVER_STAT_TID = 509;
     static const uint64_t OB_ALL_SERVER_SESSION_TID = 510;
     static const uint64_t OB_ALL_STATEMENT_TID = 511;
-<<<<<<< HEAD
     //add longfei [merge] 20160127
     static const uint64_t OB_INDEX_SHOW_TID = 512;
     //add e
@@ -835,9 +770,6 @@ namespace oceanbase
 //#define IS_SHOW_TABLE(tid) ((tid) >= OB_TABLES_SHOW_TID && (tid) <= OB_SERVER_STATUS_SHOW_TID)
 #define IS_SHOW_TABLE(tid) (((tid) >= OB_TABLES_SHOW_TID && (tid) <= OB_SERVER_STATUS_SHOW_TID) || (tid) == OB_INDEX_SHOW_TID)
     //mod e
-=======
-#define IS_SHOW_TABLE(tid) ((tid) >= OB_TABLES_SHOW_TID && (tid) <= OB_SERVER_STATUS_SHOW_TID)
->>>>>>> refs/remotes/origin/master
     ///////////////////////////////////////////////////////////
     //                 USER TABLES                           //
     ///////////////////////////////////////////////////////////
@@ -898,11 +830,8 @@ namespace oceanbase
     static const int64_t OB_MAX_THREAD_NUM = 1024;
     static const int64_t OB_CHAR_SET_NAME_LENGTH = 16;
 
-<<<<<<< HEAD
     static const int64_t MAX_SQL_ERR_MSG_LENGTH = 256;
 
-=======
->>>>>>> refs/remotes/origin/master
     enum ObDmlType
     {
       OB_DML_UNKNOW   = 0,
@@ -912,7 +841,6 @@ namespace oceanbase
       OB_DML_DELETE   = 4,
       OB_DML_NUM,
     };
-<<<<<<< HEAD
 
     // longfei [create index]
     static const uint64_t OB_INDEX_VIRTUAL_COLUMN_ID = 511;
@@ -949,27 +877,14 @@ namespace oceanbase
     };
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
     TypeName(const TypeName&);               \
   void operator=(const TypeName&)
 
-<<<<<<< HEAD
 // serialize返回失败。
 //
-=======
-// 对于 serialize 函数 pos既是输入参数又是输出参数，
-// serialize把序列化的数据从(buf+pos)处开始写入，
-// 写入完成后更新pos。如果写入后的数据要超出(buf+buf_len)，
-// serialize返回失败。
-//
-// 对于 deserialize 函数 pos既是输入参数又是输出参数，
-// deserialize从(buf+pos)处开始地读出数据进行反序列化，
-// 完成后更新pos。如果反序列化所需数据要超出(buf+data_len)，
->>>>>>> refs/remotes/origin/master
 // deserialize返回失败。
 
 #define NEED_SERIALIZE_AND_DESERIALIZE \

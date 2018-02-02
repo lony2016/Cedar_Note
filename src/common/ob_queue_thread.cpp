@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -14,19 +13,13 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_03_14
  */
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_queue_thread.cpp common / Oceanbase
  //
  // Copyright (C) 2010 Taobao.com, Inc.
  //
-<<<<<<< HEAD
  // Created on 2012-09-01 by Yubai (yubai.lk@taobao.com)
-=======
- // Created on 2012-09-01 by Yubai (yubai.lk@taobao.com) 
->>>>>>> refs/remotes/origin/master
  //
  // -------------------------------------------------------------------
  //
@@ -34,20 +27,13 @@
  //
  //
  // -------------------------------------------------------------------
-<<<<<<< HEAD
  //
-=======
- // 
->>>>>>> refs/remotes/origin/master
  // Change Log
  //
 ////====================================================================
 
 #include <errno.h>
-<<<<<<< HEAD
 #include <sys/syscall.h>
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_trace_log.h"
 #include "priority_packet_queue_thread.h"
 #include "ob_queue_thread.h"
@@ -123,7 +109,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hushuang[scalablecommit]20160417
     //////////////////////////////////////////////////////////
 //    int S2MQueueThread::ObCommitCbInfo::cb_func(void *data, uint64_t desp)
@@ -134,8 +119,6 @@ namespace oceanbase
 //      return ret;
 //    }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -144,10 +127,7 @@ namespace oceanbase
                                        thread_conf_lock_(),
                                        queued_num_(0),
                                        queue_rebalance_(false)
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -156,19 +136,12 @@ namespace oceanbase
       destroy();
     }
 
-<<<<<<< HEAD
     //int S2MQueueThread::init(const int64_t thread_num, const int64_t task_num_limit, const bool queue_rebalance, const bool dynamic_rebalance)
     int S2MQueueThread::init(const int64_t thread_num, const int64_t task_num_limit, const bool queue_rebalance, const bool dynamic_rebalance, void *tbd_ptr)
     {
       int ret = OB_SUCCESS;
       queue_rebalance_ = queue_rebalance;
       TBSYS_LOG(INFO, "test::zhouhuan1 init trans thread pool !!");
-=======
-    int S2MQueueThread::init(const int64_t thread_num, const int64_t task_num_limit, const bool queue_rebalance, const bool dynamic_rebalance)
-    {
-      int ret = OB_SUCCESS;
-      queue_rebalance_ = queue_rebalance;
->>>>>>> refs/remotes/origin/master
       if (0 != thread_num_)
       {
         ret = OB_INIT_TWICE;
@@ -181,14 +154,10 @@ namespace oceanbase
                   thread_num, task_num_limit);
         ret = OB_INVALID_ARGUMENT;
       }
-<<<<<<< HEAD
       //modify hushuang [scalable commit]20160507
       //else if (OB_SUCCESS != (ret = launch_thread_(thread_num, task_num_limit)))
       else if(OB_SUCCESS != (ret = launch_thread_(thread_num, task_num_limit, tbd_ptr)))
       //modify e
-=======
-      else if (OB_SUCCESS != (ret = launch_thread_(thread_num, task_num_limit)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(WARN, "launch thread fail, ret=%d thread_num=%ld task_num_limit=%ld", ret, thread_num, task_num_limit);
       }
@@ -225,10 +194,7 @@ namespace oceanbase
         tc.spec_task_queue.destroy();
         tc.comm_task_queue.destroy();
         tc.low_prio_task_queue.destroy();
-<<<<<<< HEAD
         tc.response_flag = false;
-=======
->>>>>>> refs/remotes/origin/master
       }
       thread_num_ = 0;
     }
@@ -292,7 +258,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //delete by zhutao :b
 //    int S2MQueueThread::push_private_task(uint64_t thread_no, ICommitTask *task)
 //    {
@@ -328,8 +293,6 @@ namespace oceanbase
 
     //e
 
-=======
->>>>>>> refs/remotes/origin/master
     int S2MQueueThread::push(void *task, const uint64_t task_sign, const int64_t prio)
     {
       int ret = OB_SUCCESS;
@@ -450,10 +413,7 @@ namespace oceanbase
           tc.spec_task_queue.destroy();
           tc.comm_task_queue.destroy();
           tc.low_prio_task_queue.destroy();
-<<<<<<< HEAD
           tc.response_flag = false;
-=======
->>>>>>> refs/remotes/origin/master
           TBSYS_LOG(INFO, "join thread succ, index=%ld", i);
         }
       }
@@ -486,14 +446,10 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //modify hushuang [scalable commit] 20160507
     //int S2MQueueThread::launch_thread_(const int64_t thread_num, const int64_t task_num_limit)
     int S2MQueueThread::launch_thread_(const int64_t thread_num, const int64_t task_num_limit, void *tbd_ptr)
     //modify e
-=======
-    int S2MQueueThread::launch_thread_(const int64_t thread_num, const int64_t task_num_limit)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       int64_t thread_num2launch = std::min(MAX_THREAD_NUM - thread_num_, thread_num);
@@ -526,7 +482,6 @@ namespace oceanbase
           TBSYS_LOG(WARN, "low prio task queue init fail, task_num_limit=%ld", task_num_limit);
           break;
         }
-<<<<<<< HEAD
         //add hushuang [scalable commit]20160507
 //        if (NULL != tbd_ptr)
 //        {
@@ -546,8 +501,6 @@ namespace oceanbase
           tc.response_flag = true;
         }
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         int tmp_ret = 0;
         if (0 != (tmp_ret = pthread_create(&(tc.pd), NULL, thread_func_, &tc)))
         {
@@ -582,17 +535,13 @@ namespace oceanbase
         tc->host->thread_index() = tc->index;
         void *pdata = tc->host->on_begin();
         bool last_rebalance_got = false;
-<<<<<<< HEAD
         //TBSYS_LOG(INFO,"test::zhouhuan1 trans_pool tid = [%ld]", syscall(SYS_gettid));
-=======
->>>>>>> refs/remotes/origin/master
         while (tc->run_flag
               || 0 != tc->high_prio_task_queue.get_total()
               || 0 != tc->spec_task_queue.get_total()
               || 0 != tc->comm_task_queue.get_total()
               || 0 != tc->low_prio_task_queue.get_total())
         {
-<<<<<<< HEAD
           //add hushuang [scalable commit]20150607
 
           if (false != tc->response_flag)
@@ -606,8 +555,6 @@ namespace oceanbase
 //            tbd->handle_unfinished_task(host, pdata,tc->index);
 //          }
           //add e
-=======
->>>>>>> refs/remotes/origin/master
           void *task = NULL;
           int64_t start_time = tbsys::CTimeUtil::getTime();
           int64_t idx = -1;
@@ -683,14 +630,10 @@ namespace oceanbase
                 && (last_rebalance_got = (NULL != (task = tc->host->rebalance_(*tc))))))
           {
             ATOMIC_ADD(&tc->host->queued_num_, -1);
-<<<<<<< HEAD
             //modify hushuang[scalable commit]20160506
             //tc->host->handle_with_stopflag(task, pdata, tc->stop_flag);
             tc->host->handle_with_stopflag(task, pdata, tc->stop_flag);
             //modify e
-=======
-            tc->host->handle_with_stopflag(task, pdata, tc->stop_flag);
->>>>>>> refs/remotes/origin/master
             tc->last_active_time = tbsys::CTimeUtil::getTime();
           }
           else

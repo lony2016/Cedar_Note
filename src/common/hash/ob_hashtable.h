@@ -476,7 +476,6 @@ namespace oceanbase
 
             return ret;
           }
-<<<<<<< HEAD
           //add maoxx [hash join single] 20170614
           inline int internal_get_multiple(const hashbucket &bucket, hashnode*& bucket_node, const _key_type &key,
                            _value_type &value, bool &is_fake) const
@@ -563,8 +562,6 @@ namespace oceanbase
             return ret;
           }
           //add e
-=======
->>>>>>> refs/remotes/origin/master
           inline int internal_set(hashbucket &bucket, const _value_type &value, const bool is_fake)
           {
             int ret = HASH_INSERT_SUCC;
@@ -586,7 +583,6 @@ namespace oceanbase
 
             return ret;
           }
-<<<<<<< HEAD
           //add maoxx [hash join single] 20170614
           inline int internal_modify_multiple(hashnode* bucket_node, const _value_type &value, const bool is_fake)
           {
@@ -605,8 +601,6 @@ namespace oceanbase
             return ret;
           }
           //add e
-=======
->>>>>>> refs/remotes/origin/master
         public:
           // 以下四个函数提供多线程安全保证
           // 成功返回HASH_EXIST
@@ -740,7 +734,6 @@ namespace oceanbase
             }
             return ret;
           };
-<<<<<<< HEAD
 
           //add maoxx [hash join single] 20170614
           int get_multiple(hashnode*& bucket_node, const _key_type &key, _value_type &value)
@@ -841,8 +834,6 @@ namespace oceanbase
           };
           //add e
 
-=======
->>>>>>> refs/remotes/origin/master
           // 返回  -1  表示set调用出错, (无法分配新结点等)
           // 其他均表示插入成功：插入成功分下面三个状态
           // 返回  HASH_OVERWRITE_SUCC  表示覆盖旧结点成功(在flag非0的时候返回）
@@ -904,7 +895,6 @@ namespace oceanbase
             }
             return ret;
           };
-<<<<<<< HEAD
 
           //add maoxx [hash join single] 20170614
           int set_multiple(const _key_type &key, const _value_type &value)
@@ -949,8 +939,6 @@ namespace oceanbase
           };
           //add e
 
-=======
->>>>>>> refs/remotes/origin/master
           template <class _callback>
           // 注意 atomic用于原子性的更新一个value,在bucket粒度的锁中执行
           // 所以callback仿函数中严禁调用hashtable的任何方法

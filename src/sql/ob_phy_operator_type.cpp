@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  * @date 2016_01_22
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2013 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -88,10 +85,7 @@ namespace oceanbase
         DEF_OP(PHY_CREATE_TABLE);
         DEF_OP(PHY_DEALLOCATE);
         DEF_OP(PHY_DROP_TABLE);
-<<<<<<< HEAD
         DEF_OP(PHY_TRUNCATE_TABLE); //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
         DEF_OP(PHY_DUAL_TABLE_SCAN);
         DEF_OP(PHY_END_TRANS);
         DEF_OP(PHY_PRIV_EXECUTOR);
@@ -120,13 +114,10 @@ namespace oceanbase
         DEF_OP(PHY_ADD_PROJECT);
         DEF_OP(PHY_KILL_SESSION);
         DEF_OP(PHY_UPS_MODIFY_WITH_DML_TYPE);
-<<<<<<< HEAD
         DEF_OP(PHY_INDEX_TRIGGER);//add maoxx
         //add lbzhong [auto_increment] 20161218:b
         DEF_OP(PHY_AUTO_INCREMENT_FILTER);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           break;
       }

@@ -313,7 +313,6 @@ namespace oceanbase
         int64_t get(const char* str, bool &valid) const;
     };
 
-<<<<<<< HEAD
     //add by qx 20161027 :b
     /**
      * @brief The ObConfigInt2Item class
@@ -369,8 +368,6 @@ namespace oceanbase
     //add :e
 
 
-=======
->>>>>>> refs/remotes/origin/master
     class ObConfigMomentItem
       : public ObConfigItem
     {

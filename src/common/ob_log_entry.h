@@ -121,7 +121,6 @@ namespace oceanbase
        * @param [in] data_len 缓冲区长度
        */
       int fill_header(const char* log_data, const int64_t data_len);
-<<<<<<< HEAD
       //add chujiajia [log synchronization][multi_cluster] 20160328:b
       /**
        * @brief fill ups log header
@@ -139,8 +138,6 @@ namespace oceanbase
        */
       int set_entry(const char* log_data, const int64_t data_len, const int32_t cmd, const int64_t log_id, const int64_t max_cmt_id);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       /**
        * @brief 计算日志序号+LogCommand+日志内容的校验和

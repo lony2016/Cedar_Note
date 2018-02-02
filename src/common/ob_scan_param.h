@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_COMMON_SCAN_PARAM_H_
 #define OCEANBASE_COMMON_SCAN_PARAM_H_
 
@@ -58,7 +55,6 @@ namespace oceanbase
       inline bool is_binary_rowkey_format() const { return is_binary_rowkey_format_; }
 
       int set_range(const ObNewRange& range);
-<<<<<<< HEAD
       //add longfei [cons static index] 151204:b
       /**
        * @brief set_fake_range:fake range is the one we recieve from rs
@@ -72,8 +68,6 @@ namespace oceanbase
        */
       void set_copy_args(bool arg);
       //add e
-=======
->>>>>>> refs/remotes/origin/master
 
       int add_column(const ObString& column_name, bool is_return = true);
       int add_column(const uint64_t& column_id, bool is_return = true);
@@ -114,7 +108,6 @@ namespace oceanbase
       {
         return &range_;
       }
-<<<<<<< HEAD
       //add longfei [cons static index] 151204:b
       /**
        * @brief get_fake_range
@@ -141,8 +134,6 @@ namespace oceanbase
         return need_fake_range_;
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       inline ScanFlag get_scan_flag()const
       {
         return scan_flag_;
@@ -332,13 +323,10 @@ namespace oceanbase
       uint64_t table_id_;
       ObString table_name_;
       ObNewRange range_;
-<<<<<<< HEAD
       //add longfei [cons static index]:b
       ObNewRange fake_range_; ///< Static data Construction phase, cs need to build range
       bool need_fake_range_; ///< Whether need to build fake_range_
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       int64_t scan_size_;
       ScanFlag scan_flag_;
       ObString basic_column_names_[OB_MAX_COLUMN_NUMBER];
@@ -373,7 +361,6 @@ namespace oceanbase
       ObArrayHelper<uint8_t> orderby_order_list_;
       ObSimpleFilter condition_filter_;
       ObGroupByParam group_by_param_;
-<<<<<<< HEAD
       // for range_ store object array.
       ObObj start_rowkey_obj_array_[OB_MAX_ROWKEY_COLUMN_NUMBER];
       ObObj end_rowkey_obj_array_[OB_MAX_ROWKEY_COLUMN_NUMBER];
@@ -384,13 +371,6 @@ namespace oceanbase
       //add e
       const ObSchemaManagerV2* schema_manager_; // rowkey compatible information get from schema
       bool is_binary_rowkey_format_;
-=======
-        // for range_ store object array.
-        ObObj start_rowkey_obj_array_[OB_MAX_ROWKEY_COLUMN_NUMBER];
-        ObObj end_rowkey_obj_array_[OB_MAX_ROWKEY_COLUMN_NUMBER];
-        const ObSchemaManagerV2* schema_manager_; // rowkey compatible information get from schema
-        bool  is_binary_rowkey_format_;
->>>>>>> refs/remotes/origin/master
     };
 
   } /* common */

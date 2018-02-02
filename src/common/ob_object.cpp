@@ -9,12 +9,9 @@
 #include "utility.h"
 #include "ob_crc64.h"
 #include "murmur_hash.h"
-<<<<<<< HEAD
 //add   fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 #include "Ob_Decimal.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase;
 using namespace oceanbase::common;
@@ -39,7 +36,6 @@ bool ObObj::is_true() const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       // ObNumber dec;
    //    ObDecimal dec;
@@ -56,15 +52,6 @@ bool ObObj::is_true() const
        }
        //modify e
        break;
-=======
-        ObNumber dec;
-        bool is_add = false;
-        if (OB_SUCCESS == get_decimal(dec, is_add))
-        {
-          ret = !dec.is_zero();
-        }
-        break;
->>>>>>> refs/remotes/origin/master
       }
     case ObFloatType:
       ret = (fabsf(value_.float_val) > FLOAT_EPSINON);
@@ -115,13 +102,8 @@ int ObObj::get_decimal(ObNumber &num) const
   bool is_add;
   return get_decimal(num, is_add);
 }
-<<<<<<< HEAD
 /*delete xsl ECNU_DECIMAL 2017_2
 int ObObj:: set_decimal(const ObNumber &num, int8_t precision, int8_t scale, bool is_add )//= false
-=======
-
-int ObObj::set_decimal(const ObNumber &num, int8_t precision, int8_t scale, bool is_add /*= false*/)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   set_flag(is_add);
@@ -148,7 +130,6 @@ int ObObj::set_decimal(const ObNumber &num, int8_t precision, int8_t scale, bool
   }
   return ret;
 }
-<<<<<<< HEAD
 */
 //add   fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 /*modify xsl ECNU_DECIMAL 2016_12
@@ -362,8 +343,6 @@ int ObObj::get_decimal_v2(ObDecimal& value) const   //实际的赋值
 
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 
 int ObObj::compare_same_type(const ObObj &other) const
 {
@@ -386,7 +365,6 @@ int ObObj::compare_same_type(const ObObj &other) const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       /*
        ObNumber n1, n2;
        get_decimal(n1);
@@ -426,13 +404,6 @@ int ObObj::compare_same_type(const ObObj &other) const
       cmp = od1.compare(od2);
       break;
       //modify e
-=======
-        ObNumber n1, n2;
-        get_decimal(n1);
-        other.get_decimal(n2);
-        cmp = n1.compare(n2);
-        break;
->>>>>>> refs/remotes/origin/master
       }
     case ObVarcharType:
       {
@@ -852,7 +823,6 @@ int ObObj::apply(const ObObj &mutation)
         break;
       case ObDecimalType:
         {
-<<<<<<< HEAD
         //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         //modify xsl ECNU_DECIMAL 2016_12
         uint64_t *t1 =NULL;
@@ -865,37 +835,6 @@ int ObObj::apply(const ObObj &mutation)
         //*this=mutation;
           break;
         //modify e
-=======
-          ObNumber num, mutation_num, res;
-          if (ext_val_can_change || org_is_nop)
-          {
-            num.set_zero();
-          }
-          else
-          {
-            err = get_decimal(num, org_is_add);
-          }
-          if (OB_SUCCESS == err)
-          {
-            err = mutation.get_decimal(mutation_num, is_add);
-          }
-          if (OB_SUCCESS == err)
-          {
-            if (is_add)
-            {
-              err = num.add(mutation_num, res);
-            }
-            else
-            {
-              res = mutation_num;
-            }
-          }
-          if (OB_SUCCESS == err)
-          {
-            set_decimal(res, meta_.dec_precision_, meta_.dec_scale_, (org_is_add || org_is_nop) && is_add);
-          }
-          break;
->>>>>>> refs/remotes/origin/master
         }
       default:
         /* case ObSeqType: */
@@ -913,7 +852,6 @@ int ObObj::apply(const ObObj &mutation)
   return err;
 }
 
-<<<<<<< HEAD
 
 //add dhc[in post-expression optimization/query_optimizer]@20151121:b
 int ObObj::obj_copy(ObObj& nobj) const
@@ -1060,8 +998,6 @@ int ObObj::obj_copy(ObObj& nobj) const
 }
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObObj::dump(const int32_t log_level /*=TBSYS_LOG_LEVEL_DEBUG*/) const
 {
   int64_t int_val = 0;
@@ -1070,7 +1006,6 @@ void ObObj::dump(const int32_t log_level /*=TBSYS_LOG_LEVEL_DEBUG*/) const
   float float_val = 0.0f;
   double double_val = 0.0f;
   ObString str_val;
-<<<<<<< HEAD
   //modify xsl ECNU_DECIMAL 2016_12
   //ObNumber num;
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
@@ -1078,9 +1013,6 @@ void ObObj::dump(const int32_t log_level /*=TBSYS_LOG_LEVEL_DEBUG*/) const
    ObDecimal od;
   //add e
   //modify e
-=======
-  ObNumber num;
->>>>>>> refs/remotes/origin/master
   char num_buf[ObNumber::MAX_PRINTABLE_SIZE];
   switch (get_type())
   {
@@ -1142,7 +1074,6 @@ void ObObj::dump(const int32_t log_level /*=TBSYS_LOG_LEVEL_DEBUG*/) const
           "[%ld] type:ObExt, val:%ld",pthread_self(),int_val);
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL 2016_12
        /*get_decimal(num, is_add);
       num.to_string(num_buf, ObNumber::MAX_PRINTABLE_SIZE);
@@ -1158,10 +1089,6 @@ void ObObj::dump(const int32_t log_level /*=TBSYS_LOG_LEVEL_DEBUG*/) const
       od.to_string(num_buf, MAX_PRINTABLE_SIZE);
       }
       //modify e
-=======
-      get_decimal(num, is_add);
-      num.to_string(num_buf, ObNumber::MAX_PRINTABLE_SIZE);
->>>>>>> refs/remotes/origin/master
       TBSYS_LOGGER.logMessage(TBSYS_LOG_NUM_LEVEL(log_level),
           "[%ld] type:ObDecimalType, val:%s, is_add:%s",
           pthread_self(), num_buf, is_add ? "true" : "false");
@@ -1215,7 +1142,6 @@ void ObObj::print_value(FILE* fd)
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       /*char num_buf[ObNumber::MAX_PRINTABLE_SIZE];
       ObNumber num;
       get_decimal(num);
@@ -1227,13 +1153,6 @@ void ObObj::print_value(FILE* fd)
       get_decimal(num);
       fprintf(fd, "%s",to_cstring(num));  //??
       //modify e
-=======
-        char num_buf[ObNumber::MAX_PRINTABLE_SIZE];
-        ObNumber num;
-        get_decimal(num);
-        num.to_string(num_buf, ObNumber::MAX_PRINTABLE_SIZE);
-        fprintf(fd, "%s", num_buf);
->>>>>>> refs/remotes/origin/master
         break;
       }
     default:
@@ -1272,7 +1191,6 @@ const char* ObObj::get_sql_type(ObObjType type)
   return sql_type;
 }
 
-<<<<<<< HEAD
 //add gaojt [ListAgg][JHOBv0.1]20150104:b
 int64_t ObObj::to_string_v2(std::string &s) const
 {
@@ -1385,8 +1303,6 @@ int64_t ObObj::to_string_v2(std::string &s) const
 }
 //add 20150104:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int64_t ObObj::to_string(char* buffer, const int64_t length) const
 {
   static const char* obj_type_name[] =
@@ -1483,16 +1399,11 @@ int64_t ObObj::to_string(char* buffer, const int64_t length) const
         break;
       case ObDecimalType:
       {
-<<<<<<< HEAD
         /*char num_buf[ObNumber::MAX_PRINTABLE_SIZE];
-=======
-        char num_buf[ObNumber::MAX_PRINTABLE_SIZE];
->>>>>>> refs/remotes/origin/master
         ObNumber num;
         get_decimal(num);
         num.to_string(num_buf, ObNumber::MAX_PRINTABLE_SIZE);
         databuff_printf(buffer, length, pos, "%s", num_buf);
-<<<<<<< HEAD
         */
         //modify xsl ECNU_DECIMAL 2016_12
         //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
@@ -1511,8 +1422,6 @@ int64_t ObObj::to_string(char* buffer, const int64_t length) const
         }
         databuff_printf(buffer, length, pos, "%s",res);
         //modify e
-=======
->>>>>>> refs/remotes/origin/master
         break;
       }
       default:
@@ -1570,27 +1479,11 @@ DEFINE_SERIALIZE(ObObj)
         ret = serialization::encode_bool_type(buf, buf_len, tmp_pos, value_.bool_val);
         break;
       case ObDecimalType:
-<<<<<<< HEAD
         //modify xsl ECNU_DECIMAL 2016_12
         //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         ret=serialization::encode_comm_decimal(buf,buf_len,tmp_pos,obj_op_flag == ADD,meta_.dec_precision_,
             meta_.dec_scale_, meta_.dec_vscale_,value_.ii,(int32_t)sizeof(uint64_t)*get_nwords());
         //modify e
-=======
-        if (meta_.dec_nwords_ + 1 <= 3)
-        {
-          ret = serialization::encode_decimal_type(buf, buf_len, tmp_pos, obj_op_flag == ADD, meta_.dec_precision_,
-              meta_.dec_scale_, meta_.dec_vscale_,
-              static_cast<int8_t>(meta_.dec_nwords_ + 1),
-              reinterpret_cast<const uint32_t*>(&val_len_));
-        }
-        else
-        {
-          ret = serialization::encode_decimal_type(buf, buf_len, tmp_pos, obj_op_flag == ADD, meta_.dec_precision_,
-              meta_.dec_scale_, meta_.dec_vscale_, static_cast<int8_t>(meta_.dec_nwords_ + 1),
-              value_.dec_words_);
-        }
->>>>>>> refs/remotes/origin/master
         break;
       default:
         TBSYS_LOG(ERROR, "invalid obj_type=%d", type);
@@ -1696,7 +1589,6 @@ DEFINE_DESERIALIZE(ObObj)
                             break;
                           case 3: //obdecimaltype
                             {
-<<<<<<< HEAD
                             //modify xsl ECNU_DECIMAL 2016_12
                             //modify wenghaixing DECIMAL OceanBase_BankCommV0.3 2014_7_10:b
                             meta_.type_ = ObDecimalType;
@@ -1722,31 +1614,6 @@ DEFINE_DESERIALIZE(ObObj)
                                 value_.ii = reinterpret_cast<uint64_t *>(o_ptr);
                             }
                             //modify e
-=======
-                              meta_.type_ = ObDecimalType;
-                              uint32_t words[ObNumber::MAX_NWORDS];
-                              int8_t p = 0;
-                              int8_t s = 0;
-                              int8_t vs = 0;
-                              int8_t n = 0;
-                              ret = serialization::decode_decimal_type(buf, data_len, tmp_pos, is_add, p, s, vs, n, words);
-                              if(OB_SUCCESS == ret)
-                              {
-                                meta_.dec_precision_ = static_cast<uint8_t>(p) & META_PREC_MASK;
-                                meta_.dec_scale_ = static_cast<uint8_t>(s) & META_SCALE_MASK;
-                                meta_.dec_vscale_ = static_cast<uint8_t>(vs) & META_VSCALE_MASK;
-                                meta_.dec_nwords_ = static_cast<uint8_t>(n - 1) & META_NWORDS_MASK;
-                                if (n <= 3)
-                                {
-                                  memcpy(reinterpret_cast<char*>(&val_len_), words, n * sizeof(uint32_t));
-                                }
-                                else
-                                {
-                                  //@todo
-                                  ret = OB_NOT_IMPLEMENT;
-                                }
-                              }
->>>>>>> refs/remotes/origin/master
                               break;
                             }
                           default:
@@ -1790,7 +1657,6 @@ DEFINE_DESERIALIZE(ObObj)
   }
   return ret;
 }
-<<<<<<< HEAD
 /**Name:from_hash
 *input: buf,buf_len
 *function:This function is only for obj hash,which used by row_key index hash for get method
@@ -1901,9 +1767,6 @@ int ObObj::from_hash(TTCInt &tc,const char* buff, int64_t buf_len)const{
 
 }
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 DEFINE_GET_SERIALIZE_SIZE(ObObj)
 {
   ObObjType type = get_type();
@@ -1948,11 +1811,7 @@ DEFINE_GET_SERIALIZE_SIZE(ObObj)
       len += serialization::encoded_length_bool_type(value_.bool_val);
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       /* if (meta_.dec_nwords_+1 <= 3)
-=======
-      if (meta_.dec_nwords_+1 <= 3)
->>>>>>> refs/remotes/origin/master
       {
         len += serialization::encoded_length_decimal_type(meta_.dec_nwords_, reinterpret_cast<const uint32_t*>(&val_len_));
       }
@@ -1960,7 +1819,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObObj)
       {
         len += serialization::encoded_length_decimal_type(static_cast<int8_t>(meta_.dec_nwords_+1), value_.dec_words_);
       }
-<<<<<<< HEAD
       */
       //modify xsl ECNU_DECIMAL 2016_12
       //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
@@ -1974,8 +1832,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObObj)
         */
       len += serialization::encoded_length_decimal_comm((int32_t)sizeof(uint64_t)*get_nwords());
       //modify:e
-=======
->>>>>>> refs/remotes/origin/master
       break;
     default:
       TBSYS_LOG(ERROR,"unexpected obj type [obj.type:%d]", type);
@@ -2034,7 +1890,6 @@ uint32_t ObObj::murmurhash2(const uint32_t hash) const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL 2016_12
       //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       /*
@@ -2066,17 +1921,6 @@ uint32_t ObObj::murmurhash2(const uint32_t hash) const
           result =::murmurhash2(&ct,length,result);
       }
       //modify e
-=======
-        int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_+1);
-        if (nwords <= 3)
-        {
-          result = ::murmurhash2(reinterpret_cast<const uint32_t*>(&val_len_), static_cast<int32_t>(sizeof(uint32_t)*nwords), result);
-        }
-        else
-        {
-          result = ::murmurhash2(value_.dec_words_, static_cast<int32_t>(sizeof(uint32_t)*nwords), result);
-        }
->>>>>>> refs/remotes/origin/master
         break;
       }
     default:
@@ -2135,7 +1979,6 @@ uint64_t ObObj::murmurhash64A(const uint64_t hash) const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       //modify xsl  ECNU_DECIMAL 2016_12
       //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       /*
@@ -2206,17 +2049,6 @@ uint64_t ObObj::murmurhash64A(const uint64_t hash) const
            result =::murmurhash64A(&ct,length,result);
        }*/
        //modify e
-=======
-        int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_ + 1);
-        if (nwords <= 3)
-        {
-          result = ::murmurhash64A(reinterpret_cast<const uint64_t*>(&val_len_), static_cast<int32_t>(sizeof(uint32_t) * nwords), result);
-        }
-        else
-        {
-          result = ::murmurhash64A(value_.dec_words_, static_cast<int32_t>(sizeof(uint32_t) * nwords), result);
-        }
->>>>>>> refs/remotes/origin/master
         break;
       }
     default:
@@ -2276,7 +2108,6 @@ int64_t ObObj::checksum(const int64_t current) const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       /*int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_+1);
       if (nwords <= 3)
       {
@@ -2293,17 +2124,6 @@ int64_t ObObj::checksum(const int64_t current) const
       ret = ob_crc64(ret, value_.ii, sizeof(uint64_t)*get_nwords());
       //modify e
       //modify e
-=======
-        int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_+1);
-        if (nwords <= 3)
-        {
-          ret = ob_crc64(ret, reinterpret_cast<const uint32_t*>(&val_len_), sizeof(uint32_t)*nwords);
-        }
-        else
-        {
-          ret = ob_crc64(ret, value_.dec_words_, sizeof(uint32_t)*nwords);
-        }
->>>>>>> refs/remotes/origin/master
         break;
       }
     default:
@@ -2362,7 +2182,6 @@ void ObObj::checksum(ObBatchChecksum &bc) const
       break;
     case ObDecimalType:
       {
-<<<<<<< HEAD
       /*int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_+1);
       if (nwords <= 3)
       {
@@ -2379,17 +2198,6 @@ void ObObj::checksum(ObBatchChecksum &bc) const
         bc.fill(value_.ii, sizeof(uint64_t)*get_nwords());
         //modify e
         //modify e
-=======
-        int8_t nwords = static_cast<int8_t>(meta_.dec_nwords_+1);
-        if (nwords <= 3)
-        {
-          bc.fill(reinterpret_cast<const uint32_t*>(&val_len_), sizeof(uint32_t)*nwords);
-        }
-        else
-        {
-          bc.fill(value_.dec_words_, sizeof(uint32_t)*nwords);
-        }
->>>>>>> refs/remotes/origin/master
         break;
       }
     default:

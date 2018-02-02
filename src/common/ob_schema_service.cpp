@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -25,8 +24,6 @@
  * @date 2016_01_21
  */
  
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_schema_service.h"
 #include "common/utility.h"
 #include "common/ob_common_param.h"
@@ -189,14 +186,11 @@ DEFINE_SERIALIZE(ColumnSchema)
   else if (OB_SUCCESS != (ret = serialization::encode_bool(buf, buf_len, pos, nullable_)))
   {
   }
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   else if (OB_SUCCESS != (ret = serialization::encode_bool(buf, buf_len, pos, auto_increment_)))
   {
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = serialization::encode_vi64(buf, buf_len, pos, length_in_rowkey_)))
   {
   }
@@ -248,14 +242,11 @@ DEFINE_DESERIALIZE(ColumnSchema)
   else if (OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, pos, &nullable_)))
   {
   }
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   else if (OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, pos, &auto_increment_)))
   {
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = serialization::decode_vi64(buf, data_len, pos, &length_in_rowkey_)))
   {
   }
@@ -330,7 +321,6 @@ DEFINE_SERIALIZE(TableSchema)
   else if (OB_SUCCESS != (ret = serialization::encode_vi64(buf, buf_len, pos, max_rowkey_length_)))
   {
   }
-<<<<<<< HEAD
 
   // longfei [create index]
   else if (OB_SUCCESS != (ret = serialization::encode_vi64(buf, buf_len, pos, original_table_id_)))
@@ -340,8 +330,6 @@ DEFINE_SERIALIZE(TableSchema)
   {
   }
 
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = serialization::encode_vi64(buf, buf_len, pos, merge_write_sstable_version_)))
   {
   }
@@ -467,7 +455,6 @@ DEFINE_DESERIALIZE(TableSchema)
   {
     TBSYS_LOG(WARN, "deserialize error here");
   }
-<<<<<<< HEAD
 
   // longfei [create index]
   else if (OB_SUCCESS != (ret = serialization::decode_vi64(buf, data_len, pos, reinterpret_cast<int64_t*>(&original_table_id_))))
@@ -479,8 +466,6 @@ DEFINE_DESERIALIZE(TableSchema)
     TBSYS_LOG(WARN, "deserialize error here");
   }
 
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = serialization::decode_vi64(buf, data_len, pos, &merge_write_sstable_version_)))
   {
     TBSYS_LOG(WARN, "deserialize error here");
@@ -718,7 +703,6 @@ DEFINE_DESERIALIZE(AlterTableSchema)
   }
   return ret;
 }
-<<<<<<< HEAD
 
 //add longfei [cons static index] 151120:b
 DEFINE_SERIALIZE(IndexBeat)
@@ -807,5 +791,3 @@ DEFINE_DESERIALIZE(IndexBeat)
   return ret;
 }
 // add e
-=======
->>>>>>> refs/remotes/origin/master

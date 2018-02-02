@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -20,9 +19,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,12 +35,9 @@
 #include "ob_sort.h"
 #include "common/utility.h"
 #include "ob_physical_plan.h"
-<<<<<<< HEAD
 //add fanqiushi [semi_join] [0.1] 20150829:b
 #include "ob_semi_left_join.h"
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
@@ -92,7 +85,6 @@ int ObSort::set_run_filename(const common::ObString &filename)
   return merge_sort_.set_run_filename(filename);
 }
 
-<<<<<<< HEAD
 //add fanqiushi [semi_join] [0.1] 20150826:b
 ObArray<ObObj>& ObSort::get_filer_set()
 {
@@ -101,8 +93,6 @@ ObArray<ObObj>& ObSort::get_filer_set()
 }
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObSort::add_sort_column(const uint64_t tid, const uint64_t cid, bool is_ascending)
 {
   int ret = OB_SUCCESS;
@@ -130,7 +120,6 @@ int ObSort::open()
   }
   return ret;
 }
-<<<<<<< HEAD
 //add wanglei [semi join] 20170417:b
 int  ObSort::open_without_sort()
 {
@@ -142,9 +131,6 @@ int  ObSort::open_without_sort()
     return ret;
 }
 //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
 int ObSort::close()
 {
   int ret = OB_SUCCESS;
@@ -185,7 +171,6 @@ int ObSort::do_sort()
     while(OB_SUCCESS == ret
         && OB_SUCCESS == (ret = child_op_->get_next_row(input_row)))
     {
-<<<<<<< HEAD
       //mod longfei 151229:b
       if (NULL == input_row)
       {
@@ -195,9 +180,6 @@ int ObSort::do_sort()
       //if (OB_SUCCESS != (ret = in_mem_sort_.add_row(*input_row)))
       else if (OB_SUCCESS != (ret = in_mem_sort_.add_row(*input_row)))
       //mod e
-=======
-      if (OB_SUCCESS != (ret = in_mem_sort_.add_row(*input_row)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(WARN, "failed to add row, err=%d", ret);
       }

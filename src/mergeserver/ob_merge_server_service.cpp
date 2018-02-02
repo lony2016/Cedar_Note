@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_26
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include <sys/syscall.h>
 #include <unistd.h>
 #include "ob_merge_server_service.h"
@@ -93,13 +90,10 @@ namespace oceanbase
 
       lease_expired_time_ = tbsys::CTimeUtil::getTime() + DEFAULT_LEASE_TIME;
       sql_id_mgr_ = NULL;
-<<<<<<< HEAD
 
       //add by qx 20160830 :b
       ups_state_ = true;
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObMergeServerService::~ObMergeServerService()
@@ -538,7 +532,6 @@ namespace oceanbase
         merge_server_->get_bloom_filter_task_queue_thread().start();
       }
 
-<<<<<<< HEAD
       //add by wangdonghui run physical plan manager thread 20160317 :b
       if (OB_SUCCESS == err)
       {
@@ -546,8 +539,6 @@ namespace oceanbase
       }
       //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != err)
       {
         if (rpc_proxy_)
@@ -674,11 +665,7 @@ namespace oceanbase
       const int32_t packet_code,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -710,7 +697,6 @@ namespace oceanbase
         case OB_SWITCH_SCHEMA:
           rc = ms_accept_schema(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
           break;
-<<<<<<< HEAD
         //add by wangdonghui 20160122 :b
         case OB_UPDATE_CACHE:
           rc = ms_accept_cache(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
@@ -724,8 +710,6 @@ namespace oceanbase
           rc = ms_update_all_procedure(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
             break;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         case OB_SCAN_REQUEST:
           rc = ms_scan(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
           break;
@@ -760,14 +744,11 @@ namespace oceanbase
         case OB_SQL_KILL_SESSION:
           rc = ms_sql_kill_session(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
           break;
-<<<<<<< HEAD
         //add weixing [statistics build v1]20170406:b
         case OB_FETCH_COLLECTION_LIST:
           rc = ms_fetch_collection_list(receive_time, version, channel_id, req, in_buffer, out_buffer, timeout_us);
           break;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           TBSYS_LOG(WARN, "check packet type failed:type[%d]", packet_code);
           rc = OB_ERROR;
@@ -779,11 +760,7 @@ namespace oceanbase
     int ObMergeServerService::ms_list_sessions(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer)
     {
@@ -828,22 +805,14 @@ namespace oceanbase
         TBSYS_LOG(WARN,"fail to send list sessions response [send_err:%d]", send_err);
       }
       ob_free(buf);
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return send_err;
     }
 
     int ObMergeServerService::ms_kill_session(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer)
     {
@@ -880,7 +849,6 @@ namespace oceanbase
         send_err = merge_server_->send_response(OB_KILL_SESSION_RESPONSE, MS_KILL_SESSION_VERSION,
           out_buffer, req, channel_id);
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
       return send_err;
     }
@@ -1082,21 +1050,11 @@ namespace oceanbase
     }
     //add e
 
-=======
-      easy_request_wakeup(req);
-      return send_err;
-    }
-
->>>>>>> refs/remotes/origin/master
     int ObMergeServerService::ms_sql_kill_session(
       const int64_t receive_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us
@@ -1149,11 +1107,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -1161,15 +1115,12 @@ namespace oceanbase
       static const int32_t MS_HEARTBEAT_LEASE_SCHEMA_VERSION = 3;
       static const int32_t MS_HEARTBEAT_PRIVILEGE_VERSION = 4;
       static const int32_t MS_HEARTBEAT_CONFIG_VERSION = 4;
-<<<<<<< HEAD
       //add wangdonghui [dev_compile] 20160730 :b
       static const int32_t MS_HEARTBEAT_PROCEDURE_VERSION = 3;
       //add :e
       //add qx 20160830 :b
       static const int32_t MS_HEARTBEAT_UPS_VERSION = 3;
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
       FILL_TRACE_LOG("step 1. start process heartbeat");
       ObResultCode rc;
@@ -1327,7 +1278,6 @@ namespace oceanbase
         }
       }
 
-<<<<<<< HEAD
       //add wangdonghui [dev_compile] 20160730 :b
       if (version > MS_HEARTBEAT_PROCEDURE_VERSION)
       {
@@ -1398,8 +1348,6 @@ namespace oceanbase
      }
      //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       FILL_TRACE_LOG("step 3. process heartbeat finish:ret[%d]", err);
       CLEAR_TRACE_LOG();
       return err;
@@ -1409,11 +1357,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -1454,11 +1398,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -1501,11 +1441,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -1535,11 +1471,7 @@ namespace oceanbase
       ObMergerGetRequest * get_event = GET_TSI_ARGS(ObMergerGetRequest, TSI_MS_GET_EVENT_1,
           cache_proxy_, async_rpc_);
       int64_t timeout_time = start_time + req_timeout_us;
-<<<<<<< HEAD
       onev_connection_e* conn = req->ms->c;
-=======
-      easy_connection_t* conn = req->ms->c;
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == err && MS_GET_VERSION != version)
       {
         err = OB_ERROR_FUNC_VERSION;
@@ -1875,11 +1807,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -2017,11 +1945,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -2108,7 +2032,6 @@ namespace oceanbase
 
       return ret;
     }
-<<<<<<< HEAD
     //add by wangdonghui 20160122 :b
     int ObMergeServerService::ms_accept_cache(
       const int64_t start_time,
@@ -2324,11 +2247,6 @@ namespace oceanbase
     //add :e
     int ObMergeServerService::send_sql_response(
       onev_request_e* req,
-=======
-
-    int ObMergeServerService::send_sql_response(
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& out_buffer,
       ObSQLResultSet &result,
       int32_t channel_id,
@@ -2392,11 +2310,7 @@ namespace oceanbase
              */
             req = next_request->get_request();
             ret = OB_SUCCESS;
-<<<<<<< HEAD
             onev_request_wakeup(req);
-=======
-            easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             break;
           }
           else if (OB_SUCCESS != ret)
@@ -2429,11 +2343,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -2523,11 +2433,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -2557,11 +2463,7 @@ namespace oceanbase
       const ObSchemaManagerV2 *schema_mgr = NULL;
       const ObSchemaManagerV2 *user_schema_mgr = NULL;
       int64_t timeout_time = start_time + req_timeout_us;
-<<<<<<< HEAD
       onev_connection_e* conn = req->ms->c;
-=======
-      easy_connection_t* conn = req->ms->c;
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == err && MS_SCAN_VERSION != version)
       {
         err = OB_ERROR_FUNC_VERSION;
@@ -2900,11 +2802,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -3022,11 +2920,7 @@ namespace oceanbase
       const int64_t start_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -3070,11 +2964,7 @@ namespace oceanbase
       const int64_t receive_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -3121,11 +3011,7 @@ namespace oceanbase
       const int64_t receive_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)
@@ -3177,11 +3063,7 @@ namespace oceanbase
       const int64_t receive_time,
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_us)

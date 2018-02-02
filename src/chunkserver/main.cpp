@@ -13,11 +13,7 @@
 #include <malloc.h>
 #include "common/ob_define.h"
 #include "ob_chunk_server_main.h"
-<<<<<<< HEAD
 #include "onev_palloc.h"
-=======
-#include "easy_pool.h"
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::chunkserver;
@@ -35,11 +31,7 @@ int main(int argc, char* argv[])
 {
   ::mallopt(M_MMAP_THRESHOLD, DEFAULT_MMAP_THRESHOLD);
   ob_init_memory_pool();
-<<<<<<< HEAD
   //onev_pool_set_allocator(ob_malloc);
-=======
-  //easy_pool_set_allocator(ob_malloc);
->>>>>>> refs/remotes/origin/master
   ObChunkServerMain* cm = ObChunkServerMain::get_instance();
   int ret = OB_SUCCESS;
   if (NULL == cm)

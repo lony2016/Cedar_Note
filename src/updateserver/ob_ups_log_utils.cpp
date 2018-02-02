@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -378,7 +375,6 @@ namespace oceanbase
 
     int replay_local_log_func(const volatile bool& stop, const char* log_dir,
                               const ObLogCursor& start_cursor, ObLogCursor& end_cursor,
-<<<<<<< HEAD
                               ObLogReplayWorker& replay_worker
                               //add lbzhong [Commit Point] 20150930:b
                               ,const int64_t commit_seq
@@ -389,13 +385,6 @@ namespace oceanbase
       char* buf = NULL;
       //int64_t len = ObLogWriter::LOG_BUFFER_SIZE;
       int64_t len = OB_MAX_LOG_BUFFER_SIZE;
-=======
-                              ObLogReplayWorker& replay_worker)
-    {
-      int err = OB_SUCCESS;
-      char* buf = NULL;
-      int64_t len = ObLogWriter::LOG_BUFFER_SIZE;
->>>>>>> refs/remotes/origin/master
       int64_t read_count = 0;
       int64_t end_id = 0;
       ObPosLogReader reader;
@@ -403,12 +392,9 @@ namespace oceanbase
       ObLogLocation end_location;
       int64_t start_time = tbsys::CTimeUtil::getTime();
       end_cursor = start_cursor;
-<<<<<<< HEAD
       //add lbzhong [Commit Point] 20150930:b
       bool has_committed_end = false;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
       if (NULL == log_dir || start_cursor.file_id_ <= 0 || start_cursor.log_id_ != 0 || start_cursor.offset_ != 0)
       {
@@ -443,7 +429,6 @@ namespace oceanbase
         start_location.log_id_ = end_cursor.log_id_;
         end_location = start_location;
       }
-<<<<<<< HEAD
       while (
           //add lbzhong [Commit Point] 20150930:b
           !has_committed_end &&
@@ -456,12 +441,6 @@ namespace oceanbase
                                                      , has_committed_end, commit_seq
                                                      //add:e
                                                      )))
-=======
-      while (!stop && OB_SUCCESS == err)
-      {
-        if (OB_SUCCESS != (err = reader.get_log(start_location.log_id_, start_location, end_location,
-                                                     buf, len, read_count)))
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(ERROR, "reader.get_log(log_id=%ld)=>%d", start_location.log_id_, err);
         }
@@ -475,12 +454,9 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
           //add by chujiajia [log synchronization][multi_cluster] 20160625:b
           replay_worker.set_next_flush_log_id(end_id + 1);
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
           start_location = end_location;
         }
       }
@@ -668,7 +644,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160524:b
     int get_tmp_log_data_checksum(const char* log_dir,
                                   uint64_t &seq,
@@ -716,8 +691,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int replay_log_in_buf_func(const char* log_data, int64_t data_len, IObLogApplier* log_applier)
     {
       int err = OB_SUCCESS;
@@ -870,7 +843,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //modify chujiajia [log synchronization][multi_cluster] 20160530:b
     //int parse_log_buffer(const char* log_data, const int64_t len, int64_t& start_id, int64_t& end_id)
     int parse_log_buffer(const char* log_data, const int64_t len, int64_t& start_id, int64_t& end_id, int64_t& master_cmt_log_id)
@@ -882,13 +854,6 @@ namespace oceanbase
       //if (OB_SUCCESS != (err = trim_log_buffer(log_data, len, end_pos, start_id, end_id)))
       if (OB_SUCCESS != (err = trim_log_buffer(log_data, len, end_pos, start_id, end_id, master_cmt_log_id)))
       //modify:e
-=======
-    int parse_log_buffer(const char* log_data, const int64_t len, int64_t& start_id, int64_t& end_id)
-    {
-      int err = OB_SUCCESS;
-      int64_t end_pos = 0;
-      if (OB_SUCCESS != (err = trim_log_buffer(log_data, len, end_pos, start_id, end_id)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR, "trim_log_buffer(log_data=%p[%ld])=>%d", log_data, len, err);
       }
@@ -899,7 +864,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //modify chujiajia [log synchronization][multi_cluster] 20160530:b
     //int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos, int64_t& start_id, int64_t& end_id)
     int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos, int64_t& start_id, int64_t& end_id, int64_t& master_cmt_log_id)
@@ -916,17 +880,6 @@ namespace oceanbase
     //int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos, int64_t& start_id, int64_t& end_id, bool& is_file_end)
     int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos, int64_t& start_id, int64_t& end_id, int64_t& master_cmt_log_id, bool& is_file_end)
     //modify:e
-=======
-    int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos,
-                        int64_t& start_id, int64_t& end_id)
-    {
-      bool is_file_end = false;
-      return trim_log_buffer(log_data, len, end_pos, start_id, end_id, is_file_end);
-    }
-
-    int trim_log_buffer(const char* log_data, const int64_t len, int64_t& end_pos,
-                        int64_t& start_id, int64_t& end_id, bool& is_file_end)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       int64_t pos = 0;
@@ -956,15 +909,12 @@ namespace oceanbase
         {
           TBSYS_LOG(ERROR, "log_entry.check_data_integrity()=>%d", err);
         }
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160530:b
         else if(log_entry.header_.max_cmt_id_ > master_cmt_log_id)
         {
           master_cmt_log_id = log_entry.header_.max_cmt_id_;
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         if (OB_SUCCESS != err)
         {}
@@ -1105,7 +1055,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
 
     //add lbzhong [Commit Point] 20150820:b
     int trim_log_buffer(const int64_t offset, const int64_t align_bits,
@@ -1622,7 +1571,5 @@ namespace oceanbase
       return err;
     }
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace updateserver
 } // end namespace oceanbase

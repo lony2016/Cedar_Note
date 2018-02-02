@@ -46,15 +46,9 @@ int ObLogWriter::init(const char* log_dir, const int64_t log_file_max_size, ObSl
     TBSYS_LOG(ERROR, "Parameter are invalid[log_dir=%p slave_mgr=%p]", log_dir, slave_mgr);
     ret = OB_INVALID_ARGUMENT;
   }
-<<<<<<< HEAD
   else if (OB_SUCCESS != (ret = log_generator_.init(OB_MAX_LOG_BUFFER_SIZE, log_file_max_size, server)))
   {
     TBSYS_LOG(ERROR, "log_generator.init(buf_size=%ld, file_limit=%ld)=>%d", OB_MAX_LOG_BUFFER_SIZE, log_file_max_size, ret);
-=======
-  else if (OB_SUCCESS != (ret = log_generator_.init(LOG_BUFFER_SIZE, log_file_max_size, server)))
-  {
-    TBSYS_LOG(ERROR, "log_generator.init(buf_size=%ld, file_limit=%ld)=>%d", LOG_BUFFER_SIZE, log_file_max_size, ret);
->>>>>>> refs/remotes/origin/master
   }
   else if (OB_SUCCESS != (ret = log_writer_.init(log_dir, log_file_max_size, du_percent, log_sync_type, fufid_getter)))
   {
@@ -146,7 +140,6 @@ int ObLogWriter::write_log(const LogCommand cmd, const char* log_data, const int
   return ret;
 }
 
-<<<<<<< HEAD
 //add chujiajia [log synchronization][multi_cluster] 20160328:b
 int ObLogWriter::write_log(const LogCommand cmd, const char* log_data, const int64_t data_len, const int64_t max_cmt_id)
 {
@@ -165,8 +158,6 @@ int ObLogWriter::write_log(const LogCommand cmd, const char* log_data, const int
 }
 //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 inline int64_t get_align_padding_size(const int64_t x, const int64_t mask)
 {
   return -x & mask;
@@ -180,7 +171,6 @@ int64_t ObLogWriter::to_string(char* buf, const int64_t len) const
   return pos;
 }
 
-<<<<<<< HEAD
 //modify chujiajia [log synchronization][multi_cluster] 20160328:b
 //int ObLogWriter::write_keep_alive_log()
 int ObLogWriter::write_keep_alive_log(const bool is_ups_nop, const int64_t max_cmt_id)
@@ -191,12 +181,6 @@ int ObLogWriter::write_keep_alive_log(const bool is_ups_nop, const int64_t max_c
   //if (OB_SUCCESS != (err = log_generator_.gen_keep_alive()))
   if (OB_SUCCESS != (err = log_generator_.gen_keep_alive(is_ups_nop, max_cmt_id)))
   //modify:e
-=======
-int ObLogWriter::write_keep_alive_log()
-{
-  int err = OB_SUCCESS;
-  if (OB_SUCCESS != (err = log_generator_.gen_keep_alive()))
->>>>>>> refs/remotes/origin/master
   {
     TBSYS_LOG(ERROR, "write_keep_alive_log()=>%d", err);
   }
@@ -232,14 +216,10 @@ int ObLogWriter::async_flush_log(int64_t& end_log_id, TraceLog::LogBuffer &tlog_
   {
     TBSYS_LOG(ERROR, "check_inner_stat()=>%d", ret);
   }
-<<<<<<< HEAD
   //modify chujiajia [log synchronization][multi_cluster] 20160328:b
   //else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len)))
   else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len, get_flushed_clog_id_without_update())))
   //modify:e
-=======
-  else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len)))
->>>>>>> refs/remotes/origin/master
   {
     TBSYS_LOG(ERROR, "log_generator.get_log()=>%d", ret);
   }
@@ -279,24 +259,14 @@ int ObLogWriter::async_flush_log(int64_t& end_log_id, TraceLog::LogBuffer &tlog_
                  start_cursor.log_id_, end_cursor.log_id_);
   if (OB_SUCCESS != ret)
   {}
-<<<<<<< HEAD
   else if (OB_SUCCESS != (ret = write_log_hook(true, start_cursor, end_cursor, buf, len)))
   {
     TBSYS_LOG(ERROR, "write_log_hook(log_id=[%ld,%ld))=>%d", start_cursor.log_id_, end_cursor.log_id_, ret);
   }
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = log_generator_.commit(end_cursor)))
   {
     TBSYS_LOG(ERROR, "log_generator.commit(end_cursor=%s)", to_cstring(end_cursor));
   }
-<<<<<<< HEAD
-=======
-  else if (OB_SUCCESS != (ret = write_log_hook(true, start_cursor, end_cursor, buf, len)))
-  {
-    TBSYS_LOG(ERROR, "write_log_hook(log_id=[%ld,%ld))=>%d", start_cursor.log_id_, end_cursor.log_id_, ret);
-  }
->>>>>>> refs/remotes/origin/master
   else if (len > 0)
   {
     last_flush_log_time_ = tbsys::CTimeUtil::getTime();
@@ -317,14 +287,10 @@ int ObLogWriter::flush_log(TraceLog::LogBuffer &tlog_buffer, const bool sync_to_
   {
     TBSYS_LOG(ERROR, "check_inner_stat()=>%d", ret);
   }
-<<<<<<< HEAD
   //modify chujiajia [log synchronization][multi_cluster] 20160328:b
   //else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len)))
   else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len, get_flushed_clog_id_without_update())))
   //modify:e
-=======
-  else if (OB_SUCCESS != (ret = log_generator_.get_log(start_cursor, end_cursor, buf, len)))
->>>>>>> refs/remotes/origin/master
   {
     TBSYS_LOG(ERROR, "log_generator.get_log()=>%d", ret);
   }
@@ -377,24 +343,14 @@ int ObLogWriter::flush_log(TraceLog::LogBuffer &tlog_buffer, const bool sync_to_
                  start_cursor.log_id_, end_cursor.log_id_);
   if (OB_SUCCESS != ret)
   {}
-<<<<<<< HEAD
   else if (OB_SUCCESS != (ret = write_log_hook(is_master, start_cursor, end_cursor, buf, len)))
   {
     TBSYS_LOG(ERROR, "write_log_hook(log_id=[%ld,%ld))=>%d", start_cursor.log_id_, end_cursor.log_id_, ret);
   }
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = log_generator_.commit(end_cursor)))
   {
     TBSYS_LOG(ERROR, "log_generator.commit(end_cursor=%s)", to_cstring(end_cursor));
   }
-<<<<<<< HEAD
-=======
-  else if (OB_SUCCESS != (ret = write_log_hook(is_master, start_cursor, end_cursor, buf, len)))
-  {
-    TBSYS_LOG(ERROR, "write_log_hook(log_id=[%ld,%ld))=>%d", start_cursor.log_id_, end_cursor.log_id_, ret);
-  }
->>>>>>> refs/remotes/origin/master
   else if (len > 0)
   {
     last_flush_log_time_ = tbsys::CTimeUtil::getTime();
@@ -415,14 +371,10 @@ int ObLogWriter::write_and_flush_log(const LogCommand cmd, const char* log_data,
     ret = OB_LOG_NOT_CLEAR;
     TBSYS_LOG(ERROR, "log_buffer not empty.");
   }
-<<<<<<< HEAD
   //modify chujiajia [log synchronization][multi_cluster] 20160627:b
   //else if (OB_SUCCESS != (ret = write_log(cmd, log_data, data_len)))
   else if (OB_SUCCESS != (ret = write_log(cmd, log_data, data_len, get_flushed_clog_id_without_update())))
   //modify:e
-=======
-  else if (OB_SUCCESS != (ret = write_log(cmd, log_data, data_len)))
->>>>>>> refs/remotes/origin/master
   {
     TBSYS_LOG(ERROR, "write_log(cmd=%d, log_data=%p[%ld])", cmd, log_data, data_len);
   }

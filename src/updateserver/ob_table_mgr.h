@@ -46,10 +46,7 @@
 #include "common/ob_iterator_adaptor.h"
 #include "common/ob_resource_pool.h"
 #include "common/ob_log_writer.h"
-<<<<<<< HEAD
 #include "common/ob_log_writer3.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/btree/key_btree.h"
 #include "sstable/ob_sstable_row.h"
 #include "sstable/ob_sstable_block_builder.h"
@@ -57,10 +54,7 @@
 #include "sstable/ob_sstable_reader.h"
 #include "sstable/ob_sstable_scanner.h"
 #include "sstable/ob_sstable_getter.h"
-<<<<<<< HEAD
 #include "sstable/ob_sstable_schema.h" /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_ups_utils.h"
 #include "ob_sstable_mgr.h"
 #include "common/ob_column_filter.h"
@@ -317,10 +311,7 @@ namespace oceanbase
         virtual void ref();
         virtual void deref();
         virtual TableType get_table_type();
-<<<<<<< HEAD
         int get_table_truncate_stat(uint64_t table_id, bool &is_truncated); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         MemTable &get_memtable();
       private:
         MemTable memtable_;
@@ -372,10 +363,7 @@ namespace oceanbase
         void pre_load_sstable_block_index();
         int get_endkey(const uint64_t table_id, common::ObTabletInfo &ci);
         bool check_sstable_checksum(const uint64_t remote_sstable_checksum);
-<<<<<<< HEAD
         int is_table_truncated(uint64_t table_id, bool &is_truncated); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
       private:
         uint64_t sstable_id_;
         common::ModulePageAllocator mod_;
@@ -407,10 +395,7 @@ namespace oceanbase
         ~TableItem();
       public:
         ITableEntity *get_table_entity(int64_t &sstable_percent, uint64_t table_id=OB_INVALID_ID);
-<<<<<<< HEAD
         int get_table_truncate_stat(uint64_t table_id, bool &is_truncated); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         MemTable &get_memtable();
         MemTable &get_inmemtable();
         int init_sstable_meta();
@@ -483,11 +468,7 @@ namespace oceanbase
           MAJOR_LOAD_BYPASS = 4,
         };
       public:
-<<<<<<< HEAD
         TableMgr(common::ObLogWriterV3/*ObILogWriter*/ &log_writer);//modify by zhouhuan [scalablecommit] 20160510
-=======
-        TableMgr(common::ObILogWriter &log_writer);
->>>>>>> refs/remotes/origin/master
         ~TableMgr();
       public:
         virtual int add_sstable(const uint64_t sstable_id);
@@ -498,14 +479,10 @@ namespace oceanbase
 
         // 在播放日志完成后调用
         int sstable_scan_finished(const int64_t minor_num_limit);
-<<<<<<< HEAD
         // 根据truncate info修正版本号范围
         int check_table_range(const common::ObVersionRange &version_range,
                           common::ObVersionRange &new_version_range,
                           uint64_t table_id=OB_INVALID_ID); /*add hxlong [Truncate Table]:20170318*/
-=======
-
->>>>>>> refs/remotes/origin/master
         // 根据版本号范围获取一组table entity
         int acquire_table(const common::ObVersionRange &version_range,
                           uint64_t &max_version,
@@ -599,12 +576,8 @@ namespace oceanbase
                                   const int64_t minor_version);
         bool less_than(const TableItemKey *v, const TableItemKey *t, int exclusive_equal);
       private:
-<<<<<<< HEAD
         //common::ObILogWriter &log_writer_;
         ObLogWriterV3 &log_writer_;
-=======
-        common::ObILogWriter &log_writer_;
->>>>>>> refs/remotes/origin/master
         bool inited_;
         bool sstable_scan_finished_;
         TableItemAllocator table_allocator_;

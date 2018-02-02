@@ -1,18 +1,10 @@
 AM_CPPFLAGS= -I${TBLIB_ROOT}/include/tbsys \
-<<<<<<< HEAD
 			 -I${ONEV_ROOT}/include/onev \
-=======
-			 -I${EASY_ROOT}/include/easy \
->>>>>>> refs/remotes/origin/master
 			 -I${top_srcdir}/include \
 			 -I${top_srcdir}/src \
 			 -fPIC
 
-<<<<<<< HEAD
 LDADD = ${ONEV_LIB_PATH}/libonev.a \
-=======
-LDADD = ${EASY_LIB_PATH}/libeasy.a \
->>>>>>> refs/remotes/origin/master
 				${TBLIB_ROOT}/lib/libtbsys.a \
 	${top_srcdir}/src/sql/libsql.a \
 	${top_srcdir}/src/common/libcommon.a

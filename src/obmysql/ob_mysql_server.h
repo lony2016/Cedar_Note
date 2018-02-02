@@ -19,21 +19,13 @@
 
 #include "ob_mysql_packet_queue_handler.h"
 #include "common/thread_buffer.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_mysql_loginer.h"
 #include "ob_mysql_command_queue_thread.h"
 #include "sql/ob_sql_session_info.h"
 #include "common/ob_define.h"
 #include "ob_mysql_callback.h"
-<<<<<<< HEAD
 #include "onev_io.h"
-=======
-#include "easy_io.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_mysql_define.h"
 #include "ob_mysql_result_set.h"
 #include "ob_mysql_util.h"
@@ -63,10 +55,7 @@ namespace oceanbase
     class ObMergerRpcProxy;
     class ObMergerRootRpcProxy;
     class ObMergerAsyncRpcStub;
-<<<<<<< HEAD
     class ObSemiJoinTaskQueueThread;//add wanglei [semi join multi thread] 20170417
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace mergeserver
 
   namespace obmysql
@@ -88,11 +77,7 @@ namespace oceanbase
           common::ObPrivilegeManager *privilege_mgr_;
           const mergeserver::ObMergeServerService *merge_service_;
           common::ObStatManager *stat_mgr_;
-<<<<<<< HEAD
           mergeserver::ObSemiJoinTaskQueueThread *semi_join_task_queue_;//add wanglei [semi join multi thread] 20170417
-=======
-
->>>>>>> refs/remotes/origin/master
           MergeServerEnv():
             rpc_proxy_(NULL),
             root_rpc_(NULL),
@@ -101,12 +86,8 @@ namespace oceanbase
             cache_proxy_(NULL),
             privilege_mgr_(NULL),
             merge_service_(NULL),
-<<<<<<< HEAD
             stat_mgr_(NULL),
             semi_join_task_queue_(NULL)//add wanglei [semi join multi thread] 20170417
-=======
-            stat_mgr_(NULL)
->>>>>>> refs/remotes/origin/master
           {
           }
         };
@@ -124,11 +105,7 @@ namespace oceanbase
          * @return    return OB_SUCCESS if encode successful
          *            else return OB_ERROR
          */
-<<<<<<< HEAD
         int post_packet(onev_request_e* req, ObMySQLPacket* packet, uint8_t seq);
-=======
-        int post_packet(easy_request_t* req, ObMySQLPacket* packet, uint8_t seq);
->>>>>>> refs/remotes/origin/master
         int get_privilege(ObPrivilege * p_privilege);
         int load_system_params(sql::ObSQLSessionInfo& session);
         common::DefaultBlockAllocator* get_block_allocator();
@@ -137,11 +114,7 @@ namespace oceanbase
          * This function called by on_connect to handle client login
          *
          */
-<<<<<<< HEAD
         int login_handler(onev_connection_e* c);
-=======
-        int login_handler(easy_connection_t* c);
->>>>>>> refs/remotes/origin/master
 
         int handle_packet(ObMySQLCommandPacket* packet);
 
@@ -327,15 +300,11 @@ namespace oceanbase
          *                else return OB_ERROR
          */
         int send_response(ObMySQLCommandPacket* packet, ObMySQLResultSet* result,
-<<<<<<< HEAD
                           MYSQL_PROTOCOL_TYPE type, sql::ObSQLSessionInfo *session
                           //add lbzhong [auto_increment] 20161130:b
                           , const bool need_response  = true
                           //add:e
                           );
-=======
-                          MYSQL_PROTOCOL_TYPE type, sql::ObSQLSessionInfo *session);
->>>>>>> refs/remotes/origin/master
 
         /**
          * Parse result set and send COM_STMT_PREPARE_RESPONSE
@@ -415,11 +384,7 @@ namespace oceanbase
          * @return   int    OB_SUCCESS if send successful
          *                  else return OB_ERROR
          */
-<<<<<<< HEAD
         int send_result_set(onev_request_e *req, ObMySQLResultSet *result,
-=======
-        int send_result_set(easy_request_t *req, ObMySQLResultSet *result,
->>>>>>> refs/remotes/origin/master
                             MYSQL_PROTOCOL_TYPE type, uint16_t server_status, uint16_t charset);
 
         /**
@@ -442,25 +407,16 @@ namespace oceanbase
          * @return   int   OB_SUCCESS if send successful
          *                 else return OB_ERROR
          */
-<<<<<<< HEAD
         int send_raw_packet(onev_request_e *req);
 
         /**
          * 异步发送已经链接到req->output上的数据
          * 包全部序列化到libonev message的buffer里
-=======
-        int send_raw_packet(easy_request_t *req);
-
-        /**
-         * 异步发送已经链接到req->output上的数据
-         * 包全部序列化到libeasy message的buffer里
->>>>>>> refs/remotes/origin/master
          * @param    req   request pointer
          *
          * @return   int   OB_SUCCESS if send successful
          *                 else return OB_ERROR
          */
-<<<<<<< HEAD
         int post_raw_packet(onev_request_e *req);
 
         int post_raw_bytes(onev_request_e * req, const char * bytes, int64_t len);
@@ -473,20 +429,6 @@ namespace oceanbase
                                   onev_request_e *req, ObMySQLResultSet *result, bool is_field, uint16_t charset);
         int process_eof_packet(onev_buf_e *&buff, int64_t &buff_pos,
                                onev_request_e *req, ObMySQLResultSet *result, uint16_t server_status);
-=======
-        int post_raw_packet(easy_request_t *req);
-
-        int post_raw_bytes(easy_request_t * req, const char * bytes, int64_t len);
-
-        int process_spr_packet(easy_buf_t *&buff, int64_t &buff_pos,
-                               easy_request_t *req, ObMySQLResultSet *result);
-        int process_resheader_packet(easy_buf_t *&buff, int64_t &buff_pos,
-                                     easy_request_t *req, ObMySQLResultSet *result);
-        int process_field_packets(easy_buf_t *&buff, int64_t &buff_pos,
-                                  easy_request_t *req, ObMySQLResultSet *result, bool is_field, uint16_t charset);
-        int process_eof_packet(easy_buf_t *&buff, int64_t &buff_pos,
-                               easy_request_t *req, ObMySQLResultSet *result, uint16_t server_status);
->>>>>>> refs/remotes/origin/master
 
         /**
          * Send field/params packets as response
@@ -501,13 +443,8 @@ namespace oceanbase
          * @return int        return OB_SUCCESS if send error packet successful
          *                                      else return OB_ERROR/OB_INVALID_ARGUMENT
          */
-<<<<<<< HEAD
         int process_row_packets(onev_buf_e *&buff, int64_t &buff_pos,
                                 onev_request_e *req, ObMySQLResultSet *result, MYSQL_PROTOCOL_TYPE type);
-=======
-        int process_row_packets(easy_buf_t *&buff, int64_t &buff_pos,
-                                easy_request_t *req, ObMySQLResultSet *result, MYSQL_PROTOCOL_TYPE type);
->>>>>>> refs/remotes/origin/master
 
         /**
          * 处理结果集中的单个数据包
@@ -517,11 +454,7 @@ namespace oceanbase
          * @param req                req pointer
          * @param packet             待发送的数据包
          */
-<<<<<<< HEAD
         int process_single_packet(onev_buf_e *&buff, int64_t &buff_pos, onev_request_e *req, ObMySQLPacket *packet);
-=======
-        int process_single_packet(easy_buf_t *&buff, int64_t &buff_pos, easy_request_t *req, ObMySQLPacket *packet);
->>>>>>> refs/remotes/origin/master
         //end of 优化发送结果集
 
         int access_cache(ObMySQLCommandPacket * packet, uint32_t stmt_id,
@@ -529,11 +462,7 @@ namespace oceanbase
 
         int fill_cache();
         int store_query_string(const ObMySQLCommandPacket& packet, ObSqlContext &context);
-<<<<<<< HEAD
         inline void wait_client_obj(onev_client_wait_e& client_wait)
-=======
-        inline void wait_client_obj(easy_client_wait_t& client_wait)
->>>>>>> refs/remotes/origin/master
         {
           pthread_mutex_lock(&client_wait.mutex);
           if (client_wait.done_count == 0)
@@ -560,11 +489,7 @@ namespace oceanbase
           return ret;
         }
 
-<<<<<<< HEAD
         inline int check_req(onev_request_e *req)
-=======
-        inline int check_req(easy_request_t *req)
->>>>>>> refs/remotes/origin/master
         {
           int ret = OB_ERROR;
           if (OB_LIKELY(NULL != req && NULL != req->ms
@@ -577,11 +502,7 @@ namespace oceanbase
 
         int trans_exe_command_with_type(ObSqlContext* context, ObMySQLCommandPacket* packet, char* buf, int32_t &len, bool &trans_flag);
 
-<<<<<<< HEAD
         static void onev_on_ioth_start(void *arg)
-=======
-        static void easy_on_ioth_start(void *arg)
->>>>>>> refs/remotes/origin/master
         {
           if (arg != NULL)
           {
@@ -607,15 +528,12 @@ namespace oceanbase
                       GETTID(), ret, local_cpu, affinity_start_cpu, affinity_end_cpu);
           }
         }
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161130:b
         int load_auto_value_and_retry(const common::ObString& q,
                                       ObMySQLResultSet &result,
                                       ObSqlContext &context,
                                       ObMySQLCommandPacket*& packet, int &err);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 
       private:
@@ -641,15 +559,9 @@ namespace oceanbase
         ObMySQLCommandQueueThread close_command_queue_thread_;
 
 
-<<<<<<< HEAD
         //libonev stuff
         onev_io_e* eio_;
         onev_io_handler_pe handler_;
-=======
-        //libeasy stuff
-        easy_io_t* eio_;
-        easy_io_handler_pt handler_;
->>>>>>> refs/remotes/origin/master
 
         // environment of mergeserver
         MergeServerEnv env_;

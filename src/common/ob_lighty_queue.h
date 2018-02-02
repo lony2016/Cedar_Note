@@ -24,11 +24,7 @@ namespace oceanbase
   namespace common
   {
     struct LightyQueueItem;
-<<<<<<< HEAD
     class LightyQueue//slwang note:?
-=======
-    class LightyQueue
->>>>>>> refs/remotes/origin/master
     {
       typedef LightyQueueItem Item;
       public:

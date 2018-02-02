@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_27
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2011 Taobao Inc.
  *

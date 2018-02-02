@@ -207,12 +207,9 @@ int64_t ObAlterTable::to_string(char* buf, const int64_t buf_len) const
         databuff_printf(buf, buf_len, pos, "data_length_=%ld, ", alt_col.column_.data_length_);
         databuff_printf(buf, buf_len, pos, "data_precision=%ld, ", alt_col.column_.data_precision_);
         databuff_printf(buf, buf_len, pos, "nullable=%s, ", alt_col.column_.nullable_ ? "TRUE" : "FALSE");
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161123:b
         databuff_printf(buf, buf_len, pos, "auto_increment=%s, ", alt_col.column_.auto_increment_ ? "TRUE" : "FALSE");
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         databuff_printf(buf, buf_len, pos, "length_in_rowkey=%ld, ", alt_col.column_.length_in_rowkey_);
         databuff_printf(buf, buf_len, pos, "gm_create=%ld, ", alt_col.column_.gm_create_);
         databuff_printf(buf, buf_len, pos, "gm_modify=%ld)", alt_col.column_.gm_modify_);

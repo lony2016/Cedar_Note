@@ -111,17 +111,12 @@ namespace oceanbase
 
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         //mod longfei 151217:b
         //ObSSTableScanner *sstable_scanner =
         //  GET_TSI_MULT(ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
         sstable::ObSSTableScanner *sstable_scanner =
           GET_TSI_MULT(sstable::ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
         //mod e
-=======
-        ObSSTableScanner *sstable_scanner = 
-          GET_TSI_MULT(ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
->>>>>>> refs/remotes/origin/master
         if (NULL == sstable_scanner)
         {
           TBSYS_LOG(ERROR, "failed to get thread local sstable scanner, "

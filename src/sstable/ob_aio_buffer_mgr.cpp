@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -2423,7 +2420,6 @@ namespace oceanbase
       return buffer;
     }
 
-<<<<<<< HEAD
     //add wenghaixing [secondary index static_index_build]20150804
     void ObThreadAIOBufferMgrArray::reset()
     {
@@ -2437,8 +2433,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int wait_aio_buffer()
     {
       int ret = OB_SUCCESS;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2015 ECNU_DaSE.
  *
@@ -28,10 +27,6 @@
 #include "rootserver/ob_root_worker.h"
 #include "rootserver/ob_root_rpc_stub.h"
 #include "rootserver/ob_root_admin_cmd.h"
-=======
-#include "rootserver/ob_root_worker.h"
-#include "rootserver/ob_root_rpc_stub.h"
->>>>>>> refs/remotes/origin/master
 #include "common/ob_schema.h"
 #include "common/ob_define.h"
 #include "sql/ob_sql_result_set.h"
@@ -121,7 +116,6 @@ int ObRootRpcStub::slave_register(const ObServer& master, const ObServer& slave_
   return err;
 }
 
-<<<<<<< HEAD
 // add by zcd [multi_cluster] 20150405:b
 // ���ñ�rs�Ľ�ɫ��Զ�̵���
 int ObRootRpcStub::set_slave_obi_role(const ObServer& slave, const common::ObiRole &role, const int64_t timeout)
@@ -336,8 +330,6 @@ int ObRootRpcStub::statistic_signal_to_cs(const ObServer &cs, ObArray<uint64_t> 
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObRootRpcStub::get_thread_buffer_(common::ObDataBuffer& data_buffer)
 {
   int ret = OB_SUCCESS;
@@ -411,7 +403,6 @@ int ObRootRpcStub::get_row_checksum(const common::ObServer& server, const int64_
   return ret;
 }
 
-<<<<<<< HEAD
 // add by zcd [multi_cluster] 20150405:b
 // Զ����������server��config��Ϣ�ĵ��ù���
 int ObRootRpcStub::set_config(const common::ObServer& server, const ObString& config_str, int64_t timeout_us)
@@ -454,8 +445,6 @@ int ObRootRpcStub::set_config(const common::ObServer& server, const ObString& co
 }
 // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObRootRpcStub::set_obi_role(const common::ObServer& ups, const common::ObiRole& role, const int64_t timeout_us)
 {
   int ret = OB_SUCCESS;
@@ -505,7 +494,6 @@ int ObRootRpcStub::switch_schema(const common::ObServer& server, const common::O
     TBSYS_LOG(ERROR, "client_mgr_=NULL");
     ret = OB_ERROR;
   }
-<<<<<<< HEAD
   else if (OB_SUCCESS != (ret = get_thread_buffer_(msgbuf)))
   {
     TBSYS_LOG(ERROR, "failed to get thread buffer, err=%d", ret);
@@ -715,17 +703,6 @@ int ObRootRpcStub::truncate_table(const common::ObServer& server, const common::
     TBSYS_LOG(ERROR, "failed to serialize, err=%d", ret);
   }
   else if (OB_SUCCESS != (ret = client_mgr_->send_request(server, OB_TRUNCATE_TABLE, DEFAULT_VERSION, timeout_us, data_buff)))
-=======
-  else if (OB_SUCCESS != (ret = get_thread_buffer_(msgbuf)))
-  {
-    TBSYS_LOG(ERROR, "failed to get thread buffer, err=%d", ret);
-  }
-  else if (OB_SUCCESS != (ret = schema_manager.serialize(msgbuf.get_data(), msgbuf.get_capacity(), msgbuf.get_position())))
-  {
-    TBSYS_LOG(ERROR, "failed to serialize schema, err=%d", ret);
-  }
-  else if (OB_SUCCESS != (ret = client_mgr_->send_request(server, OB_SWITCH_SCHEMA, DEFAULT_VERSION, timeout_us, msgbuf)))
->>>>>>> refs/remotes/origin/master
   {
     TBSYS_LOG(WARN, "failed to send request, err=%d", ret);
   }
@@ -733,38 +710,23 @@ int ObRootRpcStub::truncate_table(const common::ObServer& server, const common::
   {
     ObResultCode result;
     int64_t pos = 0;
-<<<<<<< HEAD
     if (OB_SUCCESS != (ret = result.deserialize(data_buff.get_data(), data_buff.get_position(), pos)))
-=======
-    if (OB_SUCCESS != (ret = result.deserialize(msgbuf.get_data(), msgbuf.get_position(), pos)))
->>>>>>> refs/remotes/origin/master
     {
       TBSYS_LOG(ERROR, "failed to deserialize response, err=%d", ret);
     }
     else if (OB_SUCCESS != result.result_code_)
     {
-<<<<<<< HEAD
       TBSYS_LOG(WARN, "failed to send truncate tables, err=%d", result.result_code_);
-=======
-      TBSYS_LOG(WARN, "failed to switch schema, err=%d", result.result_code_);
->>>>>>> refs/remotes/origin/master
       ret = result.result_code_;
     }
     else
     {
-<<<<<<< HEAD
       TBSYS_LOG(INFO, "send truncate_table_msg, server=%s ",to_cstring(server));
-=======
-      TBSYS_LOG(INFO, "send switch_schema, server=%s schema_version=%ld", to_cstring(server), schema_manager.get_version());
->>>>>>> refs/remotes/origin/master
     }
   }
   return ret;
 }
-<<<<<<< HEAD
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 int ObRootRpcStub::migrate_tablet(const common::ObServer& dest_server, const common::ObDataSourceDesc& desc, const int64_t timeout_us)
 {
@@ -1066,7 +1028,6 @@ int ObRootRpcStub::heartbeat_to_cs(const common::ObServer& cs, const int64_t lea
   return ret;
 }
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static_index]20151130
 int ObRootRpcStub::heartbeat_to_cs_with_index(const ObServer &cs, const int64_t lease_time, const int64_t frozen_mem_version,
                                               const int64_t schema_version, const int64_t config_version, const IndexBeat &beat)
@@ -1118,10 +1079,6 @@ int ObRootRpcStub::heartbeat_to_cs_with_index(const ObServer &cs, const int64_t 
 int ObRootRpcStub::heartbeat_to_ms(const common::ObServer& ms, const int64_t lease_time, const int64_t frozen_mem_version,
                                    const int64_t schema_version, const common::ObiRole &role, const int64_t privilege_version,
                                    const int64_t config_version, const int64_t procedure_version, const bool all_ups_state)
-=======
-int ObRootRpcStub::heartbeat_to_ms(const common::ObServer& ms, const int64_t lease_time, const int64_t frozen_mem_version,
-    const int64_t schema_version, const common::ObiRole &role, const int64_t privilege_version, const int64_t config_version)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   ObDataBuffer msgbuf;
@@ -1160,7 +1117,6 @@ int ObRootRpcStub::heartbeat_to_ms(const common::ObServer& ms, const int64_t lea
   {
     TBSYS_LOG(ERROR, "failed to serialize config_version, err=%d", ret);
   }
-<<<<<<< HEAD
   else if (OB_SUCCESS != (ret = common::serialization::encode_vi64(msgbuf.get_data(), msgbuf.get_capacity(), msgbuf.get_position(), procedure_version)))
   {
     TBSYS_LOG(ERROR, "failed to serialize procedure_version, err=%d", ret);
@@ -1171,8 +1127,6 @@ int ObRootRpcStub::heartbeat_to_ms(const common::ObServer& ms, const int64_t lea
     TBSYS_LOG(ERROR, "failed to serialize all_ups_state, err=%d", ret);
   }
   //add :e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = client_mgr_->post_request(ms, OB_REQUIRE_HEARTBEAT, MY_VERSION, msgbuf)))
   {
     TBSYS_LOG(WARN, "failed to send request, err=%d", ret);
@@ -1331,7 +1285,6 @@ int ObRootRpcStub::get_ups_max_log_seq(const common::ObServer& ups, uint64_t &ma
   return ret;
 }
 
-<<<<<<< HEAD
 // add by guojinwei [log timestamp][multi_cluster] 20150820:b
 // get max log timestamp from ups
 int ObRootRpcStub::get_ups_max_log_timestamp(const common::ObServer& ups, int64_t &max_log_timestamp, const int64_t timeout_us)
@@ -1379,8 +1332,6 @@ int ObRootRpcStub::get_ups_max_log_timestamp(const common::ObServer& ups, int64_
 }
 // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObRootRpcStub::shutdown_cs(const common::ObServer& cs, bool is_restart, const int64_t timeout_us)
 {
   int ret = OB_SUCCESS;
@@ -2288,7 +2239,6 @@ int ObRootRpcStub::fetch_slave_cluster_list(const common::ObServer& ms,
   return ret;
 }
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static_index]20151118
 int ObRootRpcStub::get_init_index_from_ups(const ObServer ups, const int64_t timeout, const int64_t data_version, ObArray<uint64_t> *list)
 {
@@ -2358,8 +2308,6 @@ int ObRootRpcStub::get_init_index_from_ups(const ObServer ups, const int64_t tim
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObRootRpcStub::fill_slave_cluster_list(ObNewScanner& scanner, const ObServer& master_rs,
     ObServer* slave_cluster_rs, int64_t& rs_count)
 {
@@ -2675,7 +2623,6 @@ int ObRootRpcStub::notify_switch_schema(const common::ObServer& rs, const int64_
   return ret;
 }
 
-<<<<<<< HEAD
 // add by chujiajia [rs_election][multi_cluster] 20150823:b
 int ObRootRpcStub::rs_election(const common::ObServer &root_server, const ObMsgRsElection &msg_rselection, char info[], const int64_t timeout_rs)
 {
@@ -2825,5 +2772,3 @@ int ObRootRpcStub::get_ups_election_ready(const common::ObServer& ups, const int
   return ret;
 }
 // add:e
-=======
->>>>>>> refs/remotes/origin/master

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -28,8 +27,6 @@
  */
 
 /** 
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -61,7 +58,6 @@
 #include "common/ob_string_buf.h"
 #include "common/utility.h"
 #include "common/ob_hint.h"
-<<<<<<< HEAD
 //add wangjiahao [table lock] 20160616 :b
 #include "ob_lock_table_stmt.h"
 //add :e
@@ -74,10 +70,6 @@
 #include "common/ob_row_desc.h"
 //add 20170726:e
 
-=======
-#include <stdint.h>
-
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::common;
 using namespace oceanbase::sql;
 
@@ -90,13 +82,9 @@ int resolve_expr(
     ObSqlRawExpr *sql_expr,
     ObRawExpr*& expr,
     int32_t expr_scope_type = T_NONE_LIMIT,
-<<<<<<< HEAD
     bool sub_query_results_scalar = true,
     ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170608
     );
-=======
-    bool sub_query_results_scalar = true);
->>>>>>> refs/remotes/origin/master
 int resolve_agg_func(
     ResultPlan * result_plan,
     ObSelectStmt* select_stmt,
@@ -122,13 +110,9 @@ int resolve_select_clause(
 int resolve_where_clause(
     ResultPlan * result_plan,
     ObStmt* stmt,
-<<<<<<< HEAD
     ParseNode* node,
     ObStmt* super_stmt = NULL//add slwang [exists related subquery] 20170604
     );
-=======
-    ParseNode* node);
->>>>>>> refs/remotes/origin/master
 int resolve_group_clause(
     ResultPlan * result_plan,
     ObSelectStmt* select_stmt,
@@ -161,7 +145,6 @@ int resolve_hints(
     ResultPlan * result_plan,
     ObStmt* stmt,
     ParseNode* node);
-<<<<<<< HEAD
 // add longfei
 /**
  * @brief generate_index_hint: for resolve index hint
@@ -175,8 +158,6 @@ int generate_index_hint(
     ObStmt* stmt,
     ParseNode* hint_node);
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_when_clause(
     ResultPlan * result_plan,
     ObStmt* stmt,
@@ -190,7 +171,6 @@ ObSqlRawExpr* create_middle_sql_raw_expr(
     ResultPlan& result_plan,
     ParseNode& node,
     uint64_t& expr_id);
-<<<<<<< HEAD
 //add by yusj [SEMI_JOIN] 20150819
 int resolve_semi_join(
 		ResultPlan * result_plan,
@@ -211,9 +191,6 @@ int generate_join_hint(
     ObStmt* stmt,
     ParseNode* hint_node);
 /*add e*/
-=======
-
->>>>>>> refs/remotes/origin/master
 static int add_all_rowkey_columns_to_stmt(ResultPlan* result_plan, uint64_t table_id, ObStmt *stmt)
 {
   int ret = OB_SUCCESS;
@@ -289,13 +266,9 @@ int resolve_independ_expr(
   ObStmt* stmt,
   ParseNode* node,
   uint64_t& expr_id,
-<<<<<<< HEAD
   int32_t expr_scope_type,
   ObStmt* super_stmt//add slwang [exists related subquery] 20170606
   )
-=======
-  int32_t expr_scope_type)
->>>>>>> refs/remotes/origin/master
 {
   int& ret = result_plan->err_stat_.err_code_ = OB_SUCCESS;
   if (node)
@@ -322,14 +295,10 @@ int resolve_independ_expr(
     {
       expr_id = logical_plan->generate_expr_id();
       sql_expr->set_expr_id(expr_id);
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170608:b
       //ret = resolve_expr(result_plan, stmt, node, sql_expr, expr, expr_scope_type);
       ret = resolve_expr(result_plan, stmt, node, sql_expr, expr, expr_scope_type, true, super_stmt);
       //modify 20170608:e
-=======
-      ret = resolve_expr(result_plan, stmt, node, sql_expr, expr, expr_scope_type);
->>>>>>> refs/remotes/origin/master
     }
     if (ret == OB_SUCCESS)
     {
@@ -350,7 +319,6 @@ int resolve_independ_expr(
   return ret;
 }
 
-<<<<<<< HEAD
 /**
  * @brief resolve_and_exprs
  * parse and_exprs statement syntax tree
@@ -361,37 +329,26 @@ int resolve_independ_expr(
  * @param expr_scope_type that expressions from different scope have different limit, such as when,insert,etc
  * @return error code
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_and_exprs(
   ResultPlan * result_plan,
   ObStmt* stmt,
   ParseNode* node,
   ObVector<uint64_t>& and_exprs,
-<<<<<<< HEAD
   int32_t expr_scope_type,
   ObStmt* super_stmt//add slwang [exists related subquery] 20170604
   )
 {
   //UNUSED(super_stmt);//add slwang [exists related subquery] 20170604
-=======
-  int32_t expr_scope_type)
-{
->>>>>>> refs/remotes/origin/master
   int& ret = result_plan->err_stat_.err_code_ = OB_SUCCESS;
   if (node)
   {
     if (node->type_ != T_OP_AND)
     {
       uint64_t expr_id = OB_INVALID_ID;
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170608:b
       //ret = resolve_independ_expr(result_plan, stmt, node, expr_id, expr_scope_type);
       ret = resolve_independ_expr(result_plan, stmt, node, expr_id, expr_scope_type, super_stmt);
       //modify 20170608:e
-=======
-      ret = resolve_independ_expr(result_plan, stmt, node, expr_id, expr_scope_type);
->>>>>>> refs/remotes/origin/master
       if (ret == OB_SUCCESS)
       {
         ret = and_exprs.push_back(expr_id);
@@ -402,7 +359,6 @@ int resolve_and_exprs(
     }
     else
     {
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170606:b
       //ret = resolve_and_exprs(result_plan, stmt, node->children_[0], and_exprs, expr_scope_type);
       ret = resolve_and_exprs(result_plan, stmt, node->children_[0], and_exprs, expr_scope_type, super_stmt);
@@ -410,11 +366,6 @@ int resolve_and_exprs(
         //ret = resolve_and_exprs(result_plan, stmt, node->children_[1], and_exprs, expr_scope_type);
         ret = resolve_and_exprs(result_plan, stmt, node->children_[1], and_exprs, expr_scope_type, super_stmt);
       //modify 20170606:e
-=======
-      ret = resolve_and_exprs(result_plan, stmt, node->children_[0], and_exprs, expr_scope_type);
-      if (ret == OB_SUCCESS)
-        ret = resolve_and_exprs(result_plan, stmt, node->children_[1], and_exprs, expr_scope_type);
->>>>>>> refs/remotes/origin/master
     }
   }
   return ret;
@@ -443,7 +394,6 @@ int resolve_and_exprs(
   expr; \
 })
 
-<<<<<<< HEAD
 /**
  * @brief resolve_expr
  * parse expr statement syntax tree
@@ -455,8 +405,6 @@ int resolve_and_exprs(
  * @param sub_query_results_scalar is flag that the extence of sub query results
  * @return error code
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_expr(
   ResultPlan * result_plan,
   ObStmt* stmt,
@@ -464,13 +412,9 @@ int resolve_expr(
   ObSqlRawExpr *sql_expr,
   ObRawExpr*& expr,
   int32_t expr_scope_type,
-<<<<<<< HEAD
   bool sub_query_results_scalar,
   ObStmt* super_stmt//add slwang [exists related subquery] 20170608
   )
-=======
-  bool sub_query_results_scalar)
->>>>>>> refs/remotes/origin/master
 {
   int& ret = result_plan->err_stat_.err_code_ = OB_SUCCESS;
   expr = NULL;
@@ -518,7 +462,6 @@ int resolve_expr(
       ObConstRawExpr *c_expr = NULL;
       if (CREATE_RAW_EXPR(c_expr, ObConstRawExpr, result_plan) == NULL)
         break;
-<<<<<<< HEAD
       c_expr->set_expr_type(node->type_); //here determines the types of the expr
       c_expr->set_result_type(ObVarcharType);
       c_expr->set_value(val);
@@ -551,18 +494,6 @@ int resolve_expr(
       break;
     }
     //add zt 20151125:e
-=======
-      c_expr->set_expr_type(node->type_);
-      c_expr->set_result_type(ObVarcharType);
-      c_expr->set_value(val);
-      expr = c_expr;
-      if (node->type_ == T_TEMP_VARIABLE)
-      {
-        TBSYS_LOG(INFO, "resolve tmp variable, name=%.*s", str.length(), str.ptr());
-      }
-      break;
-    }
->>>>>>> refs/remotes/origin/master
     case T_FLOAT:
     {
       ObObj val;
@@ -589,7 +520,6 @@ int resolve_expr(
       expr = c_expr;
       break;
     }
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL 2016_12
      case T_DECIMAL:
      {
@@ -625,27 +555,6 @@ int resolve_expr(
        break;
      }
        //modify e
-=======
-    case T_DECIMAL: // set as string
-    {
-      ObString str;
-      if (OB_SUCCESS != (ret = ob_write_string(*name_pool, ObString::make_string(node->str_value_), str)))
-      {
-        TBSYS_LOG(WARN, "out of memory");
-        break;
-      }
-      ObObj val;
-      val.set_varchar(str);
-      ObConstRawExpr *c_expr = NULL;
-      if (CREATE_RAW_EXPR(c_expr, ObConstRawExpr, result_plan) == NULL)
-        break;
-      c_expr->set_expr_type(T_DECIMAL);
-      c_expr->set_result_type(ObDecimalType);
-      c_expr->set_value(val);
-      expr = c_expr;
-      break;
-    }
->>>>>>> refs/remotes/origin/master
     case T_INT:
     {
       ObObj val;
@@ -779,14 +688,10 @@ int resolve_expr(
         ColumnItem *column_item = stmt->get_column_item(&table_name, column_name);
         if (!column_item)
         {
-<<<<<<< HEAD
           //modify slwang [exists related subquery] 20170622:b
           //ret = stmt->add_column_item(*result_plan, column_name, &table_name, &column_item);
           ret = stmt->add_column_item(*result_plan, column_name, &table_name, &column_item, super_stmt);
           //modify 20170622:e
-=======
-          ret = stmt->add_column_item(*result_plan, column_name, &table_name, &column_item);
->>>>>>> refs/remotes/origin/master
           if (ret != OB_SUCCESS)
           {
             break;
@@ -800,7 +705,6 @@ int resolve_expr(
         b_expr->set_first_ref_id(column_item->table_id_);
         b_expr->set_second_ref_id(column_item->column_id_);
         expr = b_expr;
-<<<<<<< HEAD
         
         //add by slwang [exists related subquery] 20170726:b
         if(OB_UNLIKELY(super_stmt))
@@ -813,8 +717,6 @@ int resolve_expr(
             }
         }
         //add 20170622:e
-=======
->>>>>>> refs/remotes/origin/master
         sql_expr->get_tables_set().add_member(stmt->get_table_bit_index(column_item->table_id_));
       }
       break;
@@ -989,7 +891,6 @@ int resolve_expr(
       else if (node->type_ == T_OP_NEG && sub_expr->is_const()
         && (sub_expr->get_expr_type() == T_INT
         || sub_expr->get_expr_type() == T_FLOAT
-<<<<<<< HEAD
         || sub_expr->get_expr_type() == T_DOUBLE
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*
@@ -998,9 +899,6 @@ int resolve_expr(
         || sub_expr->get_expr_type() == T_DECIMAL
         //add:e
             ))
-=======
-        || sub_expr->get_expr_type() == T_DOUBLE))
->>>>>>> refs/remotes/origin/master
       {
         ObConstRawExpr *const_expr = dynamic_cast<ObConstRawExpr*>(sub_expr);
         if (const_expr == NULL)
@@ -1045,7 +943,6 @@ int resolve_expr(
             }
             break;
           }
-<<<<<<< HEAD
             //modify xsl ECNU_DECIMAL 2017_2
             //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             /*
@@ -1091,8 +988,6 @@ int resolve_expr(
           }
             //add:e
             //modify:e
-=======
->>>>>>> refs/remotes/origin/master
           default:
           {
             /* won't be here */
@@ -1162,7 +1057,6 @@ int resolve_expr(
     case T_OP_CNN:
     {
       ObRawExpr* sub_expr1 = NULL;
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170622:b
       //ret = resolve_expr(result_plan, stmt, node->children_[0], sql_expr, sub_expr1, expr_scope_type, true);
       ret = resolve_expr(result_plan, stmt, node->children_[0], sql_expr, sub_expr1, expr_scope_type, true, super_stmt);
@@ -1189,15 +1083,6 @@ int resolve_expr(
       //add 20170915:e
 
 
-=======
-      ret = resolve_expr(result_plan, stmt, node->children_[0], sql_expr, sub_expr1, expr_scope_type, true);
-      if (ret != OB_SUCCESS)
-        break;
-      ObRawExpr* sub_expr2 = NULL;
-      ret = resolve_expr(result_plan, stmt, node->children_[1], sql_expr, sub_expr2, expr_scope_type, true);
-      if (ret != OB_SUCCESS)
-        break;
->>>>>>> refs/remotes/origin/master
       ObBinaryOpRawExpr *b_expr = NULL;
       if (CREATE_RAW_EXPR(b_expr, ObBinaryOpRawExpr, result_plan) == NULL)
         break;
@@ -1208,7 +1093,6 @@ int resolve_expr(
       in_type2.set_type(sub_expr2->get_result_type());
       if (node->type_ == T_OP_ADD)
       {
-<<<<<<< HEAD
           //modify  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           //b_expr->set_result_type(ObExprObj::type_add(in_type1, in_type2).get_type()); old code
           b_expr->set_result_type(ObExprObj::type_add_v2(in_type1, in_type2).get_type());
@@ -1234,25 +1118,6 @@ int resolve_expr(
               b_expr->set_result_type(ObExprObj::type_div_v2(in_type1, in_type2, false).get_type());
       }
       //modify e
-=======
-        b_expr->set_result_type(ObExprObj::type_add(in_type1, in_type2).get_type());
-      }
-      else if (node->type_ == T_OP_MINUS)
-      {
-        b_expr->set_result_type(ObExprObj::type_sub(in_type1, in_type2).get_type());
-      }
-      else if (node->type_ == T_OP_MUL)
-      {
-        b_expr->set_result_type(ObExprObj::type_mul(in_type1, in_type2).get_type());
-      }
-      else if (node->type_ == T_OP_DIV)
-      {
-        if (in_type1.get_type() == ObDoubleType || in_type2.get_type() == ObDoubleType)
-          b_expr->set_result_type(ObExprObj::type_div(in_type1, in_type2, true).get_type());
-        else
-          b_expr->set_result_type(ObExprObj::type_div(in_type1, in_type2, false).get_type());
-      }
->>>>>>> refs/remotes/origin/master
       else if (node->type_ == T_OP_REM || node->type_ == T_OP_MOD)
       {
         b_expr->set_result_type(ObExprObj::type_mod(in_type1, in_type2).get_type());
@@ -1376,11 +1241,7 @@ int resolve_expr(
           break;
         }
         default:
-<<<<<<< HEAD
           num_left_param = 1;//slwang note:in左边只有一列的情况下，会在前面set成T_REF_COLOUMN，所以会走到此
-=======
-          num_left_param = 1;
->>>>>>> refs/remotes/origin/master
           break;
       }
 
@@ -1602,14 +1463,10 @@ int resolve_expr(
       }
 
       uint64_t query_id = OB_INVALID_ID;
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170604:b
       //if ((ret = resolve_select_stmt(result_plan, node, query_id)) != OB_SUCCESS)
       if ((ret = resolve_select_stmt(result_plan, node, query_id, stmt)) != OB_SUCCESS)
       //modify 20170604:e
-=======
-      if ((ret = resolve_select_stmt(result_plan, node, query_id)) != OB_SUCCESS)
->>>>>>> refs/remotes/origin/master
         break;
       if (sub_query_results_scalar)
       {
@@ -1683,7 +1540,6 @@ int resolve_expr(
       }
       break;
     }
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*
         *  for cast函数
@@ -1712,8 +1568,6 @@ int resolve_expr(
           break;
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     case T_FUN_COUNT:
     case T_FUN_MAX:
     case T_FUN_MIN:
@@ -1783,7 +1637,6 @@ int resolve_expr(
             break;
           if (OB_SUCCESS != (ret = func_expr->add_param_expr(para_expr)))
             break;
-<<<<<<< HEAD
           //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           /*
           *      for cast函数
@@ -1817,8 +1670,6 @@ int resolve_expr(
             }
           }
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
         }
       }
       if (ret == OB_SUCCESS)
@@ -1864,7 +1715,6 @@ int resolve_expr(
               }
               break;
             }
-<<<<<<< HEAD
               //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
                 /*
                 *  for cast函数
@@ -1880,8 +1730,6 @@ int resolve_expr(
                   break;
                 }
                 //add:e
-=======
->>>>>>> refs/remotes/origin/master
             default:
             {
               if (func_expr->get_param_size() != param_num)
@@ -2165,7 +2013,6 @@ int resolve_when_func(
   return ret;
 }
 
-<<<<<<< HEAD
 
 /**
  * @brief resolve_agg_func
@@ -2176,8 +2023,6 @@ int resolve_when_func(
  * @param ret_sql_expr is a pointer that return sql expr
  * @return error code
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_agg_func(
     ResultPlan * result_plan,
     ObSelectStmt* select_stmt,
@@ -2332,7 +2177,6 @@ int resolve_joined_table(
       case T_JOIN_INNER:
         ret = joined_table.add_join_type(JoinedTable::T_INNER);
         break;
-<<<<<<< HEAD
     //add by wanglei [semi join] 20170417:b
     case T_JOIN_SEMI:
       ret = joined_table.add_join_type(JoinedTable::T_SEMI);
@@ -2344,8 +2188,6 @@ int resolve_joined_table(
       ret = joined_table.add_join_type(JoinedTable::T_SEMI_RIGHT);
       break;
     //add by wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
       default:
         /* won't be here */
         ret = OB_ERR_PARSER_MALLOC_FAILED;
@@ -2946,16 +2788,11 @@ int resolve_select_clause(
 int resolve_where_clause(
   ResultPlan * result_plan,
   ObStmt* stmt,
-<<<<<<< HEAD
   ParseNode* node,
   ObStmt* super_stmt//add slwang [exists related subquery] 20170604
   )
 {
   UNUSED(super_stmt);//add slwang [exists related subquery] 20170604
-=======
-  ParseNode* node)
-{
->>>>>>> refs/remotes/origin/master
   int& ret = result_plan->err_stat_.err_code_ = OB_SUCCESS;
   if (node)
   {
@@ -2964,12 +2801,8 @@ int resolve_where_clause(
               stmt,
               node,
               stmt->get_where_exprs(),
-<<<<<<< HEAD
               T_WHERE_LIMIT,
               super_stmt//add slwang [exists related subquery] 20170604
-=======
-              T_WHERE_LIMIT
->>>>>>> refs/remotes/origin/master
               );
   }
   return ret;
@@ -3205,7 +3038,6 @@ int resolve_for_update_clause(
   }
   return ret;
 }
-<<<<<<< HEAD
 /**
  * @brief resolve_select_stmt
  * parse select statement syntax tree and create ObSelectStmt object
@@ -3220,13 +3052,6 @@ int resolve_select_stmt(
     uint64_t& query_id,
     ObStmt* super_stmt//add slwang [exists related subquery] 20170604
     )
-=======
-
-int resolve_select_stmt(
-    ResultPlan* result_plan,
-    ParseNode* node,
-    uint64_t& query_id)
->>>>>>> refs/remotes/origin/master
 {
   int& ret = result_plan->err_stat_.err_code_ = OB_SUCCESS;
   OB_ASSERT(node && node->num_child_ >= 15);
@@ -3417,14 +3242,10 @@ int resolve_select_stmt(
     if (ret == OB_SUCCESS
       && (ret = resolve_select_clause(result_plan, select_stmt, node->children_[1]))
           == OB_SUCCESS
-<<<<<<< HEAD
       //modify slwang [exists related subquery] 20170604:b
       //&& (ret = resolve_where_clause(result_plan, select_stmt, node->children_[3]))
       && (ret = resolve_where_clause(result_plan, select_stmt, node->children_[3], super_stmt))
       //modify 20170604:e  
-=======
-      && (ret = resolve_where_clause(result_plan, select_stmt, node->children_[3]))
->>>>>>> refs/remotes/origin/master
           == OB_SUCCESS
       && (ret = resolve_group_clause(result_plan, select_stmt, node->children_[4]))
           == OB_SUCCESS
@@ -3466,13 +3287,9 @@ int resolve_select_stmt(
     {
       TableItem& table_item = select_stmt->get_table_item(i);
       if (!table_item.has_scan_columns_)
-<<<<<<< HEAD
       {  
         ret = resolve_table_columns(result_plan, select_stmt, table_item, 1);
       }
-=======
-        ret = resolve_table_columns(result_plan, select_stmt, table_item, 1);
->>>>>>> refs/remotes/origin/master
     }
   }
 
@@ -3502,14 +3319,10 @@ int resolve_hints(
     {
       ParseNode* hint_node = node->children_[i];
       if (!hint_node)
-<<<<<<< HEAD
       {
         continue;
       }
       query_hint.is_has_hint_ = true; // add by lxb [logical optimizer] 20170602
-=======
-        continue;
->>>>>>> refs/remotes/origin/master
       switch (hint_node->type_)
       {
         case T_READ_STATIC:
@@ -3541,7 +3354,6 @@ int resolve_hints(
             TBSYS_LOG(ERROR, "unknown hint value, ret=%d", ret);
           }
           break;
-<<<<<<< HEAD
         // add by longfei
         case T_USE_INDEX:
           ret = generate_index_hint(result_plan, stmt, hint_node);
@@ -3567,8 +3379,6 @@ int resolve_hints(
 
         break;
         //add 20170730 :e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           ret = OB_ERR_HINT_UNKNOWN;
           snprintf(result_plan->err_stat_.err_msg_, MAX_ERROR_MSG,
@@ -3580,7 +3390,6 @@ int resolve_hints(
   return ret;
 }
 
-<<<<<<< HEAD
 //add by yusj [SEMI_JOIN] 20150819
 int resolve_semi_join(
 		ResultPlan * result_plan,
@@ -3687,8 +3496,6 @@ int resolve_semi_join(
  * @param query_id is delete_stmt's id
  * @return errorcode.
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_delete_stmt(
     ResultPlan* result_plan,
     ParseNode* node,
@@ -3905,7 +3712,6 @@ int resolve_insert_values(
   return ret;
 }
 
-<<<<<<< HEAD
 /**
  * @brief resolve_insert_stmt
  * parse insert statement syntax tree and create ObInsertStmt object
@@ -3914,8 +3720,6 @@ int resolve_insert_values(
  * @param query_id is insert_stmt's id
  * @return errorcode.
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_insert_stmt(
     ResultPlan* result_plan,
     ParseNode* node,
@@ -4038,7 +3842,6 @@ int resolve_insert_stmt(
   return ret;
 }
 
-<<<<<<< HEAD
 /**
 * @brief resolve_update_stmt
 * parse update statement syntax tree and create ObUpdateStmt object
@@ -4047,8 +3850,6 @@ int resolve_insert_stmt(
 * @param query_id is update_stmt's id
 * @return errorcode.
 */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_update_stmt(
     ResultPlan* result_plan,
     ParseNode* node,
@@ -4177,7 +3978,6 @@ int resolve_update_stmt(
   return ret;
 }
 
-<<<<<<< HEAD
 /**
  * @brief resolve_when_clause
  * parse when_clause statement syntax tree
@@ -4186,8 +3986,6 @@ int resolve_update_stmt(
  * @param node is root node of when_clause statement syntax tree
  * @return error code
  */
-=======
->>>>>>> refs/remotes/origin/master
 int resolve_when_clause(
     ResultPlan * result_plan,
     ObStmt* stmt,
@@ -4210,7 +4008,6 @@ int resolve_when_clause(
   }
   return ret;
 }
-<<<<<<< HEAD
 
 //add zt 20151207:b
 /**
@@ -4420,5 +4217,3 @@ int generate_join_hint(
   return ret;
 }
 /*add e*/
-=======
->>>>>>> refs/remotes/origin/master

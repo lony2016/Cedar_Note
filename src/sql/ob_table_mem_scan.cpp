@@ -197,7 +197,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     int ObTableMemScan::add_main_output_column(const ObSqlExpression& expr)
     {
         //todo
@@ -240,8 +239,6 @@ namespace oceanbase
         return OB_SUCCESS;
     }
     //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
     int ObTableMemScan::set_table(const uint64_t table_id, const uint64_t base_table_id)
     {
       int ret = OB_SUCCESS;

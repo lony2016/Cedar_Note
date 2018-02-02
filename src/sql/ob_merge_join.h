@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,8 +12,6 @@
  * @date     2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -37,10 +34,7 @@
 #include "common/ob_array.h"
 #include "common/ob_row_store.h"
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
@@ -61,7 +55,6 @@ namespace oceanbase
         virtual int get_next_row(const common::ObRow *&row);
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
         virtual int64_t to_string(char* buf, const int64_t buf_len) const;
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150826:b
         /**
         * @brief set is this operator doing semijoin.
@@ -71,8 +64,6 @@ namespace oceanbase
         */
         void set_is_semi_join(bool is_semi_join,uint64_t tid,uint64_t cid);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         
         DECLARE_PHY_OPERATOR_ASSIGN;
       private:
@@ -92,7 +83,6 @@ namespace oceanbase
         int join_rows(const ObRow& r1, const ObRow& r2);
         int left_join_rows(const ObRow& r1);
         int right_join_rows(const ObRow& r2);
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150826:b
         /**
         * @brief change this operator's right child.
@@ -109,8 +99,6 @@ namespace oceanbase
         */
         int do_semi_open();
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         // disallow copy
         ObMergeJoin(const ObMergeJoin &other);
         ObMergeJoin& operator=(const ObMergeJoin &other);
@@ -129,7 +117,6 @@ namespace oceanbase
         common::ObRowDesc row_desc_;
         bool right_cache_is_valid_;
         bool is_right_iter_end_;
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150826:b
         bool is_semi_join_;   ///< identifier
         uint64_t right_table_id_;  ///< tid of join column
@@ -145,9 +132,6 @@ namespace oceanbase
       right_cid_=cid;
     }
     //add:e
-=======
-    };
->>>>>>> refs/remotes/origin/master
   } // end namespace sql
 } // end namespace oceanbase
 

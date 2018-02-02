@@ -23,11 +23,7 @@
 #include "common/ob_object.h"
 #include "common/ob_rowkey.h"
 #include "common/ob_simple_condition.h"
-<<<<<<< HEAD
 #include "common/ob_onev_array.h"
-=======
-#include "common/ob_easy_array.h"
->>>>>>> refs/remotes/origin/master
 
 #include "nb_table_row.h"
 
@@ -37,11 +33,7 @@ namespace common
 {
   namespace nb_accessor
   {
-<<<<<<< HEAD
     typedef OnevArray<const char*> SC;
-=======
-    typedef EasyArray<const char*> SC;
->>>>>>> refs/remotes/origin/master
 
     //scan和get操作的返回的对象，包含了一个或者多个TableRow
     class QueryRes

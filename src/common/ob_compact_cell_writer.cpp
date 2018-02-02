@@ -238,11 +238,7 @@ int ObCompactCellWriter::init(char *buf, int64_t size, enum ObCompactStoreType s
   return ret;
 }
 
-<<<<<<< HEAD
 /*int ObCompactCellWriter::write_decimal(const ObObj &decimal)
-=======
-int ObCompactCellWriter::write_decimal(const ObObj &decimal)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   ObDecimalMeta dec_meta;
@@ -270,11 +266,7 @@ int ObCompactCellWriter::write_decimal(const ObObj &decimal)
     }
     else
     {
-<<<<<<< HEAD
       words = decimal.value_.dec_words_;
-=======
-      words = decimal.value_.dec_words_; 
->>>>>>> refs/remotes/origin/master
     }
 
     for(uint16_t i=0;OB_SUCCESS == ret && i<=dec_meta.dec_nwords_;i++)
@@ -288,7 +280,6 @@ int ObCompactCellWriter::write_decimal(const ObObj &decimal)
 
   return ret;
 }
-<<<<<<< HEAD
 */
 //old code
 //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
@@ -328,8 +319,6 @@ int ObCompactCellWriter::write_decimal(const ObObj &decimal, ObObj *clone_value)
 }
 //modify e
 //modify e
-=======
->>>>>>> refs/remotes/origin/master
 
 int ObCompactCellWriter::write_varchar(const ObObj &value, ObObj *clone_value)
 {
@@ -436,15 +425,11 @@ int ObCompactCellWriter::append(uint64_t column_id, const ObObj &value, ObObj *c
       ret = buf_writer_.write<ObCellMeta>(cell_meta);
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
           //modify xsl
           //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           ret = write_decimal(value,clone_value);
           //modify e
           //modify e
-=======
-        ret = write_decimal(value);
->>>>>>> refs/remotes/origin/master
       }
       break;
     case ObFloatType:

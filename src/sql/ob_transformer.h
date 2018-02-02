@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -28,9 +27,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +56,6 @@
 #include "common/ob_list.h"
 #include "common/ob_row_desc_ext.h"
 #include "common/ob_se_array.h"
-<<<<<<< HEAD
 
 //add longfei [secondary index select]
 #include "common/ob_secondary_index_service.h"
@@ -86,13 +81,10 @@
 #include "ob_item_type.h"
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
     struct ObProcedureCompilationContext;
     class ObWhenFilter;
 
@@ -112,15 +104,6 @@ namespace oceanbase
         //add wanglei [semi join] 20170417:b
         typedef common::ObArray<uint64_t>  Join_column_Array;
         //add wanglei [semi join] 20170417:e
-=======
-    class ObWhenFilter;
-    class ObTransformer
-    {
-      public:
-        ObTransformer(ObSqlContext &context);
-        virtual ~ObTransformer();
-
->>>>>>> refs/remotes/origin/master
         int generate_physical_plans(
             ObMultiLogicPlan &logical_plans,
             ObMultiPhyPlan &physical_plans,
@@ -131,7 +114,6 @@ namespace oceanbase
             ObPhysicalPlan *physical_plan,
             ErrStat& err_stat,
             const uint64_t& query_id,
-<<<<<<< HEAD
             int32_t* index,
             bool optimizer_open = false//add dhc [query_optimzier] 20170723
             );
@@ -466,18 +448,11 @@ namespace oceanbase
 
         //add :e
 
-=======
-            int32_t* index);
-
-        ObSqlContext* get_sql_context();
-
->>>>>>> refs/remotes/origin/master
       private:
         DISALLOW_COPY_AND_ASSIGN(ObTransformer);
         void *trans_malloc(const size_t nbyte);
         void trans_free(void* p);
 
-<<<<<<< HEAD
         //add by zhujun 2014-12-05:b
         //code_coverage_zhujun
         /**
@@ -925,20 +900,14 @@ namespace oceanbase
 
         //code_coverage_zhujun
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         int generate_physical_plan(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan*& physical_plan,
             ErrStat& err_stat,
             const uint64_t& query_id = common::OB_INVALID_ID,
-<<<<<<< HEAD
             int32_t* index = NULL,
             bool optimizer_open = true //add by dhc [query optimizer] 20170818
             );
-=======
-            int32_t* index = NULL);
->>>>>>> refs/remotes/origin/master
 
         int add_cur_time_plan(
             ObPhysicalPlan *physical_plan,
@@ -975,7 +944,6 @@ namespace oceanbase
             ErrStat& err_stat,
             const uint64_t& query_id,
             int32_t* index);
-<<<<<<< HEAD
 
         // longfei [create index]
         /**
@@ -1011,8 +979,6 @@ namespace oceanbase
             const uint64_t& query_id,
             int32_t* index);
 
-=======
->>>>>>> refs/remotes/origin/master
         int gen_physical_create_table(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1025,15 +991,12 @@ namespace oceanbase
             ErrStat& err_stat,
             const uint64_t& query_id,
             int32_t* index);
-<<<<<<< HEAD
         int gen_physical_truncate_table(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
             ErrStat& err_stat,
             const uint64_t& query_id,
             int32_t* index); //add hxlong [truncate table] 20170403
-=======
->>>>>>> refs/remotes/origin/master
         int gen_physical_alter_table(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1046,7 +1009,6 @@ namespace oceanbase
             ErrStat& err_stat,
             const uint64_t& query_id,
             int32_t* index);
-<<<<<<< HEAD
         //add wangjiahao [table lock] 20160616 :b
         int gen_physical_lock_table(
                     ObLogicalPlan *logical_plan,
@@ -1096,8 +1058,6 @@ namespace oceanbase
             ObOptimizerRelation *& tmp_relation,
             bool & is_sub_query_table);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int gen_phy_tables(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1108,7 +1068,6 @@ namespace oceanbase
             oceanbase::common::ObList<ObPhyOperator*>& phy_table_list,
             oceanbase::common::ObList<ObBitSet<> >& bitset_list,
             oceanbase::common::ObList<ObSqlRawExpr*>& remainder_cnd_list,
-<<<<<<< HEAD
             oceanbase::common::ObList<ObSqlRawExpr*>& none_columnlize_alias
             , bool optimizer_open = false //add dhc [query_optimizer] 20170705
 			);
@@ -1188,15 +1147,6 @@ namespace oceanbase
             common::ObArray<uint64_t> *join_column = NULL //add by wanglei [semi join secondary index] 20170417
                 );
         //add e
-=======
-            oceanbase::common::ObList<ObSqlRawExpr*>& none_columnlize_alias);
-        int gen_physical_kill_stmt(
-          ObLogicalPlan *logical_plan,
-          ObPhysicalPlan* physical_plan,
-          ErrStat& err_stat,
-          const uint64_t& query_id,
-          int32_t* index);
->>>>>>> refs/remotes/origin/master
         int gen_phy_table(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1205,7 +1155,6 @@ namespace oceanbase
             uint64_t table_id,
             ObPhyOperator*& table_op,
             bool* group_agg_pushed_down = NULL,
-<<<<<<< HEAD
             bool* limit_pushed_down = NULL
             ,bool optimizer_open = false //add dhc [query_optimizer] 20170705
 			);
@@ -1236,15 +1185,11 @@ namespace oceanbase
             );
         //add:e
 
-=======
-            bool* limit_pushed_down = NULL);
->>>>>>> refs/remotes/origin/master
         int gen_phy_joins(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
             ErrStat& err_stat,
             ObSelectStmt *select_stmt,
-<<<<<<< HEAD
             /*add maoxx [bloomfilter_join] 20160417*/
             ObJoin::JoinType join_type,
             /*add e*/
@@ -1272,16 +1217,11 @@ namespace oceanbase
             ObPhysicalPlan *physical_plan,
             ErrStat& err_stat,
             ObSelectStmt *select_stmt,
-=======
->>>>>>> refs/remotes/origin/master
             oceanbase::common::ObList<ObPhyOperator*>& phy_table_list,
             oceanbase::common::ObList<ObBitSet<> >& bitset_list,
             oceanbase::common::ObList<ObSqlRawExpr*>& remainder_cnd_list,
             oceanbase::common::ObList<ObSqlRawExpr*>& none_columnlize_alias);
-<<<<<<< HEAD
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         int gen_phy_group_by(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1342,7 +1282,6 @@ namespace oceanbase
             ErrStat& err_stat,
             ObShowStmt *show_stmt,
             ObPhyOperator *&out_op);
-<<<<<<< HEAD
         //add longfei
         /**
          * @brief gen_phy_show_index generate physical plan for show index
@@ -1358,8 +1297,6 @@ namespace oceanbase
             ObShowStmt *show_stmt,
             ObPhyOperator *&out_op);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         int gen_phy_show_columns(
             ObPhysicalPlan *physical_plan,
             ErrStat& err_stat,
@@ -1385,7 +1322,6 @@ namespace oceanbase
             ErrStat& err_stat,
             ObShowStmt *show_stmt,
             ObPhyOperator *&out_op);
-<<<<<<< HEAD
 	   //zhounan unmark:b
        int gen_physical_cursor_declare(
             ObLogicalPlan *logical_plan,
@@ -1493,8 +1429,6 @@ namespace oceanbase
 
 //e:add by zhounan
 
-=======
->>>>>>> refs/remotes/origin/master
         int gen_phy_show_processlist(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan *physical_plan,
@@ -1556,7 +1490,6 @@ namespace oceanbase
             const ObRowDesc &row_desc,
             const ObRowDescExt &row_desc_ext,
             ObPhyOperator*& table_op);
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief cons_whole_row_desc_for_delete
@@ -1784,8 +1717,6 @@ namespace oceanbase
             ObRowDesc &row_desc,
             ErrStat& err_stat);
         //add:b
-=======
->>>>>>> refs/remotes/origin/master
         int gen_physical_update_new(
             ObLogicalPlan *logical_plan,
             ObPhysicalPlan*& physical_plan,
@@ -1887,7 +1818,6 @@ namespace oceanbase
           ErrStat& err_stat,
           const uint64_t& query_id,
           int32_t* index);
-<<<<<<< HEAD
 	//add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         int ob_write_obj_for_delete(ModuleArena &allocator, const ObObj &src, ObObj &dst,ObObj type);
          //add e
@@ -1962,14 +1892,11 @@ namespace oceanbase
             ObArray<uint64_t> &alias_exprs);
          bool is_index_table_has_all_cid_V2(uint64_t index_tid,Expr_Array *filter_array,Expr_Array *project_array);
         //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
 
       private:
         common::ObIAllocator *mem_pool_;
         ObSqlContext *sql_context_;
         bool group_agg_push_down_param_;
-<<<<<<< HEAD
 
 
         //add by zhutao [a switch from normal/procedure compilation]
@@ -1980,8 +1907,6 @@ namespace oceanbase
 		//add by qx [query optimization] 20170308 :b
         ObStatExtractor stat_extractor_;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline ObSqlContext* ObTransformer::get_sql_context()

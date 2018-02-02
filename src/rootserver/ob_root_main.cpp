@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -15,8 +14,6 @@
  *         zhangcd <zhangcd_ecnu@ecnu.cn>
  * @date 2015_08_23
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
 *   (C) 2007-2010 Taobao Inc.
 *
@@ -132,7 +129,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "Parse extra config error! string: [%s], ret: [%d]",
                   cmd_extra_config_, ret);
       }
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150416:b
       // 判断命令行的-s参数输入是否有效
       if(strlen(cmd_rs_cluster_ips_) > 0)
@@ -147,8 +143,6 @@ namespace oceanbase
         rs_config_.rs_election_random_wait_time = cmd_rs_election_random_wait_time_; /* listen port */
       }
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       rs_config_.print();
 
       if (OB_SUCCESS != ret)

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -45,12 +42,9 @@
 #include "common/ob_schema_manager.h"
 #include "common/ob_statistics.h"
 #include "common/ob_common_stat.h"
-<<<<<<< HEAD
 //add longfei
 #include "ob_chunk_server_stat.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -222,7 +216,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int ObMergerRpcProxy::check_incremental_data_range(
         int64_t table_id, ObVersionRange &version, ObVersionRange &new_range)
@@ -266,9 +259,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     int ObMergerRpcProxy::get_schema(const uint64_t table_id,
         const int64_t timestamp, const ObSchemaManagerV2 ** manager)
     {
@@ -599,7 +589,6 @@ namespace oceanbase
     }
 
 
-<<<<<<< HEAD
     //add huangcc [statistic info materialization] 20170208:b
     int ObMergerRpcProxy::ups_mutate(const ObMutator & mutate_param, const bool has_data, ObScanner & scanner)
     {
@@ -647,8 +636,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObMergerRpcProxy::get_master_master_update_server(const bool renew, ObServer & master_master_ups)
     {
       int ret = OB_SUCCESS;
@@ -1257,7 +1244,6 @@ namespace oceanbase
       return ups_scan_(sql_rpc_stub_, scan_param, scanner, common::MERGE_SERVER, timeout);
     }
 
-<<<<<<< HEAD
     //add longfei [cons static index] 151204:b
     int ObMergerRpcProxy::cs_cs_scan(const ObScanParam &scan_param, ObServer chunkserver, ObScanner &scanner, const ObServerType server_type, const int64_t time_out)
     {
@@ -1331,7 +1317,5 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_25
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -36,10 +33,7 @@
 
 #include "common/ob_slave_mgr.h"
 #include "common/ob_ack_queue.h"
-<<<<<<< HEAD
 #include "common/ob_log_generator2.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_ups_role_mgr.h"
 
 using namespace oceanbase::common;
@@ -52,16 +46,11 @@ namespace oceanbase
       public:
         static const int32_t RPC_VERSION = 1;
         static const int64_t MAX_SLAVE_NUM = 8;
-<<<<<<< HEAD
         static const int64_t DEFAULT_ACK_QUEUE_LEN = 2048;  //modify by qx 20161207 old =1024 for avoid ack_queue fulled
-=======
-        static const int64_t DEFAULT_ACK_QUEUE_LEN = 1024;
->>>>>>> refs/remotes/origin/master
         ObUpsSlaveMgr();
         virtual ~ObUpsSlaveMgr();
 
         /// @brief 初始化
-<<<<<<< HEAD
         // modify by guojinwei [log synchronization][multi_cluster] 20151117:b
         //int init(IObAsyncClientCallback* callback, ObUpsRoleMgr *role_mgr, ObCommonRpcStub *rpc_stub,
         //    int64_t log_sync_timeout);
@@ -72,10 +61,6 @@ namespace oceanbase
             int64_t log_sync_timeout);
         // modify:e
         // modify:e
-=======
-        int init(IObAsyncClientCallback* callback, ObUpsRoleMgr *role_mgr, ObCommonRpcStub *rpc_stub,
-            int64_t log_sync_timeout);
->>>>>>> refs/remotes/origin/master
 
         /// @brief 向各台Slave发送数据
         /// 目前依次向各台Slave发送数据, 并且等待Slave的成功返回
@@ -89,7 +74,6 @@ namespace oceanbase
         int set_log_sync_timeout_us(const int64_t timeout);
         int post_log_to_slave(const common::ObLogCursor& start_cursor, const common::ObLogCursor& end_cursor, const char* data, const int64_t length);
         int wait_post_log_to_slave(const char* data, const int64_t length, int64_t& delay);
-<<<<<<< HEAD
         //mod by chujiajia [log synchronization][multi_cluster] 20160627:b
         //int64_t get_acked_clog_id() const;
         int64_t get_acked_clog_id();
@@ -100,9 +84,6 @@ namespace oceanbase
           return acked_clog_id_;
         }
         //add:e
-=======
-        int64_t get_acked_clog_id() const;
->>>>>>> refs/remotes/origin/master
         int get_slaves(ObServer* slaves, int64_t limit, int64_t& slave_count);
 
         int grant_keep_alive();
@@ -112,23 +93,17 @@ namespace oceanbase
         int set_send_log_point(const ObServer &server, const uint64_t send_log_point);
         int get_num() const;
         void print(char *buf, const int64_t buf_len, int64_t& pos);
-<<<<<<< HEAD
         // add by zhangcd [majority_count_init] 20151118:b
         void set_ack_queue_majority_count(int32_t majority_count);
         int32_t get_ack_queue_majority_count();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         int64_t n_slave_last_post_;
         ObUpsRoleMgr *role_mgr_;
         ObAckQueue ack_queue_;
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160627:b
         int64_t acked_clog_id_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace common
 } // end namespace oceanbase

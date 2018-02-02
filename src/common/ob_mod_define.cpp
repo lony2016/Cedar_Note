@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_mod_define.h"
 using namespace oceanbase;
 using namespace oceanbase::common;

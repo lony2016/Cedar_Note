@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -16,8 +15,6 @@
  * @author wangdonghui <zjnuwangdonghui@163.com>
  * @date 2016_07_29
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2012 Taobao Inc.
  *
@@ -76,16 +73,12 @@ namespace oceanbase
       UPS_STAT_SCAN_QTIME,
       UPS_STAT_APPLY_QTIME,
 
-<<<<<<< HEAD
       UPS_STAT_IDLE_COUNT,
 
-=======
->>>>>>> refs/remotes/origin/master
       UPS_STAT_GET_TIMEU,
       UPS_STAT_SCAN_TIMEU,
       UPS_STAT_TRANS_TIMEU,
       UPS_STAT_TRANS_WTIME, // packet wait
-<<<<<<< HEAD
       //add by zt 20151211
 //      UPS_STAT_TRANS_W_TIME_1,
 //      UPS_STAT_TRANS_W_TIME_2,
@@ -115,12 +108,6 @@ namespace oceanbase
       UPS_STAT_COMMIT_FLTIME,
       UPS_STAT_COMMIT_PUTIME,
 
-=======
-      UPS_STAT_TRANS_HTIME, // trans handle
-      UPS_STAT_TRANS_CTIME, // wait commit thread
-      UPS_STAT_TRANS_FTIME, // wait flush
-      UPS_STAT_TRANS_RTIME, // wait response
->>>>>>> refs/remotes/origin/master
       UPS_STAT_APPLY_TIMEU,
       UPS_STAT_BATCH_TIMEU,
       UPS_STAT_MERGE_TIMEU,
@@ -192,18 +179,14 @@ namespace oceanbase
       UPS_STAT_HL_TRANS_TIMEU,
 
       UPS_STAT_LOCK_WAIT_TIME,
-<<<<<<< HEAD
       UPS_STAT_LOCK_SUCC_COUNT,
       UPS_STAT_LOCK_FAIL_COUNT,
-=======
->>>>>>> refs/remotes/origin/master
 
       UPS_STAT_DML_REPLACE_COUNT,
       UPS_STAT_DML_INSERT_COUNT,
       UPS_STAT_DML_UPDATE_COUNT,
       UPS_STAT_DML_DELETE_COUNT,
 
-<<<<<<< HEAD
       //add by zt 20151214:b
       UPS_PROC_EXEC_COUNT,
       UPS_PROC_EXEC_TIME,
@@ -221,8 +204,6 @@ namespace oceanbase
       UPS_EXE_MERGE,
       //add by zt 20151214:e
 
-=======
->>>>>>> refs/remotes/origin/master
       UPDATESERVER_STAT_MAX,
     };
     /* chunkserver */
@@ -306,7 +287,6 @@ namespace oceanbase
       SQL_SCAN_EVENT_COUNT,
       SQL_SCAN_EVENT_TIME,
 
-<<<<<<< HEAD
  	  //ups_execute
       SQL_UPS_EXECUTE_COUNT,
       SQL_UPS_EXECUTE_TIME,
@@ -314,8 +294,6 @@ namespace oceanbase
       SQL_PROC_UPS_EXECUTE_COUNT,
       SQL_PROC_UPS_EXECUTE_TIME,
 
-=======
->>>>>>> refs/remotes/origin/master
      /* memory usage statistics*/
       MS_MEMORY_LIMIT,
       MS_MEMORY_TOTAL,
@@ -357,10 +335,7 @@ namespace oceanbase
 
       SQL_CREATE_TABLE_COUNT,
       SQL_DROP_TABLE_COUNT,
-<<<<<<< HEAD
       SQL_TRUNCATE_TABLE_COUNT, /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
 
       SQL_PS_ALLOCATOR_COUNT,
       SQL_INSERT_CACHE_HIT,
@@ -392,11 +367,7 @@ namespace oceanbase
 
       SQL_COMPOUND_COUNT,
       SQL_COMPOUND_TIME,
-<<<<<<< HEAD
 
-=======
-      
->>>>>>> refs/remotes/origin/master
       SQL_SELECT_COUNT,
       SQL_SELECT_TIME,
 
@@ -412,12 +383,9 @@ namespace oceanbase
       SQL_DELETE_COUNT,
       SQL_DELETE_TIME,
 
-<<<<<<< HEAD
       SQL_PROC_COUNT,
       SQL_PROC_TIME,
 
-=======
->>>>>>> refs/remotes/origin/master
       SQL_QUERY_BYTES,
 
       SQL_COMMIT_COUNT,
@@ -425,7 +393,6 @@ namespace oceanbase
       SQL_AUTOCOMMIT_ON_COUNT,
       SQL_AUTOCOMMIT_OFF_COUNT,
 
-<<<<<<< HEAD
       SQL_CMD_RECEIVED_COUNT,
       SQL_CMD_PROCESS_COUNT,
       SQL_CMD_WAIT_TIME_MS,
@@ -435,8 +402,6 @@ namespace oceanbase
 //      SQL_MULTI_STMT_TRANS_STMT_INTERVAL,
       SQL_MULTI_STMT_TRANS_STMT_COUNT,
 
-=======
->>>>>>> refs/remotes/origin/master
       OBMYSQL_STAT_MAX
     };
 

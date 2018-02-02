@@ -19,10 +19,7 @@
 #include "ob_ms_schema_proxy.h"
 #include "common/ob_schema_manager.h"
 #include "common/ob_malloc.h"
-<<<<<<< HEAD
 #include "ob_physical_plan_cache_manager.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::mergeserver;
@@ -76,7 +73,6 @@ void ObMergerSchemaTask::runTimerTask(void)
   }
 }
 
-<<<<<<< HEAD
 ObMergerProcedureTask::ObMergerProcedureTask()
 {
   pp_mgr_ = NULL;
@@ -111,5 +107,3 @@ void ObMergerProcedureTask::runTimerTask(void)
   unset_scheduled();
 }
 
-=======
->>>>>>> refs/remotes/origin/master

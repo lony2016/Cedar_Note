@@ -29,10 +29,7 @@ namespace oceanbase
         static const int64_t OP_END_ROW               = 17;
         static const int64_t OP_VALID                 = 18;
         static const int64_t OP_NEW_ADD               = 19;
-<<<<<<< HEAD
         static const int64_t OP_TRUN_TAB              = 20;  /*add hxlong [Truncate Table]:20170402*/
-=======
->>>>>>> refs/remotes/origin/master
         static const int64_t OP_RETURN_UPDATE_RESULT  = 0x0000000100000000;
         static const int64_t OP_ACTION_FLAG_LOW_MASK  = 0x00000000ffffffff;
 

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -42,7 +39,6 @@
 #include "ob_sessionctx_factory.h"
 #include "ob_ups_table_mgr.h"
 #include "ob_ups_utils.h"
-<<<<<<< HEAD
 //add maoxx
 #include "sql/ob_index_trigger.h"
 //add e
@@ -50,8 +46,6 @@
 #include "ob_update_server_main.h"
 #include "sql/ob_auto_increment_filter.h"
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -70,7 +64,6 @@ namespace oceanbase
         int get_row_desc(const common::ObRowDesc *&row_desc) const;
         int get_affected_rows(int64_t& row_count);
         int64_t to_string(char* buf, const int64_t buf_len) const;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161127:b
         int check_auto_increment(const int64_t table_id, uint64_t& auto_column_id,
                              int64_t& auto_value, const CommonSchemaManager *&sm,
@@ -89,22 +82,14 @@ namespace oceanbase
         bool is_update_auto_value_;
         int64_t update_auto_value_;
         //add:e
-=======
-      private:
-        RWSessionCtx &session_;
-        ObIUpsTableMgr &host_;
->>>>>>> refs/remotes/origin/master
     };
 
     template <class T>
     MemTableModifyTmpl<T>::MemTableModifyTmpl(RWSessionCtx &session, ObIUpsTableMgr &host): session_(session),
                                                                                  host_(host)
-<<<<<<< HEAD
                                                                                  //add lbzhong [auto_increment] 20161218:b
                                                                                  , is_update_auto_value_(false), update_auto_value_(OB_INVALID_AUTO_INCREMENT_VALUE)
                                                                                  //add:e
-=======
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -121,7 +106,6 @@ namespace oceanbase
       uint64_t table_id = OB_INVALID_ID;
       uint64_t column_id = OB_INVALID_ID;
       const ObRowkeyInfo *rki = NULL;
-<<<<<<< HEAD
 //add wangjiahao [table lock] 20160616 :b
       if (this->get_dml_type() == OB_DML_REPLACE)
       {
@@ -181,9 +165,6 @@ namespace oceanbase
       if (OB_SUCCESS != ret)
       {}
       else if (NULL == T::child_op_)
-=======
-      if (NULL == T::child_op_)
->>>>>>> refs/remotes/origin/master
       {
         ret = OB_NOT_INIT;
       }
@@ -221,11 +202,8 @@ namespace oceanbase
       }
       else
       {
-<<<<<<< HEAD
         //del lbzhong [auto_increment] 20161218:b
         /*
-=======
->>>>>>> refs/remotes/origin/master
         UpsSchemaMgrGuard sm_guard;
         const CommonSchemaManager *sm = NULL;
         if (NULL == (sm = host_.get_schema_mgr().get_schema_mgr(sm_guard)))
@@ -233,7 +211,6 @@ namespace oceanbase
           TBSYS_LOG(WARN, "get_schema_mgr fail");
           ret = OB_SCHEMA_ERROR;
         }
-<<<<<<< HEAD
 
         else
         {
@@ -357,16 +334,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
-        else
-        {
-          ObCellIterAdaptor cia;
-          cia.set_row_iter(T::child_op_, rki->get_size(), sm);
-          ret = host_.apply(session_, cia, T::get_dml_type());
-          session_.inc_dml_count(T::get_dml_type());
-        }
-      }
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS != ret)
       {
         if (NULL != T::child_op_)
@@ -437,7 +404,6 @@ namespace oceanbase
 
     typedef MemTableModifyTmpl<sql::ObUpsModify> MemTableModify;
     typedef MemTableModifyTmpl<sql::ObUpsModifyWithDmlType> MemTableModifyWithDmlType;
-<<<<<<< HEAD
 
     //add lbzhong [auto_increment] 20161127:b
     template <class T>
@@ -598,8 +564,6 @@ namespace oceanbase
       return update_auto_value_;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace updateserver
 } // end namespace oceanbase
 

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -44,7 +41,6 @@ namespace oceanbase
 {
   namespace sql
   {
-<<<<<<< HEAD
     /**
      * @brief The ObExprValues class
      * ObExprValues is used by ObIncScan and ObInsertDBSemFilter and ObUpsModify(Replace semantics)
@@ -56,8 +52,6 @@ namespace oceanbase
      * > ObInsertDBSemFilter, uses ObExprValues as a subquery, when serialization, ObExprValues would be direct serialize,
      *   we should serialize the raw ObSqlExpression
      */
-=======
->>>>>>> refs/remotes/origin/master
     class ObExprValues: public ObNoChildrenPhyOperator
     {
       public:
@@ -67,7 +61,6 @@ namespace oceanbase
         int set_row_desc(const common::ObRowDesc &row_desc, const common::ObRowDescExt &row_desc_ext);
         int add_value(const ObSqlExpression &v);
 
-<<<<<<< HEAD
         void clear_value() { values_.clear(); } //add by zhutao, debug range update
 
         void reserve_values(int64_t num) {values_.reserve(num);}
@@ -77,12 +70,6 @@ namespace oceanbase
         void set_replace_check_rowkey_duplicate(bool flag) { replace_check_rowkey_duplicat_ = flag;}
         //add:e
         ObExpressionArray &get_values() {return values_;}
-=======
-        void reserve_values(int64_t num) {values_.reserve(num);}
-        void set_check_rowkey_duplicate(bool flag) { check_rowkey_duplicat_ = flag; }
-        void set_do_eval_when_serialize(bool v) { do_eval_when_serialize_ = v;}
-        ObExpressionArray &get_values() {return values_;};
->>>>>>> refs/remotes/origin/master
         virtual int open();
         virtual int close();
         virtual void reset();
@@ -91,7 +78,6 @@ namespace oceanbase
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
         virtual int64_t to_string(char* buf, const int64_t buf_len) const;
         enum ObPhyOperatorType get_type() const {return PHY_EXPR_VALUES;}
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief reset_iterator
@@ -137,10 +123,6 @@ namespace oceanbase
          */
         int get_next_row_template(const common::ObRow *&row);
         //add by zt 20160119:e
-=======
-        DECLARE_PHY_OPERATOR_ASSIGN;
-        NEED_SERIALIZE_AND_DESERIALIZE;
->>>>>>> refs/remotes/origin/master
       private:
         // types and constants
       private:
@@ -159,7 +141,6 @@ namespace oceanbase
         bool from_deserialize_;
         bool check_rowkey_duplicat_;
         bool do_eval_when_serialize_;
-<<<<<<< HEAD
         bool group_exec_;
         int64_t expr_idx_;
         //add huangjianwei [secondary index maintain] 20161108:b
@@ -168,8 +149,6 @@ namespace oceanbase
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         bool is_del_update;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace sql
 } // end namespace oceanbase

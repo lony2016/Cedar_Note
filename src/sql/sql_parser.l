@@ -162,7 +162,6 @@ sqnewline     {quote}{whitespace}{quote}
 
 
 %%
-<<<<<<< HEAD
 PROCEDURE			{ return PROCEDURE; }
 DECLARE				{ return DECLARE; }
 ELSEIF				{ return ELSEIF; }
@@ -189,8 +188,6 @@ ABSOLUTE           {return ABSOLUTE; }
 RELATIVE          {return RELATIVE; }
 
 
-=======
->>>>>>> refs/remotes/origin/master
 ADD               { return ADD; }
 ALTER             { return ALTER; }
 AND               { return AND; }
@@ -262,10 +259,7 @@ LEFT              { return LEFT; }
 LIMIT             { return LIMIT; }
 LIKE              { return LIKE; }
 LOCAL             { return LOCAL; }
-<<<<<<< HEAD
 LOCK              { return LOCKWJH; }
-=======
->>>>>>> refs/remotes/origin/master
 LOCKED            { return LOCKED; }
 MEDIUMINT         { return MEDIUMINT; }
 MEMORY            { return MEMORY; }
@@ -342,7 +336,6 @@ MASTER            { return MASTER; }
 SLAVE             { return SLAVE;  }
 FORCE             { return FORCE;  }
 
-<<<<<<< HEAD
 INDEX		  { return INDEX;  }
 STORING		  { return STORING;  }
   /* add hxlong [truncate table] 20170403 */
@@ -362,8 +355,6 @@ SM  { return  SM;  /* add e*/}
 
 HASH_JOIN  { return HASH_JOIN; }/*add maoxx [hash join single] 20170110*/
                   
-=======
->>>>>>> refs/remotes/origin/master
 NULL   {
   /* yylval->node = new_node(((ParseResult*)yyextra)->malloc_pool_, T_NULL, 0); */
   malloc_new_node(yylval->node, ((ParseResult*)yyextra)->malloc_pool_, T_NULL, 0);
@@ -397,11 +388,7 @@ NULL   {
 "."[0-9]+ {
   /* ParseNode* node = new_node(((ParseResult*)yyextra)->malloc_pool_, T_DOUBLE,  0); */
   ParseNode* node = NULL;
-<<<<<<< HEAD
   malloc_new_node(node, ((ParseResult*)yyextra)->malloc_pool_, T_DECIMAL/*modify xsl ECNU_DECIMAL 2017_2 should be T_DECIMAL,*/, 0);
-=======
-  malloc_new_node(node, ((ParseResult*)yyextra)->malloc_pool_, T_DOUBLE/* should be T_DECIMAL,*/, 0);
->>>>>>> refs/remotes/origin/master
   yylval->node = node;
   node->str_value_ = parse_strdup(yytext, ((ParseResult*)yyextra)->malloc_pool_);
   check_value(node->str_value_);
@@ -728,7 +715,6 @@ Timestamp{whitespace}?'[0-9]{4}(-[0-9]{2}){2}[ ][0-9]{2}(:[0-9]{2}){2}[.]?' {
 <hint>READ_STATIC  {
   return READ_STATIC;
 }
-<<<<<<< HEAD
 <hint>NO_GROUP  {
     return NO_GROUP;
   }
@@ -788,13 +774,6 @@ Timestamp{whitespace}?'[0-9]{4}(-[0-9]{2}){2}[ ][0-9]{2}(:[0-9]{2}){2}[.]?' {
     }
 <hint>WEAK  {
     return WEAK;
-=======
-<hint>READ_CONSISTENCY  {
-  return READ_CONSISTENCY;
-}
-<hint>WEAK  {
-  return WEAK;
->>>>>>> refs/remotes/origin/master
 }
 <hint>STRONG  {
   return STRONG;
@@ -805,17 +784,12 @@ Timestamp{whitespace}?'[0-9]{4}(-[0-9]{2}){2}[ ][0-9]{2}(:[0-9]{2}){2}[.]?' {
 <hint>FROZEN  {
   return FROZEN;
 }
-<<<<<<< HEAD
 <hint>[(),.]  {
-=======
-<hint>[(),]  {
->>>>>>> refs/remotes/origin/master
   return yytext[0];
 }
 <hint>HOTSPOT  {
   return HOTSPOT;
 }
-<<<<<<< HEAD
 
 <hint>{identifer} {
   // add by longfei
@@ -845,9 +819,6 @@ Timestamp{whitespace}?'[0-9]{4}(-[0-9]{2}){2}[ ][0-9]{2}(:[0-9]{2}){2}[.]?' {
   return NAME;
   //add e
 }
-=======
-<hint>{identifer} {}
->>>>>>> refs/remotes/origin/master
 <hint>. {}
 
 {comment} { /* ignore */ }

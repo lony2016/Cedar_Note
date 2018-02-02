@@ -108,11 +108,7 @@ int ObMsSqlRpcEvent::handle_packet(ObPacket * packet, void * args)
       TBSYS_LOG(WARN, "parse packet from server[%s] failed, request_id[%lu], event_id[%lu], rpc_event[%p]",
           server_.to_cstring(), client_request_id_, get_event_id(), this);
       /// set result code, maybe timeout packet, connection errors.
-<<<<<<< HEAD
       if (NULL != args && 1 == reinterpret_cast<onev_connection_e*>(args)->conn_has_error)
-=======
-      if (NULL != args && 1 == reinterpret_cast<easy_connection_t*>(args)->conn_has_error)
->>>>>>> refs/remotes/origin/master
       {
         ObCommonSqlRpcEvent::set_result_code(OB_CONN_ERROR);
       }

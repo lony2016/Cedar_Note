@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or 
@@ -47,12 +44,9 @@ namespace oceanbase
         ObMergerRpcProxy& rpc_proxy, const int64_t time_out)
     : get_cell_stream_(&rpc_proxy, CHUNK_SERVER, time_out), 
       scan_cell_stream_(&rpc_proxy, CHUNK_SERVER, time_out)
-<<<<<<< HEAD
     //add longfei [cons static index] 151205:b
     ,cs_interactive_cell_stream_(&rpc_proxy, CHUNK_SERVER, time_out)
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     {
     }
     
@@ -70,7 +64,6 @@ namespace oceanbase
     {
       return &scan_cell_stream_;
     }
-<<<<<<< HEAD
 
     //add longfei [cons static index] 151205:b
     ObCsInteractiveCellStream *ObGetCellStreamWrapper::get_cs_interactive_cell_stream()
@@ -78,7 +71,5 @@ namespace oceanbase
       return &cs_interactive_cell_stream_;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase

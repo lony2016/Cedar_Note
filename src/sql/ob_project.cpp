@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +19,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -195,7 +192,6 @@ int ObProject::get_next_row(const common::ObRow *&row)
   return ret;
 }
 
-<<<<<<< HEAD
 //add maoxx
 int ObProject::get_next_row_with_index(const common::ObRow *&row, common::ObRowStore *pre_data_row_store, common::ObRowStore *post_data_row_store)
 {
@@ -247,8 +243,6 @@ int ObProject::get_next_row_with_index(const common::ObRow *&row, common::ObRowS
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase{
   namespace sql{
     REGISTER_PHY_OPERATOR(ObProject, PHY_PROJECT);
@@ -277,7 +271,6 @@ int64_t ObProject::to_string(char* buf, const int64_t buf_len) const
   return pos;
 }
 
-<<<<<<< HEAD
 //add maoxx
 void ObProject::reset_iterator()
 {
@@ -295,8 +288,6 @@ void ObProject::reset_iterator()
   }
 }
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 DEFINE_SERIALIZE(ObProject)
 {
@@ -369,16 +360,11 @@ DEFINE_DESERIALIZE(ObProject)
         TBSYS_LOG(DEBUG, "fail to add expr to project ret=%d. buf=%p, data_len=%ld, pos=%ld", ret, buf, data_len, pos);
         break;
       }
-<<<<<<< HEAD
       else if (OB_SUCCESS != (ret = columns_.at(columns_.count() - 1).deserialize(buf, data_len, pos)))
-=======
-      if (OB_SUCCESS != (ret = columns_.at(columns_.count() - 1).deserialize(buf, data_len, pos)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(WARN, "fail to deserialize expression. ret=%d", ret);
         break;
       }
-<<<<<<< HEAD
       //add zt 20151113:b
       else
       {
@@ -387,8 +373,6 @@ DEFINE_DESERIALIZE(ObProject)
         columns_.at(columns_.count() - 1).set_owner_op(this);
       }
       //add zt 20151113:e
-=======
->>>>>>> refs/remotes/origin/master
     }
   }
   return ret;

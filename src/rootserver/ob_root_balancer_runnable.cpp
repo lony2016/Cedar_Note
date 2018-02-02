@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -77,7 +74,6 @@ void ObRootBalancerRunnable::run(tbsys::CThread *thread, void *arg)
   {
     if (is_master() || role_mgr_.get_role() == ObRoleMgr::STANDALONE)
     {
-<<<<<<< HEAD
       //modify by wenghaixing [secondary index static_index] 20151216
       //balancer_.do_balance_or_load();
       if(balancer_.check_create_index_over())
@@ -89,9 +85,6 @@ void ObRootBalancerRunnable::run(tbsys::CThread *thread, void *arg)
          TBSYS_LOG(INFO, "is building index, do not balance");
       }
       //modify e
-=======
-      balancer_.do_balance_or_load();
->>>>>>> refs/remotes/origin/master
     }
     else
     {

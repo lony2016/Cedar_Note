@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -23,8 +22,6 @@
  * @author zhouhuan <zhouhuan@stu.ecnu.edu.cn>
  * @date 2016_07_25
  */
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_trans_executor.h updateserver / Oceanbase
@@ -63,7 +60,6 @@
 #include "ob_lock_mgr.h"
 #include "ob_util_interface.h"
 #include "ob_ups_phy_operator_factory.h"
-<<<<<<< HEAD
 #include "common/ob_log_generator2.h"
 #include "common/ob_spin_rwlock.h"
 #include "common/group_queue_thread.h" //add by hushuang [scalable commit] 20160329
@@ -72,9 +68,6 @@
 //#include "common/ob_commit_queue.h"
 
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace updateserver
@@ -85,7 +78,6 @@ namespace oceanbase
         TransHandlePool() : affinity_start_cpu_(-1), affinity_end_cpu_(-1) {};
         virtual ~TransHandlePool() {};
       public:
-<<<<<<< HEAD
         volatile int64_t OB_GLOBAL_SYNC_LOG_ID;
       public:
         //modify hushuang [scalable commit]20150506
@@ -100,18 +92,13 @@ namespace oceanbase
           handle_commit_end(pdata);
         };
 
-=======
->>>>>>> refs/remotes/origin/master
         void handle(void *ptask, void *pdata)
         {
           static volatile uint64_t cpu = 0;
           rebind_cpu(affinity_start_cpu_, affinity_end_cpu_, cpu);
           handle_trans(ptask, pdata);
         };
-<<<<<<< HEAD
         //modify e
-=======
->>>>>>> refs/remotes/origin/master
         void *on_begin()
         {
           return on_trans_begin();
@@ -129,10 +116,7 @@ namespace oceanbase
         virtual void handle_trans(void *ptask, void *pdata) = 0;
         virtual void *on_trans_begin() = 0;
         virtual void on_trans_end(void *ptr) = 0;
-<<<<<<< HEAD
         virtual void handle_commit_end(void *pdata) = 0;
-=======
->>>>>>> refs/remotes/origin/master
       private:
         int64_t affinity_start_cpu_;
         int64_t affinity_end_cpu_;
@@ -162,15 +146,10 @@ namespace oceanbase
         virtual void on_trans_end(void *ptr) = 0;
     };
 
-<<<<<<< HEAD
     //mod by hushuang [scalable commit] 20160407:b
     //class TransCommitThread : public SeqQueueThread
     class TransCommitThread : public GroupQueueThread
     {//mod:e
-=======
-    class TransCommitThread : public SeqQueueThread
-    {
->>>>>>> refs/remotes/origin/master
       public:
         TransCommitThread() : affinity_cpu_(-1) {};
         virtual ~TransCommitThread() {};
@@ -200,7 +179,6 @@ namespace oceanbase
         {
           affinity_cpu_ = cpu;
         };
-<<<<<<< HEAD
         //add hushuang [scalable commit] 20160410:b
         void on_process(void *task, void *pdata)
         {
@@ -213,10 +191,6 @@ namespace oceanbase
         //add hushuang [scalable commit] 20160410:b
         virtual void handle_group(void *ptask, void *pdata) = 0;
         //add e
-=======
-      public:
-        virtual void handle_commit(void *ptask, void *pdata) = 0;
->>>>>>> refs/remotes/origin/master
         virtual void *on_commit_begin() = 0;
         virtual void on_commit_end(void *ptr) = 0;
         virtual void on_commit_push_fail(void* ptr) = 0;
@@ -249,7 +223,6 @@ namespace oceanbase
       };
       struct CommitParamData
       {
-<<<<<<< HEAD
         CommitParamData()
         {
           buffer.set_data(cbuffer, OB_MAX_PACKET_LENGTH - 1);
@@ -273,22 +246,11 @@ namespace oceanbase
         common::ObPacket pkt;
         ObTransID sid;
         onev_addr_e src_addr;
-=======
-        char cbuffer[OB_MAX_PACKET_LENGTH];
-        common::ObDataBuffer buffer;
-      };
-      struct Task
-      {
-        common::ObPacket pkt;
-        ObTransID sid;
-        easy_addr_t src_addr;
->>>>>>> refs/remotes/origin/master
         void reset()
         {
           sid.reset();
         };
       };
-<<<<<<< HEAD
 
       //add by hushuang [scalablecommit] 20160601
       /**
@@ -365,8 +327,6 @@ namespace oceanbase
           int64_t     sync_log_id_;
       };*/
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       static const int64_t TASK_QUEUE_LIMIT = 100000;
       static const int64_t FINISH_THREAD_IDLE = 5000;
       static const int64_t ALLOCATOR_TOTAL_LIMIT = 10L * 1024L * 1024L * 1024L;
@@ -374,24 +334,17 @@ namespace oceanbase
       static const int64_t ALLOCATOR_PAGE_SIZE = 4L * 1024L * 1024L;
       static const int64_t MAX_RO_NUM = 100000;
       static const int64_t MAX_RP_NUM = 10000;
-<<<<<<< HEAD
       //static const int64_t MAX_RW_NUM = 40000;
       static const int64_t MAX_RW_NUM = 80000;
       static const int64_t MAX_LRW_NUM = 10000; // add a parameter by qx 20170314 for long transcation
-=======
-      static const int64_t MAX_RW_NUM = 40000;
->>>>>>> refs/remotes/origin/master
       static const int64_t QUERY_TIMEOUT_RESERVE = 20000;
       static const int64_t TRY_FREEZE_INTERVAL = 1000000;
       static const int64_t MAX_BATCH_NUM = 1024;
       static const int64_t FLUSH_QUEUE_SIZE = 1024L * 1024L;
-<<<<<<< HEAD
       //add by hushuang[scalable commit]20160507
       static const int64_t MAX_THREAD_NUM = 256;///< max threads numbers
       //static const int64_t GROUP_ARRAY_SIZE = 5;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       typedef void (*packet_handler_pt)(common::ObPacket &pkt, common::ObDataBuffer &buffer);
       typedef bool (*trans_handler_pt)(TransExecutor &host, Task &task, TransParamData &pdata);
       typedef bool (*commit_handler_pt)(TransExecutor &host, Task &task, CommitParamData &pdata);
@@ -402,27 +355,17 @@ namespace oceanbase
         int init(const int64_t trans_thread_num,
                 const int64_t trans_thread_start_cpu,
                 const int64_t trans_thread_end_cpu,
-<<<<<<< HEAD
                 const int64_t commit_thread_cpu);
                 //const int64_t commit_end_thread_num);
                 //modify by zhouhuan [scalablecommit] 20160427
         void destroy();
       public:
         void handle_packet(common::ObPacket &pkt);
-=======
-                const int64_t commit_thread_cpu,
-                const int64_t commit_end_thread_num);
-        void destroy();
-      public:
-        void handle_packet(common::ObPacket &pkt);
-
->>>>>>> refs/remotes/origin/master
         void handle_trans(void *ptask, void *pdata);
         void *on_trans_begin();
         void on_trans_end(void *ptr);
 
         void handle_commit(void *ptask, void *pdata);
-<<<<<<< HEAD
         //add hushuang [scalable commit] 20160410:b
         /**
         * @brief transaction commit thread's main procedure.
@@ -459,8 +402,6 @@ namespace oceanbase
         */
         int push_flush_queue(LogGroup *group);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         void *on_commit_begin();
         void on_commit_push_fail(void* ptr);
         void on_commit_end(void *ptr);
@@ -476,7 +417,6 @@ namespace oceanbase
         void log_trans_info() const;
         int &thread_errno();
         int64_t &batch_start_time();
-<<<<<<< HEAD
         //add by zhouhuan [scalable commit] 20160711
         /**
         * @brief get_write_clog_mutex
@@ -532,12 +472,6 @@ namespace oceanbase
         int push_task_(Task &task);
         bool wait_for_commit_(const int pcode);
         bool is_write_packet(ObPacket& pkt);
-=======
-      private:
-        bool handle_in_situ_(const int pcode);
-        int push_task_(Task &task);
-        bool wait_for_commit_(const int pcode);
->>>>>>> refs/remotes/origin/master
         bool is_only_master_can_handle(const int pcode);
 
         int get_session_type(const ObTransID& sid, SessionType& type, const bool check_session_expired);
@@ -574,10 +508,7 @@ namespace oceanbase
         int handle_write_commit_(Task &task);
         int fill_log_(Task &task, RWSessionCtx &session_ctx);
         int commit_log_();
-<<<<<<< HEAD
         int commit_log_(LogGroup* cur_group);//add by zhouhuan for [scalablecommit] 20160822
-=======
->>>>>>> refs/remotes/origin/master
         void try_submit_auto_freeze_();
         void log_scan_qps_();
         void log_get_qps_();
@@ -608,7 +539,6 @@ namespace oceanbase
         static bool chandle_force_fetch_schema(TransExecutor &host, Task &task, CommitParamData &pdata);
         static bool chandle_switch_commit_log(TransExecutor &host, Task &task, CommitParamData &pdata);
         static bool chandle_nop(TransExecutor &host, Task &task, CommitParamData &pdata);
-<<<<<<< HEAD
 
         //add by zhutao : 20160517:b
         //static int64_t task_get_seq(void *ptask);
@@ -621,8 +551,6 @@ namespace oceanbase
         int task_end_session(void *ptask, void *pdata);
         //add by zhutao : 20160517:e
     private:
-=======
->>>>>>> refs/remotes/origin/master
       private:
         ObUtilInterface &ui_;
         common::ThreadSpecificBuffer my_thread_buffer_;
@@ -635,20 +563,15 @@ namespace oceanbase
         SessionCtxFactory session_ctx_factory_;
         SessionMgr session_mgr_;
         LockMgr lock_mgr_;
-<<<<<<< HEAD
         ObSpinLock write_clog_mutex1_;
         //add by zhouhuan[scalable commit] 20160711:b
         SpinRWLock write_clog_mutex_;///< write_clog_mutex_
         volatile int64_t commit_task_num_;
         //add:e
-=======
-        ObSpinLock write_clog_mutex_;
->>>>>>> refs/remotes/origin/master
 
         common::ObList<Task*> uncommited_session_list_;
         char ups_result_memory_[OB_MAX_PACKET_LENGTH];
         common::ObDataBuffer ups_result_buffer_;
-<<<<<<< HEAD
         //Task nop_task_;
         LogGroup nop_pos_;
         SpinRWLock task_lock_;
@@ -671,11 +594,6 @@ namespace oceanbase
 //        // add by guojinei test
 //        int64_t last_test_;
 //        // add:e
-=======
-        Task nop_task_;
-
-        common::ObFIFOStream fifo_stream_;
->>>>>>> refs/remotes/origin/master
     };
   }
 }

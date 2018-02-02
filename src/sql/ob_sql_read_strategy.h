@@ -33,19 +33,14 @@ namespace oceanbase
      * exmaple: select * from t where pk1, pk2 in ((0,1))
      *
      */
-<<<<<<< HEAD
     class ObSqlReadStrategy//slwang note:Scan:对单表的查询方法，如果该表的filter里面中没有全主键，则方法为scan
                            //             Get:对单表的查询方法，如果该表的filter中确定了全主键，则方法为get
-=======
-    class ObSqlReadStrategy
->>>>>>> refs/remotes/origin/master
     {
       public:
         ObSqlReadStrategy();
         virtual ~ObSqlReadStrategy();
 
         void reset();
-<<<<<<< HEAD
         //add wanglei [semi join] 20170417:b
         void reset_for_semi_join();
         void remove_last_inexpr();
@@ -55,8 +50,6 @@ namespace oceanbase
         //ObSEArray::iterator<ObSqlExpression> get_simple_cond_filter_list_begin();
         //ObSEArray::iterator<ObSqlExpression> get_simple_cond_filter_list_end();
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         inline void set_rowkey_info(const common::ObRowkeyInfo &rowkey_info)
         {
           rowkey_info_ = &rowkey_info;
@@ -69,7 +62,6 @@ namespace oceanbase
         int find_rowkeys_from_equal_expr(bool real_val, ObIArray<ObRowkey> &rowkey_array, PageArena<ObObj,common::ModulePageAllocator> &objs_allocator);
         int find_rowkeys_from_in_expr(bool real_val, ObIArray<ObRowkey> &rowkey_array, common::PageArena<ObObj,common::ModulePageAllocator> &objs_allocator);
         int find_scan_range(ObNewRange &range, bool &found, bool single_row_only);
-<<<<<<< HEAD
         //add wanglei [semi join in expr] 20161130:b
         typedef struct Rowkey_Objs
         {
@@ -91,9 +83,6 @@ namespace oceanbase
         int eraseDuplicate(pRowKey_Objs tmp_start_rowkeys, pRowKey_Objs tmp_end_rowkeys, bool forward, int64_t position) ;
         int release_rowkey_objs();
         //add wanglei [semi join in expr] 20161130:e
-=======
-
->>>>>>> refs/remotes/origin/master
         int assign(const ObSqlReadStrategy *other, ObPhyOperator *owner_op = NULL);
         int64_t to_string(char* buf, const int64_t buf_len) const;
       public:
@@ -110,7 +99,6 @@ namespace oceanbase
         common::ObObj end_key_objs_[OB_MAX_ROWKEY_COLUMN_NUMBER];
         char* start_key_mem_hold_[OB_MAX_ROWKEY_COLUMN_NUMBER];
         char* end_key_mem_hold_[OB_MAX_ROWKEY_COLUMN_NUMBER];
-<<<<<<< HEAD
         //add wanglei [semi join in expr] 20161130:b
         int64_t range_count_ ;
         int64_t range_count_cons_ ;
@@ -121,9 +109,6 @@ namespace oceanbase
         char**mutiple_end_key_mem_hold_ ;
         int64_t in_sub_query_idx_;
         //add wanglei [semi join in expr] 20161130:e
-=======
-
->>>>>>> refs/remotes/origin/master
       private:
         int find_single_column_range(bool real_val, int64_t idx, uint64_t column_id, bool &found);
         int find_closed_column_range(bool real_val, int64_t idx, uint64_t column_id, bool &found_start, bool &found_end, bool single_row_only);

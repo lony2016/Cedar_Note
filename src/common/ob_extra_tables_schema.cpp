@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -24,8 +23,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -236,11 +233,8 @@ int ObExtraTablesSchema::first_tablet_entry_schema(TableSchema& table_schema)
   return ret;
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> refs/remotes/origin/master
 int ObExtraTablesSchema::all_all_column_schema(TableSchema& table_schema)
 {
   int ret = OB_SUCCESS;
@@ -354,7 +348,6 @@ int ObExtraTablesSchema::all_all_column_schema(TableSchema& table_schema)
       ObIntType,  //column_type
       sizeof(int64_t), //column length
       false); //is nullable
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   ADD_COLUMN_SCHEMA("auto_increment", //column_name
       column_id ++, //column_id
@@ -363,8 +356,6 @@ int ObExtraTablesSchema::all_all_column_schema(TableSchema& table_schema)
       sizeof(int64_t), //column length
       false); //is nullable
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   ADD_COLUMN_SCHEMA("gm_create", //column_name
       OB_CREATE_TIME_COLUMN_ID, //column_id
       0, //rowkey_id
@@ -468,7 +459,6 @@ int ObExtraTablesSchema::all_join_info_schema(TableSchema& table_schema)
   return ret;
 }
 
-<<<<<<< HEAD
 //longfei [create index]
 int ObExtraTablesSchema::all_secondary_index_schema(TableSchema& table_schema)
 {
@@ -669,8 +659,6 @@ int ObExtraTablesSchema::all_secondary_index_schema(TableSchema& table_schema)
 }
 
 
-=======
->>>>>>> refs/remotes/origin/master
 ////////////////////////////////////////////////////////////////////////////
 //                        OCEANBASE SYSTEM TABLES                         //
 ////////////////////////////////////////////////////////////////////////////
@@ -816,7 +804,6 @@ int ObExtraTablesSchema::all_client_schema(TableSchema& table_schema)
       false);
   return ret;
 }
-<<<<<<< HEAD
 //add hxlong [Truncate Table]:20170318:b
 int ObExtraTablesSchema::all_truncate_op_info(TableSchema& table_schema)
 {
@@ -863,9 +850,6 @@ int ObExtraTablesSchema::all_truncate_op_info(TableSchema& table_schema)
   return ret;
 }
 //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
 int ObExtraTablesSchema::all_server_schema(TableSchema& table_schema)
 {
   int ret = OB_SUCCESS;
@@ -937,7 +921,6 @@ int ObExtraTablesSchema::all_server_schema(TableSchema& table_schema)
   return ret;
 }
 
-<<<<<<< HEAD
 //add huangcc [statistic info materialization] 20161208:b
 int ObExtraTablesSchema::all_statistic_info(TableSchema& table_schema)
 {
@@ -1064,8 +1047,6 @@ int ObExtraTablesSchema::all_udi_mointor_list(TableSchema &table_schema)
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 ////////////////////////////////////////////////////////////////////////////
 //                    OCEANBASE USER PRIVILEGE TABLES                     //
 ////////////////////////////////////////////////////////////////////////////
@@ -1192,7 +1173,6 @@ int ObExtraTablesSchema::all_user_schema(TableSchema &table_schema)
   return ret;
 }
 
-<<<<<<< HEAD
 //modified by wangdonghui 20151223 add type,comment
 //add by zhujun 2015-3-11:b
 int ObExtraTablesSchema::all_procedure_schema(TableSchema &table_schema)
@@ -1235,8 +1215,6 @@ int ObExtraTablesSchema::all_procedure_schema(TableSchema &table_schema)
 	  return ret;
 }
 //add:e
-=======
->>>>>>> refs/remotes/origin/master
 int ObExtraTablesSchema::all_table_privilege_schema(TableSchema &table_schema)
 {
   // hard code
@@ -1774,7 +1752,6 @@ int ObExtraTablesSchema::all_statement_schema(TableSchema & table_schema)
       false); //is nullable
   return ret;
 }
-<<<<<<< HEAD
 
 //add maoxx
 int ObExtraTablesSchema::all_index_service_schema(TableSchema &table_schema)
@@ -1916,5 +1893,3 @@ int ObExtraTablesSchema::all_auto_increment_schema(TableSchema &table_schema)
   return ret;
 }
 //add:e
-=======
->>>>>>> refs/remotes/origin/master

@@ -52,7 +52,6 @@ namespace oceanbase
       int64_t get_cur_sharding_result_idx() const;
       
       int get_next_row(common::ObRow &row);
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       int set_param_only(const sql::ObSqlScanParam & scan_param);
       int store_rowkey_to_sorted_operator(common::ObNewRange  rowkey)
@@ -62,8 +61,6 @@ namespace oceanbase
           return ret;
       }
       //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
     private:
       enum
       {

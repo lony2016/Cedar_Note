@@ -17,10 +17,7 @@
 #define _OB_UPS_MODIFY_H 1
 
 #include "ob_husk_filter.h"
-<<<<<<< HEAD
 #include "ob_no_children_phy_operator.h" //add wangjiahao [table lock] 20160616
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -32,7 +29,6 @@ namespace oceanbase
     {
     }
 
-<<<<<<< HEAD
     /**
      * add by zt
      * @brief The ObUpsModify class
@@ -41,13 +37,10 @@ namespace oceanbase
      * the later serialize the dmltype, it just save the dmltype flag when serialize
      * replace plan. Is it necessary to desgin two classes just for such savings ?
      */
-=======
->>>>>>> refs/remotes/origin/master
     class ObUpsModify : public ObHuskFilter<PHY_UPS_MODIFY>
     {
       public:
         ObDmlType get_dml_type() const {return OB_DML_REPLACE;};
-<<<<<<< HEAD
         int64_t get_table_id() const {return table_id_;}
         void set_table_id(int64_t table_id) {table_id_ = table_id;}
         //add lbzhong [auto_increment] 20161215:b
@@ -59,27 +52,20 @@ namespace oceanbase
         //add lbzhong [auto_increment] 20161215:b
         int64_t auto_value_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class ObUpsModifyWithDmlType: public ObHuskFilter<PHY_UPS_MODIFY_WITH_DML_TYPE>
     {
       public:
-<<<<<<< HEAD
         ObUpsModifyWithDmlType(): dml_type_(OB_DML_REPLACE), table_id_(OB_INVALID_ID)
         //add lbzhong [auto_increment] 20161215:b
         , auto_value_(OB_INVALID_AUTO_INCREMENT_VALUE)
         //add:e
         {} //modify wangjiahao [table lock] 20160616
-=======
-        ObUpsModifyWithDmlType(): dml_type_(OB_DML_REPLACE) {}
->>>>>>> refs/remotes/origin/master
         virtual ~ObUpsModifyWithDmlType() {}
       public:
         ObDmlType get_dml_type() const {return dml_type_;};
         void set_dml_type(const ObDmlType dml_type) {dml_type_ = dml_type;}
-<<<<<<< HEAD
         //add wangjiahao [table lock] 20160616 :b
         int64_t get_table_id() const {return table_id_;}
         void set_table_id(int64_t table_id) {table_id_ = table_id;}
@@ -88,8 +74,6 @@ namespace oceanbase
         int64_t get_auto_value() const {return auto_value_;}
         void set_auto_value(int64_t auto_value) {auto_value_ = auto_value;}
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         int64_t to_string(char* buf, const int64_t buf_len) const;
         int serialize(char* buf, const int64_t buf_len, int64_t& pos) const;
         int deserialize(const char* buf, const int64_t data_len, int64_t& pos);
@@ -111,13 +95,10 @@ namespace oceanbase
         }
       private:
         ObDmlType dml_type_;
-<<<<<<< HEAD
         int64_t table_id_; //add wangjiahao [table lock] 20160616
         //add lbzhong [auto_increment] 20161215:b
         int64_t auto_value_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace sql
 } // end namespace oceanbase

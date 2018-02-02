@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -20,8 +19,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -44,12 +41,9 @@
 #include "rootserver/ob_root_rpc_stub.h"
 #include "rootserver/ob_root_async_task_queue.h"
 #include <tbsys.h>
-<<<<<<< HEAD
 // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
 #include "common/ob_election_role_mgr.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 // forward declarations for unit test classes
 class ObUpsManagerTest_test_basic_Test;
@@ -98,7 +92,6 @@ namespace oceanbase
         ObUpsManager(ObRootRpcStub &rpc_stub, ObRootWorker *worker, const int64_t &revoke_rpc_timeout_us,
                      int64_t lease_duration, int64_t lease_reserved_us, int64_t waiting_ups_register_duration,
                      const common::ObiRole &obi_role, const volatile int64_t& schema_version,
-<<<<<<< HEAD
                      // modify by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
                      //const volatile int64_t& config_version);
                      const volatile int64_t &config_version,
@@ -113,11 +106,6 @@ namespace oceanbase
          */
         bool is_master_lease_valid() const;
         // add:e
-=======
-                     const volatile int64_t& config_version);
-        virtual ~ObUpsManager();
-
->>>>>>> refs/remotes/origin/master
         int get_ups_master(ObUps &ups_master) const;
         void set_async_queue(ObRootAsyncTaskQueue * queue);
         void reset_ups_read_percent();
@@ -137,7 +125,6 @@ namespace oceanbase
         int grant_eternal_lease();     // for heartbeat thread
         int check_lease();    // for check thread
         int check_ups_master_exist(); // for check thread
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         /**
          * @brief send rs election lease to ups with heartbeat
@@ -167,8 +154,6 @@ namespace oceanbase
           all_ups_state_= ups_state;
         }
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // change the ups status and then log this change
         void change_ups_stat(const int32_t index, const ObUpsStatus new_stat);
@@ -176,13 +161,9 @@ namespace oceanbase
         bool did_ups_exist(const common::ObServer &addr) const;
         bool is_ups_master(const common::ObServer &addr) const;
         bool has_master() const;
-<<<<<<< HEAD
         //delete chujiajia [rs_election][multi_cluster] 20150823:b
         // bool is_master_lease_valid() const;
         //delete:e
-=======
-        bool is_master_lease_valid() const;
->>>>>>> refs/remotes/origin/master
         bool need_grant(int64_t now, const ObUps &ups) const;
         int send_granting_msg(const common::ObServer &addr, common::ObMsgUpsHeartbeat &msg);
         int select_new_ups_master();
@@ -202,7 +183,6 @@ namespace oceanbase
         // for unit test
         int32_t get_ups_count() const;
         int32_t get_active_ups_count() const;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         /**
          * @brief get rs election lease
@@ -218,8 +198,6 @@ namespace oceanbase
          */
         bool need_renew_rs_election_lease(int64_t now, const ObUps &ups) const;
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         friend class ::ObUpsManagerTest_test_basic_Test;
         friend class ::ObUpsManagerTest_test_register_lease_Test;
         friend class ::ObUpsManagerTest_test_register_lease2_Test;
@@ -247,7 +225,6 @@ namespace oceanbase
         int32_t master_master_ups_read_percentage_;
         int32_t slave_master_ups_read_percentage_;
         bool is_flow_control_by_ip_;
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
         const common::ObElectionRoleMgr& election_role_;    ///< the information of rs election
         // add:e
@@ -255,8 +232,6 @@ namespace oceanbase
         //add by qx 20160830 :b
         bool all_ups_state_;   ///<  ups online(ture) or offline(false) flag
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
     };
  } // end namespace rootserver
 } // end namespace oceanbase

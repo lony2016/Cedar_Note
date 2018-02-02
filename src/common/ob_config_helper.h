@@ -75,11 +75,8 @@
 
 #define DEF_INT(args...)                        \
   _DEF_CONFIG_RANGE_EASY(Int,args)
-<<<<<<< HEAD
 #define DEF_INT2(args...)                        \
   _DEF_CONFIG_RANGE_EASY(Int2,args)
-=======
->>>>>>> refs/remotes/origin/master
 #define DEF_CAP(args...)                        \
   _DEF_CONFIG_RANGE_EASY(Capacity,args)
 #define DEF_TIME(args...)                       \

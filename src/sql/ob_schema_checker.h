@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -77,7 +74,6 @@ namespace oceanbase
         bool is_rowkey_column(
             const common::ObString& table_name,
             const common::ObString& column_name) const;
-<<<<<<< HEAD
         // longfei [create index]
         /**
          * @brief is_index_full: check index number of a table
@@ -86,8 +82,6 @@ namespace oceanbase
          * @return err code
          */
         int is_index_full(uint64_t table_id,bool& is_full);
-=======
->>>>>>> refs/remotes/origin/master
         
       private:
         // disallow copy

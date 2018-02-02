@@ -81,17 +81,12 @@ namespace oceanbase
         DISALLOW_COPY_AND_ASSIGN(ObRingBuffer);
 
       private:
-<<<<<<< HEAD
         //modified by qx 20161106:b
         //static const int64_t DEF_BLOCK_BITS = 22;
         //static const int64_t DEF_BLOCK_SIZE = 1 << DEF_BLOCK_BITS; // 4M
         int64_t DEF_BLOCK_BITS;
         int64_t DEF_BLOCK_SIZE;
         //modified :e
-=======
-        static const int64_t DEF_BLOCK_BITS = 22;
-        static const int64_t DEF_BLOCK_SIZE = 1 << DEF_BLOCK_BITS; // 4M
->>>>>>> refs/remotes/origin/master
         static const int64_t RING_QUEUE_BITS = 10;
         static const int64_t RING_QUEUE_SIZE = 1 << RING_QUEUE_BITS;  // 1k
         static const uint32_t BLOCK_MAGIC_NUM = 0xcececece;      // block magic num

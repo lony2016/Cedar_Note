@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -50,20 +47,14 @@ namespace oceanbase
   namespace sql
   {
     class ObTableRpcScan;
-<<<<<<< HEAD
 //    class ObProcedure; //add zt 20151110
     class SpProcedure; //add zt 20151110
-=======
->>>>>>> refs/remotes/origin/master
     class ObResultSet;
     class ObPhysicalPlan: public common::DLink
     {
       public:
-<<<<<<< HEAD
 //      friend class ObProcedure; //add zt 20151110
         friend class SpProcedure; //add zt 20151110
-=======
->>>>>>> refs/remotes/origin/master
         struct ObTableVersion
         {
           ObTableVersion()
@@ -141,20 +132,16 @@ namespace oceanbase
         int64_t get_operator_size() const { return operators_store_.count(); }
         ObPhyOperator* get_phy_operator(int64_t index) const;
         int assign(const ObPhysicalPlan& other);
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         void set_auto_increment(const bool auto_increment) { auto_increment_ = auto_increment; }
         bool is_auto_increment() const { return auto_increment_; }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         NEED_SERIALIZE_AND_DESERIALIZE;
 
         int32_t get_type(){return 0;};
         static ObPhysicalPlan *alloc();
         static void free(ObPhysicalPlan *plan);
-<<<<<<< HEAD
 
         //add zt 20151109 :b
         //bind the proc_exec flag with phy_plan is not a good idea,
@@ -179,13 +166,10 @@ namespace oceanbase
         void set_long_trans_exec(bool long_trans_exec_mode) {long_trans_exec_mode_ = long_trans_exec_mode;}
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         static const int64_t COMMON_OP_NUM = 16;
         static const int64_t COMMON_SUB_QUERY_NUM = 6;
         static const int64_t COMMON_BASE_TABLE_NUM = 64;
-<<<<<<< HEAD
 //        typedef oceanbase::common::ObSEArray<ObPhyOperator*, COMMON_OP_NUM> OperatorStore; //delete by zt 20151110
         typedef oceanbase::common::ObSEArray<ObPhyOperator*, COMMON_SUB_QUERY_NUM> SubQueries;
         typedef oceanbase::common::ObSEArray<ObTableVersion, COMMON_BASE_TABLE_NUM> BaseTableStore;
@@ -193,11 +177,6 @@ namespace oceanbase
     public:
         typedef oceanbase::common::ObSEArray<ObPhyOperator*, COMMON_OP_NUM> OperatorStore;
         //add zt 20151110 :e
-=======
-        typedef oceanbase::common::ObSEArray<ObPhyOperator*, COMMON_OP_NUM> OperatorStore;
-        typedef oceanbase::common::ObSEArray<ObPhyOperator*, COMMON_SUB_QUERY_NUM> SubQueries;
-        typedef oceanbase::common::ObSEArray<ObTableVersion, COMMON_BASE_TABLE_NUM> BaseTableStore;
->>>>>>> refs/remotes/origin/master
 
       private:
         DISALLOW_COPY_AND_ASSIGN(ObPhysicalPlan);
@@ -220,7 +199,6 @@ namespace oceanbase
         bool in_ups_executor_;
         bool cons_from_assign_;
         common::ObTransReq start_trans_req_;
-<<<<<<< HEAD
         uint64_t next_phy_operator_id_;//slwang note:默认值从0开始
         //add zt 20151109 :b
         bool group_exec_mode_;  ///< group execute flag
@@ -231,9 +209,6 @@ namespace oceanbase
         //add lbzhong [auto_increment] 20161218:b
         bool auto_increment_;
         //add:e
-=======
-        uint64_t next_phy_operator_id_;
->>>>>>> refs/remotes/origin/master
     };
 
     inline int ObPhysicalPlan::set_operator_factory(ObPhyOperatorFactory* factory)
@@ -300,7 +275,6 @@ namespace oceanbase
       table_store_.clear();
       in_ups_executor_ = false;
       cons_from_assign_ = false;
-<<<<<<< HEAD
 
       //add zt 20151119
       group_exec_mode_ = false;
@@ -308,8 +282,6 @@ namespace oceanbase
       //add by qx 20170318 :b
       long_trans_exec_mode_ = false;
       //add :e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     inline const common::ObTransID& ObPhysicalPlan::get_trans_id() const

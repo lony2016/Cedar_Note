@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -50,7 +47,6 @@ namespace oceanbase
         // start_location的log_id_必须是有效的, file_id_和offset_如果无效，会被填充为正确值。
         virtual int get_log(const int64_t start_id, ObLogLocation& start_location, ObLogLocation& end_location,
                             char* buf, const int64_t len, int64_t& read_count);
-<<<<<<< HEAD
         //add lbzhong [Commit Point] 20150820:b
         /**
          * @brief get commit log from log file
@@ -65,8 +61,6 @@ namespace oceanbase
         virtual int get_log(const int64_t start_id, ObLogLocation& start_location, ObLogLocation& end_location,
                             char* buf, const int64_t len, int64_t& read_count, bool& has_committed_end, const int64_t commit_seq);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       protected:
         bool is_inited() const;
       private:

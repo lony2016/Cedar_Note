@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -38,12 +35,9 @@
 #include "data_buffer.h"
 #include "ob_result.h"
 #include "ob_obi_role.h"
-<<<<<<< HEAD
 // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
 #include "ob_election_role_mgr.h"
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
@@ -56,15 +50,12 @@ namespace oceanbase
       ObiRole obi_role_;
       int64_t schema_version_;
       int64_t config_version_;
-<<<<<<< HEAD
       // add by guojinwei [lease between rs and ups][multi_cluster] 20150819:b
       int64_t rs_election_lease_;
       // add:e
       // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
       ObElectionRoleMgr election_role_;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       int serialize(char* buf, const int64_t buf_len, int64_t& pos) const;
       int deserialize(const char* buf, const int64_t data_len, int64_t& pos);
     };

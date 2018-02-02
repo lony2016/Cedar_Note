@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -62,15 +59,12 @@
 #include "ob_multi_tablet_merger.h"
 #include "ob_bypass_sstable_loader.h"
 #include "ob_file_recycle.h"
-<<<<<<< HEAD
 // add longfei [cons static index] 151120:b
 #include "ob_index_handle_pool.h"
 // add e
 //add weixing [statistics build]20170206:b
 #include "ob_chunk_statistics_collector.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -86,10 +80,7 @@ namespace oceanbase
     class ObTabletReportInfoList;
     class ObScanner;
     class ObServer;
-<<<<<<< HEAD
     enum ConIdxStage;
-=======
->>>>>>> refs/remotes/origin/master
   }
   namespace chunkserver
   {
@@ -99,13 +90,10 @@ namespace oceanbase
     {
       public:
         static const int32_t MAX_COMMAND_LENGTH = 1024*2;
-<<<<<<< HEAD
         //add longfei [cons static index] 151207:b
         static const int32_t MAX_GET_COLUMN_CHECKSUM_TIMEOUT = 5000000;
         static const int32_t MAX_SEND_COLUMN_CHECKSUM_TIMEOUT = 3000000;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         DISALLOW_COPY_AND_ASSIGN(ObTabletManager);
 
@@ -125,7 +113,6 @@ namespace oceanbase
         int load_tablets(const int32_t* disk_no_array, const int32_t size);
         void destroy();
 
-<<<<<<< HEAD
         // add longfei [cons static index] 151120:b
       public:
         /**
@@ -160,8 +147,6 @@ namespace oceanbase
         int retry_failed_work(const BlackList&,const ObServer);
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       public:
         /**
          * must call end_get() to release the resources.
@@ -185,15 +170,12 @@ namespace oceanbase
         int prepare_merge_tablets(const int64_t memtable_frozen_version);
         int prepare_tablet_image(const int64_t memtable_frozen_version);
 
-<<<<<<< HEAD
         //add weixing [statistics build]20170206:b
         ObStatisticsCollector& get_statistics_collector();
         int start_statistics_collector();
         int build_statistics();
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
         int merge_tablets(const int64_t memtable_frozen_version);
         ObChunkMerge &get_chunk_merge() ;
         ObCompactSSTableMemThread& get_cache_thread();
@@ -323,7 +305,6 @@ namespace oceanbase
 
         int fill_tablet_info(const ObTablet& tablet, common::ObTabletReportInfo& tablet_info);
         int send_tablet_report(const common::ObTabletReportInfoList& tablets, bool has_more);
-<<<<<<< HEAD
         //add maoxx
         /**
          * @brief get_column_checksum
@@ -356,8 +337,6 @@ namespace oceanbase
         //int send_index_info(uint64_t index_tid);
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 
       public:
         // allocate new sstable file sequence, call after load_tablets();
@@ -402,7 +381,6 @@ namespace oceanbase
         ObSwitchCacheUtility switch_cache_utility_;
 
         ObChunkMerge chunk_merge_;
-<<<<<<< HEAD
         // add longfei [cons static index] 151120:b
         ObIndexHandlePool index_handle_pool_; ///< for secondary index thread manager
         uint64_t index_beat_tid_; ///< table's id in index beat package
@@ -414,11 +392,6 @@ namespace oceanbase
         ObStatisticsCollector statistics_collector_;
         uint64_t statistics_tid_;
         //add e
-=======
-        ObCompactSSTableMemThread cache_thread_;
-        const ObChunkServerConfig* config_;
-        ObBypassSSTableLoader bypass_sstable_loader_;
->>>>>>> refs/remotes/origin/master
     };
 
     inline FileInfoCache&  ObTabletManager::get_fileinfo_cache()

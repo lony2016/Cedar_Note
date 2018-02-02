@@ -22,11 +22,7 @@
 #include "common/ob_define.h"
 #include "common/ob_server.h"
 #include "common/ob_scanner.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -55,11 +51,7 @@ namespace oceanbase
       void set_result_code(const int32_t code);
 
       //get handler
-<<<<<<< HEAD
       onev_io_process_pe* get_handler() const;
-=======
-      easy_io_process_pt* get_handler() const;
->>>>>>> refs/remotes/origin/master
 
       /// get response for serialize the result from net io buffer
       common::ObScanner & get_result(void);
@@ -111,11 +103,7 @@ namespace oceanbase
       int64_t end_time_us_;
       int64_t session_id_;
       //packet handler
-<<<<<<< HEAD
       onev_io_process_pe *handler_;
-=======
-      easy_io_process_pt *handler_;
->>>>>>> refs/remotes/origin/master
     };
   }
 }

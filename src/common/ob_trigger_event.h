@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2012 Taobao Inc.
  *
@@ -95,16 +92,12 @@ namespace oceanbase
           return ret;
         }
       private:
-<<<<<<< HEAD
         //mod longfei 160118:b
         //debug:trigger event执行replace时间超过2s
         //static const int64_t timeout = 2 * 1000L * 1000L; // 2s
         static const int64_t timeout = 5 * 1000L * 1000L; ///<  change trigger event timeout from 2s to 5s
         //mod e
 
-=======
-        static const int64_t timeout = 2 * 1000L * 1000L; // 2s
->>>>>>> refs/remotes/origin/master
         ObMsProvider *ms_provider_;
         ObGeneralRpcStub *rpc_stub_;
     };

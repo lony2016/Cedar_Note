@@ -13,11 +13,7 @@
 #include <malloc.h>
 #include "common/ob_define.h"
 #include "ob_proxy_server_main.h"
-<<<<<<< HEAD
 #include "onev_palloc.h"
-=======
-#include "easy_pool.h"
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::proxyserver;
@@ -32,11 +28,7 @@ namespace
 
 int main(int argc, char* argv[])
 {
-<<<<<<< HEAD
   //onev_pool_set_allocator(ob_malloc);
-=======
-  //easy_pool_set_allocator(ob_malloc);
->>>>>>> refs/remotes/origin/master
   ::mallopt(M_MMAP_THRESHOLD, DEFAULT_MMAP_THRESHOLD);
   ob_init_memory_pool();
   ObProxyServerMain* pm = ObProxyServerMain::get_instance();

@@ -40,11 +40,7 @@ namespace oceanbase
       int handle_send_file_request(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* request,
-=======
-        easy_request_t* request,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer);
 
@@ -54,7 +50,6 @@ namespace oceanbase
 
       int receive_file_pre(ObFileAppender& file_appender, int64_t& file_size,
           ObString& file_path, ObString& tmp_file_path,
-<<<<<<< HEAD
           onev_request_e* request, ObDataBuffer& in_buffer, 
           ObDataBuffer& out_buffer, int32_t& response_cid, const int64_t session_id);
 
@@ -64,26 +59,11 @@ namespace oceanbase
 
       int receive_file_end(ObString& file_path, ObString& tmp_file_path, const int64_t file_size,
           onev_request_e* request, ObDataBuffer& out_buffer, 
-=======
-          easy_request_t* request, ObDataBuffer& in_buffer, 
-          ObDataBuffer& out_buffer, int32_t& response_cid, const int64_t session_id);
-
-      int receive_file_block(ObFileAppender& file_appender, char* buf,
-          easy_request_t* request, ObDataBuffer& in_buffer,
-          ObDataBuffer& out_buffer, int32_t& response_cid, const int64_t session_id);
-
-      int receive_file_end(ObString& file_path, ObString& tmp_file_path, const int64_t file_size,
-          easy_request_t* request, ObDataBuffer& out_buffer, 
->>>>>>> refs/remotes/origin/master
           int32_t& response_cid, const int64_t session_id);
 
       int receive_file_loop(ObString& file_path, ObString& tmp_file_path, const int64_t file_size,
           ObFileAppender& file_appender, 
-<<<<<<< HEAD
           onev_request_e* request, ObDataBuffer& out_buffer, 
-=======
-          easy_request_t* request, ObDataBuffer& out_buffer, 
->>>>>>> refs/remotes/origin/master
           int32_t & response_cid, const int64_t session_id);
 
       int check_dir(const ObString& local_dir, const int64_t file_size);

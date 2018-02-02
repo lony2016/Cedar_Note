@@ -57,7 +57,6 @@ void ObTabletScanFuse::reuse()
 
 bool ObTabletScanFuse::check_inner_stat()
 {
-<<<<<<< HEAD
     bool ret = true;
     //mod hxlong [Truncate Table]:20170318:b
     //if(NULL == sstable_scan_ || NULL == incremental_scan_)
@@ -74,15 +73,6 @@ bool ObTabletScanFuse::check_inner_stat()
     }
     //add:e
     return ret;
-=======
-  bool ret = true;
-  if(NULL == sstable_scan_ || NULL == incremental_scan_)
-  {
-    ret = false;
-    TBSYS_LOG(WARN, "check inner stat fail:sstable_scan_[%p], incremental_scan_[%p]", sstable_scan_, incremental_scan_);
-  }
-  return ret;
->>>>>>> refs/remotes/origin/master
 }
 
 int ObTabletScanFuse::set_child(int32_t child_idx, ObPhyOperator &child_operator)
@@ -99,14 +89,9 @@ int ObTabletScanFuse::set_sstable_scan(ObSSTableScan *sstable_scan)
   int ret = OB_SUCCESS;
   if(NULL == sstable_scan)
   {
-<<<<<<< HEAD
     //ret = OB_INVALID_ARGUMENT; //mod hxlong [truncate table]
     TBSYS_LOG(WARN, "argument sstable_scan is null");
     sstable_scan_ = NULL; //add hxlong [Truncate Table]
-=======
-    ret = OB_INVALID_ARGUMENT;
-    TBSYS_LOG(WARN, "argument sstable_scan is null");
->>>>>>> refs/remotes/origin/master
   }
   else
   {
@@ -146,7 +131,6 @@ int ObTabletScanFuse::open()
     ret = OB_ERROR;
     TBSYS_LOG(WARN, "check inner stat fail");
   }
-<<<<<<< HEAD
   //mod hxlong [Truncate Table]:20170318:b
   //else if(OB_SUCCESS != (ret = sstable_scan_->open()))
   else if((sstable_scan_ != NULL) && (OB_SUCCESS != (ret = sstable_scan_->open())))
@@ -167,16 +151,6 @@ int ObTabletScanFuse::open()
     TBSYS_LOG(WARN, "fail to get incremental scan row desc:ret[%d]", ret);
   }
   //add:e
-=======
-  else if(OB_SUCCESS != (ret = sstable_scan_->open()))
-  {
-    TBSYS_LOG(WARN, "open sstable scan fail:ret[%d]", ret);
-  }
-  if (OB_SUCCESS != (ret = sstable_scan_->get_row_desc(row_desc) ))
-  {
-    TBSYS_LOG(WARN, "fail to get sstable scan row desc:ret[%d]", ret);
-  }
->>>>>>> refs/remotes/origin/master
   else
   {
     curr_row_.set_row_desc(*row_desc);
@@ -198,10 +172,6 @@ int ObTabletScanFuse::open()
 
   return ret;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 int ObTabletScanFuse::close()
 {
   int ret = OB_SUCCESS;
@@ -266,14 +236,10 @@ int ObTabletScanFuse::get_next_row(const ObRow *&row)
         }
       }
 
-<<<<<<< HEAD
       //mod hxlong [Truncate Table]:20170318:b
       //if(OB_SUCCESS == ret && NULL == last_sstable_row_)
       if(OB_SUCCESS == ret && NULL == last_sstable_row_ && sstable_scan_ != NULL)
         //mod:e
-=======
-      if(OB_SUCCESS == ret && NULL == last_sstable_row_)
->>>>>>> refs/remotes/origin/master
       {
         ret = sstable_scan_->get_next_row(sstable_rowkey_, last_sstable_row_);
         if(OB_ITER_END == ret)
@@ -408,7 +374,6 @@ int ObTabletScanFuse::get_row_desc(const common::ObRowDesc *&row_desc) const
   int ret = OB_SUCCESS;
   if(NULL == sstable_scan_)
   {
-<<<<<<< HEAD
       //mod hxlong [Truncate Table]:20170318:b
       //ret = OB_ERROR;
       //TBSYS_LOG(WARN, "sstable scan is null");
@@ -417,10 +382,6 @@ int ObTabletScanFuse::get_row_desc(const common::ObRowDesc *&row_desc) const
         TBSYS_LOG(WARN, "get row desc fail:ret[%d]", ret);
       }
       //mod:e
-=======
-    ret = OB_ERROR;
-    TBSYS_LOG(WARN, "sstable scan is null");
->>>>>>> refs/remotes/origin/master
   }
   else
   {

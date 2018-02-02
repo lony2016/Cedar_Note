@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -72,11 +69,8 @@ namespace oceanbase
           int64_t to_string(char *buffer, int64_t length) const;
           int deep_copy(Field &other, common::ObStringBuf *str_buf);
         };
-<<<<<<< HEAD
         //        common::ObString proc_sql_;//add by zz 2014-12-27, delete by zt 20151117, wtf
         //        ObPhyOperator *ps_;//add by zz to store operator, delete by zt 20151117, wtf
-=======
->>>>>>> refs/remotes/origin/master
       public:
         ObResultSet();
         ~ObResultSet();
@@ -134,12 +128,9 @@ namespace oceanbase
         int add_field_column(const Field & field);
         int add_param_column(const Field & field);
         int pre_assign_params_room(const int64_t& size, common::ObIAllocator &alloc);
-<<<<<<< HEAD
 
         //        int pre_assign_cur_time_room(common::ObObj *place_holder);  //add zt 20151121
 
-=======
->>>>>>> refs/remotes/origin/master
         int pre_assign_cur_time_room(common::ObIAllocator &alloc);
         int fill_params(const common::ObIArray<obmysql::EMySQLFieldType>& types,
                         const common::ObIArray<common::ObObj>& values);
@@ -158,15 +149,12 @@ namespace oceanbase
         void set_affected_rows(const int64_t& affected_rows);
         void set_warning_count(const int64_t& warning_count);
         void set_physical_plan(ObPhysicalPlan *physical_plan, bool did_own);
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         void set_auto_increment(const bool auto_increment) { auto_increment_ = auto_increment; }
         bool is_auto_increment() const { return auto_increment_; }
         void set_auto_value(const int64_t auto_value) { auto_value_ = auto_value; }
         int64_t get_auto_value() const { return auto_value_; }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         void fileds_clear();
         void set_stmt_type(ObBasicStmt::StmtType stmt_type);
         void set_inner_stmt_type(ObBasicStmt::StmtType stmt_type);
@@ -184,7 +172,6 @@ namespace oceanbase
         {
           plan_from_assign_ = flag;
         }
-<<<<<<< HEAD
 
         void change_phy_plan(ObPhysicalPlan *plan, bool did_own);
         void set_sql_id(int64_t sql_id) {sql_id_ = sql_id;}
@@ -246,9 +233,6 @@ namespace oceanbase
         void set_cur_schema_version(int64_t cur_schema_version) {cur_schema_version_ = cur_schema_version;}
         int64_t get_cur_schema_version() const {return cur_schema_version_;}
         //add :e
-=======
-        void set_sql_id(int64_t sql_id) {sql_id_ = sql_id;};
->>>>>>> refs/remotes/origin/master
       private:
         // types and constants
         static const int64_t MSG_SIZE = 512;
@@ -285,7 +269,6 @@ namespace oceanbase
         common::ObArenaAllocator *ps_trans_allocator_;
         int64_t query_string_id_;
         common::ObObj *cur_time_; // only used when the sql contains fun like current_time
-<<<<<<< HEAD
 
         /**
          * The pointer to used to the located the running procedure, then I
@@ -305,8 +288,6 @@ namespace oceanbase
         bool auto_increment_;
         int64_t auto_value_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     inline int64_t ObResultSet::Field::to_string(char *buffer, int64_t len) const
@@ -339,15 +320,11 @@ namespace oceanbase
        my_session_(NULL),
        ps_trans_allocator_(NULL),
        query_string_id_(0),
-<<<<<<< HEAD
        cur_time_(NULL),
        proc_(NULL), //add zt 20151202
        //add lbzhong [auto_increment] 20161218:b
         auto_increment_(false), auto_value_(OB_INVALID_AUTO_INCREMENT_VALUE)
        //add:e
-=======
-       cur_time_(NULL)
->>>>>>> refs/remotes/origin/master
     {
       message_[0] = '\0';
     }
@@ -517,13 +494,9 @@ namespace oceanbase
           ret = tmp_ret;
           TBSYS_LOG(WARN, "failed to close main_query, ret=%d", ret);
         }
-<<<<<<< HEAD
 
       }
 
-=======
-      }
->>>>>>> refs/remotes/origin/master
       set_errcode(ret);
       return ret;
     }
@@ -537,7 +510,6 @@ namespace oceanbase
       own_physical_plan_ = did_own;
     }
 
-<<<<<<< HEAD
     //add zt 20151121:b
     /**
      * @brief ObResultSet::change_phy_plan
@@ -552,8 +524,6 @@ namespace oceanbase
     }
     //add zt 20151121:e
 
-=======
->>>>>>> refs/remotes/origin/master
     inline void ObResultSet::fileds_clear()
     {
       affected_rows_ = 0;

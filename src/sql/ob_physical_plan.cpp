@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -41,11 +38,7 @@
 #include "ob_mem_sstable_scan.h"
 #include "common/serialization.h"
 #include "ob_phy_operator_factory.h"
-<<<<<<< HEAD
 #include "ob_postfix_expression.h"  //add zt 20151109
-=======
-
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 using namespace oceanbase::common::serialization;
@@ -71,7 +64,6 @@ ObPhysicalPlan::ObPhysicalPlan()
    start_trans_(false),
    in_ups_executor_(false),
    cons_from_assign_(false),
-<<<<<<< HEAD
    next_phy_operator_id_(0),
    //add zt 20151109 :b
    group_exec_mode_(false),
@@ -82,9 +74,6 @@ ObPhysicalPlan::ObPhysicalPlan()
    //add lbzhong [auto_increment] 20161218:b
    auto_increment_(false)
    //add:e
-=======
-   next_phy_operator_id_(0)
->>>>>>> refs/remotes/origin/master
 {
 }
 
@@ -108,7 +97,6 @@ int ObPhysicalPlan::deserialize_header(const char* buf, const int64_t data_len, 
   {
     TBSYS_LOG(WARN, "failed to decode trans_id_, err=%d", ret);
   }
-<<<<<<< HEAD
   //add by qx 20170313 :b
   else if ((OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, pos, &group_exec_mode_))))
   {
@@ -127,15 +115,12 @@ int ObPhysicalPlan::deserialize_header(const char* buf, const int64_t data_len, 
     TBSYS_LOG(WARN, "failed to decode auto_increment, err=%d", ret);
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
 int ObPhysicalPlan::add_phy_query(ObPhyOperator *phy_query, int32_t* idx, bool main_query)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
   if ( (ret = phy_querys_.push_back(phy_query)) == OB_SUCCESS)//slwang note:from子查询先执行到这里，所以，都是嵌套的最里层的from子查询先加入到数组中，而最外层父查询是在数组最后一个位置
   {
       if (idx != NULL)
@@ -158,22 +143,11 @@ int ObPhysicalPlan::add_phy_query(ObPhyOperator *phy_query, int32_t* idx, bool m
           TBSYS_LOG(INFO, "slwang note,phy_querys_.count()=%ld", phy_querys_.count());
           //根据数组大小来推测，是不是也把主查询放到phy_querys_中了？
       }
-=======
-  if ( (ret = phy_querys_.push_back(phy_query)) == OB_SUCCESS)
-  {
-    if (idx != NULL)
-      *idx = static_cast<int32_t>(phy_querys_.count() - 1);
-    if (main_query)
-      main_query_ = phy_query;
->>>>>>> refs/remotes/origin/master
   }
   return ret;
 }
 
-<<<<<<< HEAD
 //slwang note: 只有physical_plan->set_pre_phy_query(get_cur_time_op)用到,用来把ObGetCurTimePhyOperator操作符压入物理计划
-=======
->>>>>>> refs/remotes/origin/master
 int ObPhysicalPlan::set_pre_phy_query(ObPhyOperator *phy_query, int32_t* idx)
 {
   int ret = OB_SUCCESS;
@@ -379,10 +353,6 @@ int ObPhysicalPlan::deserialize_tree(const char *buf, int64_t data_len, int64_t 
   {
     TBSYS_LOG(WARN, "fail to decode phy operator type:ret[%d]", ret);
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS == ret)
   {
     root = op_factory_->get_one(static_cast<ObPhyOperatorType>(phy_operator_type), allocator);
@@ -391,15 +361,12 @@ int ObPhysicalPlan::deserialize_tree(const char *buf, int64_t data_len, int64_t 
       ret = OB_ALLOCATE_MEMORY_FAILED;
       TBSYS_LOG(WARN, "get operator fail:type[%d]", phy_operator_type);
     }
-<<<<<<< HEAD
     //add zt 20151111:b
     else
     {
       root->set_phy_plan(this);
     }
     //add zt 20151111:e
-=======
->>>>>>> refs/remotes/origin/master
   }
   if (OB_SUCCESS == ret)
   {
@@ -460,11 +427,7 @@ int ObPhysicalPlan::serialize_tree(char *buf, int64_t buf_len, int64_t &pos, con
     }
   }
 
-<<<<<<< HEAD
   for (int64_t i=0;OB_SUCCESS == ret && i<root.get_child_num();i++)  //value
-=======
-  for (int64_t i=0;OB_SUCCESS == ret && i<root.get_child_num();i++)
->>>>>>> refs/remotes/origin/master
   {
     if (NULL != root.get_child(static_cast<int32_t>(i)) )
     {
@@ -507,7 +470,6 @@ int ObPhysicalPlan::assign(const ObPhysicalPlan& other)
     // my_result_set_; // The result set who owns this physical plan
     start_trans_ = other.start_trans_;
     start_trans_req_ = other.start_trans_req_;
-<<<<<<< HEAD
     //add by qx 20170313 :b
     group_exec_mode_ = other.group_exec_mode_;
     long_trans_exec_mode_ = other.long_trans_exec_mode_;
@@ -515,8 +477,6 @@ int ObPhysicalPlan::assign(const ObPhysicalPlan& other)
     //add lbzhong [auto_increment] 20161218:b
     auto_increment_ = other.auto_increment_;
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     for (int32_t i = 0; i < other.phy_querys_.count(); ++i)
     {
       const ObPhyOperator *subquery = other.phy_querys_.at(i);
@@ -613,10 +573,7 @@ DEFINE_SERIALIZE(ObPhysicalPlan)
   OB_ASSERT(my_result_set_);
   common::ObTransID trans_id = my_result_set_->get_session()->get_trans_id();
   FILL_TRACE_LOG("trans_id=%s", to_cstring(trans_id));
-<<<<<<< HEAD
 //  TBSYS_LOG(INFO, "trans_id=%s", to_cstring(trans_id)); //add by zt for test purpose
-=======
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS != (ret = serialization::encode_bool(buf, buf_len, pos, start_trans_)))
   {
     TBSYS_LOG(WARN, "failed to serialize trans_id_, err=%d buf_len=%ld pos=%ld",
@@ -630,7 +587,6 @@ DEFINE_SERIALIZE(ObPhysicalPlan)
   {
     TBSYS_LOG(ERROR, "trans_id.serialize(buf=%p[%ld-%ld])=>%d", buf, pos, buf_len, ret);
   }
-<<<<<<< HEAD
   //add by qx 20170313 :b
   else if ((OB_SUCCESS != (ret = serialization::encode_bool(buf, buf_len, pos, group_exec_mode_))))
   {
@@ -649,8 +605,6 @@ DEFINE_SERIALIZE(ObPhysicalPlan)
     TBSYS_LOG(WARN, "failed to serialize auto_increment, err=%d buf_len=%ld pos=%ld", ret, buf_len, pos);
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = encode_vi32(buf, buf_len, pos, main_query_idx)))
   {
     TBSYS_LOG(WARN, "fail to encode main query idx:ret[%d]", ret);
@@ -690,7 +644,6 @@ DEFINE_DESERIALIZE(ObPhysicalPlan)
   {
     TBSYS_LOG(ERROR, "trans_id.deserialize(buf=%p[%ld-%ld])=>%d", buf, pos, data_len, ret);
   }
-<<<<<<< HEAD
   //add by qx 20170313 :b
   else if ((OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, pos, &group_exec_mode_))))
   {
@@ -707,8 +660,6 @@ DEFINE_DESERIALIZE(ObPhysicalPlan)
     TBSYS_LOG(WARN, "failed to decode auto_increment_, err=%d", ret);
   }
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   else if (OB_SUCCESS != (ret = decode_vi32(buf, data_len, pos, &main_query_idx)))
   {
     TBSYS_LOG(WARN, "fail to decode main query idx:ret[%d]", ret);
@@ -717,10 +668,6 @@ DEFINE_DESERIALIZE(ObPhysicalPlan)
   {
     TBSYS_LOG(WARN, "fail to decode phy querys size:ret[%d]", ret);
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
   for (int32_t i=0;OB_SUCCESS == ret && i<phy_querys_size;i++)
   {
     if (OB_SUCCESS != (ret = deserialize_tree(buf, data_len, pos, *allocator_, operators_store_, root)))
@@ -750,7 +697,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObPhysicalPlan)
   int64_t size = 0;
   return size;
 }
-<<<<<<< HEAD
 //add zt 20151109:b
 //namespace oceanbase
 //{
@@ -825,5 +771,3 @@ DEFINE_GET_SERIALIZE_SIZE(ObPhysicalPlan)
 //  }
 //}
 //add zt 20151109:e
-=======
->>>>>>> refs/remotes/origin/master

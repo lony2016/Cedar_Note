@@ -18,10 +18,7 @@
 #include "common/utility.h"
 #include "ob_update_server.h"
 #include "ob_update_server_main.h"
-<<<<<<< HEAD
 #include <sys/syscall.h>
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::common;
 using namespace oceanbase::updateserver;
 
@@ -93,10 +90,7 @@ void ObUpsReplayRunnable::run(tbsys::CThread* thread, void* arg)
   UNUSED(arg);
 
   TBSYS_LOG(INFO, "ObUpsLogReplayRunnable start to run");
-<<<<<<< HEAD
   TBSYS_LOG(INFO, "test::zhouhuan1 Replay Runnable tid = [%ld]",syscall(SYS_gettid));
-=======
->>>>>>> refs/remotes/origin/master
   if (!is_initialized_)
   {
     TBSYS_LOG(ERROR, "ObUpsLogReplayRunnable has not been initialized");

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 /*
  *   (C) 2007-2010 Taobao Inc.
  *

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -28,8 +27,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -81,16 +78,12 @@ namespace
   const char* STR_COLUMN_TYPE_SEQ = "seq";
   const char* STR_COLUMN_TYPE_C_TIME = "create_time";
   const char* STR_COLUMN_TYPE_M_TIME = "modify_time";
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   /*
     *for rs_admin check_schema,add decimal type
     */
   const char* STR_COLUMN_TYPE_DECIMAL="decimal";
   //add e
-=======
-
->>>>>>> refs/remotes/origin/master
   const char* STR_SECTION_APP_NAME = "app_name";
   const char* STR_KEY_APP_NAME = "name";
   const char* STR_MAX_TABLE_ID = "max_table_id";
@@ -383,12 +376,9 @@ namespace oceanbase
      *-----------------------------------------------------------------------------*/
 
     ObColumnSchemaV2::ObColumnSchemaV2() : maintained_(false), is_nullable_(true),
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161124:b
       auto_increment_(false),
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     table_id_(OB_INVALID_ID),column_group_id_(OB_INVALID_ID),
     column_id_(OB_INVALID_ID),size_(0),type_(ObNullType),
     default_value_(), column_group_next_(NULL)
@@ -424,7 +414,6 @@ namespace oceanbase
     {
       return table_id_;
     }
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         uint32_t ObColumnSchemaV2::get_precision() const {
             return ob_decimal_helper_.dec_precision_;
@@ -446,9 +435,6 @@ namespace oceanbase
         }
 
         //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     bool  ObColumnSchemaV2::is_maintained() const
     {
       return maintained_;
@@ -542,7 +528,6 @@ namespace oceanbase
 
     void ObColumnSchemaV2::print_info() const
     {
-<<<<<<< HEAD
       //mod longfei [] 160121:b
       //TBSYS_LOG(INFO,"COLUMN:(%lu,%lu,%lu:%s)",table_id_,column_group_id_,column_id_,name_);
       //TBSYS_LOG(INFO,"JOIN  :(%lu,%lu,%lu)",join_info_.join_table_,join_info_.left_column_count_,
@@ -551,11 +536,6 @@ namespace oceanbase
       TBSYS_LOG(DEBUG,"JOIN  :(%lu,%lu,%lu)",join_info_.join_table_,join_info_.left_column_count_,
                 join_info_.correlated_column_);
       //mod e
-=======
-      TBSYS_LOG(INFO,"COLUMN:(%lu,%lu,%lu:%s)",table_id_,column_group_id_,column_id_,name_);
-      TBSYS_LOG(INFO,"JOIN  :(%lu,%lu,%lu)",join_info_.join_table_,join_info_.left_column_count_,
-          join_info_.correlated_column_);
->>>>>>> refs/remotes/origin/master
     }
 
     void ObColumnSchemaV2::print(FILE* fd) const
@@ -608,15 +588,12 @@ namespace oceanbase
       {
         type = ObModifyTimeType;
       }
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       else if (strcmp(str, STR_COLUMN_TYPE_DECIMAL) == 0)
       {
         type = ObDecimalType;
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       else
       {
         TBSYS_LOG(ERROR, "column type %s not be supported", str);
@@ -656,7 +633,6 @@ namespace oceanbase
         ret = serialization::encode_bool(buf, buf_len, tmp_pos, is_nullable_);
       }
 
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161124:b
       if (OB_SUCCESS == ret)
       {
@@ -664,8 +640,6 @@ namespace oceanbase
       }
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::encode_vi64(buf, buf_len, tmp_pos,static_cast<int64_t>(table_id_));
@@ -698,7 +672,6 @@ namespace oceanbase
       {
         ret = default_value_.serialize(buf, buf_len, tmp_pos);
       }
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       if(OB_SUCCESS == ret&&ObDecimalType==type_)
       {
@@ -709,9 +682,6 @@ namespace oceanbase
           ret = serialization::encode_i8(buf, buf_len, tmp_pos,ob_decimal_helper_.dec_scale_);
       }
       //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::encode_vi64(buf, buf_len, tmp_pos,static_cast<int64_t>(join_info_.join_table_));
@@ -837,7 +807,6 @@ namespace oceanbase
         ret = serialization::decode_bool(buf, data_len, tmp_pos, &is_nullable_);
       }
 
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161124:b
       if (OB_SUCCESS == ret)
       {
@@ -845,8 +814,6 @@ namespace oceanbase
       }
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::decode_vi64(buf, data_len, tmp_pos, reinterpret_cast<int64_t *>(&table_id_));
@@ -890,7 +857,6 @@ namespace oceanbase
       {
         ret = default_value_.deserialize(buf, data_len, tmp_pos);
       }
-<<<<<<< HEAD
       //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             if(ObDecimalType==type_){
 
@@ -912,9 +878,6 @@ namespace oceanbase
               }
             }
               //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::decode_vi64(buf, data_len, tmp_pos, reinterpret_cast<int64_t *>(&join_info_.join_table_));
@@ -952,12 +915,9 @@ namespace oceanbase
     {
       int64_t len = serialization::encoded_length_bool(maintained_);
       len += serialization::encoded_length_bool(is_nullable_);
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161124:b
       len += serialization::encoded_length_bool(auto_increment_);
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       len += serialization::encoded_length_vi64(table_id_);
       len += serialization::encoded_length_vi64(column_group_id_);
       len += serialization::encoded_length_vi64(column_id_);
@@ -965,7 +925,6 @@ namespace oceanbase
       len += serialization::encoded_length_vi32(type_);
       len += serialization::encoded_length_vstr(name_);
       len += default_value_.get_serialize_size();
-<<<<<<< HEAD
       //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       if(ObDecimalType==type_)
       len += 2;
@@ -973,8 +932,6 @@ namespace oceanbase
       *1 byte for precision,and 1 byte for scale
       */
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       len += serialization::encoded_length_vi64(join_info_.join_table_);
       len += serialization::encoded_length_vi64(join_info_.correlated_column_);
       len += serialization::encoded_length_vi64(join_info_.left_column_count_);
@@ -1007,12 +964,9 @@ namespace oceanbase
     internal_ups_scan_size_(0),
     merge_write_sstable_version_(2),
     replica_count_(2),
-<<<<<<< HEAD
     //longfei [create index]
     original_table_id_(OB_INVALID_ID),
 
-=======
->>>>>>> refs/remotes/origin/master
     version_(OB_SCHEMA_VERSION_FOUR_SECOND),
     schema_version_(0),
     create_time_column_id_(OB_INVALID_ID),
@@ -1021,10 +975,7 @@ namespace oceanbase
       name_[0] = '\0';
       expire_condition_[0] = '\0';
       comment_str_[0] = '\0';
-<<<<<<< HEAD
       index_status_ = ERROR;
-=======
->>>>>>> refs/remotes/origin/master
       memset(reserved_, 0, sizeof(reserved_));
     }
 
@@ -1199,7 +1150,6 @@ namespace oceanbase
       return modify_time_column_id_;
     }
 
-<<<<<<< HEAD
     uint64_t ObTableSchema::get_original_table_id() const
     {
       return original_table_id_;
@@ -1210,8 +1160,6 @@ namespace oceanbase
       return index_status_;
     }
 
-=======
->>>>>>> refs/remotes/origin/master
     void ObTableSchema::set_table_id(const uint64_t id)
     {
       table_id_ = id;
@@ -1386,7 +1334,6 @@ namespace oceanbase
       modify_time_column_id_ = id;
     }
 
-<<<<<<< HEAD
     void ObTableSchema::set_original_table_id(uint64_t id)
     {
       original_table_id_ = id;
@@ -1397,8 +1344,6 @@ namespace oceanbase
       index_status_ = status;
     }
 
-=======
->>>>>>> refs/remotes/origin/master
     bool ObTableSchema::operator ==(const ObTableSchema& r) const
     {
       bool ret = false;
@@ -1526,7 +1471,6 @@ namespace oceanbase
       {
         ret = serialization::encode_vi64(buf, buf_len, tmp_pos, replica_count_);
       }
-<<<<<<< HEAD
 
       //add longfei [create index]
       if (OB_SUCCESS == ret)
@@ -1539,8 +1483,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::encode_vi64(buf, buf_len, tmp_pos, version_);
@@ -1831,7 +1773,6 @@ namespace oceanbase
       {
         ret = serialization::decode_vi64(buf, data_len, tmp_pos, &replica_count_);
       }
-<<<<<<< HEAD
 
       //add longfei [create index]
       if (OB_SUCCESS == ret)
@@ -1844,8 +1785,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::decode_vi64(buf, data_len, tmp_pos, &version_);
@@ -1947,14 +1886,11 @@ namespace oceanbase
       len += serialization::encoded_length_vi64(internal_ups_scan_size_);
       len += serialization::encoded_length_vi64(merge_write_sstable_version_);
       len += serialization::encoded_length_vi64(replica_count_);
-<<<<<<< HEAD
       //add longfei [create index]
       len += serialization::encoded_length_vi64(original_table_id_);
       len += serialization::encoded_length_vi32(index_status_);
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       len += serialization::encoded_length_vi64(version_);
       if (OB_SCHEMA_VERSION_FOUR_SECOND <= version_)
       {
@@ -1987,11 +1923,7 @@ namespace oceanbase
      *-----------------------------------------------------------------------------*/
     ObSchemaManagerV2::ObSchemaManagerV2(): schema_magic_(OB_SCHEMA_MAGIC_NUMBER),version_(OB_SCHEMA_VERSION_FOUR),
     timestamp_(0), max_table_id_(OB_INVALID_ID),column_nums_(0),
-<<<<<<< HEAD
     table_nums_(0), is_id_index_hash_map_init_(false), columns_(NULL), column_capacity_(0),
-=======
-    table_nums_(0), columns_(NULL), column_capacity_(0),
->>>>>>> refs/remotes/origin/master
     drop_column_group_(false),hash_sorted_(false),
     column_group_nums_(0)
     {
@@ -2001,11 +1933,7 @@ namespace oceanbase
     ObSchemaManagerV2::ObSchemaManagerV2(const int64_t timestamp): schema_magic_(OB_SCHEMA_MAGIC_NUMBER),
     version_(OB_SCHEMA_VERSION_FOUR), timestamp_(timestamp),
     max_table_id_(OB_INVALID_ID),column_nums_(0),
-<<<<<<< HEAD
     table_nums_(0), is_id_index_hash_map_init_(false), columns_(NULL), column_capacity_(0),
-=======
-    table_nums_(0), columns_(NULL), column_capacity_(0),
->>>>>>> refs/remotes/origin/master
     drop_column_group_(false),hash_sorted_(false),
     column_group_nums_(0)
     {
@@ -2019,13 +1947,10 @@ namespace oceanbase
         column_hash_map_.destroy();
         id_hash_map_.destroy();
       }
-<<<<<<< HEAD
       if(is_id_index_hash_map_init_)
       {
         id_index_hash_map_.destroy();
       }
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL != columns_)
       {
         ob_free(columns_, ObModIds::OB_SCHEMA);
@@ -2054,10 +1979,7 @@ namespace oceanbase
         }
 
         int ret = sort_column();
-<<<<<<< HEAD
         ret=init_index_hash();
-=======
->>>>>>> refs/remotes/origin/master
         if (ret != OB_SUCCESS)
         {
           TBSYS_LOG(ERROR, "sort column failed:ret[%d]", ret);
@@ -2072,10 +1994,7 @@ namespace oceanbase
     max_table_id_(OB_INVALID_ID),
     column_nums_(0),
     table_nums_(0),
-<<<<<<< HEAD
     is_id_index_hash_map_init_(false),
-=======
->>>>>>> refs/remotes/origin/master
     columns_(NULL),
     column_capacity_(0),
     drop_column_group_(false),
@@ -2326,12 +2245,8 @@ namespace oceanbase
           if (parse_ok && sort_column() != OB_SUCCESS)
           {
             TBSYS_LOG(ERROR,"sort column failed");
-<<<<<<< HEAD
             parse_ok = false;            
             init_index_hash();//add longfei [create index] e
-=======
-            parse_ok = false;
->>>>>>> refs/remotes/origin/master
           }
 
           TBSYS_LOG(DEBUG,"config:%p",&config);
@@ -3030,7 +2945,6 @@ namespace oceanbase
       return column_nums_;
     }
 
-<<<<<<< HEAD
 
     //add by qx [query optimization] 20170407 ：b
     int ObSchemaManagerV2::get_index_columns(uint64_t table_id, uint64_t index_table_id, common::ObArray<uint64_t>& column_array) const
@@ -3057,8 +2971,6 @@ namespace oceanbase
       return ret;
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
     uint64_t ObSchemaManagerV2::get_max_table_id() const
     {
       return max_table_id_;
@@ -3366,10 +3278,7 @@ namespace oceanbase
     {
       int ret = OB_ERROR;
       const ObTableSchema *table = get_table_schema(column.get_table_id());
-<<<<<<< HEAD
       //TBSYS_LOG(INFO,"longfei [create index]:%s",table->get_table_name());
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == table)
       {
         TBSYS_LOG(ERROR,"can't find this table:%lu",column.get_table_id());
@@ -3380,16 +3289,12 @@ namespace oceanbase
         TBSYS_LOG(ERROR,"column id %ld reserved for internal usage.", column.get_id());
         ret = OB_INVALID_ARGUMENT;
       }
-<<<<<<< HEAD
 
       // mod longfei [bugfix] 151201
       // when we create index that don't have storing column,we will fail here.
       //      else if (column.get_id() > table->get_max_column_id())
       else if (column.get_id() > table->get_max_column_id() && column.get_id() != OB_INDEX_VIRTUAL_COLUMN_ID)
       // mod e
-=======
-      else if (column.get_id() > table->get_max_column_id())
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR,"column id %lu greater thean max_column_id %lu",
             column.get_id(), table->get_max_column_id());
@@ -3775,10 +3680,6 @@ namespace oceanbase
         }
       }
       int64_t right_column_count = schema_manager.get_column_count();
-<<<<<<< HEAD
-=======
-      //判断右表新增的列。同样对column_id有要求
->>>>>>> refs/remotes/origin/master
       for (int64_t i = 0; i < right_column_count; i++)
       {
         const ObColumnSchemaV2 *right_column = schema_manager.get_column_schema((int32_t)i);
@@ -4141,15 +4042,12 @@ namespace oceanbase
       {
         return STR_COLUMN_TYPE_M_TIME;
       }
-<<<<<<< HEAD
       //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       else if (type==ObDecimalType)
       {
         return STR_COLUMN_TYPE_DECIMAL;
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       else
       {
         TBSYS_LOG(ERROR,"column type %d not be supported", type);
@@ -4693,10 +4591,6 @@ namespace oceanbase
         ret = serialization::encode_vi64(buf, buf_len, tmp_pos, table_nums_);
       }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = serialization::encode_vstr(buf, buf_len, tmp_pos, app_name_);
@@ -4838,10 +4732,7 @@ namespace oceanbase
           if (OB_SUCCESS == ret)
           {
             sort_column();
-<<<<<<< HEAD
             init_index_hash();  //longfei [create index]
-=======
->>>>>>> refs/remotes/origin/master
           }
         }
       }
@@ -4856,10 +4747,7 @@ namespace oceanbase
       len += serialization::encoded_length_vi64(static_cast<int64_t>(max_table_id_));
       len += serialization::encoded_length_vi64(column_nums_);
       len += serialization::encoded_length_vi64(table_nums_);
-<<<<<<< HEAD
       len += serialization::encoded_length_bool(is_id_index_hash_map_init_);
-=======
->>>>>>> refs/remotes/origin/master
       len += serialization::encoded_length_vstr(app_name_);
 
       for (int64_t i = 0; i < table_nums_; ++i)
@@ -4905,13 +4793,10 @@ namespace oceanbase
         old_tschema.set_use_bloomfilter(tschema->is_use_bloomfilter_); //
         old_tschema.set_consistency_level(tschema->consistency_level_);
         old_tschema.set_pure_update_table(tschema->is_pure_update_table_); // @deprecated
-<<<<<<< HEAD
         // add longfei [create index] 20151021
         old_tschema.set_original_table_id(tschema->original_table_id_);
         old_tschema.set_index_status(tschema->index_status_);
         // add e
-=======
->>>>>>> refs/remotes/origin/master
         old_tschema.set_create_time_column(tschema->create_time_column_id_);
         old_tschema.set_modify_time_column(tschema->modify_time_column_id_);
         if (tschema->expire_condition_[0] != '\0')
@@ -4954,7 +4839,6 @@ namespace oceanbase
             ObColumnSchemaV2 old_tcolumn;
             const ColumnSchema &tcolumn = tschema->columns_.at(i);
             old_tcolumn.set_table_id(tschema->table_id_);
-<<<<<<< HEAD
             //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
             if (tcolumn.data_type_ == ObDecimalType) {
                 old_tcolumn.set_precision(
@@ -4963,20 +4847,15 @@ namespace oceanbase
                     static_cast<uint32_t>(tcolumn.data_scale_));
             }
               //add:e
-=======
->>>>>>> refs/remotes/origin/master
             old_tcolumn.set_column_id(tcolumn.column_id_);
             old_tcolumn.set_column_name(tcolumn.column_name_);
             old_tcolumn.set_column_type(tcolumn.data_type_);
             old_tcolumn.set_column_size(tcolumn.data_length_);
             old_tcolumn.set_maintained(true); // @deprecated
             old_tcolumn.set_column_group_id(tcolumn.column_group_id_);
-<<<<<<< HEAD
             //add lbzhong [auto_increment] 20161124:b
             old_tcolumn.set_auto_increment(tcolumn.auto_increment_);
             //add:e
-=======
->>>>>>> refs/remotes/origin/master
             // @todo join info
             if (0 < tcolumn.join_table_id_)
             {
@@ -5367,11 +5246,7 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     int ObSchemaManagerV2::change_table_id(const uint64_t table_id, const uint64_t new_table_id)
-=======
-int ObSchemaManagerV2::change_table_id(const uint64_t table_id, const uint64_t new_table_id)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       //tableschema
@@ -5436,7 +5311,6 @@ int ObSchemaManagerV2::change_table_id(const uint64_t table_id, const uint64_t n
       }
       return ret;
     }
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     int ObSchemaManagerV2::get_cond_val_info(uint64_t table_id,uint64_t column_id,ObObjType &type,uint32_t &p,uint32_t &s, int32_t* idx /*=NULL*/)const{
             int ret=OB_SUCCESS;
@@ -6074,8 +5948,5 @@ int ObSchemaManagerV2::change_table_id(const uint64_t table_id, const uint64_t n
       return ret;
     }
     //add e
-=======
-
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 }   // end namespace oceanbase

@@ -21,40 +21,24 @@ kv_pair::kv_pair(const char* key, int64_t val)
 }
 
 KV::KV(const char* key, ObString val)
-<<<<<<< HEAD
   :OnevArray<kv_pair>::OnevArray(kv_pair(key, val))
-=======
-  :EasyArray<kv_pair>::EasyArray(kv_pair(key, val))
->>>>>>> refs/remotes/origin/master
 {
 }
 
 KV::KV(const char* key, int64_t val)
-<<<<<<< HEAD
   :OnevArray<kv_pair>::OnevArray(kv_pair(key, val))
-=======
-  :EasyArray<kv_pair>::EasyArray(kv_pair(key, val))
->>>>>>> refs/remotes/origin/master
 {
 }
 
 KV& KV::operator()(const char* key, ObString val)
 {
-<<<<<<< HEAD
   OnevArray<kv_pair>::operator()(kv_pair(key, val));
-=======
-  EasyArray<kv_pair>::operator()(kv_pair(key, val));
->>>>>>> refs/remotes/origin/master
   return *this;
 }
 
 KV& KV::operator()(const char* key, int64_t val)
 {
-<<<<<<< HEAD
   OnevArray<kv_pair>::operator()(kv_pair(key, val));
-=======
-  EasyArray<kv_pair>::operator()(kv_pair(key, val));
->>>>>>> refs/remotes/origin/master
   return *this;
 }
 

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -35,10 +32,7 @@
 #include "tbsys.h"
 #include "ob_malloc.h"
 #include "utility.h"
-<<<<<<< HEAD
 #include "ob_log_post.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -159,14 +153,10 @@ namespace oceanbase
           }
           return err;
         }
-<<<<<<< HEAD
         // modify by guojinwei [log synchronization][multi_cluster] 20150819:b
         //int done(int64_t seq, DataT& data, int handle_err)
         int done(int64_t seq, const ObLogPostResponse& response_data, DataT& data, int handle_err)
         // modify:e
-=======
-        int done(int64_t seq, DataT& data, int handle_err)
->>>>>>> refs/remotes/origin/master
         {
           int err = OB_SUCCESS;
           Item* item = NULL;
@@ -189,14 +179,10 @@ namespace oceanbase
             }
             else
             {
-<<<<<<< HEAD
               // modify by guojinwei [log synchronization][multi_cluster] 20150819:b
               //item->data_.done(handle_err);
               item->data_.done(response_data, handle_err);
               // modify:e
-=======
-              item->data_.done(handle_err);
->>>>>>> refs/remotes/origin/master
               data = item->data_;
               __sync_synchronize();
               item->wait_seq_ = seq + DONE;
@@ -222,7 +208,6 @@ namespace oceanbase
             else if (pop + REGISTERED == item->wait_seq_ && item->data_.is_timeout())
             {
               err = OB_PROCESS_TIMEOUT;
-<<<<<<< HEAD
               // add by guojinwei [log synchronization][multi_cluster] 20150819:b
               ObLogPostResponse response_data;
               response_data.next_flush_log_id_ = 0;
@@ -233,9 +218,6 @@ namespace oceanbase
               //item->data_.done(OB_PROCESS_TIMEOUT);
               item->data_.done(response_data, OB_PROCESS_TIMEOUT);
               // modify:e
-=======
-              item->data_.done(OB_PROCESS_TIMEOUT);
->>>>>>> refs/remotes/origin/master
             }
             else
             {
@@ -270,11 +252,7 @@ namespace oceanbase
     };
 
     template <typename reg>
-<<<<<<< HEAD
     int static_callback(onev_request_e* arg)
-=======
-    int static_callback(easy_request_t* arg)
->>>>>>> refs/remotes/origin/master
     {
       return (*reg::value())->callback(arg);
     }

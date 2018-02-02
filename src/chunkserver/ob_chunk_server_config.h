@@ -49,11 +49,7 @@ namespace oceanbase
       public:
         DEF_STR(datadir, "./data", "sstable data path");
         DEF_STR(appname, "", "application name");
-<<<<<<< HEAD
         DEF_STR(   check_compress_lib, "snappy_1.0:none:lzo_1.0", "check compress lib as cs start");
-=======
-        DEF_STR(check_compress_lib, "snappy_1.0:none:lzo_1.0", "check compress lib as cs start");
->>>>>>> refs/remotes/origin/master
 
         DEF_INT(root_server_port, "0", "root server port");
 
@@ -62,11 +58,7 @@ namespace oceanbase
         DEF_INT(task_thread_count, "32", "[1,]", "task thread number");
         DEF_INT(max_migrate_task_count, "2", "[1,]", "max migrate task number");
 
-<<<<<<< HEAD
         DEF_INT(io_thread_count, "8", "[1,]", "io thread number for libonev");
-=======
-        DEF_INT(io_thread_count, "8", "[1,]", "io thread number for libeasy");
->>>>>>> refs/remotes/origin/master
         DEF_TIME(network_timeout, "3s", "timeout when communication with other server");
         DEF_TIME(lease_check_interval, "5s", "[5s,5s]", "lease check interval, shouldn\\'t change");
 

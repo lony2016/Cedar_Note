@@ -363,11 +363,7 @@ int ObSQLQueryCache::prepare_ongoing_res(int64_t sql_id,
   return ret;
 }
 
-<<<<<<< HEAD
 int ObSQLQueryCache::append_ongoing_res(onev_buf_e * res)
-=======
-int ObSQLQueryCache::append_ongoing_res(easy_buf_t * res)
->>>>>>> refs/remotes/origin/master
 {
   int ret = OB_SUCCESS;
   if (!initialized_)

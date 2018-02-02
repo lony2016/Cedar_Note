@@ -316,7 +316,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160625:b
     void ObLogGenerator:: set_start_cursor(ObLogCursor& log_cursor)
     {
@@ -329,8 +328,6 @@ namespace oceanbase
     }
     //add:e
 	
-=======
->>>>>>> refs/remotes/origin/master
     static int serialize_log_entry(char* buf, const int64_t len, int64_t& pos, ObLogEntry& entry,
                             const char* log_data, const int64_t data_len)
     {
@@ -418,7 +415,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160328:b
     static int generate_log(char* buf, const int64_t len, int64_t& pos, ObLogCursor& cursor, const LogCommand cmd,
                             const char* log_data, const int64_t data_len, const int64_t max_cmt_id)
@@ -504,8 +500,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     static int parse_log_buffer(const char* log_data, int64_t data_len, const ObLogCursor& start_cursor, ObLogCursor& end_cursor, bool check_data_integrity = false)
     {
       int err = OB_SUCCESS;
@@ -701,7 +695,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //modify chujiajia [log synchronization][multi_cluster] 20160328:b
     //int ObLogGenerator::gen_keep_alive()
     int ObLogGenerator::gen_keep_alive(const bool is_ups_nop, const int64_t max_cmt_id)
@@ -711,11 +704,6 @@ namespace oceanbase
       //return write_nop(/*force_write*/true);
       return write_nop(is_ups_nop, max_cmt_id, /*force_write*/true);
       //modify:e
-=======
-    int ObLogGenerator::gen_keep_alive()
-    {
-      return write_nop(/*force_write*/true);
->>>>>>> refs/remotes/origin/master
     }
 
     int ObLogGenerator::append_eof()
@@ -774,7 +762,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160328:b
     int ObLogGenerator:: write_nop(const bool is_ups_nop, const int64_t max_cmt_id, const bool force_write)
     {
@@ -811,8 +798,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObLogGenerator:: switch_log(int64_t& new_file_id)
     {
       int err = OB_SUCCESS;
@@ -841,28 +826,20 @@ namespace oceanbase
       return pos_ != 0;
     }
 
-<<<<<<< HEAD
     //modify chujiajia [log synchronization][multi_cluster] 20160328:b
     //int ObLogGenerator:: get_log(ObLogCursor& start_cursor, ObLogCursor& end_cursor, char*& buf, int64_t& len)
     int ObLogGenerator:: get_log(ObLogCursor& start_cursor, ObLogCursor& end_cursor, char*& buf, int64_t& len, const int64_t max_cmt_id)
     //mod:e
-=======
-    int ObLogGenerator:: get_log(ObLogCursor& start_cursor, ObLogCursor& end_cursor, char*& buf, int64_t& len)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       if (OB_SUCCESS != (err = check_state()))
       {
         TBSYS_LOG(ERROR, "check_state()=>%d", err);
       }
-<<<<<<< HEAD
       //modify chujiajia [log synchronization][multi_cluster] 20160328:b
       //else if (!is_frozen_ && OB_SUCCESS != (err = write_nop(has_log())))
       else if (!is_frozen_ && OB_SUCCESS != (err = write_nop(true, max_cmt_id, has_log())))
       //modify:e
-=======
-      else if (!is_frozen_ && OB_SUCCESS != (err = write_nop(has_log())))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR, "write_nop()=>%d", err);
       }

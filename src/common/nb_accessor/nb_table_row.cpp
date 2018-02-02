@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date  20160124
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -71,7 +68,6 @@ void TableRow::dump() const
   }
 }
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static_index]20160117
 void TableRow::dump_test() const
 {
@@ -82,8 +78,6 @@ void TableRow::dump_test() const
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 int TableRow::init(hash::ObHashMap<const char*, int64_t>* cell_map, ObCellInfo* cells, int64_t cell_count)
 {
   int ret = OB_SUCCESS;

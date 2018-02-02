@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  * @date  2016_01_24
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -422,7 +419,6 @@ void ObRootTable2::dump() const
   return;
 }
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static index]20151207
 void ObRootTable2::dump(const int32_t index) const
 {
@@ -438,8 +434,6 @@ void ObRootTable2::dump(const int32_t index) const
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObRootTable2::dump_cs_tablet_info(const int server_index, int64_t &tablet_num)const
 {
   if (NULL != tablet_info_manager_)
@@ -602,7 +596,6 @@ ObTabletInfo* ObRootTable2::get_tablet_info(const const_iterator& it)
   return tablet_info;
 }
 
-<<<<<<< HEAD
 //add wenghaixing [secondary index.static_index]20151207
 const ObTabletInfo* ObRootTable2::get_tablet_info(const int32_t meta_index) const
 {
@@ -853,8 +846,6 @@ const ObTabletInfo* ObRootTable2::get_tablet_info(const int32_t meta_index) cons
    return ret;
  }
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 bool ObRootTable2::move_back(const int32_t from_index_inclusive, const int32_t move_step)
 {
@@ -2119,11 +2110,7 @@ int ObRootTable2::write_to_file(const char* filename)
       header.set_magic_num(ROOT_TABLE_MAGIC);
       header.header_length_ = static_cast<int16_t>(header_length);
       header.version_ = 0;
-<<<<<<< HEAD
       header.timestamp_ = 0;
-=======
-      header.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
 
       header.data_length_ = static_cast<int32_t>(total_size);
       header.data_zlength_ = static_cast<int32_t>(total_size);

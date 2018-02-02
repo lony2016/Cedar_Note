@@ -70,13 +70,8 @@ namespace oceanbase
                                         const int64_t block_size,
                                         const int64_t element_count)
     {
-<<<<<<< HEAD
       int ret = OB_SUCCESS;
       int64_t path_len = path.length();
-=======
-      int ret           = OB_SUCCESS;
-      int64_t path_len  = path.length();
->>>>>>> refs/remotes/origin/master
       
       trailer_.reset();
       if (inited_)
@@ -750,15 +745,11 @@ namespace oceanbase
         header.set_magic_num(magic);
         header.header_length_ = static_cast<int16_t>(header_len);
         header.version_ = 0;      //current record header version is 0
-<<<<<<< HEAD
 
         // modify by lbzhong [Max Log Timestamp] 20150824:b
         /// modify the reserve_ to timestamp_
         header.timestamp_ = 0;
         // modify:e
-=======
-        header.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
 
         /**
          * if data_length_ == data_zlength_, it means that the data is
@@ -1239,7 +1230,6 @@ namespace oceanbase
     {
       int ret             = OB_SUCCESS;
       int64_t column_num  = schema.get_column_count();
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
       int32_t table_trun_count = schema.get_trun_table_count();
       const ObSSTableSchemaTableDef * tab_def = NULL;
@@ -1263,8 +1253,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       const ObSSTableSchemaColumnDef * column_def = NULL;
 
       for(int32_t i = 0; i < column_num; ++i)

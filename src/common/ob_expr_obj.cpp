@@ -52,7 +52,6 @@ void ObExprObj::assign(const ObObj &obj)
       obj.get_bool(v_.bool_);
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modfify xsl ECNU_DECIMAL 2016_12_13
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //obj.get_decimal(num_);
@@ -70,10 +69,6 @@ void ObExprObj::assign(const ObObj &obj)
           break;
        }
       //modify e
-=======
-      obj.get_decimal(num_);
-      break;
->>>>>>> refs/remotes/origin/master
     case ObFloatType:
       obj.get_float(v_.float_);
       break;
@@ -119,7 +114,6 @@ int ObExprObj::to(ObObj &obj) const
       obj.set_bool(v_.bool_);
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modify xsl ECNU_DECIMAL　2016_12
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     {
@@ -130,10 +124,6 @@ int ObExprObj::to(ObObj &obj) const
       break;
     }
       //modify:e
-=======
-      ret = obj.set_decimal(num_);
-      break;
->>>>>>> refs/remotes/origin/master
     case ObFloatType:
       obj.set_float(v_.float_);
       break;
@@ -226,7 +216,6 @@ int ObExprObj::compare_same_type(const ObExprObj &other) const
       }
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       {
           ObDecimal cmp1,cmp2;
@@ -236,10 +225,6 @@ int ObExprObj::compare_same_type(const ObExprObj &other) const
           break;
       }
       //modify e
-=======
-      cmp = this->num_.compare(other.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     case ObVarcharType:
       cmp = this->varchar_.compare(other.varchar_);
       break;
@@ -525,7 +510,6 @@ int ObExprObj::compare(const ObExprObj &other, int &cmp) const
   int ret = OB_SUCCESS;
   ObExprObj promoted1;
   ObExprObj promoted2;
-<<<<<<< HEAD
   //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   char buf[MAX_PRINTABLE_SIZE];
   memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -543,8 +527,6 @@ int ObExprObj::compare(const ObExprObj &other, int &cmp) const
   tmp_obj2.set_varchar(os2);
   promoted2.assign(tmp_obj2);
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (ret = compare_type_promotion(*this, other, promoted1, promoted2, p_this, p_other)))
@@ -777,16 +759,11 @@ int ObExprObj::get_bool(bool &value) const
       value = (v_.int_ != 0);
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       value = !decimal_.is_zero();
       break;
       //modify:e
-=======
-      value = !num_.is_zero();
-      break;
->>>>>>> refs/remotes/origin/master
     case ObFloatType:
       value = (fabsf(v_.float_) > FLOAT_EPSINON);
       break;
@@ -1115,7 +1092,6 @@ inline int ObExprObj::add_same_type(const ObExprObj &other, ObExprObj &res) cons
       res.v_.double_ = this->v_.double_ + other.v_.double_;
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
 //      uint32_t len = this->get_len() > other.get_len() ? this->get_len() :other.get_len();
@@ -1123,10 +1099,6 @@ inline int ObExprObj::add_same_type(const ObExprObj &other, ObExprObj &res) cons
       ret = this->decimal_.add(other.decimal_, res.decimal_);
       break;
       //modify:e
-=======
-      ret = this->num_.add(other.num_, res.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     default:
       ret = OB_ERR_UNEXPECTED;
       TBSYS_LOG(ERROR, "unexpected branch");
@@ -1135,16 +1107,12 @@ inline int ObExprObj::add_same_type(const ObExprObj &other, ObExprObj &res) cons
   return ret;
 }
 
-<<<<<<< HEAD
 //modify xsl ECNU_DECIMAL 2016_12
-=======
->>>>>>> refs/remotes/origin/master
 int ObExprObj::add(ObExprObj &other, ObExprObj &res)
 {
   int ret = OB_SUCCESS;
   ObExprObj promoted1;
   ObExprObj promoted2;
-<<<<<<< HEAD
   //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   char buf[MAX_PRINTABLE_SIZE];
   memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -1163,16 +1131,11 @@ int ObExprObj::add(ObExprObj &other, ObExprObj &res)
   promoted2.assign(tmp_obj2);
 
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (ret = arith_type_promotion(*this, other, promoted1, promoted2, p_this, p_other)))
   {
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
     if (OB_RESULT_UNKNOWN == ret)
     {
       ret = OB_SUCCESS;
@@ -1183,16 +1146,10 @@ int ObExprObj::add(ObExprObj &other, ObExprObj &res)
   {
     ret = p_this->add_same_type(*p_other, res);
   }
-<<<<<<< HEAD
    return ret;
 
 }
 //modify e
-=======
-  return ret;
-}
-
->>>>>>> refs/remotes/origin/master
 inline int ObExprObj::sub_same_type(const ObExprObj &other, ObExprObj &res) const
 {
   int ret = OB_SUCCESS;
@@ -1211,16 +1168,11 @@ inline int ObExprObj::sub_same_type(const ObExprObj &other, ObExprObj &res) cons
       res.v_.double_ = this->v_.double_ - other.v_.double_;
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       ret = this->decimal_.sub(other.decimal_, res.decimal_);
       break;
       //modify:e
-=======
-      ret = this->num_.sub(other.num_, res.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     default:
       ret = OB_ERR_UNEXPECTED;
       TBSYS_LOG(ERROR, "unexpected branch");
@@ -1228,17 +1180,12 @@ inline int ObExprObj::sub_same_type(const ObExprObj &other, ObExprObj &res) cons
   }
   return ret;
 }
-<<<<<<< HEAD
 //modify xsl ECNU_DECIMAL 2016_12
-=======
-
->>>>>>> refs/remotes/origin/master
 int ObExprObj::sub(ObExprObj &other, ObExprObj &res)
 {
   int ret = OB_SUCCESS;
   ObExprObj promoted1;
   ObExprObj promoted2;
-<<<<<<< HEAD
   //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
    char buf[MAX_PRINTABLE_SIZE];
    memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -1257,8 +1204,6 @@ int ObExprObj::sub(ObExprObj &other, ObExprObj &res)
    promoted2.assign(tmp_obj2);
 
    //add:e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (ret = arith_type_promotion(*this, other, promoted1, promoted2, p_this, p_other)))
@@ -1271,19 +1216,11 @@ int ObExprObj::sub(ObExprObj &other, ObExprObj &res)
   }
   else
   {
-<<<<<<< HEAD
       ret = p_this->sub_same_type(*p_other, res);
   }
   return ret;
 }
 //modify e
-=======
-    ret = p_this->sub_same_type(*p_other, res);
-  }
-  return ret;
-}
-
->>>>>>> refs/remotes/origin/master
 inline int ObExprObj::mul_same_type(const ObExprObj &other, ObExprObj &res) const
 {
   int ret = OB_SUCCESS;
@@ -1302,16 +1239,11 @@ inline int ObExprObj::mul_same_type(const ObExprObj &other, ObExprObj &res) cons
       res.v_.double_ = this->v_.double_ * other.v_.double_;
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       ret = this->decimal_.mul(other.decimal_, res.decimal_);
       break;
       //modify:e
-=======
-      ret = this->num_.mul(other.num_, res.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     default:
       ret = OB_ERR_UNEXPECTED;
       TBSYS_LOG(ERROR, "unexpected branch");
@@ -1320,16 +1252,12 @@ inline int ObExprObj::mul_same_type(const ObExprObj &other, ObExprObj &res) cons
   return ret;
 }
 
-<<<<<<< HEAD
 //modify xsl ECNU_DECIMAL 2016_12
-=======
->>>>>>> refs/remotes/origin/master
 int ObExprObj::mul(ObExprObj &other, ObExprObj &res)
 {
   int ret = OB_SUCCESS;
   ObExprObj promoted1;
   ObExprObj promoted2;
-<<<<<<< HEAD
   //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   char buf[MAX_PRINTABLE_SIZE];
   memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -1348,8 +1276,6 @@ int ObExprObj::mul(ObExprObj &other, ObExprObj &res)
   promoted2.assign(tmp_obj2);
 
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (ret = arith_type_promotion(*this, other, promoted1, promoted2, p_this, p_other)))
@@ -1366,10 +1292,7 @@ int ObExprObj::mul(ObExprObj &other, ObExprObj &res)
   }
   return ret;
 }
-<<<<<<< HEAD
 //modify e
-=======
->>>>>>> refs/remotes/origin/master
 
 // @return ObMaxType when not supporting
 // int div int result in double
@@ -1386,11 +1309,7 @@ static ObObjType DIV_TYPE_PROMOTION[ObMaxType][ObMaxType] =
   ,
   {
     /*Int div XXX*/
-<<<<<<< HEAD
     ObNullType/*Null*/, ObIntType/*Int*//*modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b*/, ObFloatType,
-=======
-    ObNullType/*Null*/, ObDoubleType/*Int*/, ObFloatType,
->>>>>>> refs/remotes/origin/master
     ObDoubleType, ObDoubleType, ObDoubleType,
     ObDoubleType, ObMaxType/*Seq, not_support*/, ObDoubleType,
     ObDoubleType, ObMaxType/*Extend*/, ObDoubleType,
@@ -1581,7 +1500,6 @@ inline int ObExprObj::cast_to_varchar(ObString &varchar, ObStringBuf &mem_buf) c
   }
   return ret;
 }
-<<<<<<< HEAD
 //modify xsl ECNU_DECIAML 2017_5
 inline int ObExprObj::cast_to_decimal(ObDecimal &dec, ObStringBuf &mem_buf) const
 {
@@ -1667,8 +1585,6 @@ inline int ObExprObj::cast_to_decimal(ObString &varchar, ObStringBuf &mem_buf) c
   return ret;
 }
 //add:e*/
-=======
->>>>>>> refs/remotes/origin/master
 
 int ObExprObj::cast_to(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_buf) const
 {
@@ -1700,7 +1616,6 @@ int ObExprObj::cast_to(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_bu
   }
   return err;
 }
-<<<<<<< HEAD
 //modify xsl ECNU_DECIMAL 2017_5
 //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 int ObExprObj::cast_toV2(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_buf,uint32_t precision,uint32_t scale)
@@ -1857,8 +1772,6 @@ int ObExprObj::cast_toV2(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_
 }
 //add:e
 //modify e
-=======
->>>>>>> refs/remotes/origin/master
 
 inline int ObExprObj::div_type_promotion(const ObExprObj &this_obj, const ObExprObj &other,
                                          ObExprObj &promoted_obj1, ObExprObj &promoted_obj2,
@@ -1886,14 +1799,11 @@ inline int ObExprObj::div_same_type(const ObExprObj &other, ObExprObj &res) cons
   res.type_ = get_type();
   switch(get_type())
   {
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     case ObIntType:
       res.v_.int_=this->v_.int_/other.v_.int_;
       break;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
     case ObFloatType:
       res.v_.float_ = this->v_.float_ / other.v_.float_;
       break;
@@ -1901,16 +1811,11 @@ inline int ObExprObj::div_same_type(const ObExprObj &other, ObExprObj &res) cons
       res.v_.double_ = this->v_.double_ / other.v_.double_;
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       ret = this->decimal_.div(other.decimal_, res.decimal_);
       break;
       //modify:e
-=======
-      ret = this->num_.div(other.num_, res.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     default:
       ret = OB_ERR_UNEXPECTED;
       TBSYS_LOG(ERROR, "unexpected branch, type=%d", get_type());
@@ -1931,7 +1836,6 @@ int ObExprObj::div(ObExprObj &other, ObExprObj &res, bool int_div_as_double)
   {
     ObExprObj promoted_value1;
     ObExprObj promoted_value2;
-<<<<<<< HEAD
     //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
      char buf[MAX_PRINTABLE_SIZE];
      memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -1970,30 +1874,11 @@ int ObExprObj::div(ObExprObj &other, ObExprObj &res, bool int_div_as_double)
         ret = p_this->div_same_type(*p_other, res);
         //end= tbsys::CTimeUtil::getTime();
         //TBSYS_LOG(INFO,"xushilei,test div:%ld",end-start);
-=======
-    const ObExprObj *p_this = NULL;
-    const ObExprObj *p_other = NULL;
-    if (OB_SUCCESS != (ret = div_type_promotion(*this, other, promoted_value1,
-                                                promoted_value2, p_this, p_other, int_div_as_double)))
-    {
-      if (OB_RESULT_UNKNOWN == ret)
-      {
-        ret = OB_SUCCESS;
-      }
-      res.set_null();
-    }
-    else
-    {
-      ret = p_this->div_same_type(*p_other, res);
->>>>>>> refs/remotes/origin/master
     }
   }
   return ret;
 }
-<<<<<<< HEAD
 //modify e
-=======
->>>>>>> refs/remotes/origin/master
 
 inline int ObExprObj::mod_type_promotion(const ObExprObj &this_obj, const ObExprObj &other,
                                          ObExprObj &promoted_obj1, ObExprObj &promoted_obj2,
@@ -2091,16 +1976,11 @@ int ObExprObj::negate(ObExprObj &res) const
       res.v_.double_ = -this->v_.double_;
       break;
     case ObDecimalType:
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       ret = this->decimal_.negate(res.decimal_);
       break;
       //modify:e
-=======
-      ret = this->num_.negate(res.num_);
-      break;
->>>>>>> refs/remotes/origin/master
     default:
       res.set_null();
       ret = OB_INVALID_ARGUMENT;
@@ -2507,7 +2387,6 @@ int ObExprObj::not_like(const ObExprObj &pattern, ObExprObj &result) const
   return err;
 }
 
-<<<<<<< HEAD
 int ObExprObj::set_decimal(const char* dec_str)  //not see use
 {
     int ret = OB_SUCCESS;
@@ -2543,28 +2422,6 @@ int ObExprObj::set_decimal(const char* dec_str)  //not see use
 
 
     return ret;
-=======
-int ObExprObj::set_decimal(const char* dec_str)
-{
-  int ret = OB_SUCCESS;
-  ObObj obj;
-  ObNumber num;
-  static const int8_t TEST_PREC = 38;
-  static const int8_t TEST_SCALE = 4;
-  if (OB_SUCCESS != (ret = num.from(dec_str)))
-  {
-    TBSYS_LOG(WARN, "failed to construct decimal from string, err=%d str=%s", ret, dec_str);
-  }
-  else if (OB_SUCCESS != (ret = obj.set_decimal(num, TEST_PREC, TEST_SCALE)))
-  {
-    TBSYS_LOG(WARN, "obj failed to set decimal, err=%d", ret);
-  }
-  else
-  {
-    this->assign(obj);
-  }
-  return ret;
->>>>>>> refs/remotes/origin/master
 }
 
 void ObExprObj::set_varchar(const char* value)
@@ -2675,14 +2532,10 @@ int ObExprObj::get_decimal(char * buf, const int64_t buf_len) const
   }
   else
   {
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       //change num_ to decimal_
       decimal_.to_string(buf, buf_len);
       //modify:e
-=======
-    num_.to_string(buf, buf_len);
->>>>>>> refs/remotes/origin/master
   }
   return ret;
 }
@@ -2942,7 +2795,6 @@ ObObj ObExprObj::type_arithmetic(const ObObj& t1, const ObObj& t2)
   v2.type_ = t2.get_type();
   ObExprObj promoted1;
   ObExprObj promoted2;
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   char buf[MAX_PRINTABLE_SIZE];
   memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -2960,8 +2812,6 @@ ObObj ObExprObj::type_arithmetic(const ObObj& t1, const ObObj& t2)
   tmp_obj2.set_varchar(os2);
   promoted2.assign(tmp_obj2);
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (err = arith_type_promotion(v1, v2, promoted1, promoted2, p_this, p_other)))
@@ -2978,7 +2828,6 @@ ObObj ObExprObj::type_arithmetic(const ObObj& t1, const ObObj& t2)
   }
   return ret;
 }
-<<<<<<< HEAD
 //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 ObObj ObExprObj::type_add_v2(const ObObj& t1, const ObObj& t2){
 
@@ -3026,9 +2875,6 @@ ObObj ObExprObj::type_div_v2(const ObObj& t1, const ObObj& t2, bool int_div_as_d
 
 }
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 ObObj ObExprObj::type_add(const ObObj& t1, const ObObj& t2)
 {
   return type_arithmetic(t1, t2);
@@ -3055,7 +2901,6 @@ ObObj ObExprObj::type_div(const ObObj& t1, const ObObj& t2, bool int_div_as_doub
   v2.type_ = t2.get_type();
   ObExprObj promoted_value1;
   ObExprObj promoted_value2;
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   char buf[MAX_PRINTABLE_SIZE];
   memset(buf, 0, MAX_PRINTABLE_SIZE);
@@ -3073,8 +2918,6 @@ ObObj ObExprObj::type_div(const ObObj& t1, const ObObj& t2, bool int_div_as_doub
   tmp_obj2.set_varchar(os2);
   promoted_value2.assign(tmp_obj2);
   //add e
-=======
->>>>>>> refs/remotes/origin/master
   const ObExprObj *p_this = NULL;
   const ObExprObj *p_other = NULL;
   if (OB_SUCCESS != (err = div_type_promotion(v1, v2, promoted_value1, promoted_value2,

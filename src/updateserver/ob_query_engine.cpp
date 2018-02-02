@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_query_engine.cpp / hash / common / Oceanbase
@@ -51,15 +48,10 @@ namespace oceanbase
     int64_t QueryEngine::HASH_SIZE = 50000000;
     QueryEngine::QueryEngine(MemTank &allocer) : inited_(false),
                                                  btree_alloc_(allocer),
-<<<<<<< HEAD
                                                  table_btree_alloc_(allocer), /*add hxlong [Truncate Table]:20170403*/
                                                  hash_alloc_(allocer),
                                                  keybtree_(btree_alloc_),
                                                  table_keybtree_(table_btree_alloc_), /*add hxlong [Truncate Table]:20170318*/
-=======
-                                                 hash_alloc_(allocer),
-                                                 keybtree_(btree_alloc_),
->>>>>>> refs/remotes/origin/master
                                                  keyhash_(hash_alloc_, hash_alloc_)
     {
     }
@@ -90,15 +82,12 @@ namespace oceanbase
         {
           TBSYS_LOG(WARN, "keybtree init fail");
         }
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         else if (ERROR_CODE_OK != (ret = table_keybtree_.init()))
         {
           TBSYS_LOG(WARN, "table_keybtree init fail");
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         else
         {
           inited_ = true;
@@ -117,10 +106,7 @@ namespace oceanbase
       else
       {
         keybtree_.destroy();
-<<<<<<< HEAD
         table_keybtree_.destroy(); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         keyhash_.destroy();
         inited_ = false;
       }
@@ -137,10 +123,7 @@ namespace oceanbase
       else
       {
         keybtree_.clear();
-<<<<<<< HEAD
         table_keybtree_.clear(); /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         keyhash_.clear();
       }
       return ret;
@@ -165,7 +148,6 @@ namespace oceanbase
         TBSYS_LOG(INFO, "value null pointer");
         ret = OB_ERROR;
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318:b
       else if (0 == key.row_key.length())
       {
@@ -183,8 +165,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       else if (OB_SUCCESS != (hash_ret = keyhash_.insert(hash_key, value)))
       {
         if (OB_ENTRY_EXIST != hash_ret)
@@ -221,7 +201,6 @@ namespace oceanbase
       {
         TBSYS_LOG(WARN, "have not inited");
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318
       else if (0 == key.row_key.length())
       {
@@ -236,8 +215,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       else if (g_conf.using_hash_index)
       {
         TEHashKey hash_key;
@@ -375,7 +352,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int QueryEngine::scan_table(const TEKey &start_key,
                           const int min_key,
@@ -469,9 +445,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     void QueryEngine::dump2text(const char *fname)
     {
       const int64_t BUFFER_SIZE = 1024;
@@ -547,7 +520,6 @@ namespace oceanbase
     {
       return keyhash_.uninit_unit_num();
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int QueryEngine::get_table_truncate_stat(uint64_t table_id, bool & is_truncated)
     {
@@ -579,9 +551,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     QueryEngineIterator::QueryEngineIterator() : keybtree_(NULL), read_handle_(), key_(), pvalue_(NULL)
@@ -614,12 +583,9 @@ namespace oceanbase
             ret = OB_ITER_END;
             break;
           }
-<<<<<<< HEAD
           // modify by guojinwei [repeatable read] 20160417:b
           // return pvalue for traversing uncommitted value list, though committed value list is null
           /*
-=======
->>>>>>> refs/remotes/origin/master
           if (pvalue_->is_empty())
           {
             // 数据链表为空时 直接跳过这记录
@@ -629,12 +595,9 @@ namespace oceanbase
           {
             break;
           }
-<<<<<<< HEAD
           */
           break;
           // modify:e
-=======
->>>>>>> refs/remotes/origin/master
         }
       }
       return ret;

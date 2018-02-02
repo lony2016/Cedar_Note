@@ -18,11 +18,7 @@
 #define OB_MERGE_CALLBACK_H_
 
 #include "common/ob_packet_factory.h"
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -36,49 +32,28 @@ namespace oceanbase
       /**
        * callback func of main service
        * @param req   requset to process
-<<<<<<< HEAD
        * @return int  return ONEV_AGAIN if push it into queue
        *              else return ONEV_ERROR
        */
       static int process(onev_request_e* req);
-=======
-       * @return int  return EASY_AGAIN if push it into queue
-       *              else return EASY_ERROR
-       */
-      static int process(easy_request_t* req);
->>>>>>> refs/remotes/origin/master
 
       /**
        * callback func of async rpc call
        * called when receive async rpc call response
        * @param req   request to process
-<<<<<<< HEAD
        * @return int  return ONEV_OK if request processed successful
        *              else return ONEV_ERROR
        */
       static int rpc_process(onev_request_e* req);
-=======
-       * @return int  return EASY_OK if request processed successful
-       *              else return EASY_ERROR
-       */
-      static int rpc_process(easy_request_t* req);
->>>>>>> refs/remotes/origin/master
       
       /**
        * callback func of sql async  rpc call
        * called when receive async rpc call response
        * @param req   request to process
-<<<<<<< HEAD
        * @return int  return ONEV_OK if request processed successful
        *              else return ONEV_ERROR
        */
       static int sql_process(onev_request_e* req);
-=======
-       * @return int  return EASY_OK if request processed successful
-       *              else return EASY_ERROR
-       */
-      static int sql_process(easy_request_t* req);
->>>>>>> refs/remotes/origin/master
 
       static ObPacketFactory packet_factory_;
     };

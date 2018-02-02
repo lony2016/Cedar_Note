@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -106,7 +103,6 @@ namespace oceanbase
         int get_row_desc(const common::ObRowDesc *&row_desc) const;
         int get_last_rowkey(const ObRowkey *&rowkey);
 
-<<<<<<< HEAD
       public:
         //add longfei [cons static index] 151202:b
         /**
@@ -129,8 +125,6 @@ namespace oceanbase
         int init_sstable_scanner_for_local_idx(ObNewRange &fake_range);
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         int init_sstable_scanner();
         // disallow copy

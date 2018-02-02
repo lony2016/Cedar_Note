@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -33,8 +32,6 @@
  *
  * @date 2016_07_26
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -62,10 +59,7 @@
 #include "common/ob_trigger_msg.h"
 #include "common/ob_general_rpc_stub.h"
 #include "common/ob_data_source_desc.h"
-<<<<<<< HEAD
 #include "common/ob_election_role_mgr.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "rootserver/ob_root_callback.h"
 #include "rootserver/ob_root_worker.h"
 #include "rootserver/ob_root_admin_cmd.h"
@@ -81,20 +75,13 @@
 #include "common/ob_common_stat.h"
 #include "sql/ob_sql_scan_param.h"
 #include "sql/ob_sql_get_param.h"
-<<<<<<< HEAD
 #include "common/ob_version.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include <sys/types.h>
 #include <unistd.h>
 //#define PRESS_TEST
 #define __rs_debug__
 #include "common/debug.h"
-<<<<<<< HEAD
 #include "common/ob_libonev_mem_pool.h"
-=======
-#include "common/ob_libeasy_mem_pool.h"
->>>>>>> refs/remotes/origin/master
 
 namespace
 {
@@ -106,7 +93,6 @@ namespace oceanbase
 {
   namespace rootserver
   {
-<<<<<<< HEAD
     //mod by pangtianze [rs_election] 20160106:b
 //    // mod by zcd [multi_cluster] 20150405:b
 //    ObRootWorker::ObRootWorker(ObConfigManager &config_mgr, ObRootServerConfig &rs_config)
@@ -123,15 +109,6 @@ namespace oceanbase
       //add wenghaixing [secondary index.static index]20151216
       icu_.init(this);
       //add e
-=======
-    using namespace oceanbase::common;
-
-    ObRootWorker::ObRootWorker(ObConfigManager &config_mgr, ObRootServerConfig &rs_config)
-      : config_mgr_(config_mgr), config_(rs_config), is_registered_(false),
-      root_server_(config_), sql_proxy_(const_cast<ObChunkServerManager&>(root_server_.get_server_manager()), const_cast<ObRootServerConfig&>(rs_config), const_cast<ObRootRpcStub&>(rt_rpc_stub_))
-    {
-      schema_version_ = 0;
->>>>>>> refs/remotes/origin/master
     }
 
     ObRootWorker::~ObRootWorker()
@@ -140,13 +117,8 @@ namespace oceanbase
     int ObRootWorker::create_eio()
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       onev_pool_set_allocator(ob_onev_realloc);
       eio_ = onev_create_io(eio_, io_thread_count_);
-=======
-      easy_pool_set_allocator(ob_easy_realloc);
-      eio_ = easy_eio_create(eio_, io_thread_count_);
->>>>>>> refs/remotes/origin/master
       eio_->do_signal = 0;
       eio_->force_destroy_second = OB_CONNECTION_FREE_TIME_S;
       eio_->checkdrc = 1;
@@ -154,11 +126,7 @@ namespace oceanbase
       if (NULL == eio_)
       {
         ret = OB_ERROR;
-<<<<<<< HEAD
         TBSYS_LOG(ERROR, "onev_io_create error");
-=======
-        TBSYS_LOG(ERROR, "easy_io_create error");
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
@@ -169,11 +137,7 @@ namespace oceanbase
       //set call back function
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         memset(&server_handler_, 0, sizeof(onev_io_handler_pe));
-=======
-        memset(&server_handler_, 0, sizeof(easy_io_handler_pt));
->>>>>>> refs/remotes/origin/master
         server_handler_.encode = ObTbnetCallback::encode;
         server_handler_.decode = ObTbnetCallback::decode;
         server_handler_.process = ObRootCallback::process;//root server process
@@ -313,10 +277,7 @@ namespace oceanbase
         int64_t now = tbsys::CTimeUtil::getTime();
         if (!root_server_.init(now, this))
         {
-<<<<<<< HEAD
           TBSYS_LOG(WARN, "rs init fail");
-=======
->>>>>>> refs/remotes/origin/master
           ret = OB_ERROR;
         }
       }
@@ -363,13 +324,10 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "schedule ms list task fail, ret: [%d]", ret);
       }
 
-<<<<<<< HEAD
       // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
       set_auto_elect_flag_task_.init(this);
       // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       ObRoleMgr::Role role = role_mgr_.get_role();
       if (role == ObRoleMgr::MASTER)
       {
@@ -428,7 +386,6 @@ namespace oceanbase
         TBSYS_LOG(INFO, "[NOTICE] master start-up finished");
         root_server_.dump_root_table();
 
-<<<<<<< HEAD
         //add chujiajia [rs_election][multi_cluster] 20150823:b
         ObServer current_cluster_ups;
         while(OB_ENTRY_NOT_EXIST == (ret = root_server_.get_master_ups(current_cluster_ups, false)))
@@ -470,8 +427,6 @@ namespace oceanbase
         cur_role.set_role(common::ObiRole::INIT);
         // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
         // wait finish
         for (;;)
         {
@@ -481,7 +436,6 @@ namespace oceanbase
             TBSYS_LOG(INFO, "role manager change state, stat=%d", role_mgr_.get_state());
             break;
           }
-<<<<<<< HEAD
 
           // add by zcd [multi_cluster] 20150405:b
           switch(cur_role.get_role())
@@ -633,9 +587,6 @@ namespace oceanbase
           }
           // add:e
           usleep(100 * 1000); // 100 ms
-=======
-          usleep(10 * 1000); // 10 ms
->>>>>>> refs/remotes/origin/master
         }
       }
 
@@ -645,7 +596,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     // 设置所有的备集群中RootServer的角色为SLAVE
     int ObRootWorker::set_all_slaves_role_to_slave()
@@ -880,8 +830,6 @@ namespace oceanbase
     }
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObRootWorker::start_as_slave()
     {
       int err = OB_SUCCESS;
@@ -1205,11 +1153,8 @@ namespace oceanbase
       }
       TBSYS_LOG(INFO, "stop flag set");
       root_server_.stop_threads();
-<<<<<<< HEAD
       check_rselection_thread_.stop();
       check_rselection_thread_.wait();
-=======
->>>>>>> refs/remotes/origin/master
       wait_for_queue();
       ObBaseServer::destroy();
     }
@@ -1262,7 +1207,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add wenghaixing [secondary index.static_index]20151118
     int ObRootWorker::submit_job(ObPacket pc)
     {
@@ -1276,9 +1220,6 @@ namespace oceanbase
       return ret;
     }
     //add e
-=======
-
->>>>>>> refs/remotes/origin/master
     int ObRootWorker::submit_delete_tablets_task(const common::ObTabletReportInfoList& delete_list)
     {
       int ret = OB_SUCCESS;
@@ -1313,10 +1254,6 @@ namespace oceanbase
       int ret = OB_SUCCESS;
       bool ps = true;
       int packet_code = packet->get_packet_code();
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       switch(packet_code)
       {
         case OB_SEND_LOG:
@@ -1359,7 +1296,6 @@ namespace oceanbase
         case OB_RS_GET_IMPORT_STATUS:
         case OB_RS_SET_IMPORT_STATUS:
         case OB_RS_NOTIFY_SWITCH_SCHEMA:
-<<<<<<< HEAD
         // add by zhangcd [majority_count_init] 20151118:b
         case OB_RS_GET_ALL_CLUSTERS_INFO:
         // add:e
@@ -1370,29 +1306,20 @@ namespace oceanbase
         //case OB_REPORT_INDEX:
         case OB_REPORT_TABLETS_HISTOGRAMS:
         //add e
-=======
-          ps = read_thread_queue_.push(packet, (int32_t)config_.read_queue_size, false);
-          break;
-        case OB_REPORT_TABLETS:
->>>>>>> refs/remotes/origin/master
         case OB_SERVER_REGISTER:
         case OB_MERGE_SERVER_REGISTER:
         case OB_MIGRATE_OVER:
         case OB_CREATE_TABLE:
-<<<<<<< HEAD
         //add by wangdonghui 20160121 :b
         case OB_CREATE_PROCEDURE:
         //add :e
         //add by wangdonghui 20160226 [drop procedure] :b
         case OB_DROP_PROCEDURE:
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         case OB_ALTER_TABLE:
         case OB_FORCE_CREATE_TABLE_FOR_EMERGENCY:
         case OB_FORCE_DROP_TABLE_FOR_EMERGENCY:
         case OB_DROP_TABLE:
-<<<<<<< HEAD
         case OB_TRUNCATE_TABLE: //add hxlong [truncate table]20170403
         //add wenghaixing [secondary index drop index]20141223
         case OB_DROP_INDEX:
@@ -1400,8 +1327,6 @@ namespace oceanbase
         //add maoxx
         case OB_GET_COLUMN_CHECKSUM:
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         case OB_REPORT_CAPACITY_INFO:
         case OB_SLAVE_REG:
         case OB_WAITING_JOB_DONE:
@@ -1423,7 +1348,6 @@ namespace oceanbase
             ps = false;
           }
           break;
-<<<<<<< HEAD
         //add chujiajia [rs_election][multi_cluster] 20150823:b
         case OB_RS_ELECTION:
           ps = write_thread_queue_.push(packet,
@@ -1441,11 +1365,6 @@ namespace oceanbase
         // add by guojinwei [reelect][multi_cluster] 20151129:b
         case OB_RS_GET_ELECTION_READY:
         // add:e
-=======
-        case OB_RENEW_LEASE_REQUEST:
-        case OB_SLAVE_QUIT:
-        case OB_SET_OBI_ROLE:
->>>>>>> refs/remotes/origin/master
         case OB_FETCH_SCHEMA:
         case OB_WRITE_SCHEMA_TO_FILE:
         case OB_FETCH_SCHEMA_VERSION:
@@ -1465,12 +1384,9 @@ namespace oceanbase
         case OB_SET_MASTER_UPS_CONFIG:
         case OB_CHANGE_UPS_MASTER:
         case OB_CHANGE_TABLE_ID:
-<<<<<<< HEAD
         // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
         case OB_RS_SET_AUTO_ELECT_FLAG:
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         case OB_CS_IMPORT_TABLETS:
         case OB_RS_SHUTDOWN_SERVERS:
         case OB_RS_RESTART_SERVERS:
@@ -1480,12 +1396,9 @@ namespace oceanbase
         case OB_HANDLE_TRIGGER_EVENT:
         case OB_RS_ADMIN_START_IMPORT:
         case OB_RS_ADMIN_START_KILL_IMPORT:
-<<<<<<< HEAD
         //add by wangdonghui 20160304 :b
         case OB_FETCH_PROCEDURE:
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
           if (ObRoleMgr::MASTER == role_mgr_.get_role())
           {
@@ -1586,11 +1499,7 @@ namespace oceanbase
           }
           else
           {
-<<<<<<< HEAD
             onev_request_e* req = ob_packet->get_request();
-=======
-            easy_request_t* req = ob_packet->get_request();
->>>>>>> refs/remotes/origin/master
             if (OB_SELF_FLAG != ob_packet->get_target_id()
                 && (NULL == req || NULL == req->ms || NULL == req->ms->c))
             {
@@ -1610,7 +1519,6 @@ namespace oceanbase
                   TBSYS_LOG(DEBUG, "handle packet, packe code is %d", packet_code);
                   switch(packet_code)
                   {
-<<<<<<< HEAD
                     //add chujiajia [rs_election][multi_cluster] 20150823:b
                     case OB_RS_ELECTION:
                       return_code = rt_rs_election(version, *in_buf, req,channel_id, thread_buff);
@@ -1625,11 +1533,6 @@ namespace oceanbase
                       return_code = rt_report_index_info(version, *in_buf, req, channel_id, thread_buff);
                       break;
                     //add e
-=======
-                    case OB_REPORT_TABLETS:
-                      return_code = rt_report_tablets(version, *in_buf, req, channel_id, thread_buff);
-                      break;
->>>>>>> refs/remotes/origin/master
                     case OB_SERVER_REGISTER:
                       return_code = rt_register(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1642,14 +1545,11 @@ namespace oceanbase
                     case OB_CREATE_TABLE:
                       return_code = rt_create_table(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
 
                       // longfei [create index]
                     case OB_CREATE_INDEX:
                       return_code = rt_create_index(version, *in_buf, req, channel_id, thread_buff);
                       break;
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_FORCE_DROP_TABLE_FOR_EMERGENCY:
                       return_code = rt_force_drop_table(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1662,7 +1562,6 @@ namespace oceanbase
                     case OB_DROP_TABLE:
                       return_code = rt_drop_table(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
                      //add hxlong [truncate table] 20170402
                     case OB_TRUNCATE_TABLE:
                       return_code = rt_truncate_table(version, *in_buf, req, channel_id, thread_buff);
@@ -1690,8 +1589,6 @@ namespace oceanbase
                       TBSYS_LOG(DEBUG, "in_buf is %s", in_buf->get_data());
                       break;
                     //add :e
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_REPORT_CAPACITY_INFO:
                       return_code = rt_report_capacity_info(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1768,15 +1665,12 @@ namespace oceanbase
                     case OB_FETCH_SCHEMA:
                       return_code = rt_fetch_schema(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
 
                     //add by wangdonghui 20160304 :b
                     case OB_FETCH_PROCEDURE:
                       return_code = rt_fetch_procedure(version, *in_buf, req, channel_id, thread_buff);
 					  break;
                     //add :e
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_FETCH_SCHEMA_VERSION:
                       return_code = rt_fetch_schema_version(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1801,14 +1695,11 @@ namespace oceanbase
                     case OB_RS_CHECK_TABLET_MERGED:
                       return_code = rt_check_tablet_merged(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
                      //add wenghaixing [secondary index.static_index]20151118
                     case OB_INDEX_JOB:
                       return_code = rt_handle_index_job(version, *in_buf, req, channel_id, thread_buff);
                       break;
                      //add e
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_FETCH_STATS:
                       return_code = rt_fetch_stats(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1836,7 +1727,6 @@ namespace oceanbase
                     case OB_SET_OBI_ROLE:
                       return_code = rt_set_obi_role(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
                     // add by guojinwei [obi role switch][multi_cluster] 20150915:b
                     case OB_SET_SLAVE_CLUSTER_OBI_ROLE:
                       return_code = rt_set_slave_cluster_obi_role(version, *in_buf, req, channel_id, thread_buff);
@@ -1847,8 +1737,6 @@ namespace oceanbase
                       return_code = rt_get_election_ready(version, *in_buf, req, channel_id, thread_buff);
                       break;
                     // add:e
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_RS_GET_LAST_FROZEN_VERSION:
                       return_code = rt_get_last_frozen_version(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1894,13 +1782,10 @@ namespace oceanbase
                     case OB_CHANGE_TABLE_ID:
                       return_code = rt_change_table_id(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
                     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
                     case OB_RS_SET_AUTO_ELECT_FLAG:
                       return_code = rt_set_auto_elect_flag(version, *in_buf, req, channel_id, thread_buff);
                     // add:e
-=======
->>>>>>> refs/remotes/origin/master
                     case OB_GET_CS_LIST:
                       return_code = rt_get_cs_list(version, *in_buf, req, channel_id, thread_buff);
                       break;
@@ -1958,14 +1843,11 @@ namespace oceanbase
                     case OB_RS_NOTIFY_SWITCH_SCHEMA:
                       return_code = rt_notify_switch_schema(version, *in_buf, req, channel_id, thread_buff);
                       break;
-<<<<<<< HEAD
                     // add by zhangcd [majority_count_init] 20151118:b
                     case OB_RS_GET_ALL_CLUSTERS_INFO:
                       return_code = rt_get_all_clusters_info(version, *in_buf, req, channel_id, thread_buff);
                       break;
                     // add:e
-=======
->>>>>>> refs/remotes/origin/master
                     default:
                       TBSYS_LOG(ERROR, "unknow packet code %d in read queue", packet_code);
                       return_code = OB_ERROR;
@@ -2015,7 +1897,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //del by pangtianze [rs_election] 20160106:b
     /*
     //add chujiajia [rs_election][multi_cluster] 20150823:b
@@ -2484,49 +2365,6 @@ namespace oceanbase
           TBSYS_LOG(ERROR, "found_server.serialize error");
         }
         else
-=======
-    int ObRootWorker::rt_get_update_server_info(const int32_t version, ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, ObDataBuffer& out_buff,
-        bool use_inner_port /* = false*/)
-    {
-      static const int MY_VERSION = 1;
-      common::ObResultCode result_msg;
-      result_msg.result_code_ = OB_SUCCESS;
-      int ret = OB_SUCCESS;
-
-      //next two lines only for exmaples, actually this func did not need this
-      char msg_buff[OB_MAX_RESULT_MESSAGE_LENGTH];
-      result_msg.message_.assign_buffer(msg_buff, OB_MAX_RESULT_MESSAGE_LENGTH);
-
-      if (version != MY_VERSION)
-      {
-        result_msg.result_code_ = OB_ERROR_FUNC_VERSION;
-      }
-
-      UNUSED(in_buff); // rt_get_update_server_info() no input params
-      common::ObServer found_server;
-      if (OB_SUCCESS == ret && OB_SUCCESS == result_msg.result_code_)
-      {
-        found_server = root_server_.get_update_server_info(use_inner_port);
-      }
-
-      if (OB_SUCCESS == ret)
-      {
-        ret = result_msg.serialize(out_buff.get_data(), out_buff.get_capacity(), out_buff.get_position());
-        if (ret != OB_SUCCESS)
-        {
-          TBSYS_LOG(ERROR, "result_msg.serialize error");
-        }
-      }
-      if (OB_SUCCESS == ret)
-      {
-        ret = found_server.serialize(out_buff.get_data(), out_buff.get_capacity(), out_buff.get_position());
-        if (ret != OB_SUCCESS)
-        {
-          TBSYS_LOG(ERROR, "found_server.serialize error");
-        }
-        else
->>>>>>> refs/remotes/origin/master
         {
           TBSYS_LOG(DEBUG, "find master update server:server[%s]", found_server.to_cstring());
         }
@@ -2539,12 +2377,8 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_scan(const int32_t version, ObDataBuffer& in_buff,
-<<<<<<< HEAD
 
         onev_request_e* req, const uint32_t channel_id, ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -2616,11 +2450,7 @@ namespace oceanbase
 
 
     int ObRootWorker::rt_sql_scan(const int32_t version,
-<<<<<<< HEAD
         ObDataBuffer& in_buff, onev_request_e* req,
-=======
-        ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         const uint32_t channel_id, ObDataBuffer& out_buff)
     {
       UNUSED(channel_id);
@@ -2707,23 +2537,15 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_get(const int32_t version, ObDataBuffer& in_buff,
-<<<<<<< HEAD
 
         onev_request_e* req, const uint32_t channel_id, ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
       result_msg.result_code_ = OB_SUCCESS;
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
 
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       char msg_buff[OB_MAX_RESULT_MESSAGE_LENGTH];
       result_msg.message_.assign_buffer(msg_buff, OB_MAX_RESULT_MESSAGE_LENGTH);
 
@@ -2815,12 +2637,8 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_fetch_schema(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
 
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       static const int MY_VERSION = 1;
@@ -2905,7 +2723,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add by wangdonghui 20160304 :b
     int ObRootWorker::rt_fetch_procedure(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
@@ -2941,10 +2758,6 @@ namespace oceanbase
 
     int ObRootWorker::rt_after_restart(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-    int ObRootWorker::rt_after_restart(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       UNUSED(version);
@@ -2970,11 +2783,7 @@ namespace oceanbase
       return ret;
     }
     int ObRootWorker::rt_fetch_schema_version(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       static const int MY_VERSION = 1;
@@ -3017,11 +2826,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_report_tablets(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 2;
       common::ObResultCode result_msg;
@@ -3084,11 +2889,7 @@ namespace oceanbase
       return ret;
     }
     int ObRootWorker::rt_waiting_job_done(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -3139,11 +2940,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_delete_tablets(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(version);
@@ -3192,11 +2989,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_cs_delete_tablets(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       UNUSED(version);
@@ -3246,11 +3039,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_register(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -3321,7 +3110,6 @@ namespace oceanbase
         }
       }
 
-<<<<<<< HEAD
       //add wenghaixing [secondary index.static_index]20160118
       //serialized buffer in cluster_id
       if (OB_SUCCESS == ret)
@@ -3335,8 +3123,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         send_response(OB_SERVER_REGISTER_RESPONSE, MY_VERSION, out_buff, req, channel_id);
@@ -3345,11 +3131,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_register_ms(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -3448,11 +3230,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_migrate_over(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int CS_MIGRATE_OVER_VERSION = 3;
       int ret = OB_SUCCESS;
@@ -3548,11 +3326,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_report_capacity_info(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -3615,11 +3389,7 @@ namespace oceanbase
 
     // for chunk server
     int ObRootWorker::rt_heartbeat(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 2;
       common::ObResultCode result_msg;
@@ -3651,20 +3421,12 @@ namespace oceanbase
       {
         result_msg.result_code_ = root_server_.receive_hb(server, server.get_port(), false, role);
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return ret;
     }
     // for merge server
     int ObRootWorker::rt_heartbeat_ms(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 3;
       common::ObResultCode result_msg;
@@ -3728,20 +3490,12 @@ namespace oceanbase
       {
         result_msg.result_code_ = root_server_.receive_hb(server, sql_port, is_listen_ms, role);
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
     int ObRootWorker::rt_check_tablet_merged(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       int err = OB_SUCCESS;
@@ -3814,7 +3568,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
     //add wenghaixing [secondary index.static_index]20151118
     int ObRootWorker::rt_handle_index_job(const int32_t version, ObDataBuffer &in_buff, onev_request_e *req, const uint32_t channel_id, ObDataBuffer &out_buff)
     {
@@ -3908,11 +3661,6 @@ namespace oceanbase
     //add e
     int ObRootWorker::rt_dump_cs_info(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-
-    int ObRootWorker::rt_dump_cs_info(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -3926,11 +3674,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_fetch_stats(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       static const int MY_VERSION = 1;
@@ -3981,11 +3725,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_ping(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       static const int MY_VERSION = 1;
@@ -4015,11 +3755,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_slave_quit(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4071,11 +3807,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_update_server_report_freeze(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4144,11 +3876,7 @@ namespace oceanbase
 
 
     int ObRootWorker::rt_slave_register(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4282,11 +4010,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_renew_lease(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       int ret = OB_SUCCESS;
@@ -4335,11 +4059,7 @@ namespace oceanbase
 
       return ret;
     }
-<<<<<<< HEAD
     int ObRootWorker::rt_set_obi_role_to_slave(const int32_t version, common::ObDataBuffer& in_buff, onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-    int ObRootWorker::rt_set_obi_role_to_slave(const int32_t version, common::ObDataBuffer& in_buff, easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4368,7 +4088,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     int ObRootWorker::set_master_root_server_config_on_slave(const ObString& config_string)
     {
@@ -4409,16 +4128,6 @@ namespace oceanbase
       if (version != MY_VERSION)
       {
         ret = OB_ERROR_FUNC_VERSION;
-=======
-    int ObRootWorker::rt_grant_lease(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-    {
-      static const int MY_VERSION = 1;
-      int ret = OB_SUCCESS;
-      if (version != MY_VERSION)
-      {
-        ret = OB_ERROR_FUNC_VERSION;
->>>>>>> refs/remotes/origin/master
       }
 
       ObLease lease;
@@ -4461,11 +4170,7 @@ namespace oceanbase
     }
 
     int ObRootWorker::rt_slave_write_log(const int32_t version, common::ObDataBuffer& in_buffer,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buffer)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buffer)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -4550,11 +4255,7 @@ namespace oceanbase
     }
 
 int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       UNUSED(in_buff);
@@ -4582,11 +4283,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_get_obi_role(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       UNUSED(in_buff);
@@ -4625,11 +4322,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_force_cs_to_report(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4657,11 +4350,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_set_obi_role(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4689,7 +4378,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       {
         ret = send_response(OB_SET_OBI_ROLE_RESPONSE, MY_VERSION, out_buff, req, channel_id);
       }
-<<<<<<< HEAD
       TBSYS_LOG(INFO, "set obi role, ret=%d", ret);
       return ret;
     }
@@ -4725,13 +4413,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
 
     int ObRootWorker::rt_get_last_frozen_version(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-      return ret;
-    }
-
-    int ObRootWorker::rt_get_last_frozen_version(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4756,11 +4437,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rs_check_root_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       int err = OB_SUCCESS;
@@ -4816,11 +4493,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rs_dump_cs_tablet_info(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       int err = OB_SUCCESS;
@@ -4875,11 +4548,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_admin(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -4940,19 +4609,14 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
         case OB_RS_ADMIN_INIT_CLUSTER:
           {
             TBSYS_LOG(INFO, "start init cluster table");
-<<<<<<< HEAD
             // modify by zcd [multi_cluster] 20150405:b
             ObBootstrap bootstrap(root_server_, *this);
             // modify:e
-=======
-            ObBootstrap bootstrap(root_server_);
->>>>>>> refs/remotes/origin/master
             ret = bootstrap.init_all_cluster();
             break;
           }
         case OB_RS_ADMIN_BOOT_STRAP:
           TBSYS_LOG(INFO, "start to bootstrap");
-<<<<<<< HEAD
           // add by zcd [multi_cluster] 20150416:b
           {
             common::ObServer obi_master = check_rselection_thread_.get_ob_election_node().get_leaderinfo();
@@ -4986,11 +4650,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           TBSYS_LOG(INFO, "end set obi_master_first");
           break;
           // add:e
-=======
-          ret = root_server_.boot_strap();
-          TBSYS_LOG(INFO, "bootstrap over");
-          break;
->>>>>>> refs/remotes/origin/master
         case OB_RS_ADMIN_CHECKPOINT:
           if (root_server_.is_master())
           {
@@ -5022,7 +4681,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
             TBSYS_LOG(WARN, "switch ini schema failed:ret[%d]", ret);
           }
           break;
-<<<<<<< HEAD
         // add by guojinwei [new rs_admin command][multi_cluster] 20150901:b
         case OB_RS_ADMIN_REELECT:
           {
@@ -5048,8 +4706,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
             ret = root_server_.start_gather_operation();
             break;
           //add e
-=======
->>>>>>> refs/remotes/origin/master
         case OB_RS_ADMIN_BOOT_RECOVER:
         case OB_RS_ADMIN_DUMP_ROOT_TABLE:
         case OB_RS_ADMIN_DUMP_UNUSUAL_TABLETS:
@@ -5099,11 +4755,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_change_log_level(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -5143,11 +4795,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_stat(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -5206,11 +4854,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_get_master_ups_config(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       UNUSED(in_buff);
@@ -5247,11 +4891,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_ups_heartbeat_resp(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(req);
@@ -5285,20 +4925,12 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
         ret = root_server_.receive_ups_heartbeat_resp(msg.addr_, ups_status, msg.obi_role_);
       }
       // no response
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
     int ObRootWorker::rt_get_ups(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5334,11 +4966,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_ups_register(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static int MY_VERSION = 1;
       int ret = OB_SUCCESS;
@@ -5382,11 +5010,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_set_master_ups_config(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5426,11 +5050,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_set_ups_config(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5476,11 +5096,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_ups_slave_failure(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       ObMsgUpsSlaveFailure msg;
@@ -5514,11 +5130,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_change_ups_master(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -5561,11 +5173,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_get_cs_list(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5595,11 +5203,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_get_row_checksum(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -5645,11 +5249,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_get_ms_list(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5678,11 +5278,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
 
-<<<<<<< HEAD
     int ObRootWorker::rt_get_proxy_list(const int32_t version, common::ObDataBuffer& in_buff, onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-    int ObRootWorker::rt_get_proxy_list(const int32_t version, common::ObDataBuffer& in_buff, easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       UNUSED(in_buff);
@@ -5711,11 +5307,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_cs_import_tablets(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       uint64_t table_id = OB_INVALID_ID;
@@ -5756,11 +5348,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_restart_cs(const int32_t version, ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -5856,11 +5444,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_shutdown_cs(const int32_t version, ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -5948,7 +5532,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     {
       return &my_thread_buffer;
     }
-<<<<<<< HEAD
 
     // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
     int64_t ObRootWorker::get_rs_election_lease()
@@ -5960,11 +5543,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     template <class Queue>
       int ObRootWorker::submit_async_task_(const PacketCode pcode, Queue& qthread, int32_t task_queue_size,
           const int32_t version, common::ObDataBuffer& in_buff, onev_request_e* req,
-=======
-    template <class Queue>
-      int ObRootWorker::submit_async_task_(const PacketCode pcode, Queue& qthread, int32_t task_queue_size,
-          const int32_t version, common::ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
           const uint32_t channel_id, const int64_t timeout)
       {
         int ret = OB_SUCCESS;
@@ -6059,11 +5637,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
         return ret;
       }
     int ObRootWorker::rt_split_tablet(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       int err = OB_SUCCESS;
@@ -6117,11 +5691,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_create_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -6152,7 +5722,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
         {
           TBSYS_LOG(WARN, "failed to deserialize, err=%d", ret);
         }
-<<<<<<< HEAD
         //modify wenghaixing [secondary index.static_index]20160119
         /*else if (OB_SUCCESS != (ret = root_server_.create_table(if_not_exists, tschema)))
         {
@@ -6170,12 +5739,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           }
         }
         //modify e
-=======
-        else if (OB_SUCCESS != (ret = root_server_.create_table(if_not_exists, tschema)))
-        {
-          TBSYS_LOG(WARN, "failed to create table, err=%d", ret);
-        }
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           res.message_ = ob_get_err_msg();
@@ -6206,11 +5769,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_alter_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -6267,11 +5826,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_drop_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -6324,7 +5879,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170403:b
     int ObRootWorker::rt_truncate_table(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
@@ -6525,11 +6079,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
 
     int ObRootWorker::rt_execute_sql(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-
-    int ObRootWorker::rt_execute_sql(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       UNUSED(req);              /* NULL */
@@ -6601,11 +6150,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_handle_trigger_event(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
 
@@ -6630,7 +6175,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
             int64_t count = 0;
             if (role != common::ObiRole::MASTER)
             {
-<<<<<<< HEAD
               //modify by qx 20170225 :b
               // fix schema fail to refresh bug after drop table
                 ret = root_server_.renew_user_schema(count);
@@ -6640,9 +6184,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
 //                   sleep(1);
                 }
               // modidfy :e
-=======
-              ret = root_server_.renew_user_schema(count);
->>>>>>> refs/remotes/origin/master
             }
             TBSYS_LOG(INFO, "[TRIGGER][renew_user_schema(%ld)] done. ret=%d", count, ret);
             break;
@@ -6678,7 +6219,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           {
             if (role != common::ObiRole::MASTER)
             {
-<<<<<<< HEAD
               // modify by qx 20170224 :b
               // add a do while dead loop
               if (OB_SUCCESS != (ret = root_server_.trigger_create_table(msg.param)))
@@ -6692,12 +6232,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
                   ret = OB_SUCCESS;
               }
               // modify :e
-=======
-              if (OB_SUCCESS != (ret = root_server_.trigger_create_table(msg.param)))
-              {
-                TBSYS_LOG(WARN, "fail to create table for slave obi master, ret=%d", ret);
-              }
->>>>>>> refs/remotes/origin/master
             }
             TBSYS_LOG(INFO, "[TRIGGER][slave_create_table] done. ret=%d", ret);
             break;
@@ -6714,7 +6248,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
             TBSYS_LOG(INFO, "[TRIGGER][slave_drop_table] done. ret=%d", ret);
             break;
           }
-<<<<<<< HEAD
         //add by wdh 20160730 :b
         case CREATE_PROCEDURE_TRIGGER:
         case DROP_PROCEDURE_TRIGGER:
@@ -6728,14 +6261,11 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           TBSYS_LOG(INFO, "[TRIGGER][slave_create_procedure] done.");
           break;
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           {
             TBSYS_LOG(WARN, "get unknown trigger event msg:type[%ld]", msg.type);
           }
       }
-<<<<<<< HEAD
       //add by qx 20170225 :b
       if (OB_SUCCESS != ret)
       {
@@ -6756,29 +6286,12 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
         {
           TBSYS_LOG(WARN, "failed to send response, err=%d", err);
         }
-=======
-      int err = OB_SUCCESS;
-      // send response message, always success
-      if (OB_SUCCESS != (err = res.serialize(out_buff.get_data(),
-              out_buff.get_capacity(), out_buff.get_position())))
-      {
-        TBSYS_LOG(WARN, "failed to serialize, err=%d", err);
-      }
-      else if (OB_SUCCESS != (err = send_response(OB_HANDLE_TRIGGER_EVENT_RESPONSE,
-              MY_VERSION, out_buff, req, channel_id)))
-      {
-        TBSYS_LOG(WARN, "failed to send response, err=%d", err);
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
 
     int ObRootWorker::rt_get_master_obi_rs(const int32_t version, common::ObDataBuffer &in_buff,
-<<<<<<< HEAD
         onev_request_e *req, const uint32_t channel_id, common::ObDataBuffer &out_buff)
-=======
-        easy_request_t *req, const uint32_t channel_id, common::ObDataBuffer &out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(version);
       UNUSED(in_buff);
@@ -6801,16 +6314,11 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           {
             TBSYS_LOG(ERROR, "seriliaze self addr fail, ret: [%d]", ret);
           }
-<<<<<<< HEAD
           TBSYS_LOG(TRACE, "master cluster, send master obi rs: [%s]", to_cstring(self_addr_));
-=======
-          TBSYS_LOG(TRACE, "send master obi rs: [%s]", to_cstring(self_addr_));
->>>>>>> refs/remotes/origin/master
         }
         else /* if (role == common::ObiRole::SLAVE) */
         {
           ObServer master_rs;
-<<<<<<< HEAD
           // modify by zcd [multi_cluster] 20150405:b
           master_rs = get_obi_master_root_server();
 
@@ -6821,19 +6329,11 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
 //          else
           // modify:e
           if (OB_SUCCESS != (ret = master_rs.serialize(out_buff.get_data(),
-=======
-          if (OB_SUCCESS != config_.get_master_root_server(master_rs))
-          {
-            TBSYS_LOG(ERROR, "Get master root server error, ret: [%d]", ret);
-          }
-          else if (OB_SUCCESS != (ret = master_rs.serialize(out_buff.get_data(),
->>>>>>> refs/remotes/origin/master
                   out_buff.get_capacity(),
                   out_buff.get_position())))
           {
             TBSYS_LOG(ERROR, "seriliaze master obi rs fail, ret: [%d]", ret);
           }
-<<<<<<< HEAD
           if (role == common::ObiRole::SLAVE)
           {
             TBSYS_LOG(TRACE, "slave cluster, send master obi rs: [%s]", to_cstring(master_rs));
@@ -6842,9 +6342,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
           {
             TBSYS_LOG(INFO, "init cluster, send master obi rs: [%s]", to_cstring(master_rs));
           }
-=======
-          TBSYS_LOG(INFO, "send master obi rs: [%s]", to_cstring(master_rs));
->>>>>>> refs/remotes/origin/master
         }
       }
 
@@ -6858,11 +6355,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_set_config(const int32_t version,
-<<<<<<< HEAD
         common::ObDataBuffer& in_buff, onev_request_e* req,
-=======
-        common::ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       UNUSED(version);
@@ -6904,11 +6397,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
 
     int ObRootWorker::rt_get_config(const int32_t version,
-<<<<<<< HEAD
         common::ObDataBuffer& in_buff, onev_request_e* req,
-=======
-        common::ObDataBuffer& in_buff, easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         const uint32_t channel_id, common::ObDataBuffer& out_buff)
     {
       UNUSED(version);
@@ -6940,11 +6429,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     }
     //for bypass
     int ObRootWorker::rt_check_task_process(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id,
-=======
-        easy_request_t* req, const uint32_t channel_id,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& out_buff)
     {
       int ret = OB_SUCCESS;
@@ -6958,20 +6443,12 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       {
         TBSYS_LOG(DEBUG, "bypas process is already processing, wait.., ret=%d", ret);
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
     int ObRootWorker::rt_prepare_bypass_process(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -7022,11 +6499,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rs_cs_load_bypass_sstable_done(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -7039,11 +6512,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       common::ObTableImportInfoList table_list;
       bool is_load_succ = false;
       ObServer cs;
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret && OB_SUCCESS == result_msg.result_code_)
       {
         ret = cs.deserialize(in_buff.get_data(), in_buff.get_capacity(), in_buff.get_position());
@@ -7096,11 +6565,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_cs_delete_table_done(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
          onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-         easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -7113,11 +6578,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       uint64_t table_id =  UINT64_MAX;
       bool is_delete_succ = false;
       ObServer cs;
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret && OB_SUCCESS == result_msg.result_code_)
       {
         ret = cs.deserialize(in_buff.get_data(), in_buff.get_capacity(), in_buff.get_position());
@@ -7172,11 +6633,7 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       return ret;
     }
     int ObRootWorker::rt_start_bypass_process(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       static const int MY_VERSION = 1;
       common::ObResultCode result_msg;
@@ -7240,7 +6697,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
       }
       return ret;
     }
-<<<<<<< HEAD
 
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     int ObRootWorker::set_auto_elect_flag(bool flag)
@@ -7270,10 +6726,6 @@ int ObRootWorker::rt_get_boot_state(const int32_t version, common::ObDataBuffer&
     // add:e
 int ObRootWorker::rt_write_schema_to_file(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-int ObRootWorker::rt_write_schema_to_file(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
 {
   UNUSED(in_buff);
   static const int MY_VERSION = 1;
@@ -7313,11 +6765,7 @@ int ObRootWorker::rt_write_schema_to_file(const int32_t version, common::ObDataB
   return ret;
 }
 int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7351,7 +6799,6 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
       return ret;
     }
 
-<<<<<<< HEAD
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     int ObRootWorker::rt_set_auto_elect_flag(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
@@ -7398,10 +6845,6 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
 
     int ObRootWorker::rt_start_import(const int32_t version, common::ObDataBuffer& in_buff,
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-    int ObRootWorker::rt_start_import(const int32_t version, common::ObDataBuffer& in_buff,
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7463,11 +6906,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_import(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7535,11 +6974,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_start_kill_import(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7592,11 +7027,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_kill_import(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7649,11 +7080,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_get_import_status(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7712,11 +7139,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_set_import_status(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int32_t MY_VERSION = 1;
@@ -7776,11 +7199,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_force_create_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -7837,11 +7256,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_force_drop_table(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       static const int MY_VERSION = 1;
@@ -7898,11 +7313,7 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
 
     int ObRootWorker::rt_notify_switch_schema(const int32_t version, common::ObDataBuffer& in_buff,
-<<<<<<< HEAD
         onev_request_e* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
-=======
-        easy_request_t* req, const uint32_t channel_id, common::ObDataBuffer& out_buff)
->>>>>>> refs/remotes/origin/master
     {
       UNUSED(in_buff);
       int ret = OB_SUCCESS;
@@ -7945,7 +7356,6 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
       return ret;
     }
 
-<<<<<<< HEAD
     //add longfei [create index] 20151017
     int ObRootWorker::rt_create_index(
         const int32_t version,
@@ -8284,7 +7694,4 @@ int ObRootWorker::rt_change_table_id(const int32_t version, common::ObDataBuffer
     }
     // add:e
   } // end namespace
-=======
-  }; // end namespace
->>>>>>> refs/remotes/origin/master
 }

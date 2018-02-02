@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -61,11 +58,7 @@ namespace oceanbase
     {
       public:
         ObMsSQLProxy();
-<<<<<<< HEAD
         virtual ~ObMsSQLProxy() {}
-=======
-        virtual ~ObMsSQLProxy() {};
->>>>>>> refs/remotes/origin/master
 
        int execute(const ObString &cmd,
                     ObSQLResultSet &rs,
@@ -81,7 +74,6 @@ namespace oceanbase
         int init_sql_env(ObSqlContext &context, int64_t &schema_version,
                          ObSQLResultSet &result, ObSQLSessionInfo &session);
         int cleanup_sql_env(ObSqlContext &context, ObSQLResultSet &rs);
-<<<<<<< HEAD
 
         //add by zt 20160321
         /**
@@ -96,8 +88,6 @@ namespace oceanbase
         int init_sql_env_for_cache(ObSqlContext &context, int64_t &schema_version,
                                    ObSQLResultSet &result, ObSQLSessionInfo &session);
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         const ObMergeServerService *ms_service_;
         // environment virable

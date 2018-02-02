@@ -18,11 +18,7 @@
 #ifndef OB_CHUNK_CALLBACK_H_
 #define OB_CHUNK_CALLBACK_H_
 
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -31,11 +27,7 @@ namespace oceanbase
     class ObChunkCallback
     {
     public:
-<<<<<<< HEAD
       static int process(onev_request_e* req);
-=======
-      static int process(easy_request_t* req);
->>>>>>> refs/remotes/origin/master
     };
   }
 }

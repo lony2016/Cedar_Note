@@ -18,11 +18,7 @@
 #define _OB_MUTATOR_HELPER_H
 
 #include "common/ob_mutator.h"
-<<<<<<< HEAD
 #include "common/ob_onev_array.h"
-=======
-#include "common/ob_easy_array.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -38,11 +34,7 @@ namespace oceanbase
       kv_pair(const char* key, int64_t val);
     };
 
-<<<<<<< HEAD
     class KV : public OnevArray<kv_pair>
-=======
-    class KV : public EasyArray<kv_pair>
->>>>>>> refs/remotes/origin/master
     {
     public:
       KV(const char* key, ObString val);

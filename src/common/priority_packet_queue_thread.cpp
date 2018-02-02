@@ -21,10 +21,7 @@
 #include "ob_profile_log.h"
 #include "ob_profile_type.h"
 #include "ob_atomic.h"
-<<<<<<< HEAD
 #include <sys/syscall.h>
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase {
 namespace common {
@@ -169,10 +166,7 @@ void PriorityPacketQueueThread::run(tbsys::CThread *, void *)
   ObPacket *packet = NULL;
   int64_t priority = -1;
   static const int64_t TASK_WAIT_TIME = 1; // wait 1ms if there is no task
-<<<<<<< HEAD
   TBSYS_LOG(INFO, "test::zhouhuan1 read_thread tid = [%ld]", syscall(SYS_gettid));
-=======
->>>>>>> refs/remotes/origin/master
 
   while (!_stop)
   {

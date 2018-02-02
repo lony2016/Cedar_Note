@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -71,29 +68,19 @@ namespace oceanbase
 
       private:
         bool check_inner_stat();
-<<<<<<< HEAD
         int normal_get(ObTableIdName** table_info, bool index = false);
-=======
-        int normal_get(ObTableIdName** table_info);
->>>>>>> refs/remotes/origin/master
         int internal_get(ObTableIdName** table_info);
       protected:
         bool need_scan_;
         bool only_core_tables_;
-<<<<<<< HEAD
         // longfei [create index] for schema in secondary index core table
         bool index; ///< flag for get row from res2
-=======
->>>>>>> refs/remotes/origin/master
         int32_t table_idx_;
         nb_accessor::ObNbAccessor nb_accessor_;
         ObScanHelper* client_proxy_;
         nb_accessor::QueryRes* res_;
-<<<<<<< HEAD
         //longfei [create index] for schema in secondary index core table
         nb_accessor::QueryRes* res2_; ///< for schema in secondary index core table
-=======
->>>>>>> refs/remotes/origin/master
         ObTableIdName table_id_name_;
     };
   }

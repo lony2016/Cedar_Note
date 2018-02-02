@@ -25,7 +25,6 @@ namespace oceanbase
     struct ObObjCastParams
     {
       // add params when necessary
-<<<<<<< HEAD
       //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         uint32_t precision;
         uint32_t scale;
@@ -37,8 +36,6 @@ namespace oceanbase
             is_modify=false;
         }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
     typedef int (*ObObjCastFunc) (const ObObjCastParams &params, const ObExprObj &in, ObExprObj &out);
     extern ObObjCastFunc OB_OBJ_CAST[ObMaxType][ObMaxType];
@@ -46,13 +43,10 @@ namespace oceanbase
     // utility function
     int obj_cast(const ObObj &orig_cell, const ObObj &expected_type,
                  ObObj &casted_cell, const ObObj *&res_cell);
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     int obj_cast_for_rowkey(const ObObj &orig_cell, const ObObj &expected_type,
                  ObObj &casted_cell, const ObObj *&res_cell);
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     int obj_cast(ObObj &cell, const ObObjType expected_type, char* buf, int64_t buf_size, int64_t &used_buf_len);
     int obj_cast(ObObj &cell, const ObObjType expected_type, ObString &cast_buffer);
   } // end namespace common

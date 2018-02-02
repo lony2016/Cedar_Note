@@ -212,11 +212,7 @@ int ObRpcStub::OCEANBASE_JOIN(send_param_, 0)(ObDataBuffer & data_buffer, \
 int OCEANBASE_JOIN(post_request_, NUM_ARG)( \
     const ObServer& server, const int64_t timeout, \
     const int32_t pcode, const int32_t version, \
-<<<<<<< HEAD
     onev_io_process_pe handler, void* args, ARG_PNS) const
-=======
-    easy_io_process_pt handler, void* args, ARG_PNS) const
->>>>>>> refs/remotes/origin/master
 
 #define POST_REQUEST_DECLARE(NUM_ARG) \
   DO_POST_REQUEST_DECLARE( NUM_ARG,  OCEANBASE_JOIN(ARG_TN, NUM_ARG), OCEANBASE_JOIN(ARG_PN, NUM_ARG))
@@ -226,11 +222,7 @@ int OCEANBASE_JOIN(post_request_, NUM_ARG)( \
 int ObRpcStub::OCEANBASE_JOIN(post_request_, NUM_ARG)( \
     const ObServer& server, const int64_t timeout, \
     const int32_t pcode, const int32_t version, \
-<<<<<<< HEAD
     onev_io_process_pe handler,  void* args, ARG_PNS) const \
-=======
-    easy_io_process_pt handler,  void* args, ARG_PNS) const \
->>>>>>> refs/remotes/origin/master
 { \
   int ret = OB_SUCCESS; \
   ObDataBuffer data_buffer; \

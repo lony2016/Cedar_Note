@@ -104,11 +104,7 @@ namespace oceanbase
 
       if (OB_SUCCESS == ret)
       {
-<<<<<<< HEAD
         memset(&server_handler_, 0, sizeof(onev_io_handler_pe));
-=======
-        memset(&server_handler_, 0, sizeof(easy_io_handler_pt));
->>>>>>> refs/remotes/origin/master
         server_handler_.encode = ObTbnetCallback::encode;
         server_handler_.decode = ObTbnetCallback::decode;
         server_handler_.process = ObProxyCallback::process;
@@ -214,11 +210,7 @@ namespace oceanbase
       int32_t channel_id = ob_packet->get_channel_id();
       int64_t receive_time = ob_packet->get_receive_ts();
       int64_t network_timeout = ob_packet->get_source_timeout();
-<<<<<<< HEAD
       onev_request_e* req = ob_packet->get_request();
-=======
-      easy_request_t* req = ob_packet->get_request();
->>>>>>> refs/remotes/origin/master
       ObDataBuffer* in_buffer = ob_packet->get_buffer();
       ThreadSpecificBuffer::Buffer* thread_buffer = response_buffer_.get_buffer();
       if (NULL == req || NULL == req->ms || NULL == req->ms->c)

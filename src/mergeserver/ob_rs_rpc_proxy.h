@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -21,8 +20,6 @@
  *
  * @date 2016_07_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef _OB_MERGER_RS_RPC_PROXY_H_
 #define _OB_MERGER_RS_RPC_PROXY_H_
 
@@ -63,7 +60,6 @@ namespace oceanbase
     public:
       // retry interval time
       static const int64_t RETRY_INTERVAL_TIME = 20; // 20 ms usleep
-<<<<<<< HEAD
       //mod longfei [timeout debug] 20160122:b
       //static const int64_t CREATE_DROP_TABLE_TIME_OUT = 5 * 1000 * 1000; // 5s
       static const int64_t CREATE_DROP_TABLE_TIME_OUT = 10 * 1000 * 1000; ///< set create and drop timeout = 10s
@@ -72,9 +68,6 @@ namespace oceanbase
       static const int64_t DROP_INDEX_TIME_OUT = 30 * 1000 * 1000; ///< set drop index timeout = 30s
       //add e
 
-=======
-      static const int64_t CREATE_DROP_TABLE_TIME_OUT = 5 * 1000 * 1000; // 5s
->>>>>>> refs/remotes/origin/master
       ///
       int init(common::ObGeneralRpcStub *rpc_stub);
 
@@ -94,7 +87,6 @@ namespace oceanbase
       int create_table(bool if_not_exists, const common::TableSchema & table_schema);
       // drop tables
       int drop_table(bool if_exists, const common::ObStrings & tables);
-<<<<<<< HEAD
       // truncate tables
       int truncate_table(bool if_exists, const common::ObStrings & tables,
                          const common::ObString & user, const common::ObString & comment); //add hxlong [Truncate Table]:20170403
@@ -122,9 +114,6 @@ namespace oceanbase
        */
       int drop_procedure(bool if_exists, const common::ObString & proc_name);
       //add :e
-=======
-      // alter table
->>>>>>> refs/remotes/origin/master
       int alter_table(const common::AlterTableSchema & alter_schema);
       int fetch_master_ups(const ObServer &rootserver, ObServer & master_ups);
     public:
@@ -138,7 +127,6 @@ namespace oceanbase
       int set_obi_role(const ObServer &rs, const int64_t timeout, const ObiRole &obi_role);
       int get_obi_role(const int64_t timeout_us, const common::ObServer& root_server, common::ObiRole &obi_role) const;
       int set_master_rs_vip_port_to_cluster(const ObServer &rs, const int64_t timeout, const char *new_master_ip, const int32_t new_master_port);
-<<<<<<< HEAD
     public:
       // longfei secondary index service
       // longfei [drop index]
@@ -150,8 +138,6 @@ namespace oceanbase
        */
       int drop_index(bool if_exists, const common::ObStrings& indexs);
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       // check inner stat
       bool check_inner_stat(void) const;

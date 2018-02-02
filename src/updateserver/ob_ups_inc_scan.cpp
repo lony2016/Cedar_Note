@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -33,7 +30,6 @@
  *   yuanqi <yuanqi.xhf@taobao.com>
  *     - some work details if you want
  */
-<<<<<<< HEAD
 
 #include "common/ob_new_scanner_helper.h"
 #include "ob_ups_inc_scan.h"
@@ -45,16 +41,6 @@ namespace oceanbase
 {
   namespace updateserver
   {
-=======
-#include "common/ob_new_scanner_helper.h"
-#include "ob_ups_inc_scan.h"
-#include "ob_update_server_main.h"
-
-using namespace oceanbase::sql;
-
-namespace oceanbase{
-  namespace updateserver{
->>>>>>> refs/remotes/origin/master
     REGISTER_CREATOR(oceanbase::sql::ObPhyOperatorGFactory, oceanbase::sql::ObPhyOperator, ObIncGetIter, oceanbase::sql::PHY_INC_GET_ITER);
   }
 }
@@ -306,7 +292,6 @@ namespace oceanbase
       int err = OB_SUCCESS;
       ObUpsTableMgr* table_mgr = NULL;
 
-<<<<<<< HEAD
       //add by zt 20160113:b
       if(group_exec_mode_)
       {
@@ -318,8 +303,6 @@ namespace oceanbase
       if( OB_SUCCESS != err ) {}
       else
       //add by zt 20160113:e
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == (table_mgr = get_table_mgr()))
       {
         err = OB_ERR_UNEXPECTED;
@@ -334,10 +317,7 @@ namespace oceanbase
       }
       else if (ObIncScan::ST_MGET == scan_type_)
       {
-<<<<<<< HEAD
         TBSYS_LOG(DEBUG, "ObUpsIncScan, GetParam[%p]: %s", get_param_, to_cstring(*get_param_)); //add by zt 20160118
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != (err = get_iter_.open(session_ctx_, table_mgr, get_param_, lock_flag_, result_)))
         {
           TBSYS_LOG(WARN, "get_iter_.open()=>%d", err);
@@ -398,10 +378,7 @@ namespace oceanbase
     int ObUpsIncScan::get_next_row(const ObRow *&row)
     {
       int err = OB_SUCCESS;
-<<<<<<< HEAD
       int64_t start_ts = tbsys::CTimeUtil::getTime(); //add by zt
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == result_)
       {
         err = OB_NOT_INIT;
@@ -415,10 +392,7 @@ namespace oceanbase
           TBSYS_LOG(WARN, "result->get_next_row()=>%d", err);
         }
       }
-<<<<<<< HEAD
       OB_STAT_INC(UPDATESERVER, UPS_EXEC_INC_SCAN, tbsys::CTimeUtil::getTime() - start_ts); //add by zt
-=======
->>>>>>> refs/remotes/origin/master
       return err;
     }
 
@@ -436,7 +410,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
 
     //add by zt 20160113:b
     int ObUpsIncScan::prepare_data()
@@ -575,7 +548,5 @@ namespace oceanbase
       return err;
     }
     //add by zt 20160113:e
-=======
->>>>>>> refs/remotes/origin/master
   }; // end namespace updateserver
 }; // end namespace oceanbase

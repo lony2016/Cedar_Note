@@ -1,19 +1,11 @@
 AM_CPPFLAGS := $(AM_CPPFLAGS) -I${TBLIB_ROOT}/include/tbsys \
-<<<<<<< HEAD
              -I${ONEV_ROOT}/include/onev   \
-=======
-             -I${EASY_ROOT}/include/easy   \
->>>>>>> refs/remotes/origin/master
              -I${top_srcdir}/include       \
              -I${top_srcdir}/src
 
 LDADD = ${top_srcdir}/src/mergeserver/libmergeserver.a \
         ${top_srcdir}/src/sstable/libsstable.a         \
-<<<<<<< HEAD
         ${ONEV_LIB_PATH}/libonev.a                     \
-=======
-        ${EASY_LIB_PATH}/libeasy.a                     \
->>>>>>> refs/remotes/origin/master
         ${TBLIB_ROOT}/lib/libtbsys.a
 
 AM_LDFLAGS=-lpthread -lc -lm  -lrt -lcrypt -lssl #-pg
@@ -30,7 +22,6 @@ endif
 #        tools/flex -osql_parser.lex.c $<
 
 sql_parser_sources=                                    \
-<<<<<<< HEAD
   ob_cursor_declare_stmt.cpp         ob_cursor_declare_stmt.h	\
   ob_cursor_fetch_prior_stmt.cpp     ob_cursor_fetch_prior_stmt.h  \
   ob_cursor_fetch_relative_stmt.cpp  ob_cursor_fetch_relative_stmt.h  \
@@ -64,8 +55,6 @@ sql_parser_sources=                                    \
   ob_cursor_fetch_prior.cpp           ob_cursor_fetch_prior.h\
   ob_cursor_close.cpp                ob_cursor_close.h\
   ob_cursor.cpp                      ob_cursor.h\
-=======
->>>>>>> refs/remotes/origin/master
   build_plan.h                build_plan.cpp           \
   dml_build_plan.h            dml_build_plan.cpp       \
   ob_alter_table_stmt.h       ob_alter_table_stmt.cpp  \
@@ -73,7 +62,6 @@ sql_parser_sources=                                    \
   ob_basic_stmt.h                                      \
   ob_column_def.h                                      \
   ob_create_table_stmt.h      ob_create_table_stmt.cpp \
-<<<<<<< HEAD
   ob_create_index_stmt.h      ob_create_index_stmt.cpp \
   ob_deallocate_stmt.h        ob_deallocate_stmt.cpp   \
   ob_delete_stmt.h            ob_delete_stmt.cpp       \
@@ -108,13 +96,6 @@ sql_parser_sources=                                    \
   ob_procedure_select_into_stmt.h  ob_procedure_select_into_stmt.cpp\
   ob_variable_set_array_value_stmt.h   ob_variable_set_array_value_stmt.cpp\
   ob_variable_set_array_value.h   ob_variable_set_array_value.cpp\
-=======
-  ob_deallocate_stmt.h        ob_deallocate_stmt.cpp   \
-  ob_delete_stmt.h            ob_delete_stmt.cpp       \
-  ob_drop_table_stmt.h        ob_drop_table_stmt.cpp   \
-  ob_dual_table_scan.h ob_dual_table_scan.cpp          \
-  ob_execute_stmt.h           ob_execute_stmt.cpp      \
->>>>>>> refs/remotes/origin/master
   ob_explain_stmt.h           ob_explain_stmt.cpp      \
   ob_insert_stmt.h            ob_insert_stmt.cpp       \
   ob_item_type.h                                       \
@@ -122,10 +103,7 @@ sql_parser_sources=                                    \
   ob_logical_plan.h           ob_logical_plan.cpp      \
   ob_multi_logic_plan.h       ob_multi_logic_plan.cpp  \
   ob_multi_phy_plan.h         ob_multi_phy_plan.cpp    \
-<<<<<<< HEAD
   pull_up_sublink.h           pull_up_sublink.cpp      \
-=======
->>>>>>> refs/remotes/origin/master
   ob_physical_plan.h          ob_physical_plan.cpp     \
   ob_prepare_stmt.h           ob_prepare_stmt.cpp      \
   ob_raw_expr.h               ob_raw_expr.cpp          \
@@ -155,7 +133,6 @@ sql_parser_sources=                                    \
   ob_end_trans_stmt.h\
   ob_non_reserved_keywords.h  ob_non_reserved_keywords.c \
 	ob_priv_executor.h ob_priv_executor.cpp\
-<<<<<<< HEAD
         ob_change_obi_stmt.h ob_change_obi_stmt.cpp \
         ob_lock_table_stmt.h ob_lock_table_stmt.cpp \
         ob_optimizer_relation.h ob_optimizer_relation.cpp\
@@ -174,44 +151,29 @@ operators_sources=                                                       \
   ob_cursor_fetch_prior.cpp           ob_cursor_fetch_prior.h\
   ob_cursor_close.cpp                ob_cursor_close.h\
   ob_cursor.cpp                      ob_cursor.h\
-=======
-	ob_change_obi_stmt.h ob_change_obi_stmt.cpp
-
-operators_sources=                                                       \
->>>>>>> refs/remotes/origin/master
   ob_add_project.h                   ob_add_project.cpp                  \
   ob_aggregate_function.h            ob_aggregate_function.cpp           \
   ob_alter_sys_cnf.h                 ob_alter_sys_cnf.cpp                \
   ob_alter_table.h                   ob_alter_table.cpp                  \
-<<<<<<< HEAD
   ob_bloomfilter_join.h              ob_bloomfilter_join.cpp             \
   ob_hash_join_single.h              ob_hash_join_single.cpp             \
-=======
->>>>>>> refs/remotes/origin/master
   ob_column_group_scanner.h          ob_column_group_scanner.cpp         \
   ob_create_table.h                  ob_create_table.cpp                 \
   ob_create_user_stmt.h ob_create_user_stmt.cpp                          \
   ob_deallocate.h                    ob_deallocate.cpp                   \
   ob_delete.h                        ob_delete.cpp                       \
   ob_double_children_phy_operator.h  ob_double_children_phy_operator.cpp \
-<<<<<<< HEAD
   ob_truncate_table.h                ob_truncate_table.cpp               \
   ob_drop_table.h                    ob_drop_table.cpp                   \
   ob_drop_index.h	             ob_drop_index.cpp			 \
-=======
-  ob_drop_table.h                    ob_drop_table.cpp                   \
->>>>>>> refs/remotes/origin/master
   ob_execute.h                       ob_execute.cpp                      \
   ob_explain.h                       ob_explain.cpp                      \
   ob_filter.h                        ob_filter.cpp                       \
   ob_groupby.h                       ob_groupby.cpp                      \
   ob_in_memory_sort.h                ob_in_memory_sort.cpp               \
-<<<<<<< HEAD
   ob_index_trigger.h                 ob_index_trigger.cpp                \
   ob_in_memory_cursor.h              ob_in_memory_cursor.cpp             \
   ob_merge_cursor.h                  ob_merge_cursor.cpp                 \
-=======
->>>>>>> refs/remotes/origin/master
   ob_insert.h                        ob_insert.cpp                       \
   ob_join.h                          ob_join.cpp                         \
   ob_limit.h                         ob_limit.cpp                        \
@@ -238,14 +200,10 @@ operators_sources=                                                       \
   ob_single_child_phy_operator.h     ob_single_child_phy_operator.cpp    \
   ob_sort.h                          ob_sort.cpp                         \
   ob_sort_helper.h                                                       \
-<<<<<<< HEAD
   ob_cursor_helper.h                                                     \
   ob_sql.h                           ob_sql.cpp                          \
   ob_optimizer.h                     ob_optimizer.cpp                    \
   ob_optimizer_logical.h             ob_optimizer_logical.cpp            \
-=======
-  ob_sql.h                           ob_sql.cpp                          \
->>>>>>> refs/remotes/origin/master
   ob_sql_context.h                                                       \
   ob_sql_expression.h                ob_sql_expression.cpp               \
   ob_sql_read_param.h                ob_sql_read_param.cpp               \
@@ -279,10 +237,7 @@ operators_sources=                                                       \
   ob_multiple_merge.h                ob_multiple_merge.cpp               \
   ob_inc_scan.h                      ob_inc_scan.cpp                     \
   ob_insert_dbsem_filter.h ob_insert_dbsem_filter.cpp                    \
-<<<<<<< HEAD
   ob_semi_left_join.h                ob_semi_left_join.cpp               \
-=======
->>>>>>> refs/remotes/origin/master
   ob_cs_create_plan.h                ob_cs_create_plan.cpp               \
   ob_phy_operator_factory.h          ob_phy_operator_factory.cpp         \
   ob_husk_filter.h	              \
@@ -301,10 +256,7 @@ operators_sources=                                                       \
   ob_multiple_scan_merge.h           ob_multiple_scan_merge.cpp \
   ob_multiple_get_merge.h            ob_multiple_get_merge.cpp \
   ob_empty_row_filter.h              ob_empty_row_filter.cpp \
-<<<<<<< HEAD
   ob_auto_increment_filter.h         ob_auto_increment_filter.cpp \
-=======
->>>>>>> refs/remotes/origin/master
   ob_sql_read_strategy.h             ob_sql_read_strategy.cpp \
   ob_tablet_join_cache.h             ob_tablet_join_cache.cpp \
   ob_direct_trigger_event_util.h     ob_direct_trigger_event_util.cpp \
@@ -314,17 +266,12 @@ operators_sources=                                                       \
   ob_get_cur_time_phy_operator.h     ob_get_cur_time_phy_operator.cpp \
   ob_kill_session.h                  ob_kill_session.cpp \
   ob_sql_id_mgr.h                    ob_sql_id_mgr.cpp \
-<<<<<<< HEAD
   ob_change_obi.h                    ob_change_obi.cpp\
-=======
-	ob_change_obi.h                    ob_change_obi.cpp\
->>>>>>> refs/remotes/origin/master
   ob_sql_query_cache.h               ob_sql_query_cache.cpp \
   ob_sql_id_mgr.h       ob_sql_id_mgr.cpp \
   ob_ps_store_item.h    ob_ps_store_item.cpp \
   ob_ps_store.h         ob_ps_store.cpp      \
   ob_ps_store_item_callback.h \
-<<<<<<< HEAD
   ob_sql_character_set.h             ob_sql_character_set.cpp\
   ob_fill_values.h	ob_fill_values.cpp  \
   ob_ups_lock_table.h     ob_ups_lock_table.cpp\
@@ -332,12 +279,6 @@ operators_sources=                                                       \
   ob_semi_join.h	ob_semi_join.cpp\
   ob_gather_statistics.h ob_gather_statistics.cpp\
   ob_gather_statistics_stmt.h ob_gather_statistics_stmt.cpp
-=======
-	ob_sql_character_set.h             ob_sql_character_set.cpp
-
-
-
->>>>>>> refs/remotes/origin/master
 misc_sources =							\
   ob_type_convertor.h						\
   ob_ups_result.h                    ob_ups_result.cpp		\

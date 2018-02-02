@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -39,26 +36,19 @@
 #include "common/utility.h"
 #include "common/ob_obj_cast.h"
 #include "common/hash/ob_hashmap.h"
-<<<<<<< HEAD
 #include "ob_physical_plan.h" //add zt 20151109
 #include "ob_sp_procedure.h" //add by zt 20160704
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 ObExprValues::ObExprValues()
   :values_(OB_TC_MALLOC_BLOCK_SIZE, ModulePageAllocator(ObModIds::OB_SQL_ARRAY)),
    from_deserialize_(false),
    check_rowkey_duplicat_(false),
-<<<<<<< HEAD
    do_eval_when_serialize_(false),
    group_exec_(false),
    //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
    is_del_update(false)
    //add e
-=======
-   do_eval_when_serialize_(false)
->>>>>>> refs/remotes/origin/master
 {
 }
 
@@ -66,15 +56,12 @@ ObExprValues::~ObExprValues()
 {
 }
 
-<<<<<<< HEAD
 //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 void ObExprValues::set_del_upd(){
     is_del_update=true;
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 void ObExprValues::reset()
 {
   row_desc_.reset();
@@ -85,12 +72,9 @@ void ObExprValues::reset()
   from_deserialize_ = false;
   check_rowkey_duplicat_ = false;
   do_eval_when_serialize_ = false;
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   is_del_update=false;
   //add e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 void ObExprValues::reuse()
@@ -103,12 +87,9 @@ void ObExprValues::reuse()
   from_deserialize_ = false;
   check_rowkey_duplicat_ = false;
   do_eval_when_serialize_ = false;
-<<<<<<< HEAD
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   is_del_update=false;
   //add e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObExprValues::set_row_desc(const common::ObRowDesc &row_desc, const common::ObRowDescExt &row_desc_ext)
@@ -131,7 +112,6 @@ int ObExprValues::add_value(const ObSqlExpression &v)
 int ObExprValues::open()
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
 
   //add by zt 20160119:b
   if( group_exec_ )
@@ -144,8 +124,6 @@ int ObExprValues::open()
   if( OB_SUCCESS != ret ) {}
   else
   //add by zt 20160119:e
-=======
->>>>>>> refs/remotes/origin/master
   if (from_deserialize_)
   {
     row_store_.reset_iterator();
@@ -191,14 +169,11 @@ int ObExprValues::close()
 int ObExprValues::get_next_row(const common::ObRow *&row)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
   if( group_exec_ )
   {
     ret = get_next_row_template(row);
   }
   else
-=======
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS != (ret = row_store_.get_next_row(row_)))
   {
     if (OB_ITER_END != ret)
@@ -279,7 +254,6 @@ int ObExprValues::eval()
         }
       }
     }
-<<<<<<< HEAD
     //add huangjianwei [secondary index maintain] 20161108:b
     if (replace_check_rowkey_duplicat_ && row_num > 1)
     {
@@ -483,86 +457,6 @@ int ObExprValues::eval()
         }
       }// end for
     }
-=======
-    for (int64_t i = 0; OB_SUCCESS == ret && i < values_.count(); i+=col_num) // for each row
-    {
-      ObRow val_row;
-      val_row.set_row_desc(row_desc_);
-      ObString varchar;
-      ObObj casted_cell;
-      for (int64_t j = 0; OB_SUCCESS == ret && j < col_num; ++j)
-      {
-        varchar.assign_ptr(varchar_buff, OB_MAX_VARCHAR_LENGTH);
-        casted_cell.set_varchar(varchar); // reuse the varchar buffer
-        const ObObj *single_value = NULL;
-        uint64_t table_id = OB_INVALID_ID;
-        uint64_t column_id = OB_INVALID_ID;
-        ObObj tmp_value;
-        ObObj data_type;
-        ObSqlExpression &val_expr = values_.at(i+j);
-        if ((ret = val_expr.calc(val_row, single_value)) != OB_SUCCESS) // the expr should be a const expr here
-        {
-          TBSYS_LOG(WARN, "Calculate value result failed, err=%d", ret);
-        }
-        else if (OB_SUCCESS != (ret = row_desc_ext_.get_by_idx(j, table_id, column_id, data_type)))
-        {
-          ret = OB_ERR_UNEXPECTED;
-          TBSYS_LOG(WARN, "Failed to get column, err=%d", ret);
-        }
-        /*
-        else if (0 < row_desc_.get_rowkey_cell_count()
-                 && j < row_desc_.get_rowkey_cell_count()
-                 && single_value->is_null())
-        {
-          TBSYS_LOG(USER_ERROR, "primary key can not be null");
-          ret = OB_ERR_INSERT_NULL_ROWKEY;
-        }
-        */
-        else if (OB_SUCCESS != (ret = obj_cast(*single_value, data_type, casted_cell, single_value)))
-        {
-          TBSYS_LOG(WARN, "failed to cast obj, err=%d", ret);
-        }
-        else if (OB_SUCCESS != (ret = ob_write_obj(buf, *single_value, tmp_value)))
-        {
-          TBSYS_LOG(WARN, "str buf write obj fail:ret[%d]", ret);
-        }
-        else if ((ret = val_row.set_cell(table_id, column_id, tmp_value)) != OB_SUCCESS)
-        {
-          TBSYS_LOG(WARN, "Add value to ObRow failed");
-        }
-        else
-        {
-          //TBSYS_LOG(DEBUG, "i=%ld j=%ld cell=%s", i, j, to_cstring(tmp_value));
-        }
-      } // end for
-      if (OB_LIKELY(OB_SUCCESS == ret))
-      {
-        if (OB_SUCCESS != (ret = row_store_.add_row(val_row, stored_row)))
-        {
-          TBSYS_LOG(WARN, "failed to add row into store, err=%d", ret);
-        }
-        else if (indicator)
-        {
-          const ObRowkey *rowkey = NULL;
-          bool is_dup = false;
-          if ((ret = val_row.get_rowkey(rowkey)) != OB_SUCCESS)
-          {
-            TBSYS_LOG(WARN, "Get RowKey failed, err=%d", ret);
-          }
-          else if ((ret = indicator->have_seen(*rowkey, is_dup)) != OB_SUCCESS)
-          {
-            TBSYS_LOG(WARN, "Check duplication failed, err=%d", ret);
-          }
-          else if (is_dup)
-          {
-            ret = OB_ERR_PRIMARY_KEY_DUPLICATE;
-            TBSYS_LOG(USER_ERROR, "Duplicate entry \'%s\' for key \'PRIMARY\'", to_cstring(*rowkey));
-          }
-          TBSYS_LOG(INFO, "check rowkey isdup is %c rowkey=%s", is_dup?'Y':'N', to_cstring(*rowkey));
-        }
-      }
-    }   // end for
->>>>>>> refs/remotes/origin/master
     if (indicator)
     {
       indicator->~ObDuplicateIndicator();
@@ -597,7 +491,6 @@ PHY_OPERATOR_ASSIGN(ObExprValues)
   return ret;
 }
 
-<<<<<<< HEAD
 /*******************************************************************
   *We need to define different serialize methods for procedure
   *execution or physical plan execution.
@@ -607,13 +500,10 @@ PHY_OPERATOR_ASSIGN(ObExprValues)
   *   no precede plans
   *****************************************************************/
 
-=======
->>>>>>> refs/remotes/origin/master
 DEFINE_SERIALIZE(ObExprValues)
 {
   int ret = OB_SUCCESS;
   int64_t tmp_pos = pos;
-<<<<<<< HEAD
   //add by zt 20160118:b
   if( OB_SUCCESS !=  (ret = serialization::encode_bool(buf, buf_len, tmp_pos, my_phy_plan_->is_group_exec())) )
   {
@@ -661,35 +551,6 @@ DEFINE_SERIALIZE(ObExprValues)
       (const_cast<ObExprValues*>(this))->close();
     }
   }
-=======
-  if (do_eval_when_serialize_)
-  {
-    if (OB_SUCCESS != (ret = (const_cast<ObExprValues*>(this))->open()))
-    {
-      TBSYS_LOG(WARN, "failed to open expr_values, err=%d", ret);
-    }
-  }
-
-  if (OB_LIKELY(OB_SUCCESS == ret))
-  {
-    if (OB_SUCCESS != (ret = row_desc_.serialize(buf, buf_len, tmp_pos)))
-    {
-      TBSYS_LOG(WARN, "serialize row_desc fail ret=%d buf=%p buf_len=%ld pos=%ld", ret, buf, buf_len, tmp_pos);
-    }
-    else if (OB_SUCCESS != (ret = row_store_.serialize(buf, buf_len, tmp_pos)))
-    {
-      TBSYS_LOG(WARN, "serialize row_store fail ret=%d buf=%p buf_len=%ld pos=%ld", ret, buf, buf_len, tmp_pos);
-    }
-    else
-    {
-      pos = tmp_pos;
-    }
-  }
-  if (do_eval_when_serialize_)
-  {
-    (const_cast<ObExprValues*>(this))->close();
-  }
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -697,7 +558,6 @@ DEFINE_DESERIALIZE(ObExprValues)
 {
   int ret = OB_SUCCESS;
   int64_t tmp_pos = pos;
-<<<<<<< HEAD
   //add zt 20151109:b
   if( OB_SUCCESS != (ret = serialization::decode_bool(buf, data_len, tmp_pos, &group_exec_)) )
   {
@@ -717,8 +577,6 @@ DEFINE_DESERIALIZE(ObExprValues)
   }
   else
   //add zt 20151109:e
-=======
->>>>>>> refs/remotes/origin/master
   if (OB_SUCCESS != (ret = row_desc_.deserialize(buf, data_len, tmp_pos)))
   {
     TBSYS_LOG(WARN, "serialize row_desc fail ret=%d buf=%p data_len=%ld pos=%ld", ret, buf, data_len, tmp_pos);
@@ -737,7 +595,6 @@ DEFINE_DESERIALIZE(ObExprValues)
 
 DEFINE_GET_SERIALIZE_SIZE(ObExprValues)
 {
-<<<<<<< HEAD
   //delete by zt 20151109 :b
   //  return (row_desc_.get_serialize_size() + row_store_.get_serialize_size());
   //delete by zt 20151109 :e
@@ -900,7 +757,3 @@ int ObExprValues::get_next_row_template(const common::ObRow *&row)
 }
 
 //add by zt 20160119:e
-=======
-  return (row_desc_.get_serialize_size() + row_store_.get_serialize_size());
-}
->>>>>>> refs/remotes/origin/master

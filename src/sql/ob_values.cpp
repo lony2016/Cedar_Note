@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -37,7 +34,6 @@
  */
 #include "ob_values.h"
 #include "common/utility.h"
-<<<<<<< HEAD
 
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
@@ -63,42 +59,27 @@ ObValues::ObValues() : is_open_(false), static_data_id_(-1),
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     is_need_fix_obvalues=false;
     //add e
-=======
-using namespace oceanbase::sql;
-using namespace oceanbase::common;
-
-ObValues::ObValues()
-{
->>>>>>> refs/remotes/origin/master
 }
 
 ObValues::~ObValues()
 {
 }
-<<<<<<< HEAD
 //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 void ObValues::set_fix_obvalues(){
     is_need_fix_obvalues=true;
 }
 //add e
-=======
-
->>>>>>> refs/remotes/origin/master
 void ObValues::reset()
 {
   row_desc_.reset();
   //curr_row_.reset(false, ObRow::DEFAULT_NULL);
   row_store_.clear();
-<<<<<<< HEAD
 
   is_open_ = false; //add zt : 20151107
   ObSingleChildPhyOperator::reset();
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   is_need_fix_obvalues=false;
   //add e
-=======
-  ObSingleChildPhyOperator::reset();
->>>>>>> refs/remotes/origin/master
 }
 
 void ObValues::reuse()
@@ -106,7 +87,6 @@ void ObValues::reuse()
   row_desc_.reset();
   //curr_row_.reset(false, ObRow::DEFAULT_NULL);
   row_store_.clear();
-<<<<<<< HEAD
 
   is_open_ = false; //add by zt 20151107
   static_data_id_ = -1; //add by zt 20160118
@@ -114,9 +94,6 @@ void ObValues::reuse()
   //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
   is_need_fix_obvalues=false;
   //add e
-=======
-  ObSingleChildPhyOperator::reset();
->>>>>>> refs/remotes/origin/master
 }
 
 int ObValues::set_row_desc(const common::ObRowDesc &row_desc)
@@ -136,20 +113,13 @@ int ObValues::open()
 {
   int ret = OB_SUCCESS;
   curr_row_.set_row_desc(row_desc_);
-<<<<<<< HEAD
   if (NULL != child_op_  && !is_open_ ) //modify zt 20151107
-=======
-  if (NULL != child_op_)
->>>>>>> refs/remotes/origin/master
   {
     if (OB_SUCCESS != (ret = load_data()))
     {
       TBSYS_LOG(WARN, "failed to load data from child op, err=%d", ret);
     }
-<<<<<<< HEAD
     is_open_ = true; //add zt 20151107
-=======
->>>>>>> refs/remotes/origin/master
   }
   return ret;
 }
@@ -157,10 +127,7 @@ int ObValues::open()
 int ObValues::close()
 {
   row_store_.clear();
-<<<<<<< HEAD
   is_open_ = false; //add zt 20151124, avoid reopened by ObUpsExecutor
-=======
->>>>>>> refs/remotes/origin/master
   return OB_SUCCESS;
 }
 
@@ -187,7 +154,6 @@ int ObValues::get_row_desc(const common::ObRowDesc *&row_desc) const
   return OB_SUCCESS;
 }
 
-<<<<<<< HEAD
 //add by zt 20160114:b
 int ObValues::get_row_desc_template(const common::ObRowDesc *&row_desc) const
 {
@@ -205,8 +171,6 @@ int ObValues::get_row_desc_template(const common::ObRowDesc *&row_desc) const
 }
 //add by zt 20160114:e
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase{
   namespace sql{
     REGISTER_PHY_OPERATOR(ObValues, PHY_VALUES);
@@ -248,10 +212,7 @@ PHY_OPERATOR_ASSIGN(ObValues)
     }
     store_ptr->reset_iterator();
   }
-<<<<<<< HEAD
   static_data_id_ = o_ptr->static_data_id_; //add by zt 20160118
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -337,7 +298,6 @@ int ObValues::load_data()
     }
     else
     {
-<<<<<<< HEAD
         //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*
         TBSYS_LOG(DEBUG, "load data from child, row=%s", to_cstring(*row));
@@ -420,13 +380,6 @@ int ObValues::load_data()
           }
         }
           //modify e
-=======
-      TBSYS_LOG(DEBUG, "load data from child, row=%s", to_cstring(*row));
-      if (OB_SUCCESS != (ret = row_store_.add_row(*row, stored_row)))
-      {
-        TBSYS_LOG(WARN, "fail to add row:ret[%d]", ret);
-      }
->>>>>>> refs/remotes/origin/master
     }
   }
   if (OB_SUCCESS != (err = child_op_->close()))
@@ -439,7 +392,6 @@ int ObValues::load_data()
   }
   return ret;
 }
-<<<<<<< HEAD
 //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
 void ObValues::add_rowkey_array(uint64_t tid,uint64_t cid,common::ObObjType type,uint32_t p,uint32_t s){
 
@@ -481,5 +433,3 @@ int ObValues::get_rowkey_schema(uint64_t tid,uint64_t cid,common::ObObjType& typ
     return ret;
 }
 //add e
-=======
->>>>>>> refs/remotes/origin/master

@@ -19,11 +19,7 @@
 #include "common/ob_client_manager.h"
 #include "common/ob_packet_factory.h"
 #include "common/ob_server.h"
-<<<<<<< HEAD
 #include "onev_io.h"
-=======
-#include "easy_io.h"
->>>>>>> refs/remotes/origin/master
 #include "ob_tbnet_callback.h"
 
 namespace oceanbase
@@ -43,13 +39,8 @@ public:
 private:
   bool init_;
   ObServer server_;
-<<<<<<< HEAD
   onev_io_e *eio_;
   onev_io_handler_pe client_handler_;
-=======
-  easy_io_t *eio_;
-  easy_io_handler_pt client_handler_;
->>>>>>> refs/remotes/origin/master
   ObClientManager client_mgr_;
 };
 

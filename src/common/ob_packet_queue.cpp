@@ -9,7 +9,6 @@ namespace oceanbase
       head_ = NULL;
       tail_ = NULL;
       size_ = 0;
-<<<<<<< HEAD
       thread_buffer_ = new ThreadSpecificBuffer(static_cast<int32_t>(THREAD_BUFFER_SIZE));
     }
     ObPacketQueue::ObPacketQueue(const int64_t thread_buffer_size)
@@ -18,9 +17,6 @@ namespace oceanbase
       tail_ = NULL;
       size_ = 0;
       thread_buffer_ = new ThreadSpecificBuffer(static_cast<int32_t>(sizeof(ObPacket) + thread_buffer_size));
-=======
-      thread_buffer_ = new ThreadSpecificBuffer(THREAD_BUFFER_SIZE);
->>>>>>> refs/remotes/origin/master
     }
 
     ObPacketQueue::~ObPacketQueue()

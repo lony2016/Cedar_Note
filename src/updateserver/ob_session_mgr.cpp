@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_session_mgr.cpp updateserver / Oceanbase
@@ -42,11 +39,8 @@
 #include "ob_session_mgr.h"
 #include "ob_update_server_main.h"
 
-<<<<<<< HEAD
 #define UPS ObUpdateServerMain::get_instance()->get_update_server()//add by zhouhuan 20160723
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   using namespace common;
@@ -287,10 +281,7 @@ namespace oceanbase
     int SessionMgr::init(const uint32_t max_ro_num,
                         const uint32_t max_rp_num,
                         const uint32_t max_rw_num,
-<<<<<<< HEAD
                         const uint32_t max_lrw_num, // add by qx 20170314 for long transcations
-=======
->>>>>>> refs/remotes/origin/master
                         ISessionCtxFactory *factory)
     {
       int ret = OB_SUCCESS;
@@ -301,18 +292,11 @@ namespace oceanbase
       else if (0 >= max_ro_num
               || 0 >= max_rp_num
               || 0 >= max_rw_num
-<<<<<<< HEAD
               || 0 >= max_lrw_num // add by qx 20170314 for long transcations
               || NULL == (factory_ = factory))
       {
         TBSYS_LOG(WARN, "invalid param max_ro_num=%u max_rp_num=%u max_rw_num=%u max_lrw_num =%u factory=%p",
                   max_ro_num, max_rp_num, max_rw_num, max_lrw_num, factory); // add by qx 20170314 for long transcations
-=======
-              || NULL == (factory_ = factory))
-      {
-        TBSYS_LOG(WARN, "invalid param max_ro_num=%u max_rp_num=%u max_rw_num=%u factory=%p",
-                  max_ro_num, max_rp_num, max_rw_num, factory);
->>>>>>> refs/remotes/origin/master
         ret = OB_INVALID_ARGUMENT;
       }
       //else if (1 != start())
@@ -320,7 +304,6 @@ namespace oceanbase
       //  TBSYS_LOG(WARN, "start thread to flush_min_flying_trans_id fail");
       //  ret = OB_ERR_UNEXPECTED;
       //}
-<<<<<<< HEAD
       else if (OB_SUCCESS != (ret = ctx_map_.init(max_ro_num + max_rp_num + max_rw_num + max_lrw_num)))  // add by qx 20170314 for long transcations
       {
         TBSYS_LOG(WARN, "init ctx_map fail, ret=%d num=%u", ret, max_ro_num + max_rp_num + max_rw_num + max_lrw_num); // add by qx 20170314
@@ -328,15 +311,6 @@ namespace oceanbase
       else
       {
         const int64_t MAX_CTX_NUM[SESSION_TYPE_NUM] = {max_ro_num, max_rp_num, max_rw_num, max_lrw_num}; // add by qx 20170314
-=======
-      else if (OB_SUCCESS != (ret = ctx_map_.init(max_ro_num + max_rp_num + max_rw_num)))
-      {
-        TBSYS_LOG(WARN, "init ctx_map fail, ret=%d num=%u", ret, max_ro_num + max_rp_num + max_rw_num);
-      }
-      else
-      {
-        const int64_t MAX_CTX_NUM[SESSION_TYPE_NUM] = {max_ro_num, max_rp_num, max_rw_num};
->>>>>>> refs/remotes/origin/master
         BaseSessionCtx *ctx = NULL;
         for (int i = 0; i < SESSION_TYPE_NUM; i++)
         {
@@ -471,20 +445,14 @@ namespace oceanbase
         {
           uint32_t sd = 0;
           const int64_t begin_trans_id = published_trans_id_;
-<<<<<<< HEAD
           //TBSYS_LOG(WARN,"test::zhouhuan start_session begin trans id = %ld", published_trans_id_);
-=======
->>>>>>> refs/remotes/origin/master
           ctx->set_trans_id(begin_trans_id);
           ctx->set_session_start_time(start_time);
           ctx->set_session_timeout(timeout);
           ctx->set_session_idle_time(idle_time);
-<<<<<<< HEAD
           // add by guojinwei [repeatable read] 20160417:b
           ctx->set_trans_start_time(begin_trans_id);
           // add:e
-=======
->>>>>>> refs/remotes/origin/master
           if (OB_SUCCESS != (ret = ctx_map_.assign(ctx, sd)))
           {
             TBSYS_LOG(WARN, "assign from ctx_map fail, ret=%d ctx=%p type=%d", ret, ctx, type);
@@ -498,12 +466,9 @@ namespace oceanbase
           else
           {
             ctx->set_session_descriptor(sd);
-<<<<<<< HEAD
             // add by guojinwei [repeatable read] 20160417:b
             ctx->set_trans_descriptor(sd);
             // add:e
-=======
->>>>>>> refs/remotes/origin/master
             session_descriptor = sd;
             FILL_TRACE_BUF(ctx->get_tlog_buffer(), "type=%d sd=%u ctx=%p trans_id=%ld", type, sd, ctx, begin_trans_id);
             break;
@@ -536,7 +501,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add hushuang[scalablecommit]20160415
 
     int SessionMgr::update_commited_trans_id(int64_t trans_id)
@@ -589,9 +553,6 @@ namespace oceanbase
 
     //add e
     int SessionMgr::end_session(const uint32_t session_descriptor, const bool rollback, const bool force, const uint64_t es_flag, const bool is_slave)
-=======
-    int SessionMgr::end_session(const uint32_t session_descriptor, const bool rollback, const bool force, const uint64_t es_flag)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       BaseSessionCtx *ctx = NULL;
@@ -634,7 +595,6 @@ namespace oceanbase
           }
           if (ctx->need_to_do((BaseSessionCtx::ES_STAT)(es_flag & BaseSessionCtx::ES_PUBLISH)))
           {
-<<<<<<< HEAD
             //delete by hushuang[scalable commit]20160506
             if (is_slave && ctx->get_trans_id() > 0) // ctx->get_trans_id() == 0 说明是INTERNAL_WRITE, 在把sstable load到inmemtable时用到
             {
@@ -646,24 +606,11 @@ namespace oceanbase
             ctx->mark_done(BaseSessionCtx::ES_PUBLISH);
             //del by zhouhuan [scalable commit]
             /*if (0 != ctx->get_last_proc_time())
-=======
-            if (ctx->get_trans_id() > 0) // ctx->get_trans_id() == 0 说明是INTERNAL_WRITE, 在把sstable load到inmemtable时用到
-            {
-              published_trans_id_ = ctx->get_trans_id();
-            }
-            ctx->publish();
-            ctx->mark_done(BaseSessionCtx::ES_PUBLISH);
-            if (0 != ctx->get_last_proc_time())
->>>>>>> refs/remotes/origin/master
             {
               int64_t cur_time = tbsys::CTimeUtil::getTime();
               OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_FTIME, cur_time - ctx->get_last_proc_time());
               ctx->set_last_proc_time(cur_time);
-<<<<<<< HEAD
             }*/
-=======
-            }
->>>>>>> refs/remotes/origin/master
           }
         }
         if (es_flag & BaseSessionCtx::ES_FREE)
@@ -683,10 +630,6 @@ namespace oceanbase
             OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_RTIME, cur_time - ctx->get_last_proc_time());
             ctx->set_last_proc_time(cur_time);
           }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
           ctx->on_free();
           FILL_TRACE_BUF(ctx->get_tlog_buffer(), "type=%d sd=%u ctx=%p trans_id=%ld trans_timeu=%ld",
                         ctx->get_type(), session_descriptor, ctx, ctx->get_trans_id(),
@@ -755,7 +698,6 @@ namespace oceanbase
     int SessionMgr::wait_write_session_end_and_lock(const int64_t timeout_us)
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       //add chujiajia [log synchronization][multi_cluster] 20160603:b
       UNUSED(timeout_us);
       //add:e
@@ -769,19 +711,12 @@ namespace oceanbase
       UPS.set_force_switch_flag(true);
       __sync_synchronize();
       //add:e
-=======
-      int64_t now_time = tbsys::CTimeUtil::getTime();
-      int64_t abs_timeout_us = now_time + timeout_us;
-      int64_t start_time = now_time;
-      session_lock_.wrlock();
->>>>>>> refs/remotes/origin/master
       while (true)
       {
         if (0 == ctx_list_[ST_READ_WRITE].get_free())
         {
           break;
         }
-<<<<<<< HEAD
         //UPS.switch_group();//add by zhouhuan 20160723
         now_time = tbsys::CTimeUtil::getTime();
         //TBSYS_LOG(INFO,"test::zhouhuan now_time= %ld,ab_timeout_us=%ld,wait_time=%ld", now_time, abs_timeout_us, start_time + FORCE_KILL_WAITTIME);
@@ -792,26 +727,15 @@ namespace oceanbase
         //  break;
         //}
         //del:e
-=======
-        now_time = tbsys::CTimeUtil::getTime();
-        if (now_time > abs_timeout_us)
-        {
-          ret = OB_PROCESS_TIMEOUT;
-          break;
-        }
->>>>>>> refs/remotes/origin/master
         if (now_time >= (start_time + FORCE_KILL_WAITTIME))
         {
           start_time = now_time;
           TBSYS_LOG(INFO, "wait time over %ld, will force kill session", FORCE_KILL_WAITTIME);
           const bool force = true;
           kill_zombie_session(force);
-<<<<<<< HEAD
           //add chujiajia [log synchronization][multi_cluster] 20160603:b
           break;
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
         }
         asm("pause");
       }
@@ -819,13 +743,10 @@ namespace oceanbase
       {
         session_lock_.unlock();
       }
-<<<<<<< HEAD
       //add by zhouhuan for [scalablecommit] 20160802:b
       __sync_synchronize();
       UPS.set_force_switch_flag(false);
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 

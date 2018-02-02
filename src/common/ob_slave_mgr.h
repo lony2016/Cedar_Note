@@ -23,10 +23,7 @@
 #include "ob_common_rpc_stub.h"
 #include "ob_lease_common.h"
 #include "ob_log_cursor.h"
-<<<<<<< HEAD
 #include "ob_log_generator2.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -118,7 +115,6 @@ namespace oceanbase
       virtual int send_data(const char* data, const int64_t length);
         virtual int post_log_to_slave(const ObLogCursor& start_cursor, const ObLogCursor& end_cursor, const char* data, const int64_t length);
         virtual int wait_post_log_to_slave(const char* data, const int64_t length, int64_t& delay_us);
-<<<<<<< HEAD
         //mod by chujiajia [log synchronization][multi_cluster] 20160627:b
         //virtual int64_t get_acked_clog_id() const{return 0;}
         virtual int64_t get_acked_clog_id(){return 0;}
@@ -130,9 +126,6 @@ namespace oceanbase
          */
         virtual int64_t get_acked_clog_id_without_update(){return 0;}
         //add:e
-=======
-        virtual int64_t get_acked_clog_id() const { return 0; }
->>>>>>> refs/remotes/origin/master
       /// @brief 获取Slave个数
       /// @retval slave_num_ Slave个数
       inline int get_num() const {return slave_num_;}

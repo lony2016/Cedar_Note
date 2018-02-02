@@ -234,10 +234,6 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
       return pos;
     }
 
@@ -301,7 +297,6 @@ namespace oceanbase
 
       for (int64_t i = 0; i < obj_cnt_ ; ++i)
       {
-<<<<<<< HEAD
           //modify xsl ECNU_DECIMAL 2016.12.26
           //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           if (obj_ptr_[i].get_type() == ObVarcharType/* || obj_ptr_[i].get_type() == ObDecimalType*/)
@@ -314,12 +309,6 @@ namespace oceanbase
               total_len +=sizeof(uint64_t)*obj_ptr_[i].get_nwords();   //??
           }
           //modify e
-=======
-        if (obj_ptr_[i].get_type() == ObVarcharType)
-        {
-          total_len += obj_ptr_[i].get_val_len();
-        }
->>>>>>> refs/remotes/origin/master
       }
       return total_len;
     }
@@ -415,7 +404,6 @@ namespace oceanbase
         {
           const ObObj &cell = rowkey.get_obj_ptr()[i];
           ObObjType to_type = rowkey_info.get_column(i)->type_;
-<<<<<<< HEAD
           /* if (cell.get_type() != to_type
               && to_type == ObVarcharType)*/
               //old code
@@ -425,10 +413,6 @@ namespace oceanbase
               && to_type == ObVarcharType)||(cell.get_type() != to_type
               && to_type == ObDecimalType))
         //add e
-=======
-          if (cell.get_type() != to_type
-              && to_type == ObVarcharType)
->>>>>>> refs/remotes/origin/master
           {
             need = true;
             break;

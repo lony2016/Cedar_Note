@@ -53,13 +53,8 @@ namespace oceanbase
       private:
         // data members
         char cells_buffer_[MAX_COLUMNS_COUNT * sizeof(ObObj)];
-<<<<<<< HEAD
         common::ObObj *cells_;//slwang note:存放该行的数据：每一个数组成员存放的是这行的每一列的数据
         int16_t cells_count_;//slwang note:该行实际列数
-=======
-        common::ObObj *cells_;
-        int16_t cells_count_;
->>>>>>> refs/remotes/origin/master
         int16_t reserved1_;
         int32_t reserved2_;
     };

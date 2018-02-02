@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -35,11 +32,8 @@
 #define __OB_COMMON_OB_ACK_QUEUE_H__
 #include "tbsys.h"
 #include "ob_wait_queue.h"
-<<<<<<< HEAD
 #include "ob_log_post.h"
 #include "ob_log_generator2.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -52,7 +46,6 @@ namespace oceanbase
       public:
         static const int RPC_VERSION = 1;
         enum { TIMEOUT_DELTA = 10000, DEFAULT_DELAY_WARN_THRESHOLD_US = 50000};
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
         /**
          * @brief slave status enum
@@ -80,16 +73,6 @@ namespace oceanbase
           //void done(int err);
           void done(const ObLogPostResponse& response_data, int err);
           // modify:e
-=======
-        struct WaitNode
-        {
-          WaitNode(): start_seq_(-1), end_seq_(-1), err_(OB_SUCCESS), server_(),
-                      send_time_us_(0),
-                      timeout_us_(0), receive_time_us_(0) {}
-          ~WaitNode() {}
-          bool is_timeout() const { return timeout_us_ > 0 && send_time_us_ + timeout_us_ < tbsys::CTimeUtil::getTime(); }
-          void done(int err);
->>>>>>> refs/remotes/origin/master
           int64_t get_delay(){ return receive_time_us_ - send_time_us_; }
           int64_t to_string(char* buf, const int64_t len) const;
           int64_t start_seq_;
@@ -99,7 +82,6 @@ namespace oceanbase
           int64_t send_time_us_;
           int64_t timeout_us_;
           int64_t receive_time_us_;
-<<<<<<< HEAD
           // add by guojinwei [log synchronization][multi_cluster] 20150819:b
           int64_t next_flush_log_id_;
           int64_t message_residence_time_us_;
@@ -134,20 +116,11 @@ namespace oceanbase
         // modify:e
         // modify:e
          int64_t get_next_acked_seq();
-=======
-        };
-      public:
-        ObAckQueue();
-        ~ObAckQueue();
-        int init(IObAsyncClientCallback* callback, const ObClientManager* client_mgr, int64_t queue_len);
-        int64_t get_next_acked_seq();
->>>>>>> refs/remotes/origin/master
         int many_post(const ObServer* servers, int64_t n_server, int64_t start_seq, int64_t end_seq,
                             const int32_t pcode, const int64_t timeout_us, const ObDataBuffer& pkt_buffer, int64_t idx=0);
         int post(const ObServer servers, int64_t start_seq, int64_t end_seq, int64_t send_time_us,
                  const int32_t pcode, const int64_t timeout_us, const ObDataBuffer& pkt_buffer, int64_t idx);
         int callback(void* arg);
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
         /**
          * @brief set the number of majority
@@ -172,13 +145,10 @@ namespace oceanbase
         bool is_wait_node_valid(const WaitNode& wait_node);
         bool is_single();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         IObAsyncClientCallback* callback_;
         const ObClientManager* client_mgr_;
         ObWaitQueue<WaitNode> wait_queue_;
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20150819:b
         volatile int64_t next_flush_seq_;           ///< the next flush LSN in local
         // add:e
@@ -194,10 +164,6 @@ namespace oceanbase
         int32_t majority_count_;                    ///< the number of majority
         SlaveNode slave_array_[SLAVE_COUNT];        ///< salve array storing slave information
         // add:e
-=======
-        volatile int64_t next_acked_seq_;
-        volatile uint64_t lock_;
->>>>>>> refs/remotes/origin/master
     };
     class IObAsyncClientCallback
     {

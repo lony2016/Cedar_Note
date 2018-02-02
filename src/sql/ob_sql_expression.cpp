@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -22,8 +21,6 @@
  *
  * @date 2016_07_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2012 Taobao Inc.
  *
@@ -46,10 +43,7 @@
 #include "sql/ob_item_type_str.h"
 #include "common/ob_cached_allocator.h"
 #include "sql/ob_phy_operator_type.h"
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
@@ -57,7 +51,6 @@ ObSqlExpression::ObSqlExpression()
   : column_id_(0), table_id_(0), is_aggr_func_(false), is_distinct_(false)
   , aggr_func_(T_INVALID)
 {
-<<<<<<< HEAD
   //add weixing [implementation of sub_query]20160106
   use_bloom_filter_ = false;
   //add e
@@ -96,12 +89,6 @@ ObSqlExpression::~ObSqlExpression()
     bloom_filter_.destroy();
   }
   //add e
-=======
-}
-
-ObSqlExpression::~ObSqlExpression()
-{
->>>>>>> refs/remotes/origin/master
 }
 
 ObSqlExpression::ObSqlExpression(const ObSqlExpression &other)
@@ -120,7 +107,6 @@ ObSqlExpression& ObSqlExpression::operator=(const ObSqlExpression &other)
     is_aggr_func_ = other.is_aggr_func_;
     is_distinct_ = other.is_distinct_;
     aggr_func_ = other.aggr_func_;
-<<<<<<< HEAD
     //add weixing [implementation of sub_query]20160106
     use_bloom_filter_ = other.use_bloom_filter_;
     if(use_bloom_filter_)
@@ -128,8 +114,6 @@ ObSqlExpression& ObSqlExpression::operator=(const ObSqlExpression &other)
       bloom_filter_.deep_copy(other.bloom_filter_);
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     // @note we do not copy the members of DLink on purpose
   }
   return *this;
@@ -150,7 +134,6 @@ int ObSqlExpression::add_expr_item_end()
   return post_expr_.add_expr_item_end();
 }
 
-<<<<<<< HEAD
 //add weixing [implementation of sub_query]20160106
 void ObSqlExpression::set_has_bloomfilter()
 {
@@ -159,8 +142,6 @@ void ObSqlExpression::set_has_bloomfilter()
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 static ObObj OBJ_ZERO;
 static struct obj_zero_init
 {
@@ -170,14 +151,10 @@ static struct obj_zero_init
   }
 } obj_zero_init;
 
-<<<<<<< HEAD
 //mod weixing [implementation of sub_query]20160116
 //int ObSqlExpression::calc(const common::ObRow &row, const common::ObObj *&result)
 int ObSqlExpression::calc(const common::ObRow &row, const common::ObObj *&result, hash::ObHashMap<common::ObRowkey, common::ObRowkey, common::hash::NoPthreadDefendMode>* hash_map, bool second_check)
 //mod e
-=======
-int ObSqlExpression::calc(const common::ObRow &row, const common::ObObj *&result)
->>>>>>> refs/remotes/origin/master
 {
   int err = OB_SUCCESS;
   if (OB_UNLIKELY(is_aggr_func_ && T_FUN_COUNT == aggr_func_ && post_expr_.is_empty()))
@@ -188,14 +165,10 @@ int ObSqlExpression::calc(const common::ObRow &row, const common::ObObj *&result
   }
   else
   {
-<<<<<<< HEAD
     //mod weixing [implementation of sub_query]20160116
     //err = post_expr_.calc(row, result);
     err = post_expr_.calc(row, result, hash_map, second_check);
     //mod e
-=======
-    err = post_expr_.calc(row, result);
->>>>>>> refs/remotes/origin/master
   }
   return err;
 }
@@ -213,11 +186,7 @@ int64_t ObSqlExpression::to_string(char* buf, const int64_t buf_len) const
   }
   if (is_aggr_func_)
   {
-<<<<<<< HEAD
     databuff_printf(buf, buf_len, pos, "%s(%s", ob_aggr_func_str(aggr_func_), is_distinct_ ? "DISTINCT " : "");
-=======
-	databuff_printf(buf, buf_len, pos, "%s(%s", ob_aggr_func_str(aggr_func_), is_distinct_ ? "DISTINCT " : "");
->>>>>>> refs/remotes/origin/master
   }
   if (post_expr_.is_empty())
   {
@@ -231,11 +200,7 @@ int64_t ObSqlExpression::to_string(char* buf, const int64_t buf_len) const
   }
   if (is_aggr_func_)
   {
-<<<<<<< HEAD
     databuff_printf(buf, buf_len, pos, ")");
-=======
-	databuff_printf(buf, buf_len, pos, ")");
->>>>>>> refs/remotes/origin/master
   }
   return pos;
 }
@@ -253,7 +218,6 @@ DEFINE_SERIALIZE(ObSqlExpression)
   }
   else
   {
-<<<<<<< HEAD
     //add weixing [implementation of sub_query]20160106
     ObObj use_bloom_filter;
     use_bloom_filter.set_bool(use_bloom_filter_);
@@ -270,8 +234,6 @@ DEFINE_SERIALIZE(ObSqlExpression)
       TBSYS_LOG(WARN, "serialize bloomfilter success");
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 	// success
 	//TBSYS_LOG(INFO, "success serialize one ObSqlExpression. pos=%ld", pos);
   }
@@ -291,7 +253,6 @@ DEFINE_DESERIALIZE(ObSqlExpression)
   }
   else
   {
-<<<<<<< HEAD
     //add weixing [implementation of sub_query]20160106
     ObObj use_bloom_filter;
     if(OB_SUCCESS != (ret = use_bloom_filter.deserialize(buf, data_len, pos)))
@@ -315,8 +276,6 @@ DEFINE_DESERIALIZE(ObSqlExpression)
       }
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
 	// success
   }
   return ret;
@@ -449,7 +408,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObSqlExpression)
   int64_t size = 0;
   size += get_basic_param_serialize_size();
   size += post_expr_.get_serialize_size();
-<<<<<<< HEAD
   //add weixing [implementation of sub_query]20160106
   ObObj use_bloom_filter;
   use_bloom_filter.set_bool(use_bloom_filter_);
@@ -460,8 +418,6 @@ DEFINE_GET_SERIALIZE_SIZE(ObSqlExpression)
     TBSYS_LOG(WARN, "add bloonfilter size in get serialize size %ld",bloom_filter_.get_serialize_size());
   }
   //add e
-=======
->>>>>>> refs/remotes/origin/master
   return size;
 }
 
@@ -501,7 +457,6 @@ int ObSqlExpressionUtil::make_column_expr(const uint64_t tid, const uint64_t cid
   return ret;
 }
 
-<<<<<<< HEAD
 //static ObCachedAllocator<ObSqlExpression> SQL_EXPR_ALLOC;  //delete by zt, 20160419
 static ObCachedAllocator<ObSqlExpression> SQL_EXPR_ALLOC[16]; //add by zt, 20160419
 static volatile uint64_t ALLOC_TIMES = 0;
@@ -556,39 +511,4 @@ namespace oceanbase{
     }
   }
 }
-=======
-static ObCachedAllocator<ObSqlExpression> SQL_EXPR_ALLOC;
-static volatile uint64_t ALLOC_TIMES = 0;
-static volatile uint64_t FREE_TIMES = 0;
-
-ObSqlExpression* ObSqlExpression::alloc()
-{
-  ObSqlExpression *ret = SQL_EXPR_ALLOC.alloc();
-  if (OB_UNLIKELY(NULL == ret))
-  {
-    TBSYS_LOG(ERROR, "failed to allocate expression object");
-  }
-  else
-  {
-    atomic_inc(&ALLOC_TIMES);
-  }
-  if (ALLOC_TIMES % 1000000 == 0)
-  {
-    TBSYS_LOG(INFO, "[EXPR] alloc %p, times=%ld cached=%d alloc_num=%d",
-              ret, ALLOC_TIMES, SQL_EXPR_ALLOC.get_cached_count(), SQL_EXPR_ALLOC.get_allocated_count());
-    ob_print_phy_operator_stat();
-  }
-  return ret;
-}
-
-void ObSqlExpression::free(ObSqlExpression* ptr)
-{
-  SQL_EXPR_ALLOC.free(ptr);
-  atomic_inc(&FREE_TIMES);
-  if (FREE_TIMES % 1000000 == 0)
-  {
-    TBSYS_LOG(INFO, "[EXPR] free %p, times=%ld cached=%d alloc_num=%d",
-              ptr, FREE_TIMES, SQL_EXPR_ALLOC.get_cached_count(), SQL_EXPR_ALLOC.get_allocated_count());
-  }
->>>>>>> refs/remotes/origin/master
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
 * Copyright (C) 2013-2016 DaSE .
 *
@@ -16,8 +15,6 @@
 * @date 2016_01_21
 */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_iterator_adaptor.h common / Oceanbase
@@ -42,12 +39,9 @@
 #include "common/ob_schema.h"
 #include "common/ob_ups_row.h"
 #include "sql/ob_rowkey_phy_operator.h"
-<<<<<<< HEAD
 //add maoxx
 #include "common/ob_row_store.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -64,7 +58,6 @@ namespace oceanbase
       public:
         int cast_cell(const int64_t idx, ObObj &cell) const;
         int cast_rowkey_cell(const int64_t idx, ObObj &cell) const;
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         /*
          *声明自己写的两个函数
@@ -72,8 +65,6 @@ namespace oceanbase
         uint32_t get_precision(const int64_t idx);
         uint32_t get_scale(const int64_t idx);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         static ObString get_tsi_buffer_();
         static ObString get_tsi_buffer_(const int64_t idx);
@@ -127,7 +118,6 @@ namespace oceanbase
         int get_cell(ObCellInfo** cell, bool* is_row_changed);
         int is_row_finished(bool* is_row_finished);
       public:
-<<<<<<< HEAD
         void set_row_iter(sql::ObPhyOperator *row_iter, const int64_t rk_size, const ObSchemaManagerV2 *schema_mgr
                           //add lbzhong [auto_increment] 20161127:b
                           , const bool is_update_auto_value = false
@@ -138,22 +128,15 @@ namespace oceanbase
         int set_updated_auto_value(const ObRow *&row);
         int64_t get_updated_auto_value();
         //add:e
-=======
-        void set_row_iter(sql::ObPhyOperator *row_iter, const int64_t rk_size, const ObSchemaManagerV2 *schema_mgr);
-        void reset();
->>>>>>> refs/remotes/origin/master
       private:
         sql::ObPhyOperator *row_iter_;
         int64_t rk_size_;
         ObCellAdaptor single_row_iter_;
         bool is_iter_end_;
         int set_row_iter_ret_;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161127:b
         int64_t updated_auto_value_;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     class ObRowIterAdaptor : public sql::ObRowkeyPhyOperator
@@ -186,7 +169,6 @@ namespace oceanbase
         bool deep_copy_;
         bool is_ups_row_;
     };
-<<<<<<< HEAD
 
     //add maoxx
     /**
@@ -271,8 +253,6 @@ namespace oceanbase
         int set_row_iter_ret_;
     };
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

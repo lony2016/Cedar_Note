@@ -701,12 +701,9 @@ inline void ObFirstTabletEntryTable::fill_int_column(ColumnSchema &col_schema) c
   col_schema.data_precision_ = 0;
   col_schema.data_scale_ = 0;
   col_schema.nullable_ = false;
-<<<<<<< HEAD
   //add lbzhong [auto_increment] 20161123:b
   col_schema.auto_increment_ = false;
   //add:e
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 int ObFirstTabletEntryTable::cons_meta_table_schema(const uint64_t tid, const TableSchema &oschema,
@@ -764,12 +761,9 @@ int ObFirstTabletEntryTable::cons_meta_table_schema(const uint64_t tid, const Ta
         col_schema.data_precision_ = ocschema.data_precision_;
         col_schema.data_scale_ = ocschema.data_scale_;
         col_schema.nullable_ = false;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161123:b
         col_schema.auto_increment_ = false;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         if (OB_SUCCESS != (ret = tschema.columns_.push_back(col_schema)))
         {

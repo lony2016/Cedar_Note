@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  *   Weng Haixing <wenghaixing@ecnu.cn>
  * @date  20160124
  */
-=======
->>>>>>> refs/remotes/origin/master
 
 /*
  *   (C) 2007-2010 Taobao Inc.
@@ -51,10 +48,7 @@ namespace oceanbase
       public:
         static const int32_t IPV4 = 4;
         static const int32_t IPV6 = 6;
-<<<<<<< HEAD
         static const int64_t MAX_IP_PORT_SQL_LENGTH = MAX_IP_ADDR_LENGTH + 10;      // copy from 0.5
-=======
->>>>>>> refs/remotes/origin/master
 
         ObServer()
           : version_(IPV4), port_(0)
@@ -83,7 +77,6 @@ namespace oceanbase
         int64_t to_string(char* buffer, const int64_t size) const;
         bool ip_to_string(char* buffer, const int32_t size) const;
         const char* to_cstring() const; // use this carefully, the content of the returned buffer will be modified by the next call
-<<<<<<< HEAD
         // add by zhangcd [rs_election] 20151129:b
         /**
          * @brief set_ipv6_addr
@@ -94,9 +87,6 @@ namespace oceanbase
          */
         bool set_ipv6_addr(const char* ip, const int32_t port);     // copy from 0.5
         // add:e
-=======
-
->>>>>>> refs/remotes/origin/master
         bool set_ipv4_addr(const char* ip, const int32_t port);
         bool set_ipv4_addr(const int32_t ip, const int32_t port);
 
@@ -114,7 +104,6 @@ namespace oceanbase
         uint64_t get_ipv6_low() const;
         void set_port(int32_t port);
         void set_max();
-<<<<<<< HEAD
         // add by zhangcd [rs_election] 20151129:b
         /**
          * @brief is_valid
@@ -138,11 +127,6 @@ namespace oceanbase
         int64_t hash() const;   // for ob_hashtable.h
         uint32_t murmurhash2(const uint32_t hash) const;
         //add e
-=======
-
-        void reset_ipv4_10(int ip = 10);
-
->>>>>>> refs/remotes/origin/master
         NEED_SERIALIZE_AND_DESERIALIZE;
 
       private:
@@ -153,15 +137,12 @@ namespace oceanbase
           uint32_t v6_[4];
         } ip;
     };
-<<<<<<< HEAD
     //add wenghaixing [secondary index.static_index]20151217
     inline int64_t ObServer::hash() const
     {
       return this->murmurhash2(0);
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 

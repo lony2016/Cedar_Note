@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -25,8 +24,6 @@
  * @date  2016_07_30
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_ROOT_RPC_STUB_H_
 #define OCEANBASE_ROOT_RPC_STUB_H_
 
@@ -38,10 +35,7 @@
 #include "common/ob_tablet_info.h"
 #include "common/ob_tablet_info.h"
 #include "common/ob_rs_ups_message.h"
-<<<<<<< HEAD
 #include "common/ob_rs_rs_message.h"
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_data_source_desc.h"
 #include "common/ob_list.h"
 #include "common/ob_range2.h"
@@ -49,11 +43,8 @@
 #include "common/ob_new_scanner.h"
 #include "sql/ob_sql_scan_param.h"
 #include "ob_daily_merge_checker.h"
-<<<<<<< HEAD
 #include "common/ob_schema_service.h"
 #include "common/ob_name_code_map.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -69,7 +60,6 @@ namespace oceanbase
         int init(const common::ObClientManager *client_mgr, common::ThreadSpecificBuffer* tsbuffer);
         // synchronous rpc messages
         virtual int slave_register(const common::ObServer& master, const common::ObServer& slave_addr, common::ObFetchParam& fetch_param, const int64_t timeout);
-<<<<<<< HEAD
         // add by zcd [multi_cluster] 20150405:b
         virtual int set_slave_obi_role(const ObServer& slave, const common::ObiRole &role, const int64_t timeout);
         virtual int boot_strap(const common::ObServer& server);
@@ -86,10 +76,6 @@ namespace oceanbase
         //add hxlong [truncate table] 20170403:b
         virtual int truncate_table(const common::ObServer& server, const common::ObMutator& mutator, const int64_t timeout_us);
         //add:e
-=======
-        virtual int set_obi_role(const common::ObServer& ups, const common::ObiRole& role, const int64_t timeout_us);
-        virtual int switch_schema(const common::ObServer& server, const common::ObSchemaManagerV2& schema_manager, const int64_t timeout_us);
->>>>>>> refs/remotes/origin/master
         virtual int migrate_tablet(const common::ObServer& src_cs, const common::ObDataSourceDesc& desc, const int64_t timeout_us);
         virtual int create_tablet(const common::ObServer& cs, const common::ObNewRange& range, const int64_t mem_version, const int64_t timeout_us);
         virtual int delete_tablets(const common::ObServer& cs, const common::ObTabletReportInfoList &tablets, const int64_t timeout_us);
@@ -99,7 +85,6 @@ namespace oceanbase
         virtual int revoke_ups_lease(const common::ObServer &ups, const int64_t lease, const common::ObServer& master, const int64_t timeout_us);
         virtual int import_tablets(const common::ObServer& cs, const uint64_t table_id, const int64_t version, const int64_t timeout_us);
         virtual int get_ups_max_log_seq(const common::ObServer& ups, uint64_t &max_log_seq, const int64_t timeout_us);
-<<<<<<< HEAD
         // add by guojinwei [log timestamp][multi_cluster] 20150820:b
         /**
          * @brief get max log timestamp from ups
@@ -122,31 +107,23 @@ namespace oceanbase
          */
         virtual int set_config(const common::ObServer& server, const ObString& config_str, int64_t timeout_us);
         // add:e
-=======
-        virtual int shutdown_cs(const common::ObServer& cs, bool is_restart, const int64_t timeout_us);
-        virtual int get_row_checksum(const common::ObServer& server, const int64_t data_version, const uint64_t table_id, ObRowChecksum &row_checksum, int64_t timeout_us);
->>>>>>> refs/remotes/origin/master
 
         virtual int get_split_range(const common::ObServer& ups, const int64_t timeout_us,
              const uint64_t table_id, const int64_t frozen_version, common::ObTabletInfoList &tablets);
         virtual int table_exist_in_cs(const common::ObServer &cs, const int64_t timeout_us,
             const uint64_t table_id, bool &is_exist_in_cs);
         // asynchronous rpc messages
-<<<<<<< HEAD
         //add weixing [statistics build v1]20170406:b
         virtual int get_collection_list_from_ms(const ObServer ms, const int64_t timeout, const int64_t data_version, ObArray<uint64_t> *list);
         //add e
         //add weixing [statistics build v1]20170331:b
         virtual int statistic_signal_to_cs(const common::ObServer& cs, ObArray<uint64_t> &list);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         virtual int heartbeat_to_cs(const common::ObServer& cs,
                                     const int64_t lease_time,
                                     const int64_t frozen_mem_version,
                                     const int64_t schema_version,
                                     const int64_t config_version);
-<<<<<<< HEAD
 
         //add wenghaixing [secondary index.static_index]20151130
         virtual int heartbeat_to_cs_with_index(const ObServer &cs,
@@ -157,21 +134,15 @@ namespace oceanbase
                                                const IndexBeat &beat);
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
         virtual int heartbeat_to_ms(const common::ObServer& ms,
                                     const int64_t lease_time,
                                     const int64_t frozen_mem_version,
                                     const int64_t schema_version,
                                     const common::ObiRole &role,
                                     const int64_t privilege_version,
-<<<<<<< HEAD
                                     const int64_t config_version,
                                     const int64_t procedure_version,
                                     const bool all_ups_state);
-=======
-                                    const int64_t config_version);
->>>>>>> refs/remotes/origin/master
 
         virtual int grant_lease_to_ups(const common::ObServer& ups,
                                        common::ObMsgUpsHeartbeat &msg);
@@ -193,12 +164,9 @@ namespace oceanbase
             const int64_t cluster_id, ObDataSourceProxyList& proxy_list, int64_t timeout);
         virtual int fetch_slave_cluster_list(const common::ObServer& ms, const common::ObServer& master_rs,
             common::ObServer* slave_cluster_rs, int64_t& rs_count, int64_t timeout);
-<<<<<<< HEAD
         //add wenghaixing [secondary index.static_index]20151118
         virtual int get_init_index_from_ups(const ObServer ups, const int64_t timeout, const int64_t data_version, ObArray<uint64_t> *list);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         virtual int import(const common::ObServer& rs, const common::ObString& table_name,
             const uint64_t table_id, const common::ObString& uri, const int64_t start_time, const int64_t timeout);
         virtual int kill_import(const common::ObServer& rs, const common::ObString& table_name,
@@ -208,7 +176,6 @@ namespace oceanbase
         virtual int set_import_status(const common::ObServer& rs, const common::ObString& table_name,
             const uint64_t table_id, const int32_t status, const int64_t timeout);
         virtual int notify_switch_schema(const common::ObServer& rs, const int64_t timeout);
-<<<<<<< HEAD
         //add chujiajia [rs_election][multi_cluster] 20150823:b
         /**
          * @brief send rootserver election message 
@@ -237,8 +204,6 @@ namespace oceanbase
          */
         virtual int get_ups_election_ready(const common::ObServer& ups, const int64_t timeout_us);
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         int fill_proxy_list(ObDataSourceProxyList& proxy_list, common::ObNewScanner& scanner);
         int fill_slave_cluster_list(common::ObNewScanner& scanner, const common::ObServer& master_rs,

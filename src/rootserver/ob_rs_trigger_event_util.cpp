@@ -95,7 +95,6 @@ int ObRootTriggerUtil::drop_tables(ObTriggerEvent & trigger, const uint64_t tabl
   return err;
 }
 
-<<<<<<< HEAD
 //add by wdh 20160730 :b
 int ObRootTriggerUtil::create_procedure(ObTriggerEvent & trigger)
 {
@@ -126,5 +125,3 @@ int ObRootTriggerUtil::drop_procedure(ObTriggerEvent &trigger)
 }
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master

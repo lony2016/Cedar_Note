@@ -292,11 +292,7 @@ namespace oceanbase
       else if (0 >= size
                || page_size_ < size + (int64_t)sizeof(id))
       {
-<<<<<<< HEAD
         TBSYS_LOG(WARN, "invalid param, size=%ld, page_size_ =%ld", size,page_size_ );
-=======
-        TBSYS_LOG(WARN, "invalid param, size=%ld", size);
->>>>>>> refs/remotes/origin/master
       }
       else
       {

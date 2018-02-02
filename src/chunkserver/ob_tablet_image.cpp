@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -21,8 +20,6 @@
  * @author liubozhong <51141500077@ecnu.cn>
  * @date 2016_01_19
  */
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *  (C) 2007-2010 Taobao Inc.
  *
@@ -909,7 +906,6 @@ namespace oceanbase
       range.set_rowkey_info(ri);
 
       it = tablet_list_.lower_bound(range, compare_tablet_range);
-<<<<<<< HEAD
       //delete by guojinwei 20160824:b
       ////add longfei 2016-03-30 19:16:57
       ////看看找到的tablet是什么样的
@@ -923,8 +919,6 @@ namespace oceanbase
       //TBSYS_LOG(INFO, "====dump tablet end====");
       ////add e
       // delete:e
-=======
->>>>>>> refs/remotes/origin/master
       if (it == tablet_list_.end())
       {
         //                       start_key
@@ -969,7 +963,6 @@ namespace oceanbase
       {
         ret = OB_CS_TABLET_NOT_EXIST;
       }
-<<<<<<< HEAD
       // delete by guojinwei 20160824:b
       ////add else longfei 2016-03-30 19:31:54
       //else
@@ -978,8 +971,6 @@ namespace oceanbase
       //}
       ////add e
       // delete:e
-=======
->>>>>>> refs/remotes/origin/master
 
       return ret;
     }
@@ -1008,7 +999,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     // add longfei [cons static index] 151121:b
     const int ObTabletImage::acquire_tablets_by_table_id(
         const uint64_t table_id,
@@ -1042,8 +1032,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObTabletImage::remove_sstable(ObTablet* tablet) const
     {
       int ret = OB_SUCCESS;
@@ -1227,14 +1215,10 @@ namespace oceanbase
       record_header.set_magic_num(ObTabletMetaHeader::TABLET_META_MAGIC);
       record_header.header_length_ = OB_RECORD_HEADER_LENGTH;
       record_header.version_ = 0;
-<<<<<<< HEAD
       // modify by lbzhong [multi_cluster] 20151111:b
       // record_header.reserved_ = 0;
       record_header.timestamp_ = 0;
       // modify:e
-=======
-      record_header.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
 
       int64_t payload_pos = pos + OB_RECORD_HEADER_LENGTH;
       int64_t tablet_pos = payload_pos + meta_header.get_serialize_size();
@@ -2605,7 +2589,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add longfei [cons static index] 151207:b
     int ObMultiVersionTabletImage::upgrade_index_tablet(ObTablet* tablet, const bool load_sstable)
     {
@@ -2652,8 +2635,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObMultiVersionTabletImage::upgrade_service()
     {
       int ret = OB_SUCCESS;

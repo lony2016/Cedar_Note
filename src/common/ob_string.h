@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -16,8 +15,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_COMMON_OB_STRING_H_
 #define OCEANBASE_COMMON_OB_STRING_H_
 
@@ -189,7 +186,6 @@ namespace oceanbase
           }
         }
 
-<<<<<<< HEAD
         //add longfei 20151114 :b
         /**
          * @brief add_string add a string to Obstring
@@ -214,8 +210,6 @@ namespace oceanbase
         }
         // add e
 
-=======
->>>>>>> refs/remotes/origin/master
         /*
          * attach myself to other's buff, so you can read through me, but not write
          * 把ob_string 关联到一块不属于自己的内存空间上, 该 obstring 可读,不可写
@@ -267,7 +261,6 @@ namespace oceanbase
         inline const char* ptr() const { return ptr_; }
         inline char* ptr() { return ptr_; }
 
-<<<<<<< HEAD
         //add by qx 20160903 :b
         inline void set_length(obstr_size_t data_length)
         {
@@ -275,8 +268,6 @@ namespace oceanbase
         }
         //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
         inline int64_t hash() const
         {
           int64_t hash_val = 0;
@@ -390,7 +381,6 @@ namespace oceanbase
           ObString ret(0, static_cast<obstr_size_t>(strlen(cstr)), const_cast<char*>(cstr));
           return ret;
         }
-<<<<<<< HEAD
         
         // add by lxb on 2016/02/16 for logical optimizer
         static ObString link_string(const char* lstr, const int64_t rint)
@@ -400,8 +390,6 @@ namespace oceanbase
           ObString ret(0, static_cast<obstr_size_t>(strlen(str)), str);
           return ret;
         }
-=======
->>>>>>> refs/remotes/origin/master
 
         int64_t to_string(char *buff, const int64_t len) const
         {
@@ -506,7 +494,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add xsl ECNU_DECIMAL 2017_1
 //    template <typename AllocatorT>
 //    int ob_write_decimal(AllocatorT &allocator,TTInt* src,TTInt*& dst)
@@ -543,8 +530,6 @@ namespace oceanbase
       return ret;
     }
     //add e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 #endif

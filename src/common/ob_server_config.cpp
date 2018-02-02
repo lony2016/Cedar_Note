@@ -198,7 +198,6 @@ int ObServerConfig::add_extra_config(const char* config_str, bool check_name /* 
   return ret;
 }
 
-<<<<<<< HEAD
 int ObServerConfig::add_extra_config2(const char* config_str, bool check_name /* = false */)
 {
   int ret = OB_SUCCESS;
@@ -256,8 +255,6 @@ int ObServerConfig::add_extra_config2(const char* config_str, bool check_name /*
   return ret;
 }
 
-=======
->>>>>>> refs/remotes/origin/master
 DEFINE_SERIALIZE(ObServerConfig)
 {
   static const int HEADER_LENGTH = sizeof (uint32_t) + sizeof (uint64_t);
@@ -328,7 +325,6 @@ DEFINE_DESERIALIZE(ObServerConfig)
   }
   return ret;
 }
-<<<<<<< HEAD
 int ObServerConfig::deserialize2(const char* buf, const int64_t data_len, int64_t& pos)
 {
   int ret = OB_SUCCESS;
@@ -366,5 +362,3 @@ int ObServerConfig::deserialize2(const char* buf, const int64_t data_len, int64_
   }
   return ret;
 }
-=======
->>>>>>> refs/remotes/origin/master

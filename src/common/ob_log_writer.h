@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -14,8 +13,6 @@
  * @date 2016_07_22
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -42,10 +39,7 @@
 #include "ob_log_cursor.h"
 #include "ob_log_generator.h"
 #include "ob_log_data_writer.h"
-<<<<<<< HEAD
 #include "ob_log_generator2.h"
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -57,21 +51,14 @@ namespace oceanbase
         virtual ~ObILogWriter() {};
       public:
         virtual int switch_log_file(uint64_t &new_log_file_id) = 0;
-<<<<<<< HEAD
         virtual int switch_log_file(uint64_t &new_log_file_id, FLogPos& cur_pos, const int64_t max_cmt_id) = 0; //add by zhouhuan
-=======
->>>>>>> refs/remotes/origin/master
         virtual int write_replay_point(uint64_t replay_point) = 0;
     };
 
     class ObLogWriter : public ObILogWriter
     {
     public:
-<<<<<<< HEAD
       //static int64_t LOG_BUFFER_SIZE = OB_MAX_LOG_BUFFER_SIZE;  // in fact,only uesed by test case
-=======
-      static const int64_t LOG_BUFFER_SIZE = OB_MAX_LOG_BUFFER_SIZE;
->>>>>>> refs/remotes/origin/master
       static const int64_t LOG_FILE_ALIGN_BIT = 9;
       static const int64_t LOG_FILE_ALIGN_SIZE = 1 << LOG_FILE_ALIGN_BIT;
       static const int64_t LOG_FILE_ALIGN_MASK = LOG_FILE_ALIGN_SIZE - 1;
@@ -101,7 +88,6 @@ namespace oceanbase
           UNUSED(data_len);
           return OB_SUCCESS;
       }
-<<<<<<< HEAD
 
       //add zhouhuan[scalable commit]20160510
       virtual int switch_log_file(uint64_t &new_log_file_id, FLogPos& cur_pos, const int64_t max_cmt_id)
@@ -114,8 +100,6 @@ namespace oceanbase
       }
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       bool check_log_size(const int64_t size) const { return log_generator_.check_log_size(size); }
       int start_log(const ObLogCursor& start_cursor);
       int start_log_maybe(const ObLogCursor& start_cursor);
@@ -135,7 +119,6 @@ namespace oceanbase
       /// @retval OB_BUF_NOT_ENOUGH 内部缓冲区已满
       /// @retval otherwise 失败
       int write_log(const LogCommand cmd, const char* log_data, const int64_t data_len);
-<<<<<<< HEAD
       //add chujiajia [log synchronization][multi_cluster] 20160328:b
       /**
        * @brief write log
@@ -166,14 +149,6 @@ namespace oceanbase
       //int write_keep_alive_log()
       int write_keep_alive_log(const bool is_ups_nop, const int64_t max_cmt_id);
       //mod:e
-=======
-
-      template<typename T>
-      int write_log(const LogCommand cmd, const T& data);
-
-      int write_keep_alive_log();
-
->>>>>>> refs/remotes/origin/master
         int async_flush_log(int64_t& end_log_id, TraceLog::LogBuffer &tlog_buffer = oceanbase::common::TraceLog::get_logbuffer());
         int64_t get_flushed_clog_id();
       /// @brief 将缓冲区中的日志写入磁盘
@@ -260,7 +235,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add chujiajia [log synchronization][multi_cluster] 20160603:b
     /**
      * @brief write log with input parameters
@@ -284,9 +258,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 

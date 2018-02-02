@@ -9,13 +9,10 @@
 using namespace oceanbase::sql;
 using namespace oceanbase::common;
 
-<<<<<<< HEAD
 //add by qx [query optimization] 20170308 :b
 #include "ob_optimizer_relation.h"
 //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
 ObSelectStmt::ObSelectStmt(ObStringBuf* name_pool)
 : ObStmt(name_pool, ObStmt::T_SELECT)
 {
@@ -27,7 +24,6 @@ ObSelectStmt::ObSelectStmt(ObStringBuf* name_pool)
   limit_offset_id_ = OB_INVALID_ID;
   for_update_ = false;
   gen_joined_tid_ = UINT64_MAX - 2;
-<<<<<<< HEAD
   //add by qx [query optimization] 20170315 :b
   if (!table_id_statInfo_map_.created())
   {
@@ -35,8 +31,6 @@ ObSelectStmt::ObSelectStmt(ObStringBuf* name_pool)
   }
   //add :e
   select_stmt_rel_info_ = NULL;//add dhc [query_optimization] 20170809
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 ObSelectStmt::~ObSelectStmt()
@@ -48,7 +42,6 @@ ObSelectStmt::~ObSelectStmt()
     joined_tables_[i]->~JoinedTable();
     parse_free(joined_tables_[i]);
   }
-<<<<<<< HEAD
   //add by dhc [query optimization] 20170809 : b
   if (select_stmt_rel_info_ != NULL)
   {
@@ -136,13 +129,6 @@ ObSelectStmt::~ObSelectStmt()
   //add dhc [query optimization] 20170811 :b
   table_id_statInfo_map_.destroy();
   //add 20170811 :e
-=======
-  select_items_.clear();
-  select_items_.clear();
-  joined_tables_.clear();
-  group_expr_ids_.clear();
-  order_items_.clear();
->>>>>>> refs/remotes/origin/master
 }
 
 int ObSelectStmt::check_alias_name(
@@ -253,7 +239,6 @@ uint64_t ObSelectStmt::get_alias_expr_id(oceanbase::common::ObString& alias_name
   return expr_id;
 }
 
-<<<<<<< HEAD
 //add dhc [query optimizer] 20170607 :b
 int ObSelectStmt::remove_joined_table(uint64_t table_id)
 {
@@ -277,8 +262,6 @@ int ObSelectStmt::remove_joined_table(uint64_t table_id)
 }
 //add dhc e
 
-=======
->>>>>>> refs/remotes/origin/master
 JoinedTable* ObSelectStmt::get_joined_table(uint64_t table_id)
 {
   JoinedTable *joined_table = NULL;
@@ -458,14 +441,11 @@ void ObSelectStmt::print(FILE* fp, int32_t level, int32_t index)
 
   print_indentation(fp, level);
   fprintf(fp, "ObSelectStmt %d Begin\n", index);
-<<<<<<< HEAD
   
   // print query id, add by lxb on 2016/12/24
   print_indentation(fp, level);
   fprintf(fp, "QueryId ::= %lu \n", ObBasicStmt::get_query_id());
   
-=======
->>>>>>> refs/remotes/origin/master
   ObStmt::print(fp, level);
 
   if (set_op_ == NONE)
@@ -481,16 +461,11 @@ void ObSelectStmt::print(FILE* fp, int32_t level, int32_t index)
         fprintf(fp, ", ");
       SelectItem& item = select_items_[i];
       if (item.alias_name_.length() > 0)
-<<<<<<< HEAD
         fprintf(fp, "<expr_id_:%lu, is_real_alias_:%s, alias_name_:%.*s, expr_name_:%.*s, type_:%d>", 
           item.expr_id_, item.is_real_alias_?"True":"False",
           item.alias_name_.length(), item.alias_name_.ptr(),
           item.expr_name_.length(), item.expr_name_.ptr(),
           int(item.type_));
-=======
-        fprintf(fp, "<%lu, %.*s>", item.expr_id_,
-          item.alias_name_.length(), item.alias_name_.ptr());
->>>>>>> refs/remotes/origin/master
       else
         fprintf(fp, "<%ld>", item.expr_id_);
     }

@@ -239,7 +239,6 @@ namespace oceanbase
         }
         return ret;
       }
-<<<<<<< HEAD
       //add xsl ECNU_DECIMAL 2016_11
       inline int write_Decimal(const uint64_t* src,uint64_t *& dst, uint32_t len)
       {
@@ -262,9 +261,6 @@ namespace oceanbase
           return ret;
       }
       //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       inline int write_varchar(const ObString &str, ObString *str_written = NULL)
       {
         int ret = common::OB_SUCCESS;

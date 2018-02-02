@@ -14,7 +14,6 @@
 
 #include "ob_single_log_reader.h"
 #include "ob_log_dir_scanner.h"
-<<<<<<< HEAD
 #include "ob_log_generator2.h"
 using namespace oceanbase::common;
 
@@ -24,12 +23,6 @@ using namespace oceanbase::common;
 //there is a strange phenomenon that LOG_BUFFER_MAX_LENGTH is undefined if we comment below this line by qx
 //int64_t ObSingleLogReader::LOG_BUFFER_MAX_LENGTH = 1 << 21;
 //delete :e
-=======
-#include "ob_log_generator.h"
-using namespace oceanbase::common;
-
-const int64_t ObSingleLogReader::LOG_BUFFER_MAX_LENGTH = 1 << 21;
->>>>>>> refs/remotes/origin/master
 
 ObSingleLogReader::ObSingleLogReader()
 {
@@ -85,11 +78,7 @@ int ObSingleLogReader::init(const char* log_dir)
   {
     if (NULL == log_buffer_.get_data())
     {
-<<<<<<< HEAD
       char* buf = static_cast<char*>(ob_malloc(OB_LOG_BUFFER_MAX_SIZE, ObModIds::OB_SINGLE_LOG_READER));
-=======
-      char* buf = static_cast<char*>(ob_malloc(LOG_BUFFER_MAX_LENGTH, ObModIds::OB_SINGLE_LOG_READER));
->>>>>>> refs/remotes/origin/master
       if (NULL == buf)
       {
         TBSYS_LOG(ERROR, "ob_malloc for log_buffer_ failed");
@@ -97,11 +86,7 @@ int ObSingleLogReader::init(const char* log_dir)
       }
       else
       {
-<<<<<<< HEAD
         log_buffer_.set_data(buf, OB_LOG_BUFFER_MAX_SIZE);
-=======
-        log_buffer_.set_data(buf, LOG_BUFFER_MAX_LENGTH);
->>>>>>> refs/remotes/origin/master
       }
     }
   }
@@ -275,11 +260,7 @@ int ObSingleLogReader::read_header(ObLogEntry& entry)
       err = OB_LAST_LOG_RUINNED;
     }
   }
-<<<<<<< HEAD
   else if (ObLogGeneratorV2::is_eof(log_buffer_.get_data() + log_buffer_.get_position(),
-=======
-  else if (ObLogGenerator::is_eof(log_buffer_.get_data() + log_buffer_.get_position(),
->>>>>>> refs/remotes/origin/master
                                   log_buffer_.get_limit() - log_buffer_.get_position()))
   {
     err = OB_READ_NOTHING;

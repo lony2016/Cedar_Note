@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_27
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_logical_plan.h"
 #include "ob_select_stmt.h"
 #include "ob_delete_stmt.h"
@@ -26,17 +23,11 @@
 #include "ob_update_stmt.h"
 #include "ob_show_stmt.h"
 #include "ob_execute_stmt.h"
-<<<<<<< HEAD
 #include "ob_procedure_execute_stmt.h"
 #include "ob_prepare_stmt.h"
 #include "ob_sql_session_info.h"
 #include "parse_malloc.h"
 #include "ob_lock_table_stmt.h" //add wangjiahao [table lock] 20160616
-=======
-#include "ob_prepare_stmt.h"
-#include "ob_sql_session_info.h"
-#include "parse_malloc.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -56,12 +47,9 @@ namespace oceanbase
       new_gen_qid_ = 1;
       new_gen_eid_ = 1;
       new_gen_wid_ = 1;
-<<<<<<< HEAD
       
       // add by lxb on 2017/02/16 for logical optimizer
       new_gen_aid_ = 1;
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObLogicalPlan::~ObLogicalPlan()
@@ -124,7 +112,6 @@ namespace oceanbase
       OB_ASSERT(NULL != select_stmt);
       return select_stmt;
     }
-<<<<<<< HEAD
     //add wanglei [semi join] 20170417:b
     oceanbase::common::ObVector<ObSqlRawExpr*> & ObLogicalPlan::get_expr_list()
     {
@@ -147,9 +134,6 @@ namespace oceanbase
         }
     }
     //add wanglei [semi join] 20170417:e
-=======
-
->>>>>>> refs/remotes/origin/master
     ObSqlRawExpr* ObLogicalPlan::get_expr(uint64_t expr_id) const
     {
       ObSqlRawExpr *expr = NULL;
@@ -165,7 +149,6 @@ namespace oceanbase
       OB_ASSERT(NULL != expr);
       return expr;
     }
-<<<<<<< HEAD
     
     /*
      * delete expr by id
@@ -200,8 +183,6 @@ namespace oceanbase
         }
       }
     }
-=======
->>>>>>> refs/remotes/origin/master
 
     int ObLogicalPlan::fill_result_set(ObResultSet& result_set, ObSQLSessionInfo* session_info, common::ObIAllocator &alloc)
     {
@@ -352,10 +333,7 @@ namespace oceanbase
           break;
         }
         case ObStmt::T_SHOW_TABLES:
-<<<<<<< HEAD
         case ObStmt::T_SHOW_INDEX:
-=======
->>>>>>> refs/remotes/origin/master
         case ObStmt::T_SHOW_VARIABLES:
         case ObStmt::T_SHOW_COLUMNS:
         case ObStmt::T_SHOW_SCHEMA:
@@ -555,7 +533,6 @@ namespace oceanbase
           }
           break;
         }
-<<<<<<< HEAD
         //delete by wangdonghui 20160303 :b
         //add zt 20151121:b
 //        case ObStmt::T_PROCEDURE_EXEC:
@@ -591,8 +568,6 @@ namespace oceanbase
 //        }
         //add zt 20151121:e
         //delete :e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           break;
       }
@@ -631,7 +606,6 @@ namespace oceanbase
         sql_expr->print(fp, level + 2, i);
       }
       fprintf(fp, "    </ExprList>\n");
-<<<<<<< HEAD
 	  fprintf(fp, "    <RawExprList>\n");
       for (i = 0; i < raw_exprs_store_.size(); i ++)
       {
@@ -639,8 +613,6 @@ namespace oceanbase
         raw_expr->print(fp, level + 2);
       }
       fprintf(fp, "    </RawExprList>\n");
-=======
->>>>>>> refs/remotes/origin/master
       if (CUR_TIME == cur_time_fun_type_)
       {
         fprintf(fp, "    <CurrentTimeFun>MS</CurrentTimeFun>\n");

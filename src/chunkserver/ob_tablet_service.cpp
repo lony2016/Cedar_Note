@@ -44,14 +44,11 @@ void ObTabletService::reset()
 int ObTabletService::open(const sql::ObSqlReadParam &sql_read_param)
 {
   int ret = OB_SUCCESS;
-<<<<<<< HEAD
   //add longfei 2016-03-30 15:35:16
   //cs管理teblet
   TBSYS_LOG(DEBUG, "debug::longfei>>>cs scan data for table[%ld].", sql_read_param.get_table_id());
   //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   common::ObMergerSchemaManager *merger_schema_mgr = NULL;
   const ObSchemaManagerV2 *schema_mgr = NULL;
   cur_row_ = NULL;
@@ -309,14 +306,10 @@ int ObTabletService::fill_scan_data(ObNewScanner &new_scanner)
   if ((OB_SUCCESS == ret || OB_FORCE_TIME_OUT == ret) && tablet_read_ == &tablet_scan_ )
   {
     ObNewRange range;
-<<<<<<< HEAD
     //mod hxlong [Truncate Table]:20170318:b
     //if (OB_SUCCESS == (ret = tablet_scan_.get_tablet_range(range)))
     if (OB_SUCCESS == (ret = tablet_scan_.get_scan_range(range)))
       //mod:e
-=======
-    if (OB_SUCCESS == (ret = tablet_scan_.get_tablet_range(range)))
->>>>>>> refs/remotes/origin/master
     {
       new_scanner.set_range(range);
     }

@@ -65,16 +65,12 @@ namespace oceanbase
         {
           return append_escape(ObCellMeta::ES_DEL_ROW);
         }
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         inline int tab_truncate()
         {
           return append_escape(ObCellMeta::ES_DEL_ROW);
         }
         //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
         inline int row_nop()
         {
           return append_escape(ObCellMeta::ES_NOP_ROW);
@@ -121,14 +117,10 @@ namespace oceanbase
 
       protected:
         virtual int write_varchar(const ObObj &value, ObObj *clone_value);
-<<<<<<< HEAD
         //int write_decimal(const ObObj &decimal);
         //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         int write_decimal(const ObObj &decimal, ObObj *clone_value);
         //modify:e
-=======
-        int write_decimal(const ObObj &decimal);
->>>>>>> refs/remotes/origin/master
 
       protected:
         ObBufferWriter buf_writer_;

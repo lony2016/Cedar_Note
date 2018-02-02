@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -147,20 +144,12 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     ObSSTableSchema::ObSSTableSchema():version_(OB_SSTABLE_SCHEMA_VERSION_TWO),/*add hxlong [truncate table]*/
      column_def_(column_def_array_), hash_init_(false),curr_group_head_(0)
     {
       memset(&column_def_array_, 0, sizeof(ObSSTableSchemaColumnDef) * OB_MAX_COLUMN_NUMBER);
       memset(&table_trun_array_, 0, sizeof(ObSSTableSchemaTableDef) * OB_MAX_TABLE_NUMBER); //add hxlong [Truncate Table]:20160318
       memset(&schema_header_, 0, sizeof(ObSSTableSchemaHeaderV2));
-=======
-    ObSSTableSchema::ObSSTableSchema():column_def_(column_def_array_), hash_init_(false),
-    curr_group_head_(0)
-    {
-      memset(&column_def_array_, 0, sizeof(ObSSTableSchemaColumnDef) * OB_MAX_COLUMN_NUMBER);
-      memset(&schema_header_, 0, sizeof(ObSSTableSchemaHeader));
->>>>>>> refs/remotes/origin/master
     }
 
     ObSSTableSchema::~ObSSTableSchema()
@@ -196,15 +185,12 @@ namespace oceanbase
       return count;
     }
 
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     const int32_t ObSSTableSchema::get_trun_table_count() const
     {
       return schema_header_.trun_table_count_;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     int ObSSTableSchema::get_rowkey_column_count(const uint64_t table_id, int64_t& rowkey_column_count) const
     {
       int ret = OB_SUCCESS;
@@ -347,7 +333,6 @@ namespace oceanbase
 
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     //trun table def
     const ObSSTableSchemaTableDef* ObSSTableSchema::get_truncate_def(const uint64_t table_id) const
@@ -374,8 +359,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     DEFINE_SERIALIZE(ObSSTableSchemaHeader)
     {
@@ -439,7 +422,6 @@ namespace oceanbase
               + encoded_length_i16(reserved16_)
               + encoded_length_i32(total_column_count_));
     }
-<<<<<<< HEAD
     //add hxlong [truncate table]
     DEFINE_SERIALIZE(ObSSTableSchemaHeaderV2)
     {
@@ -507,8 +489,6 @@ namespace oceanbase
               + encoded_length_i32(trun_table_count_));
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
     DEFINE_SERIALIZE(ObSSTableSchemaColumnDef)
     {
@@ -542,7 +522,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     DEFINE_SERIALIZE(ObSSTableSchemaTableDef)
     {
@@ -609,8 +588,6 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     DEFINE_DESERIALIZE(ObSSTableSchemaColumnDef)
     {
       int ret                 = OB_SUCCESS;
@@ -1096,7 +1073,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int ObSSTableSchema::add_table_def(const ObSSTableSchemaTableDef& table_def)
     {
@@ -1126,8 +1102,6 @@ namespace oceanbase
           return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     int ObSSTableSchema::get_table_column_groups_id(const uint64_t table_id,
                                                     uint64_t* group_ids, int64_t & size)const
     {
@@ -1583,7 +1557,6 @@ namespace oceanbase
                   buf, buf_len, pos, serialize_size);
         ret = OB_ERROR;
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table] for upgrade :20170504:b
       if (OB_SUCCESS == ret)
       {
@@ -1596,9 +1569,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         ret = schema_header_.serialize(buf, buf_len, pos);
@@ -1609,7 +1579,6 @@ namespace oceanbase
                     buf, buf_len, pos, schema_header_.total_column_count_);
         }
       }
-<<<<<<< HEAD
       if (OB_SUCCESS == ret)
       {
         //add hxlong [Truncate Table]:20170318:b
@@ -1629,11 +1598,6 @@ namespace oceanbase
       if (OB_SUCCESS == ret)
       {
         //add:e
-=======
-
-      if (OB_SUCCESS == ret)
-      {
->>>>>>> refs/remotes/origin/master
         for (int64_t i = 0; OB_SUCCESS == ret
              && i < schema_header_.total_column_count_; ++i)
         {
@@ -1656,10 +1620,7 @@ namespace oceanbase
     {
       int ret = OB_SUCCESS;
       int64_t column_count = 0;
-<<<<<<< HEAD
       int32_t trun_table_count = 0; //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
 
       if (NULL == buf || data_len <= 0 || pos > data_len)
       {
@@ -1669,7 +1630,6 @@ namespace oceanbase
       }
       reset();
 
-<<<<<<< HEAD
       //add hxlong [Truncate Table] for upgrade :20170504:b
       if (OB_SUCCESS == ret)
       {
@@ -1750,20 +1710,6 @@ namespace oceanbase
         }
       }
       //add:e
-=======
-      if (OB_SUCCESS == ret)
-      {
-        ret = schema_header_.deserialize(buf, data_len, pos);
-        column_count = get_column_count();
-        if (OB_SUCCESS != ret)
-        {
-          TBSYS_LOG(WARN, "failed to deserialize schema header, buf=%p, "
-                          "data_len=%ld, pos=%ld, column_count=%ld",
-                    buf, data_len, pos, column_count);
-        }
-      }
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret && common::OB_MAX_COLUMN_NUMBER <= column_count)
       {
         column_def_ = reinterpret_cast<ObSSTableSchemaColumnDef*>
@@ -1774,11 +1720,6 @@ namespace oceanbase
           ret = OB_ERROR;
         }
       }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         schema_header_.total_column_count_ = 0;
@@ -1808,15 +1749,10 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
     DEFINE_GET_SERIALIZE_SIZE(ObSSTableSchema)
     {
       int64_t total_size  = 0;
       int32_t column_count = get_column_count();
-<<<<<<< HEAD
       int32_t table_count = get_trun_table_count(); //add hxlong [Truncate Table]:20170318
       total_size += encoded_length_i32(version_); //add hxlong [Truncate Table]:20170724
       total_size += schema_header_.get_serialize_size();
@@ -1824,16 +1760,6 @@ namespace oceanbase
       total_size += table_trun_array_[0].get_serialize_size() * table_count; //add hxlong [Truncate Table]:20170318
       return total_size;
     }
-=======
-
-      total_size += schema_header_.get_serialize_size();
-      total_size += column_def_[0].get_serialize_size() * column_count;
-
-      return total_size;
-    }
-
-
->>>>>>> refs/remotes/origin/master
     int build_sstable_schema(const uint64_t new_table_id, const uint64_t schema_table_id,
         const common::ObSchemaManagerV2 & schema,
         ObSSTableSchema& sstable_schema, bool binary_format)
@@ -1882,7 +1808,6 @@ namespace oceanbase
 
         for (col_index = 0; col_index < size && OB_SUCCESS == ret; ++col_index)
         {
-<<<<<<< HEAD
           //modify longfei [cons static index] 151205:b
           //因为如果这张表是索引的话，表的列id是不连续的，索引要多加一个判定条件?
           if (rowkey_info.is_rowkey_column(col[col_index].get_id())
@@ -1891,9 +1816,6 @@ namespace oceanbase
                       col[col_index].get_id())))
           //if (rowkey_info.is_rowkey_column(col[col_index].get_id()))
           //mod e
-=======
-          if (rowkey_info.is_rowkey_column(col[col_index].get_id()))
->>>>>>> refs/remotes/origin/master
           {
             // ignore rowkey columns;
             continue;
@@ -1910,12 +1832,9 @@ namespace oceanbase
             TBSYS_LOG(ERROR,"add column_def(%u,%u,%u,%u) failed col_index : %ld",column_def.table_id_,
                 column_def.column_group_id_,column_def.column_name_id_,column_def.rowkey_seq_, col_index);
           }
-<<<<<<< HEAD
           else
           {
           }
-=======
->>>>>>> refs/remotes/origin/master
         }
       }
 

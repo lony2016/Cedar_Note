@@ -51,13 +51,10 @@ namespace oceanbase
         env.privilege_mgr_ = server_.get_privilege_manager();
         env.stat_mgr_ = server_.get_stat_manager();
         env.merge_service_ = &(server_.get_service());
-<<<<<<< HEAD
         //add wanglei [semi join multi thread] 20170417:b
         env.semi_join_task_queue_ = mergeserver::ObSemiJoinTaskQueueThread::GET_INSTANCE();
         env.semi_join_task_queue_->start();
         //add wanglei [semi join multi thread] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
         sql_server_.set_env(env);
       }
       return ret;

@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -23,10 +22,6 @@
 
 /*
  * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
- *
->>>>>>> refs/remotes/origin/master
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * version 2 as published by the Free Software Foundation.
@@ -75,10 +70,7 @@ namespace oceanbase
       PHY_UPS_EXECUTOR,         /*20*/
       PHY_TABLET_DIRECT_JOIN,
       PHY_MERGE_JOIN,
-<<<<<<< HEAD
       PHY_SEMI_JOIN, //add wanglei [semi join] 20170417
-=======
->>>>>>> refs/remotes/origin/master
       PHY_MERGE_EXCEPT,
       PHY_MERGE_INTERSECT,
       PHY_MERGE_UNION,
@@ -116,7 +108,6 @@ namespace oceanbase
       PHY_OB_CHANGE_OBI,
       PHY_ADD_PROJECT,
       PHY_UPS_MODIFY_WITH_DML_TYPE,
-<<<<<<< HEAD
       //add fanqiushi [semi_join] [0.1] 20150829:b
       PHY_SEMI_LEFT_JOIN,
       //add:e
@@ -172,10 +163,6 @@ namespace oceanbase
       PHY_END, /* end of phy operator type */
 
 
-=======
-
-      PHY_END /* end of phy operator type */
->>>>>>> refs/remotes/origin/master
     };
 
     void ob_print_phy_operator_stat();

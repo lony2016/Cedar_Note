@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *
  * This program is free software; you can redistribute it and/or modify
@@ -56,11 +53,7 @@ namespace oceanbase
       PS_ITEM_VALID                     /* plan is ok */
     };
 
-<<<<<<< HEAD
     class ObPsStoreItemValue //is short for prepare stmt store
-=======
-    class ObPsStoreItemValue
->>>>>>> refs/remotes/origin/master
     {
       static const int64_t COMMON_PARAM_NUM = 12;
     public:

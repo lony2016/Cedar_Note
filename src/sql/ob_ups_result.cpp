@@ -32,12 +32,9 @@ namespace oceanbase
                                  scanner_(),
                                  scanner_sel_buffer_(NULL),
                                  scanner_sel_length_(0)
-<<<<<<< HEAD
                                  //add lbzhong [auto_increment] 20161218:b
                                  , auto_value_(OB_INVALID_AUTO_INCREMENT_VALUE)
                                  //add:e
-=======
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -104,10 +101,7 @@ namespace oceanbase
       {
         scanner_sel_buffer_ = buffer;
         scanner_sel_length_ = pos;
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan ObUpsResult set_scanner pos = %ld",pos);
-=======
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
@@ -173,12 +167,9 @@ namespace oceanbase
       scanner_sel_buffer_ = 0;
       scanner_sel_length_ = 0;
       trans_id_.reset();
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161218:b
       auto_value_ = OB_INVALID_AUTO_INCREMENT_VALUE;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     int ObUpsResult::serialize_warning_list_(char* buf, const int64_t buf_len, int64_t& pos) const
@@ -254,10 +245,7 @@ namespace oceanbase
         ret = OB_INVALID_ARGUMENT;
       }
       int64_t tmp_pos = pos;
-<<<<<<< HEAD
       //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize000000 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
       while (OB_SUCCESS == ret)
       {
         // serialize head flag
@@ -267,10 +255,7 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize111111 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize error code flag
         if (OB_SUCCESS != (ret = encode_i8(buf, buf_len, tmp_pos, F_ERROR_CODE)))
@@ -279,11 +264,8 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize222222 tmp_pos = %ld",tmp_pos);
 
-=======
->>>>>>> refs/remotes/origin/master
         // serialize error code value
         if (OB_SUCCESS != (ret = encode_i32(buf, buf_len, tmp_pos, error_code_)))
         {
@@ -291,10 +273,7 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize333333 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize affected rows flag
         if (OB_SUCCESS != (ret = encode_i8(buf, buf_len, tmp_pos, F_AFFECTED_ROWS)))
@@ -303,11 +282,8 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize444444 tmp_pos = %ld",tmp_pos);
 
-=======
->>>>>>> refs/remotes/origin/master
         // serialize affected rows value
         if (OB_SUCCESS != (ret = encode_i64(buf, buf_len, tmp_pos, affected_rows_)))
         {
@@ -315,10 +291,7 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize555555 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize warning list flag
         if (OB_SUCCESS != (ret = encode_i8(buf, buf_len, tmp_pos, F_WARNING_LIST)))
@@ -327,11 +300,8 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize666666 tmp_pos = %ld",tmp_pos);
 
-=======
->>>>>>> refs/remotes/origin/master
         // serialize warning list value
         if (OB_SUCCESS != (ret = serialize_warning_list_(buf, buf_len, tmp_pos)))
         {
@@ -339,10 +309,7 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize7777777 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize new scanner flag
         if (OB_SUCCESS != (ret = encode_i8(buf, buf_len, tmp_pos, F_NEW_SCANNER)))
@@ -351,11 +318,8 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize88888888 tmp_pos = %ld",tmp_pos);
 
-=======
->>>>>>> refs/remotes/origin/master
         // serialize new scanner value
         if (NULL != scanner_sel_buffer_)
         {
@@ -371,10 +335,7 @@ namespace oceanbase
             memcpy(buf + tmp_pos, scanner_sel_buffer_, scanner_sel_length_);
             tmp_pos += scanner_sel_length_;
           }
-<<<<<<< HEAD
           //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize999999-1 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
         }
         else
         {
@@ -384,10 +345,7 @@ namespace oceanbase
                       ret, buf, buf_len, tmp_pos);
             break;
           }
-<<<<<<< HEAD
           //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize999999-2 tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
         }
 
         // serialize transaction id flag
@@ -397,10 +355,7 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serializeAAAAAAA tmp_pos = %ld",tmp_pos);
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize transaction id
         if (OB_SUCCESS != (ret = trans_id_.serialize(buf, buf_len, tmp_pos)))
@@ -409,7 +364,6 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serializeBBBBBBB tmp_pos = %ld",tmp_pos);
 
         //add lbzhong [auto_increment] 20161218:b
@@ -430,8 +384,6 @@ namespace oceanbase
           break;
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
 
         // serialize end flag
         if (OB_SUCCESS != (ret = encode_i8(buf, buf_len, tmp_pos, F_UPS_RESULT_END)))
@@ -440,18 +392,11 @@ namespace oceanbase
                     ret, buf, buf_len, tmp_pos);
           break;
         }
-<<<<<<< HEAD
         //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serializeCCCCCC tmp_pos = %ld",tmp_pos);
         pos = tmp_pos;
         break;
       }
       //TBSYS_LOG(ERROR,"test::zhouhuan UpsResult serialize pos = %ld",pos);
-=======
-
-        pos = tmp_pos;
-        break;
-      }
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -530,7 +475,6 @@ namespace oceanbase
                       ret, buf, data_len, tmp_pos);
           }
           break;
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         case F_AUTO_VALUE:
           if (OB_SUCCESS != (ret = decode_i64(buf, data_len, tmp_pos, &auto_value_)))
@@ -540,8 +484,6 @@ namespace oceanbase
           }
           break;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         default:
           // unknow flag
           break;
@@ -584,14 +526,11 @@ namespace oceanbase
       ret += encoded_length_i8(F_TRANS_ID);
       ret += trans_id_.get_serialize_size();
 
-<<<<<<< HEAD
       //add lbzhong [auto_increment] 20161218:b
       ret += encoded_length_i8(F_AUTO_VALUE);
       ret += encoded_length_i64(auto_value_);
       //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
       ret += encoded_length_i8(F_UPS_RESULT_END);
       return ret;
     }

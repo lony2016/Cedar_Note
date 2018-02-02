@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -18,8 +17,6 @@
  * @date 2016_07_29
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 #include "common/ob_define.h"
 #include "common/ob_trace_log.h"
 #include "ob_merge_server.h"
@@ -43,14 +40,10 @@ namespace oceanbase
         response_buffer_(RESPONSE_PACKET_BUFFER_SIZE),
         rpc_buffer_(RESPONSE_PACKET_BUFFER_SIZE),
         scan_req_pool_(common::ObModIds::OB_MS_SQL_SCAN_REQ_POOL),
-<<<<<<< HEAD
         get_req_pool_(common::ObModIds::OB_MS_SQL_GET_REQ_POOL),
         //add by wangdonghui 20160301 [pl manage] :b
         procedure_manager_()
         //add :e
-=======
-        get_req_pool_(common::ObModIds::OB_MS_SQL_GET_REQ_POOL)
->>>>>>> refs/remotes/origin/master
     {
     }
 
@@ -144,15 +137,12 @@ namespace oceanbase
         TBSYS_LOG(INFO, "enlarge bloom_filter_cache_size to: %ld",
             static_cast<int64_t>(ms_config_.bloom_filter_cache_size));
         insert_cache_.enlarge_total_size(ms_config_.bloom_filter_cache_size);
-<<<<<<< HEAD
 
         //add huangcc [statistic information cache] 20170317:b
         TBSYS_LOG(INFO, "enlarge statistic_info_cache_size to: %ld",
             static_cast<int64_t>(ms_config_.statistic_info_cache_size));
         statistic_info_cache_.enlarge_total_size(ms_config_.statistic_info_cache_size);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
 
       return ret;
@@ -174,11 +164,7 @@ namespace oceanbase
 
       if (ret == OB_SUCCESS)
       {
-<<<<<<< HEAD
         memset(&server_handler_, 0, sizeof(onev_io_handler_pe));
-=======
-        memset(&server_handler_, 0, sizeof(easy_io_handler_pt));
->>>>>>> refs/remotes/origin/master
         server_handler_.encode = ObTbnetCallback::encode;
         server_handler_.decode = ObTbnetCallback::decode;
         server_handler_.process = ObMergeCallback::process;
@@ -240,15 +226,12 @@ namespace oceanbase
       {
         ret = insert_cache_.init(ms_config_.bloom_filter_cache_size);
       }
-<<<<<<< HEAD
       //add huangcc [statistic information cache] 20170317:b
       if (ret == OB_SUCCESS)
       {
         ret = statistic_info_cache_.init(service_.get_sql_proxy(),ms_config_.statistic_info_cache_size);
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       if (ret == OB_SUCCESS)
       {
         ret = scan_req_pool_.init();
@@ -276,7 +259,6 @@ namespace oceanbase
       {
         ret = service_.initialize(this);
       }
-<<<<<<< HEAD
       //add by wangdonghui 20160301 [physical plan cache] :b
       if(ret == OB_SUCCESS)
       {
@@ -284,9 +266,6 @@ namespace oceanbase
         procedure_manager_.set_ms_service(&service_);
       }
       //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -301,12 +280,9 @@ namespace oceanbase
       ObSingleServer::destroy();
       TBSYS_LOG(WARN, "stop mergeserver service");
       service_.destroy();
-<<<<<<< HEAD
       //add wanglei [semi join multi thread] 20170417:b
       ObSemiJoinTaskQueueThread::GET_INSTANCE()->stop();
       //add wanglei [semi join multi thread] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     int ObMergeServer::init_root_server()
@@ -398,11 +374,7 @@ namespace oceanbase
       int32_t channel_id = ob_packet->get_channel_id();
       ObDataBuffer* in_buffer = ob_packet->get_buffer();
       ThreadSpecificBuffer::Buffer* thread_buffer = response_buffer_.get_buffer();
-<<<<<<< HEAD
       onev_request_e* request = ob_packet->get_request();
-=======
-      easy_request_t* request = ob_packet->get_request();
->>>>>>> refs/remotes/origin/master
       if (NULL == request || NULL == request->ms || NULL == request->ms->c)
       {
         TBSYS_LOG(ERROR, "req or req->ms or req->ms->c is NUll should not reach this");

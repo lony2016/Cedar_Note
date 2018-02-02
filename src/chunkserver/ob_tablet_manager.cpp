@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2016_01_21
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2010 Taobao Inc.
  *
@@ -56,13 +53,10 @@
 #include "ob_file_recycle.h"
 #include "ob_chunk_server_stat.h"
 
-<<<<<<< HEAD
 //add  wenghaixing
 #include "common/ob_mutator.h"
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 #define LOG_CACHE_MEMORY_USAGE(header)                                  \
   do  {                                                                 \
     TBSYS_LOG(INFO, "%s cur_serving_idx_ =%ld, mgr_status_ =%ld,"       \
@@ -91,11 +85,8 @@
               manager->get_unserving_block_cache().size());             \
   } while(0);
 
-<<<<<<< HEAD
 using namespace oceanbase::common;
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace chunkserver
@@ -114,12 +105,9 @@ namespace oceanbase
       tablet_image_(fileinfo_cache_, disk_manager_),
       config_(NULL)
     {
-<<<<<<< HEAD
       //add longfei [cons static index] 151120:b
       index_beat_tid_ = OB_INVALID_ID;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObTabletManager::~ObTabletManager()
@@ -1214,7 +1202,6 @@ namespace oceanbase
       return err;
     }
 
-<<<<<<< HEAD
     //add weixing [statistics build]20170206:b
     ObStatisticsCollector& ObTabletManager::get_statistics_collector()
     {
@@ -1239,8 +1226,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObTabletManager::merge_tablets(const int64_t memtable_frozen_version)
     {
       int ret = OB_SUCCESS;
@@ -1525,11 +1510,7 @@ namespace oceanbase
     }
 
     int ObTabletManager::init_sstable_scanner(const ObScanParam& scan_param,
-<<<<<<< HEAD
         const ObTablet* tablet, sstable::ObSSTableScanner& sstable_scanner) //mod longfei 增加ObSSTableScanner的命名空间
-=======
-        const ObTablet* tablet, ObSSTableScanner& sstable_scanner)
->>>>>>> refs/remotes/origin/master
     {
       int err = OB_SUCCESS;
       ObSSTableReader* sstable_reader = NULL;
@@ -1540,17 +1521,12 @@ namespace oceanbase
         TBSYS_LOG(WARN, "invalid param, tablet=%p", tablet);
         err = OB_INVALID_ARGUMENT;
       }
-<<<<<<< HEAD
       //modify longfei [cons static index] 151219:b
       /*else if (OB_SUCCESS != (err = tablet->find_sstable(
-=======
-      else if (OB_SUCCESS != (err = tablet->find_sstable(
->>>>>>> refs/remotes/origin/master
               *scan_param.get_range(), &sstable_reader, size)) )
       {
         TBSYS_LOG(WARN, "find_sstable err=%d, size=%d", err, size);
       }
-<<<<<<< HEAD
       else*/
       else
       {
@@ -1574,10 +1550,6 @@ namespace oceanbase
       if(OB_SUCCESS == err)
       //modify e
       {
-=======
-      else
-      {
->>>>>>> refs/remotes/origin/master
         err = sstable_scanner.set_scan_param(scan_param, sstable_reader,
           get_serving_block_cache(), get_serving_block_index_cache());
         if (OB_SUCCESS != err)
@@ -1607,27 +1579,20 @@ namespace oceanbase
       int err = OB_SUCCESS;
       ObTablet* tablet = NULL;
       ObTablet*& scan_tablet = get_cur_thread_scan_tablet();
-<<<<<<< HEAD
       //longfei 这儿加上特别加上sstable命名空间是因为编译的时候遇到了这么一个错误
       //cc1plus: error: candidates are: #‘tree_list’ not supported by dump_decl#<declaration error>
       //google了之后发现是因为命名空间的污染的原因，sstable和sql里面都分别有一个类ObSSTableScanner
       sstable::ObSSTableScanner *sstable_scanner = GET_TSI_MULT(sstable::ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
-=======
-      ObSSTableScanner *sstable_scanner = GET_TSI_MULT(ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
->>>>>>> refs/remotes/origin/master
 
       int64_t query_version = 0;
       ObMultiVersionTabletImage::ScanDirection scan_direction =
         scan_param.get_scan_direction() == ScanFlag::FORWARD ?
         ObMultiVersionTabletImage::SCAN_FORWARD : ObMultiVersionTabletImage::SCAN_BACKWARD;
 
-<<<<<<< HEAD
       //add longfei [cons static index] 151219:b
       bool has_fake_range = scan_param.if_need_fake();
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
       if (NULL == sstable_scanner)
       {
         TBSYS_LOG(ERROR, "failed to get thread local sstable scanner, sstable_scanner=%p",
@@ -1640,7 +1605,6 @@ namespace oceanbase
           to_cstring(scan_param.get_version_range()));
         err = OB_ERROR;
       }
-<<<<<<< HEAD
       /*
        * 根据has_fake_range改变取tablet的策略
        */
@@ -1678,16 +1642,6 @@ namespace oceanbase
       }
       if(OB_SUCCESS == err && NULL != tablet && tablet->is_removed())
       //mod e
-=======
-      else if (OB_SUCCESS != (err =
-            tablet_image_.acquire_tablet(*scan_param.get_range(),
-              scan_direction, query_version, tablet)))
-      {
-        TBSYS_LOG(WARN, "failed to acquire range(%s), tablet=%p, version=%ld, err=%d",
-            to_cstring(*scan_param.get_range()), tablet, query_version, err);
-      }
-      else if (NULL != tablet && tablet->is_removed())
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(INFO, "tablet is removed, can't scan, tablet_range=%s",
             to_cstring(tablet->get_range()));
@@ -1708,7 +1662,6 @@ namespace oceanbase
       {
         scanner.set_data_version(tablet->get_data_version());
         ObNewRange copy_range;
-<<<<<<< HEAD
         //modify longfei [cons static index] 151219:b
         //deep_copy_range(*GET_TSI_MULT(ModuleArena, TSI_SSTABLE_MODULE_ARENA_1),
           //tablet->get_range(), copy_range);
@@ -1723,10 +1676,6 @@ namespace oceanbase
             tablet->get_range(), copy_range);
         }
         //modify e
-=======
-        deep_copy_range(*GET_TSI_MULT(ModuleArena, TSI_SSTABLE_MODULE_ARENA_1),
-          tablet->get_range(), copy_range);
->>>>>>> refs/remotes/origin/master
         scanner.set_range_shallow_copy(copy_range);
 
         /**
@@ -1769,14 +1718,10 @@ namespace oceanbase
     int ObTabletManager::end_scan(bool release_tablet /*=true*/)
     {
       int err = OB_SUCCESS;
-<<<<<<< HEAD
       //mod longfei 151217:b
       //ObSSTableScanner *sstable_scanner = GET_TSI_MULT(ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
       sstable::ObSSTableScanner *sstable_scanner = GET_TSI_MULT(sstable::ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
       //mod e
-=======
-      ObSSTableScanner *sstable_scanner = GET_TSI_MULT(ObSSTableScanner, TSI_CS_SSTABLE_SCANNER_1);
->>>>>>> refs/remotes/origin/master
       ObTablet*& scan_tablet = get_cur_thread_scan_tablet();
 
       if (NULL == sstable_scanner)
@@ -2030,11 +1975,7 @@ namespace oceanbase
           }
           else if (OB_SIZE_OVERFLOW == err)
           {
-<<<<<<< HEAD
             TBSYS_LOG(WARN, "find sstable reader by rowkey return more than "
-=======
-            TBSYS_LOG(WARN, "find sstable reader by rowkey return more than"
->>>>>>> refs/remotes/origin/master
                       "one reader, tablet=%p", tablets[i]);
             err = OB_ERROR;
             break;
@@ -2407,7 +2348,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     // add longfei [cons static index] 151120:b
     ObIndexHandlePool & ObTabletManager::get_index_handle_pool()
     {
@@ -2575,7 +2515,5 @@ namespace oceanbase
 
   //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   }
 }

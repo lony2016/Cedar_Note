@@ -38,14 +38,11 @@ namespace oceanbase
         void assign(const ObObj &obj);
         int to(ObObj &obj) const;
         int cast_to(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_buf) const;
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         void set_decimal(const ObDecimal &value);
         void set_len(uint32_t l) {len = l;}    //add xsl ECNU_DECIMAL 2017_5
         int cast_toV2(int32_t dest_type, ObExprObj &result, ObStringBuf &mem_buf,uint32_t precision,uint32_t scale) ;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         // setters
         void set_null();
         void set_int(const int64_t value);
@@ -71,15 +68,11 @@ namespace oceanbase
         const ObCreateTime& get_ctime() const {return v_.createtime_;}
         const ObModifyTime& get_mtime() const {return v_.modifytime_;}
         bool get_bool() const {return v_.bool_;}
-<<<<<<< HEAD
         //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         //const ObNumber& get_decimal() const {return num_;}      old code
         const ObDecimal& get_decimal() const {return decimal_;}
         const uint32_t get_len() const {return len;}
         //modify:e
-=======
-        const ObNumber& get_decimal() const {return num_;}
->>>>>>> refs/remotes/origin/master
         const int64_t get_ext() const {return v_.ext_;}
         ObObjType get_type() const;
         bool is_zero() const;
@@ -147,7 +140,6 @@ namespace oceanbase
         static ObObj type_varchar_length(const ObObj& t1);
 
         int64_t to_string(char* buffer, const int64_t length) const;
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         uint32_t get_precision();
         uint32_t get_scale();
@@ -157,8 +149,6 @@ namespace oceanbase
         static ObObj type_mul_v2(const ObObj& t1, const ObObj& t2);
         static ObObj type_div_v2(const ObObj& t1, const ObObj& t2, bool int_div_as_double);
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         // function members
         static int type_promotion(ObObjType type_promote_map[ObMaxType][ObMaxType],
@@ -171,15 +161,12 @@ namespace oceanbase
                                           const ObExprObj *&p_this, const ObExprObj *&p_other);
         int cast_to_int(int64_t &val) const;
         int cast_to_varchar(ObString &varchar, ObStringBuf &mem_buf) const;
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         inline int cast_to_decimal(ObString &varchar, ObStringBuf &mem_buf) const;
         //add:e
         //add xsl ECNU_DECIMAL 2017_5
         inline int cast_to_decimal(ObDecimal &dec, ObStringBuf &mem_buf) const;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         int get_bool(bool &value) const;
         int get_timestamp(int64_t & timestamp) const;
         bool is_datetime() const;
@@ -226,15 +213,12 @@ namespace oceanbase
         // data members
         int8_t type_;           // ObObjType
         ObNumber num_;
-<<<<<<< HEAD
         //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
         ObDecimal decimal_;
         //add:e
         //add xsl ECNU_DECIMAL
         uint32_t len;
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         ObString varchar_;
         union
         {
@@ -254,10 +238,7 @@ namespace oceanbase
       :type_(ObNullType)
     {
       v_.int_ = 0;
-<<<<<<< HEAD
       len = 0;
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     inline ObExprObj::~ObExprObj()
@@ -328,7 +309,6 @@ namespace oceanbase
       type_ = ObBoolType;
       v_.bool_ = value;
     }
-<<<<<<< HEAD
     //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     inline void ObExprObj::set_decimal(const ObDecimal &value)
     {
@@ -336,14 +316,6 @@ namespace oceanbase
       decimal_ = value;
     }
    //modify:e
-=======
-
-    inline void ObExprObj::set_decimal(const ObNumber &value)
-    {
-      type_ = ObDecimalType;
-      num_ = value;
-    }
->>>>>>> refs/remotes/origin/master
 
     inline void ObExprObj::set_ext(const int64_t value)
     {
@@ -354,25 +326,17 @@ namespace oceanbase
     inline bool ObExprObj::is_zero() const
     {
       bool result = false;
-<<<<<<< HEAD
       //modify fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       // change num_ to decimal_
       if (((type_ == ObIntType) && (v_.int_ == 0))
           || ((type_ == ObDecimalType) && decimal_.is_zero())
-=======
-      if (((type_ == ObIntType) && (v_.int_ == 0))
-          || ((type_ == ObDecimalType) && num_.is_zero())
->>>>>>> refs/remotes/origin/master
           || (type_ == ObFloatType && v_.float_ == 0.0f)
           || (type_ == ObDoubleType && v_.double_ == 0.0))
       {
         result = true;
       }
       return result;
-<<<<<<< HEAD
       //modify:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     inline ObObjType ObExprObj::get_type() const
@@ -389,7 +353,6 @@ namespace oceanbase
     {
       return type_ == ObBoolType && !v_.bool_;
     }
-<<<<<<< HEAD
     //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
     inline uint32_t ObExprObj::get_precision(){
 
@@ -404,8 +367,6 @@ namespace oceanbase
       return decimal_.get_vscale();
     }
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace common
 } // end namespace oceanbase
 

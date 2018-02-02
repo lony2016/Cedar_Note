@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -63,7 +60,6 @@ namespace oceanbase
         virtual int get_next_row(const common::ObRow *&row);
         virtual int close();
         virtual ObPhyOperatorType get_type() const;
-<<<<<<< HEAD
         void set_tmp_table(uint64_t subquery_id) {tmp_table_subquery_ = subquery_id;}
         //add maoxx
         /**
@@ -102,26 +98,17 @@ namespace oceanbase
          */
         int prepare_data();
         //add by zt 20160114:e
-=======
-        void set_tmp_table(uint64_t subquery_id) {tmp_table_subquery_ = subquery_id;};
-
-        DECLARE_PHY_OPERATOR_ASSIGN;
-        NEED_SERIALIZE_AND_DESERIALIZE;
->>>>>>> refs/remotes/origin/master
       private:
         common::ObRow cur_row_;
         common::ObRowDesc cur_row_desc_;
         common::ObRowStore row_store_;
         bool from_deserialize_;
         uint64_t tmp_table_subquery_;
-<<<<<<< HEAD
 
         //add by zt 20160113:b
         common::ObRowStore *row_store_ptr_;  ///<  used to seperate row_store from the operator
         bool proc_exec_;  ///<  whether  procedure execution flag
         //add by zt 20160113:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

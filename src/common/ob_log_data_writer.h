@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -50,15 +47,11 @@ namespace oceanbase
       class AppendBuffer
       {
         public:
-<<<<<<< HEAD
           //delete by qx 20161024 :b
           //use oceanbase::common::OB_FLUSH_DISK_BUFFER_SIZE instead of it
           //static const int64_t DEFAULT_BUF_SIZE = 1<<22;
           //delete :e
 
-=======
-          static const int64_t DEFAULT_BUF_SIZE = 1<<22;
->>>>>>> refs/remotes/origin/master
           AppendBuffer();
           ~AppendBuffer();
           int write(const char* buf, int64_t len, int64_t pos);
@@ -85,7 +78,6 @@ namespace oceanbase
         int get_cursor(ObLogCursor& cursor) const;
         inline int64_t get_file_size() const {return file_size_;};
         int64_t to_string(char* buf, const int64_t len) const;
-<<<<<<< HEAD
         //add chujiajia [log synchronization][multi_cluster] 20160625:b
         /**
          * @brief set end_cursor_
@@ -105,8 +97,6 @@ namespace oceanbase
          */
         int write_eof(const ObLogCursor cursor);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
       protected:
         int check_eof_after_log_cursor(const ObLogCursor& cursor);
         int prepare_fd(const int64_t file_id);

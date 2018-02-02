@@ -34,10 +34,7 @@ namespace oceanbase
         virtual int get_next_row(const ObRow *&row);
         enum JoinType{
           INNER_JOIN,
-<<<<<<< HEAD
           SEMI_JOIN,//add by wanglei [semi join] 20170417
-=======
->>>>>>> refs/remotes/origin/master
           LEFT_OUTER_JOIN,
           RIGHT_OUTER_JOIN,
           FULL_OUTER_JOIN,

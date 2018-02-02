@@ -156,10 +156,7 @@ namespace oceanbase
         task.mutation_ts_ = mutator.get_mutate_timestamp();
         task.checksum_before_mutate_ = mutator.get_memtable_checksum_before_mutate();
         task.checksum_after_mutate_ = mutator.get_memtable_checksum_after_mutate();
-<<<<<<< HEAD
         //TBSYS_LOG(WARN,"test::zhouhuan handle mutator trans_id=%ld mutate_timestamp=%ld",session_ctx->get_trans_id(), mutator.get_mutate_timestamp());
-=======
->>>>>>> refs/remotes/origin/master
         session_ctx->set_trans_id(mutator.get_mutate_timestamp());
         tc_is_replaying_log() = true;
         if (OB_SUCCESS != (err = table_mgr_->apply(using_id, *session_ctx,
@@ -366,11 +363,7 @@ namespace oceanbase
       {
         TBSYS_LOG(ERROR, "table_mgr->check_checksum(%s)=>%d", to_cstring(task), err);
       }
-<<<<<<< HEAD
       else if (OB_SUCCESS != (err = session_mgr_->end_session(task.trans_id_.descriptor_, rollback, true, (uint64_t)BaseSessionCtx::ES_ALL, true)))
-=======
-      else if (OB_SUCCESS != (err = session_mgr_->end_session(task.trans_id_.descriptor_, rollback)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(ERROR, "end_session(%s)=>%d", to_cstring(task.trans_id_), err);
       }
@@ -397,14 +390,10 @@ namespace oceanbase
       }
       else
       {
-<<<<<<< HEAD
         //modify chujiajia [log synchronization][multi_cluster] 20160703:b
         //err = log_mgr_->write_log_as_slave(task.batch_buf_, task.batch_buf_len_);
         err = log_mgr_->write_log_as_slave(task.log_id_, task.batch_buf_, task.batch_buf_len_);
         //modify:e
-=======
-        err = log_mgr_->write_log_as_slave(task.batch_buf_, task.batch_buf_len_);
->>>>>>> refs/remotes/origin/master
       }
       task.profile_.end_flush();
       return err;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿/**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -21,8 +20,6 @@
  * @date 2016_07_27
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * (C) 2007-2011 Taobao Inc.
  *
@@ -36,18 +33,9 @@
  *
  * Authors:
  *   xiaochu <xiaochu.yh@taobao.com>
-<<<<<<< HEAD
  *     - ��׺����ʽ��ֵ�������ڸ����е���Ҫ֧�ָ�����ֵ�ĳ���
  *
  */
-=======
- *     - 后缀表达式求值，可用于复合列等需要支持复杂求值的场合
- *
- */
-
-
-
->>>>>>> refs/remotes/origin/master
 #ifndef OCEANBASE_SQL_OB_POSTFIX_EXPRESSION_H_
 #define OCEANBASE_SQL_OB_POSTFIX_EXPRESSION_H_
 #include "ob_item_type.h"
@@ -61,14 +49,11 @@
 #include "common/ob_expr_obj.h"
 #include "common/ob_se_array.h"
 #include "ob_phy_operator.h"
-<<<<<<< HEAD
 
 //add weixing [implementation of sub_query]20160111
 #include "common/bloom_filter.h"
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 using namespace oceanbase::common;
 
 namespace oceanbase
@@ -107,11 +92,8 @@ namespace oceanbase
       }value_;
       // due to compile restriction, cant put string_ into union.
       // reason: ObString default constructor has parameters
-<<<<<<< HEAD
       ObDecimal dec;   //add xsl ECNU_DECIMAL 2016_12
       uint32_t len;        //add xsl
-=======
->>>>>>> refs/remotes/origin/master
       ObString  string_;        // const varchar obj or system function name
       public:
         int assign(const common::ObObj &obj);
@@ -142,15 +124,12 @@ namespace oceanbase
       TWO_OR_THREE = -3,
       OCCUR_AS_PAIR = -2,
       MORE_THAN_ZERO = -1,
-<<<<<<< HEAD
       //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
       /*
         * for cast????
       */
       TWO_OR_FOUR=-4,
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
 
     struct ObInRowOperator
@@ -358,20 +337,13 @@ namespace oceanbase
           PARAM_IDX,
           SYSTEM_VAR,
           TEMP_VAR,
-<<<<<<< HEAD
           ARRAY_VAR,   //add zt 20151126
-=======
->>>>>>> refs/remotes/origin/master
           OP,
           CUR_TIME_OP,
           UPS_TIME_OP,
           END, /* postfix expression terminator */
-<<<<<<< HEAD
           END_TYPE,
           QUERY_ID //add weixing [implementation of sub_query]20160116
-=======
-          END_TYPE
->>>>>>> refs/remotes/origin/master
         };
       public:
         ObPostfixExpression();
@@ -384,7 +356,6 @@ namespace oceanbase
         int add_expr_obj(const common::ObObj &obj);
         int add_expr_item(const ExprItem &item);
         int add_expr_item_end();
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150910:b
         /**
         * @brief create a new expression for right table scan.
@@ -409,19 +380,6 @@ namespace oceanbase
         int is_const_expr(bool &is_type) const;
         int is_column_index_expr(bool &is_type) const;
         int is_var_expr(bool &is_type, ObObj &var_name) const;  //add by zt 20160617
-=======
-        void reset(void);
-
-        /* 将row中的值代入到expr计算结果 */
-        int calc(const common::ObRow &row, const ObObj *&result);
-
-        /*
-         * 判断表达式类型：是否是const, column_index, etc
-         * 如果表达式类型为column_index,则返回index值
-         */
-        int is_const_expr(bool &is_type) const;
-        int is_column_index_expr(bool &is_type) const;
->>>>>>> refs/remotes/origin/master
         int get_column_index_expr(uint64_t &tid, uint64_t &cid, bool &is_type) const;
         int merge_expr(const ObPostfixExpression &expr1, const ObPostfixExpression &expr2, const ExprItem &op);
         bool is_empty() const;
@@ -440,7 +398,6 @@ namespace oceanbase
         // print the postfix expression
         int64_t to_string(char* buf, const int64_t buf_len) const;
 
-<<<<<<< HEAD
         //add weixing [implementation of sub_query]20160111
         void set_has_bloomfilter(ObBloomFilterV1 *bloom_filter) {bloom_filter_ = bloom_filter;}
         //add e
@@ -482,9 +439,6 @@ namespace oceanbase
         //add zt 20151109 :e
 		
 		bool is_expr_has_more_than_two_columns();	//add dhc [query_optimizer] 20170727
-=======
-        NEED_SERIALIZE_AND_DESERIALIZE;
->>>>>>> refs/remotes/origin/master
       private:
         class ExprUtil
         {
@@ -562,7 +516,6 @@ namespace oceanbase
         static inline int sys_func_unhex(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params);
         static inline int sys_func_ip_to_int(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params);
         static inline int sys_func_int_to_ip(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params);
-<<<<<<< HEAD
 
         //add weixing [implementation of sub_query]20160116
         static inline int in_sub_query_func(ObExprObj *stack_i, int &idx_i, ObExprObj &result, const ObPostExprExtraParams &params, ObBloomFilterV1* bloom_filter, hash::ObHashMap<common::ObRowkey, common::ObRowkey, common::hash::NoPthreadDefendMode>* hash_map, int &sub_query_idx, bool second_check);
@@ -574,12 +527,6 @@ namespace oceanbase
         int get_sys_func(const common::ObString &sys_func, ObSqlSysFunc &func_type) const;
         int get_var_obj(ObPostExprNodeType type, const ObObj& expr_node, const ObObj*& val) const;
         int get_array_var(const ObObj& expr_node, int64_t idx_type, const ObObj &idx_val, const ObObj*& val) const; //add zt 20151126
-=======
-        // 辅助函数，检查表达式是否表示const或者column index
-        int check_expr_type(const int64_t type_val, bool &is_type, const int64_t stack_len) const;
-        int get_sys_func(const common::ObString &sys_func, ObSqlSysFunc &func_type) const;
-        int get_var_obj(ObPostExprNodeType type, const ObObj& expr_node, const ObObj*& val) const;
->>>>>>> refs/remotes/origin/master
       private:
         static const int64_t DEF_STRING_BUF_SIZE = 64 * 1024L;
         static const int64_t BASIC_SYMBOL_COUNT = 64;
@@ -589,7 +536,6 @@ namespace oceanbase
         static int32_t SYS_FUNCS_ARGS_NUM[SYS_FUNC_NUM];
       public:
         typedef ObSEArray<ObObj, BASIC_SYMBOL_COUNT> ExprArray;
-<<<<<<< HEAD
         //add  fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
          ObObj& get_expr() ;
          int fix_varchar_and_decimal(uint32_t p,uint32_t s);
@@ -623,8 +569,6 @@ namespace oceanbase
           return expr_;
         }
         //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
       private:
         ExprArray expr_;
         ObExprObj *stack_;
@@ -633,15 +577,11 @@ namespace oceanbase
         ObStringBuf str_buf_;
         ObPhyOperator *owner_op_;
         ObStringBuf calc_buf_;
-<<<<<<< HEAD
         //add weixing [implementation of sub_query]20160111
         common::ObBloomFilterV1 *bloom_filter_;
         //add e
     }; // class ObPostfixExpression
 
-=======
-    }; // class ObPostfixExpression
->>>>>>> refs/remotes/origin/master
     inline void ObPostfixExpression::set_int_div_as_double(bool did)
     {
       did_int_div_as_double_ = did;

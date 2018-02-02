@@ -314,16 +314,12 @@ namespace oceanbase
     {
       return MEMTABLE;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int MemTableEntity::get_table_truncate_stat(uint64_t table_id, bool &is_truncated)
     {
       return memtable_.get_table_truncate_stat(table_id, is_truncated);
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     ObRowIterAdaptor* ITableEntity::alloc_row_iter_adaptor(ResourcePool &rp, Guard &guard)
     {
       return rp.get_row_iter_adaptor_rp().get(guard.get_row_iter_adaptor_guard());
@@ -1119,7 +1115,6 @@ namespace oceanbase
       }
       return bret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int SSTableEntity::is_table_truncated(uint64_t table_id, bool &is_truncated)
     {
@@ -1139,9 +1134,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     TableItem::TableItem() : inmemtable_entity_(*this),
@@ -1227,7 +1219,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int TableItem::get_table_truncate_stat(uint64_t table_id, bool &is_truncated)
     {
@@ -1258,9 +1249,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     MemTable &TableItem::get_memtable()
     {
       if (DROPING < stat_)
@@ -1299,13 +1287,9 @@ namespace oceanbase
           table_schema++)
       {
         if (!is_inmemtable(table_schema->get_table_id()))
-<<<<<<< HEAD
         {
 
         }
-=======
-        {}
->>>>>>> refs/remotes/origin/master
         else
         {
           ITableIterator *iter = NULL;
@@ -1564,10 +1548,7 @@ namespace oceanbase
           }
           else
           {
-<<<<<<< HEAD
              //dump finished
-=======
->>>>>>> refs/remotes/origin/master
             SSTableID sst_id = sstable_entity_.get_sstable_id();
             if (SSTableID::START_MINOR_VERSION == sst_id.minor_version_start)
             {
@@ -1708,11 +1689,7 @@ namespace oceanbase
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
     TableMgr::TableMgr(/*ObILogWriter*/ObLogWriterV3 &log_writer) : log_writer_(log_writer),
-=======
-    TableMgr::TableMgr(ObILogWriter &log_writer) : log_writer_(log_writer),
->>>>>>> refs/remotes/origin/master
                                                    inited_(false),
                                                    sstable_scan_finished_(false),
                                                    table_map_(sizeof(TableItemKey)),
@@ -2401,7 +2378,6 @@ namespace oceanbase
       }
       return bret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int TableMgr::check_table_range(const ObVersionRange &version_range,
                                 ObVersionRange &new_version_range,
@@ -2562,9 +2538,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     int TableMgr::acquire_table(const ObVersionRange &version_range,
                                 uint64_t &max_version,
                                 TableList &table_list,
@@ -2968,7 +2941,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "someone has locked freeze action, loading bypass now, wait a moment");
         ret = OB_EAGAIN;
       }
-<<<<<<< HEAD
       //modify by zhouhuan [scalablecommit] 20160429:b
       //else if (OB_SUCCESS != (ret = log_writer_.switch_log_file(clog_id)))
       //{
@@ -3096,77 +3068,6 @@ namespace oceanbase
           }
           freeze_lock_.unlock();
         }
-=======
-      else if (OB_SUCCESS != (ret = log_writer_.switch_log_file(clog_id)))
-      {
-        TBSYS_LOG(WARN, "switch commit log fail ret=%d", ret);
-        freeze_lock_.unlock();
-      }
-      else
-      {
-        map_lock_.wrlock();
-        uint64_t tmp_major_version = cur_major_version_;
-        uint64_t tmp_minor_version = cur_minor_version_;
-        TableItem *table_item2freeze = NULL;
-        if ((uint64_t)num_limit < (tmp_minor_version + 1)
-            || SSTableID::MAX_MINOR_VERSION < (tmp_minor_version + 1))
-        {
-          tmp_major_version += 1;
-          tmp_minor_version = SSTableID::START_MINOR_VERSION;
-          major_version_changed = true;
-        }
-        else
-        {
-          tmp_minor_version += 1;
-          major_version_changed = false;
-        }
-        if (OB_SUCCESS == ret)
-        {
-          frozen_version = SSTableID::get_id(cur_major_version_, cur_minor_version_, cur_minor_version_);
-          new_version = SSTableID::get_id(tmp_major_version, tmp_minor_version, tmp_minor_version);
-          table_item2freeze = freeze_active_(new_version);
-        }
-        if (NULL == table_item2freeze)
-        {
-          TBSYS_LOG(WARN, "freeze memtable fail");
-          ret = OB_ERROR;
-        }
-        else
-        {
-          table_item2freeze->inc_ref_cnt();
-          last_clog_id_ = clog_id;
-        }
-        map_lock_.unlock();
-        if (NULL != table_item2freeze)
-        {
-          SSTableID sst_id = table_item2freeze->get_sstable_id();
-          time_stamp = tbsys::CTimeUtil::getTime();
-          if (OB_SUCCESS != (ret = table_item2freeze->do_freeze(clog_id, time_stamp)))
-          {
-            TBSYS_LOG(ERROR, "do freeze fail ret=%d clog_id=%lu", ret, clog_id);
-          }
-          else
-          {
-            if (major_version_changed)
-            {
-              last_major_freeze_time_ = tbsys::CTimeUtil::getTime();
-            }
-            frozen_memused_ += table_item2freeze->get_memtable().used();
-            frozen_memtotal_ += table_item2freeze->get_memtable().total();
-            frozen_rowcount_ += table_item2freeze->get_memtable().size();
-            TBSYS_LOG(INFO, "freeze succ last_major_freeze_time_=%ld frozen_memused=%ld frozen_memtotal=%ld frozen_rowcount=%ld %s",
-                      last_major_freeze_time_, frozen_memused_, frozen_memtotal_, frozen_rowcount_, sst_id.log_str());
-          }
-          map_lock_.rdlock();
-          if (0 == table_item2freeze->dec_ref_cnt())
-          {
-            table_allocator_.free(table_item2freeze);
-            TBSYS_LOG(INFO, "erase sstable, delete table_item=%p %s", table_item2freeze, sst_id.log_str());
-          }
-          map_lock_.unlock();
-        }
-        freeze_lock_.unlock();
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
@@ -3690,10 +3591,7 @@ namespace oceanbase
         ret = sst_id.major_version;
         revert_active_memtable(table_item);
       }
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 

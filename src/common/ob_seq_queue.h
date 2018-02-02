@@ -67,7 +67,6 @@ namespace oceanbase
         int add(const int64_t seq, void* data);
         int get(int64_t& seq, void*& data, const int64_t timeout_us);
         int update(const int64_t seq);
-<<<<<<< HEAD
 		//add chujiajia [log synchronization][multi_cluster] 20160625:b
         /**
          * @brief update seq_ after obi_role switch
@@ -76,8 +75,6 @@ namespace oceanbase
          */
         int update_after_switch(const int64_t seq);
 		//add:e
-=======
->>>>>>> refs/remotes/origin/master
         bool next_is_ready() const;
         int64_t get_seq();
       protected:

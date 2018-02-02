@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -57,7 +54,6 @@ namespace oceanbase
         static int add_show_schemas(common::ObSchemaManagerV2& schema_mgr);
         static int add_show_schema(common::ObSchemaManagerV2& schema_mgr, int32_t stmt_type);
         static int add_show_tables_schema(common::ObSchemaManagerV2& schema_mgr);
-<<<<<<< HEAD
         /**
          * @brief ObShowSchemaManager::add_show_index_schema: add virtual table __index_show's schema to schema_mgr
          * @param schema_mgr
@@ -66,18 +62,13 @@ namespace oceanbase
          */
         static int add_show_index_schema(common::ObSchemaManagerV2& schema_mgr);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         static int add_show_variables_schema(common::ObSchemaManagerV2& schema_mgr);
         static int add_show_columns_schema(common::ObSchemaManagerV2& schema_mgr);
         static int add_show_create_table_schema(common::ObSchemaManagerV2& schema_mgr);
         static int add_show_parameters_schema(common::ObSchemaManagerV2& schema_mgr);
         static int add_show_table_status_schema(common::ObSchemaManagerV2& schema_mgr);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
       private:        
         static common::ObSchemaManagerV2 *show_schema_mgr_;
         static tbsys::CThreadMutex mutex_;

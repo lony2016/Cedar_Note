@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_memtable.cpp updateserver / Oceanbase
@@ -269,7 +266,6 @@ namespace oceanbase
             ret = ccw.row_delete();
             ccw.set_row_deleted(true);
           }
-<<<<<<< HEAD
           //add hxlong [Truncate Table]:20170318:b
           else if (is_trun_tab_(cell_info.value_))
           {
@@ -277,8 +273,6 @@ namespace oceanbase
             ccw.set_tab_truncated(true);
           }
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
           else
           {
             ret = ccw.append(cell_info.column_id_, cell_info.value_);
@@ -380,14 +374,10 @@ namespace oceanbase
               TBSYS_LOG(WARN, "copy rowkey fail, ret=%d %s", ret, cur_key.log_str());
               break;
             }
-<<<<<<< HEAD
             //mod hxlong [Truncate Table]:20170318:b
             //else if (OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
             else if (tmp_row_key.row_key.length()>0 && OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
               //mod:e
-=======
-            else if (OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
->>>>>>> refs/remotes/origin/master
             {
               TBSYS_LOG(WARN, "insert cur_key to bloomfilter fail ret=%d %s", ret, cur_key.log_str());
               break;
@@ -541,7 +531,6 @@ namespace oceanbase
                                   ObBatchChecksum &bc)
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170403:b
       /* check the table_value info*/
       TEKey cur_table_key; //行主键
@@ -559,10 +548,6 @@ namespace oceanbase
       TEValueUCInfo *cur_uci = NULL;
       if (ret == OB_SUCCESS && /*add hxlong [Truncate Table]:20170318:b*/
               OB_SUCCESS == (ret = get_cur_value_(session, lock_info,
-=======
-      TEValueUCInfo *cur_uci = NULL;
-      if (OB_SUCCESS == (ret = get_cur_value_(session, lock_info,
->>>>>>> refs/remotes/origin/master
                                               cur_key, cur_value, cur_uci, is_row_changed,
                                               total_row_counter, new_row_counter, bc)))
       {
@@ -1285,13 +1270,9 @@ namespace oceanbase
               else if (OB_SUCCESS != (ret = session_ctx.get_ups_mutator().get_mutator().update(cell_info->table_id_,
                                                                                               cell_info->row_key_,
                                                                                               cell_info->column_id_,
-<<<<<<< HEAD
                                                                                               cell_info->value_,
                                                                                               //cell_info->value_)))
                                                                                               is_row_changed))) //modify by qx 20170210 :use new update function
-=======
-                                                                                              cell_info->value_)))
->>>>>>> refs/remotes/origin/master
               {
                 TBSYS_LOG(WARN, "add cell info to mutator fail, ret=%d", ret);
               }
@@ -1308,16 +1289,12 @@ namespace oceanbase
                       str_dml_type(dml_type), total_row_counter, new_row_counter, cell_counter, ret);
         if (OB_SUCCESS == ret)
         {
-<<<<<<< HEAD
           //add lbzhong [auto_increment] 20161213:b
           if (iter.get_type() != ITERATOR_AUTO_INCREMENT)
           {
           //add:e
           session_ctx.get_ups_result().set_affected_rows(total_row_counter);
           } //add lbzhong [auto_increment] 20161213:b:e
-=======
-          session_ctx.get_ups_result().set_affected_rows(total_row_counter);
->>>>>>> refs/remotes/origin/master
           session_ctx.get_uc_info().uc_row_counter += new_row_counter;
           session_ctx.get_uc_info().uc_checksum = bc.calc();
           //session_ctx.commit_prepare_list();
@@ -1505,14 +1482,10 @@ namespace oceanbase
           {
             TBSYS_LOG(WARN, "copy rowkey fail, ret=%d %s", ret, key.log_str());
           }
-<<<<<<< HEAD
           //mod hxlong [Truncate Table]:20170318:b
           //else if (OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
           else if (tmp_row_key.row_key.length() > 0 && OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
             //mod:e
-=======
-          else if (OB_SUCCESS != (ret = table_bf_.insert(tmp_row_key.table_id, tmp_row_key.row_key)))
->>>>>>> refs/remotes/origin/master
           {
             TBSYS_LOG(WARN, "insert cur_key to bloomfilter fail ret=%d %s", ret, key.log_str());
           }
@@ -1585,17 +1558,13 @@ namespace oceanbase
       int ret = OB_SUCCESS;
       TEKey key(table_id, row_key);
       TEValue *value = NULL;
-<<<<<<< HEAD
       TEValue * cur_table_value = NULL;  //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
       ILockInfo* lock_info = NULL;
       if (!inited_)
       {
         TBSYS_LOG(WARN, "have not inited");
         ret = OB_ERROR;
       }
-<<<<<<< HEAD
 
       //add hxlong [Truncate Table]:20170318:b
       if (ret == OB_SUCCESS)
@@ -1617,10 +1586,6 @@ namespace oceanbase
         //add:e
        if (ST_READ_WRITE == session_ctx.get_type())
        {
-=======
-      else if (ST_READ_WRITE == session_ctx.get_type())
-      {
->>>>>>> refs/remotes/origin/master
         if (NULL == (lock_info = ((RWSessionCtx&)session_ctx).get_lock_info()))
         {
           ret = OB_ERR_UNEXPECTED;
@@ -1644,15 +1609,11 @@ namespace oceanbase
           value = table_engine_.get(key);
         }
       }
-<<<<<<< HEAD
       }
-=======
->>>>>>> refs/remotes/origin/master
       if (OB_SUCCESS == ret)
       {
         iterator.get_get_iter_().set_(key, value, column_filter, true, &session_ctx);
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318
       else if (OB_TABLE_UPDATE_LOCKED == ret)
       {
@@ -1660,8 +1621,6 @@ namespace oceanbase
         ret = OB_SUCCESS;
       }
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -1711,11 +1670,7 @@ namespace oceanbase
                       ColumnFilter *column_filter/* = NULL*/)
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       int err = OB_SUCCESS; //add hxlong [Truncate Table]:20170318
-=======
-      
->>>>>>> refs/remotes/origin/master
       TEKey start_key;
       TEKey end_key;
       int start_exclude = get_start_exclude(range);
@@ -1747,7 +1702,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "have not inited");
         ret = OB_ERROR;
       }
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170318
       /*check */
       /* check the table_value info*/
@@ -1784,18 +1738,6 @@ namespace oceanbase
       {
         iter.get_scan_iter_().set_(get_table_id(range), column_filter, true, &session_ctx, cur_table_value);
       }
-=======
-      else if (OB_SUCCESS != table_engine_.scan(start_key, min_key, start_exclude,
-                                                end_key, max_key, end_exclude,
-                                                reverse, iter.get_scan_iter_().get_te_iter_()))
-      {
-        ret = OB_ERROR;
-      }
-      else
-      {
-        iter.get_scan_iter_().set_(get_table_id(range), column_filter, true, &session_ctx);
-      }
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -1951,7 +1893,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318:b
     int MemTable::get_table_truncate_stat(uint64_t table_id, bool &is_truncated)
     {
@@ -1965,9 +1906,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     int MemTable::get_bloomfilter(TableBloomFilter &table_bf) const
     {
       return table_bf.deep_copy(table_bf_);
@@ -1999,7 +1937,6 @@ namespace oceanbase
       }
       return ret;
     }
-<<<<<<< HEAD
     //add hxlong [Truncate Table]:20170318
     int MemTable::scan_all_table(TableEngineIterator &iter)
     {
@@ -2028,9 +1965,6 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
-
->>>>>>> refs/remotes/origin/master
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     MemTableGetIter::MemTableGetIter() : te_key_(),
@@ -2112,14 +2046,10 @@ namespace oceanbase
       {
         if (!read_uncommited_data_()
             && NULL != session_ctx
-<<<<<<< HEAD
             // modify by guojinwei [repeatable read] 20160417:b
             //&& list_head->modify_time > session_ctx->get_trans_id())
             && list_head->modify_time > session_ctx->get_trans_start_time())
             // modify:e
-=======
-            && list_head->modify_time > session_ctx->get_trans_id())
->>>>>>> refs/remotes/origin/master
         {
           cell_iter_.set_rne();
         }
@@ -2221,7 +2151,6 @@ namespace oceanbase
         int64_t v = 0;
         value.get_modifytime(v);
         if (NULL != session_ctx_
-<<<<<<< HEAD
             // modify by guojinwei [repeatable read] 20160417:b
             //&& v > session_ctx_->get_trans_id())
             && v > session_ctx_->get_trans_start_time())
@@ -2231,11 +2160,6 @@ namespace oceanbase
           //TBSYS_LOG(DEBUG, "trans_end v=%ld trans_id=%ld", v, session_ctx_->get_trans_id());
           TBSYS_LOG(DEBUG, "trans_end v=%ld trans_start_time=%ld", v, session_ctx_->get_trans_start_time());
           // modify:e
-=======
-            && v > session_ctx_->get_trans_id())
-        {
-          TBSYS_LOG(DEBUG, "trans_end v=%ld trans_id=%ld", v, session_ctx_->get_trans_id());
->>>>>>> refs/remotes/origin/master
           bret = true;
         }
       }
@@ -2262,10 +2186,7 @@ namespace oceanbase
             ret = OB_ITER_END;
             break;
           }
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
           else
           {
             __builtin_prefetch(node_iter_);
@@ -2302,25 +2223,17 @@ namespace oceanbase
         }
 
         ret = cell_iter_.get_cell(ci_.column_id_, ci_.value_);
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           break;
         }
-<<<<<<< HEAD
         // modify by guojinwei [repeatable read] 20160417:b
         //TBSYS_LOG(DEBUG, "NEXT_CELL: tid=%ld value=%p node=%p %s",
         //          NULL == session_ctx_ ? 0 : session_ctx_->get_trans_id(), te_value_, node_iter_, print_cellinfo(&ci_));
         TBSYS_LOG(DEBUG, "NEXT_CELL: trans_start_time=%ld value=%p node=%p %s",
                   NULL == session_ctx_ ? 0 : session_ctx_->get_trans_start_time(), te_value_, node_iter_, print_cellinfo(&ci_));
         // modify:e
-=======
-        TBSYS_LOG(DEBUG, "NEXT_CELL: tid=%ld value=%p node=%p %s",
-                  NULL == session_ctx_ ? 0 : session_ctx_->get_trans_id(), te_value_, node_iter_, print_cellinfo(&ci_));
->>>>>>> refs/remotes/origin/master
         if (trans_end_(ci_.value_))
         {
           ret = OB_ITER_END;
@@ -2341,14 +2254,10 @@ namespace oceanbase
             if (INT64_MAX == v
                 && read_uncommited_data_())
             {
-<<<<<<< HEAD
               // modify by guojinwei [repeatable read] 20160417:b
               //ci_.value_.set_modifytime(session_ctx_->get_trans_id());
               ci_.value_.set_modifytime(session_ctx_->get_trans_start_time());
               // modify:e
-=======
-              ci_.value_.set_modifytime(session_ctx_->get_trans_id());
->>>>>>> refs/remotes/origin/master
             }
           }
           else if (ObCreateTimeType == ci_.value_.get_type())
@@ -2358,14 +2267,10 @@ namespace oceanbase
             if (INT64_MAX == v
                 && read_uncommited_data_())
             {
-<<<<<<< HEAD
               // modify by guojinwei [repeatable read] 20160417:b
               //ci_.value_.set_createtime(session_ctx_->get_trans_id());
               ci_.value_.set_createtime(session_ctx_->get_trans_start_time());
               // modify:e
-=======
-              ci_.value_.set_createtime(session_ctx_->get_trans_id());
->>>>>>> refs/remotes/origin/master
             }
           }
           iter_counter_++;
@@ -2417,14 +2322,10 @@ namespace oceanbase
       bool bret = false;
       if (NULL != session_ctx_
           && NULL != te_value_
-<<<<<<< HEAD
           // modify by guojinwei [repeatable read] 20160417:b
           //&& te_value_->row_lock.is_exclusive_locked_by(session_ctx_->get_session_descriptor()))
           && te_value_->row_lock.is_exclusive_locked_by(session_ctx_->get_trans_descriptor()))
           // modify:e
-=======
-          && te_value_->row_lock.is_exclusive_locked_by(session_ctx_->get_session_descriptor()))
->>>>>>> refs/remotes/origin/master
       {
         bret = true;
       }
@@ -2439,28 +2340,20 @@ namespace oceanbase
         if (NULL != session_ctx_
             && ST_READ_ONLY == session_ctx_->get_type()
             && NULL != te_value_->list_head
-<<<<<<< HEAD
             // modify by guojinwei [repeatable read] 20160417:b
             //&& session_ctx_->get_trans_id() < te_value_->list_head->modify_time)
             && session_ctx_->get_trans_start_time() < te_value_->list_head->modify_time)
             // modify:e
-=======
-            && session_ctx_->get_trans_id() < te_value_->list_head->modify_time)
->>>>>>> refs/remotes/origin/master
         {
           // need to lookup undo list
           ObUndoNode *iter = te_value_->undo_list;
           while (NULL != iter)
           {
             if (NULL != iter->head
-<<<<<<< HEAD
                 // modify by guojinwei [repeatable read] 20160417:b
                 //&& session_ctx_->get_trans_id() >= iter->head->modify_time)
                 && session_ctx_->get_trans_start_time() >= iter->head->modify_time)
                 // modify:e
-=======
-                && session_ctx_->get_trans_id() >= iter->head->modify_time)
->>>>>>> refs/remotes/origin/master
             {
               ret = iter->head;
               break;
@@ -2501,10 +2394,7 @@ namespace oceanbase
                                            return_rowkey_column_(true),
                                            session_ctx_(NULL),
                                            is_iter_end_(true),
-<<<<<<< HEAD
                                            table_value_(NULL), /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
                                            get_iter_()
     {
     }
@@ -2522,31 +2412,21 @@ namespace oceanbase
       session_ctx_ = NULL;
       is_iter_end_ = true;
       get_iter_.reset();
-<<<<<<< HEAD
       table_value_ = NULL; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     void MemTableScanIter::set_(const uint64_t table_id,
                                 ColumnFilter *column_filter,
                                 const bool return_rowkey_column,
-<<<<<<< HEAD
                                 const BaseSessionCtx *session_ctx,
                                 TEValue * value) /*add hxlong [Truncate Table]:20170318*/
-=======
-                                const BaseSessionCtx *session_ctx)
->>>>>>> refs/remotes/origin/master
     {
       table_id_ = table_id;
       column_filter_ = column_filter;
       return_rowkey_column_ = return_rowkey_column;
       session_ctx_ = session_ctx;
       is_iter_end_ = false;
-<<<<<<< HEAD
       table_value_ = value; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     void MemTableScanIter::set_(const uint64_t table_id,
@@ -2601,7 +2481,6 @@ namespace oceanbase
               break;
             }
             //get_iter_.reset();
-<<<<<<< HEAD
             //mod hxlong [Truncate Table]:20170318:b
             //get_iter_.set_(te_iter_.get_key(), te_iter_.get_value(), column_filter_, return_rowkey_column_, session_ctx_);
             if (table_value_ == NULL)
@@ -2613,9 +2492,6 @@ namespace oceanbase
               get_iter_.set_(te_iter_.get_key(), table_value_, column_filter_, return_rowkey_column_, session_ctx_);
             }
             //mod:e
-=======
-            get_iter_.set_(te_iter_.get_key(), te_iter_.get_value(), column_filter_, return_rowkey_column_, session_ctx_);
->>>>>>> refs/remotes/origin/master
             ret = get_iter_.next_cell();
             if (OB_ITER_END == ret)
             {

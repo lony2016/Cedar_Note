@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -23,9 +22,6 @@
  */
 
 /** * (C) 2010-2012 Alibaba Group Holding Limited.
-=======
- * (C) 2010-2012 Alibaba Group Holding Limited.
->>>>>>> refs/remotes/origin/master
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +67,6 @@ namespace oceanbase
         virtual int close();
         virtual int get_next_row(const common::ObRow *&row);
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const;
-<<<<<<< HEAD
         /**
          * @brief get_row_desc_template
          * get row descriptor
@@ -158,11 +153,6 @@ namespace oceanbase
         
         // add by lxb [hash join single] 20170411
         int get_is_index_without_storing(bool &is_use, uint64_t &tid);
-=======
-        virtual ObPhyOperatorType get_type() const;
-
-        int init(ObSqlContext *context, const common::ObRpcScanHint *hint = NULL);
->>>>>>> refs/remotes/origin/master
 
         /**
          * 添加一个需输出的column
@@ -191,7 +181,6 @@ namespace oceanbase
          * @return OB_SUCCESS或错误码
          */
         int add_filter(ObSqlExpression *expr);
-<<<<<<< HEAD
         //add fanqiushi [semi_join] [0.1] 20150910:b
         /**
         * @brief insert a expression to a scan operator.
@@ -201,8 +190,6 @@ namespace oceanbase
         */
         int add_filter_set_for_semijoin(ObSqlExpression *expr);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         int add_group_column(const uint64_t tid, const uint64_t cid);
         int add_aggr_column(const ObSqlExpression& expr);
 
@@ -255,7 +242,6 @@ namespace oceanbase
         bool has_limit_;
         bool is_skip_empty_row_;
         int32_t read_method_;
-<<<<<<< HEAD
         //add longfei
         bool is_use_index_rpc_scan_;  ///< 判断是否使用了回表的索引
         bool is_use_index_for_storing_; ///< 判断是否使用了不回表的索引
@@ -272,8 +258,6 @@ namespace oceanbase
         bool is_right_table_;
         ObSqlExpression* expr_clone;
         //add wanglei [semi join] 20170417:e
-=======
->>>>>>> refs/remotes/origin/master
     };
     inline void ObTableRpcScan::set_phy_plan(ObPhysicalPlan *the_plan)
     {
@@ -288,7 +272,6 @@ namespace oceanbase
     {
       return 0;
     }
-<<<<<<< HEAD
 
     //add by zt 20160114:b
     inline int ObTableRpcScan::get_row_desc_template(const ObRowDesc *&row_desc) const
@@ -296,8 +279,6 @@ namespace oceanbase
       return rpc_scan_.get_row_desc(row_desc);
     }
     //add by zt 20160114:e
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace sql
 } // end namespace oceanbase
 

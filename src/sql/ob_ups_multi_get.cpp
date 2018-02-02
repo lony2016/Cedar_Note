@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -246,12 +243,9 @@ int ObUpsMultiGet::next_get_param()
   cur_get_param_.reset();
   cur_get_param_.set_version_range(get_param_->get_version_range());
   cur_get_param_.set_is_read_consistency(get_param_->get_is_read_consistency());
-<<<<<<< HEAD
   // add by guojinwei [repeatable read] 20160312:b
   cur_get_param_.set_trans_id(get_param_->get_trans_id());
   // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
   ObGetParam::ObRowIndex row_idx;
 

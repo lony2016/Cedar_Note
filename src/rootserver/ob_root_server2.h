@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -36,8 +35,6 @@
  * @date 2016_07_26
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*===============================================================
  *   (C) 2007-2010 Taobao Inc.
  *
@@ -54,11 +51,7 @@
 #ifndef OCEANBASE_ROOTSERVER_OB_ROOT_SERVER2_H_
 #define OCEANBASE_ROOTSERVER_OB_ROOT_SERVER2_H_
 #include <tbsys.h>
-<<<<<<< HEAD
 #include <vector>
-=======
-
->>>>>>> refs/remotes/origin/master
 #include "common/ob_define.h"
 #include "common/ob_server.h"
 #include "common/ob_array.h"
@@ -103,7 +96,6 @@
 #include "ob_schema_service_ups_provider.h"
 #include "rootserver/ob_root_operation_helper.h"
 #include "rootserver/ob_root_timer_task.h"
-<<<<<<< HEAD
 // add by guojinwei [lease between rs and ups][multi_cluster] 20150908:b
 #include "common/ob_election_role_mgr.h"
 #include "common/ob_cluster_mgr.h"
@@ -115,9 +107,6 @@
 //add by wangdonghui 20160229 [physical plan cahce management] :b
 #include "common/ob_name_code_map.h"
 //add :e
-=======
-
->>>>>>> refs/remotes/origin/master
 class ObBalanceTest;
 class ObBalanceTest_test_n_to_2_Test;
 class ObBalanceTest_test_timeout_Test;
@@ -128,10 +117,7 @@ class ObDeleteReplicasTest_delete_when_rereplication_Test;
 class ObDeleteReplicasTest_delete_when_report_Test;
 class ObBalanceTest_test_shutdown_servers_Test;
 class ObRootServerTest;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 namespace oceanbase
 {
   namespace common
@@ -195,14 +181,11 @@ namespace oceanbase
         virtual ~ObRootServer2();
 
         bool init(const int64_t now, ObRootWorker* worker);
-<<<<<<< HEAD
 
         //add chujiajia [rs_election][multi_cluster] 20150823:b
         bool is_master_ups_lease_valid();
         bool get_is_have_inited();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         int start_master_rootserver();
         int init_first_meta();
         int init_boot_state();
@@ -219,7 +202,6 @@ namespace oceanbase
         int slave_boot_strap();
         int start_notify_switch_schema();
         int notify_switch_schema(bool only_core_tables, bool force_update = false);
-<<<<<<< HEAD
 
         //add by wangdonghui 20160122 :b
         /**
@@ -256,14 +238,11 @@ namespace oceanbase
         //add :e
 
 
-=======
->>>>>>> refs/remotes/origin/master
         void set_privilege_version(const int64_t privilege_version);
         // commit update inner table task
         void commit_task(const ObTaskType type, const common::ObRole role, const common::ObServer & server, int32_t sql_port,
                          const char* server_version, const int32_t cluster_role = 0);
         // for monitor info
-<<<<<<< HEAD
         // add by guojinwei [obi role switch][multi_cluster] 20150916:b
         /**
          * @brief commit a inner table task with cluster id
@@ -278,8 +257,6 @@ namespace oceanbase
         void commit_cluster_task(const ObTaskType type, const common::ObRole role, const common::ObServer & server, int32_t sql_port,
                                  const char* server_version, const int64_t cluster_id, const int32_t cluster_role = 0);
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         int64_t get_table_count(void) const;
         void get_tablet_info(int64_t & tablet_count, int64_t & row_count, int64_t & date_size) const;
         int change_table_id(const int64_t table_id, const int64_t new_table_id=0);
@@ -304,7 +281,6 @@ namespace oceanbase
         int force_create_table(const uint64_t table_id);
         int force_drop_table(const uint64_t table_id);
         int check_schema();
-<<<<<<< HEAD
 
         //add weixing [statistics build v1]20170330:b
         int start_gather_operation();
@@ -316,8 +292,6 @@ namespace oceanbase
         //add by wdh 20160730 :b
         int trigger_create_procedure();
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         /*
          * 从本地读取新schema, 判断兼容性
          */
@@ -352,7 +326,6 @@ namespace oceanbase
            const int64_t occupy_size, const uint64_t crc_sum, const uint64_t row_checksum, const int64_t row_count);
         /// if (force_update = true && get_only_core_tables = false) then read new schema from inner table
         int get_schema(const bool froce_update, bool get_only_core_tables, common::ObSchemaManagerV2& out_schema);
-<<<<<<< HEAD
         //add by wangdonghui 20160307 :b
         /**
          * @brief get_procedure
@@ -362,8 +335,6 @@ namespace oceanbase
          */
         int get_procedure(common::ObNameCodeMap& namecodemap);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int64_t get_schema_version() const;
         const ObRootServerConfig& get_config() const;
         ObConfigManager* get_config_mgr();
@@ -386,15 +357,12 @@ namespace oceanbase
         int find_statement_table_key(const common::ObGetParam& get_param, common::ObScanner& scanner);
         int find_root_table_range(const common::ObScanParam& scan_param, common::ObScanner& scanner);
         virtual int report_tablets(const common::ObServer& server, const common::ObTabletReportInfoList& tablets, const int64_t time_stamp);
-<<<<<<< HEAD
         //add wenghaixing [secondary index.static_index]20151118
         int get_init_index(const int64_t version, ObArray<uint64_t> *list);
         int get_table_from_index(int64_t index_id, uint64_t &table_id);
         int write_tablet_info_list_to_rt(ObTabletInfoList **tablet_info_list, const int32_t list_size);
         bool check_static_index_over();
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         int receive_hb(const common::ObServer& server, const int32_t sql_port, const bool is_listen_ms, const common::ObRole role);
         common::ObServer get_update_server_info(bool use_inner_port) const;
         int add_range_for_load_data(const common::ObList<common::ObNewRange*> &range);
@@ -422,7 +390,6 @@ namespace oceanbase
         bool is_master() const;
         common::ObFirstTabletEntryMeta* get_first_meta();
         void dump_root_table() const;
-<<<<<<< HEAD
         //add wenghaixing [secondary index.static index]20151207
         void dump_root_table(const int32_t index) const;
        // int get_rt_tablet_info(const int32_t meta_index, const ObTabletInfo *&tablet_info) const;
@@ -442,8 +409,6 @@ namespace oceanbase
         int modify_index_process_info(const uint64_t index_tid, const IndexStatus stat);
         int get_rt_tablet_info(const int32_t meta_index, const ObTabletInfo *&tablet_info) const;
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         bool check_root_table(const common::ObServer &expect_cs) const;
         int dump_cs_tablet_info(const common::ObServer & cs, int64_t &tablet_num) const;
         void dump_unusual_tablets() const;
@@ -479,7 +444,6 @@ namespace oceanbase
         int serialize_ms_list(char* buf, const int64_t buf_len, int64_t& pos) const;
         int serialize_proxy_list(char* buf, const int64_t buf_len, int64_t& pos) const;
         int grant_eternal_ups_lease();
-<<<<<<< HEAD
         // add by guojinwei [lease between rs and ups][multi_cluster] 20150820:b
         /**
          * @brief grant ups lease
@@ -530,14 +494,11 @@ namespace oceanbase
          */
         int is_clusters_ready_for_election();
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         int cs_import_tablets(const uint64_t table_id, const int64_t tablet_version);
         /// force refresh the new schmea manager through inner table scan
         int refresh_new_schema(int64_t & table_count);
         int switch_ini_schema();
         int renew_user_schema(int64_t & table_count);
-<<<<<<< HEAD
 
         //add by wangdonghui 20160307 :b
         /**
@@ -553,8 +514,6 @@ namespace oceanbase
          */
         int refresh_new_procedure();
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int renew_core_schema(void);
         void dump_schema_manager();
         void dump_migrate_info() const; // for monitor
@@ -569,7 +528,6 @@ namespace oceanbase
         int create_table(const bool if_not_exists, const common::TableSchema &tschema);
         int alter_table(common::AlterTableSchema &tschema);
         int drop_tables(const bool if_exists, const common::ObStrings &tables);
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         int truncate_tables(const bool if_exists, const common::ObStrings &tables, const common::ObString &user, const common::ObString & comment);
         int truncate_one_table( const common::ObMutator & mutator);
@@ -677,9 +635,6 @@ namespace oceanbase
           return schema_manager_for_cache_;;
         }
         //add e
-=======
-        int64_t get_last_frozen_version() const;
->>>>>>> refs/remotes/origin/master
 
         //for bypass process begin
         ObRootOperationHelper* get_bypass_operation();
@@ -708,7 +663,6 @@ namespace oceanbase
         //for bypass process end
         /// check the table exist according the local schema manager
         int check_table_exist(const common::ObString & table_name, bool & exist);
-<<<<<<< HEAD
 
         //add by wangdonghui 20160122 :b
         /**
@@ -720,8 +674,6 @@ namespace oceanbase
          */
         int check_procedure_exist(const common::ObString & proc_name, bool & exist);
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int delete_dropped_tables(int64_t & table_count);
         void after_switch_to_master();
         int after_restart();
@@ -841,7 +793,6 @@ namespace oceanbase
         int drop_one_table(const bool if_exists, const common::ObString & table_name, bool & refresh);
         /// force sync schema to all servers include ms\cs\master ups
         int force_sync_schema_all_servers(const common::ObSchemaManagerV2 &schema);
-<<<<<<< HEAD
 
         //add by wangdonghui 20160123 :b
 
@@ -866,10 +817,6 @@ namespace oceanbase
         int get_ms(common::ObServer& ms_server);
 
 
-=======
-        int force_heartbeat_all_servers(void);
-        int get_ms(common::ObServer& ms_server);
->>>>>>> refs/remotes/origin/master
       private:
         static const int MIN_BALANCE_TOLERANCE = 1;
 
@@ -942,7 +889,6 @@ namespace oceanbase
         ObRootOperationHelper operation_helper_;
         ObRootOperationDuty operation_duty_;
         common::ObTimer timer_;
-<<<<<<< HEAD
 
         // add by zcd [multi_cluster] 20150416:b
         std::vector<common::ObServer> slave_array_;
@@ -956,8 +902,6 @@ namespace oceanbase
         //add by wangdonghui [procedure physical plan cache management] 20160229:b
         common::ObNameCodeMap *name_code_map_;  ///< rootserver store name code map
         //add :e		
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

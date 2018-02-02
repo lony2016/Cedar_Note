@@ -30,11 +30,7 @@ ObBaseClient::~ObBaseClient()
 int ObBaseClient::initialize(const ObServer& server)
 {
   int ret = OB_ERROR;
-<<<<<<< HEAD
   int rc = ONEV_OK;
-=======
-  int rc = EASY_OK;
->>>>>>> refs/remotes/origin/master
   if (init_)
   {
     TBSYS_LOG(WARN, "already init");
@@ -44,26 +40,16 @@ int ObBaseClient::initialize(const ObServer& server)
   {
     server_ = server;
     //create io thread
-<<<<<<< HEAD
     eio_ = onev_create_io(eio_, 1);
-=======
-    eio_ = easy_eio_create(eio_, 1);
->>>>>>> refs/remotes/origin/master
     eio_->do_signal = 0;
     eio_->force_destroy_second = OB_CONNECTION_FREE_TIME_S;
     eio_->checkdrc = 1;
     if (NULL == eio_)
     {
       ret = OB_ERROR;
-<<<<<<< HEAD
       TBSYS_LOG(ERROR, "onev_io_create error");
     }
     memset(&client_handler_, 0, sizeof(onev_io_handler_pe));
-=======
-      TBSYS_LOG(ERROR, "easy_io_create error");
-    }
-    memset(&client_handler_, 0, sizeof(easy_io_handler_pt));
->>>>>>> refs/remotes/origin/master
     client_handler_.encode = ObTbnetCallback::encode;
     client_handler_.decode = ObTbnetCallback::decode;
     client_handler_.get_packet_id = ObTbnetCallback::get_packet_id;
@@ -77,24 +63,15 @@ int ObBaseClient::initialize(const ObServer& server)
       //start io thread
       if (ret == OB_SUCCESS)
       {
-<<<<<<< HEAD
         rc = onev_start_io(eio_);
         if (ONEV_OK == rc)
-=======
-        rc = easy_eio_start(eio_);
-        if (EASY_OK == rc)
->>>>>>> refs/remotes/origin/master
         {
           ret = OB_SUCCESS;
           TBSYS_LOG(INFO, "start io thread");
         }
         else
         {
-<<<<<<< HEAD
           TBSYS_LOG(ERROR, "onev_start_io failed");
-=======
-          TBSYS_LOG(ERROR, "easy_eio_start failed");
->>>>>>> refs/remotes/origin/master
           ret = OB_ERROR;
         }
       }
@@ -111,15 +88,9 @@ void ObBaseClient::destroy()
 {
   if (init_)
   {
-<<<<<<< HEAD
     onev_stop_io(eio_);
     onev_wait_io(eio_);
     onev_destroy_io(eio_);
-=======
-    easy_eio_stop(eio_);
-    easy_eio_wait(eio_);
-    easy_eio_destroy(eio_);
->>>>>>> refs/remotes/origin/master
     init_ = false;
   }
   TBSYS_LOG(INFO, "client stoped");

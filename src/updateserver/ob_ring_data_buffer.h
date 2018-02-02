@@ -35,11 +35,7 @@ namespace oceanbase
       public:
         // block_size必须是2的n次幂 1<<block_size_shift
         int init(const int64_t n_blocks = DEFAULT_N_BLOCKS,
-<<<<<<< HEAD
                  const int64_t block_size_shift = common::OB_DEFAULT_BLOCK_BITS);  //modify by qx 20161229: replace DEFAULT_BLOCK_SIZE_SHIFT
-=======
-                 const int64_t block_size_shift = DEFAULT_BLOCK_SIZE_SHIFT);
->>>>>>> refs/remotes/origin/master
         // 可能返回OB_DATA_NOT_SERVE表示pos无效
         int read(const int64_t pos, int64_t& real_pos, char* buf, const int64_t len, int64_t& read_count) const;
         int append(const char* buf, const int64_t len);

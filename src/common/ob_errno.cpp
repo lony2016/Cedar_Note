@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -22,8 +21,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2013 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -159,11 +156,7 @@ static struct ObStrErrorInit
 
     ADD_ERROR_STR(OB_RPC_SEND_ERROR, "PRC send error");
     ADD_ERROR_STR(OB_RPC_POST_ERROR, "PRC post error");
-<<<<<<< HEAD
     ADD_ERROR_STR(OB_LIBONEV_ERROR, "Libonev error");
-=======
-    ADD_ERROR_STR(OB_LIBEASY_ERROR, "Libeasy error");
->>>>>>> refs/remotes/origin/master
     ADD_ERROR_STR(OB_CONNECT_ERROR, "Connect error");
     ADD_ERROR_STR(OB_NOT_FREE, "Not free");
     ADD_ERROR_STR(OB_INIT_SQL_CONTEXT_ERROR, "Init SQL context error");
@@ -183,11 +176,8 @@ static struct ObStrErrorInit
     ADD_ERROR_STR(OB_WAITING_COMMIT, "Waiting commit error");
     ADD_ERROR_STR(OB_STMT_EXPIRED, "Expired statement");
 
-<<<<<<< HEAD
     ADD_ERROR_STR(OB_OPERATION_NOT_ALLOWED, "Operation is not allowed"); // 操作不允许 add dragon [Bugfix#12] 2017-3-8
     ADD_ERROR_STR(OB_TABLE_UPDATE_LOCKED, "table is locked"); //add hxlong [Truncate Table]:20170403
-=======
->>>>>>> refs/remotes/origin/master
     //error code for chunk server -1001 ---- -2000
     ADD_ERROR_STR(OB_CS_CACHE_NOT_HIT, "Cache not hit");   // 缓存没有命中
     ADD_ERROR_STR(OB_CS_TIMEOUT, "ChunkServer timeout");         // 超时
@@ -267,12 +257,7 @@ static struct ObStrErrorInit
     ADD_ERROR_STR(OB_DATA_SOURCE_CONCURRENCY_FULL, "Data source concurrency full");
     ADD_ERROR_STR(OB_DATA_SOURCE_WRONG_URI_FORMAT, "Data source wrong URI format");
     ADD_ERROR_STR(OB_SSTABLE_VERSION_UNEQUAL, "SSTable version not equal");
-<<<<<<< HEAD
    //error code for merge server -4000 ---- -5000
-=======
-
-    //error code for merge server -4000 ---- -5000
->>>>>>> refs/remotes/origin/master
     ADD_ERROR_STR(OB_INNER_STAT_ERROR, "Inner state error");     // inner stat check error
     ADD_ERROR_STR(OB_OLD_SCHEMA_VERSION, "Schema version too old");   // find old schema version
     ADD_ERROR_STR(OB_INPUT_PARAM_ERROR, "Input parameter error");    // check input param error
@@ -320,13 +305,10 @@ static struct ObStrErrorInit
     ADD_ERROR_STR(OB_ERR_COLUMN_NOT_FOUND, "Column not found");   // SQLSTATE '42S22'
     ADD_ERROR_STR(OB_ERR_DELETE_NULL_ROWKEY, "Delete null rowkey");
     ADD_ERROR_STR(OB_ERR_INSERT_INNER_JOIN_COLUMN, "Insert inner join column error");
-<<<<<<< HEAD
     //add wangjiahao [table lock] 20160616 :b
     ADD_ERROR_STR(OB_ERR_TABLE_EXCLUSIVE_LOCK_CONFLICT, "Table have been locked");
     ADD_ERROR_STR(OB_ERR_TABLE_INTENTION_LOCK_CONFLICT, "Table have been locked");
     //add :e
-=======
->>>>>>> refs/remotes/origin/master
     ADD_ERROR_STR(OB_ERR_USER_EMPTY, "No user");
     ADD_ERROR_STR(OB_ERR_USER_NOT_EXIST, "User not exist");
     ADD_ERROR_STR(OB_ERR_NO_PRIVILEGE, "No privilege");
@@ -363,7 +345,6 @@ static struct ObStrErrorInit
     ADD_ERROR_STR(OB_ERR_UNKNOWN_SESSION_ID, "Unknown session ID");
     ADD_ERROR_STR(OB_ERR_PROTOCOL_NOT_RECOGNIZE, "Incorrect protocol");
     ADD_ERROR_STR(OB_ERR_WRITE_AUTH_ERROR, "Write auth packet error");
-<<<<<<< HEAD
     //add wanglei [semi join] 20161130:b -5201 ~ -5220
     ADD_ERROR_STR(OB_ERR_CAN_NOT_USE_SEMI_JOIN, "can not use semi join!");
     ADD_ERROR_STR(OB_ERR_HAS_NO_EQUI_COND, "has no equal conditon!");
@@ -428,11 +409,6 @@ static struct ObStrErrorInit
     ADD_ERROR_STR(OB_ERR_PS_TOO_MANY_PARAM, "Prepared statement contains too many placeholders");
     ADD_ERROR_STR(OB_ERR_READ_ONLY, "The server is read only now");
     ADD_ERROR_STR(OB_ERR_NULL_POINTER, "some null pointer err occured!");//add wenghaixing [secondary index.static index]20151118
-=======
-
-    ADD_ERROR_STR(OB_ERR_PS_TOO_MANY_PARAM, "Prepared statement contains too many placeholders");
-    ADD_ERROR_STR(OB_ERR_READ_ONLY, "The server is read only now");
->>>>>>> refs/remotes/origin/master
     // Fatal errors and the client should close the connection, -8000 ~ -8999
     ADD_ERROR_STR(OB_ERR_SERVER_IN_INIT, "Server is initializing");
   }

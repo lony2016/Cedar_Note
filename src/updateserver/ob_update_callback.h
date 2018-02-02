@@ -16,11 +16,7 @@
  */
 #ifndef OB_UPDATE_CALLBACK_H_
 #define OB_UPDATE_CALLBACK_H_
-<<<<<<< HEAD
 #include "onev_struct.h"
-=======
-#include "easy_io_struct.h"
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {
@@ -29,11 +25,7 @@ namespace oceanbase
     class ObUpdateCallback
     {
     public:
-<<<<<<< HEAD
       static int process(onev_request_e* r);
-=======
-      static int process(easy_request_t* r);
->>>>>>> refs/remotes/origin/master
     };
   }
 }

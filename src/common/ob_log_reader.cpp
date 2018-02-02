@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -15,8 +14,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -135,11 +132,7 @@ int ObLogReader::read_log(LogCommand &cmd, uint64_t &seq, char* &log_data, int64
       if (OB_SUCCESS == ret && OB_LOG_SWITCH_LOG == cmd)
       {
         TBSYS_LOG(INFO, "reach the end of log[cur_log_file_id_=%lu]", cur_log_file_id_);
-<<<<<<< HEAD
         // 不管打开成功或失败: cur_log_file_id++, log_file_reader_->pos会被置零,
-=======
-        // 不管打开成功或失败: cur_log_file_id++, log_file_reader_->pos会被置零, 
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != (ret = log_file_reader_->close()))
         {
           TBSYS_LOG(ERROR, "log_file_reader_ close error[ret=%d]", ret);
@@ -318,7 +311,6 @@ int ObLogReader::read_log_(LogCommand &cmd, uint64_t &log_seq, char *&log_data, 
 
   return ret;
 }
-<<<<<<< HEAD
 
 //add lbzhong [Max Log Timestamp] 20150824:b
 int ObLogReader::read_log(uint64_t &log_seq, int64_t& timestamp)
@@ -526,5 +518,3 @@ int ObLogReader::read_log_for_data_checksum_(LogCommand& cmd, uint64_t &log_seq,
 // add:e
 
 
-=======
->>>>>>> refs/remotes/origin/master

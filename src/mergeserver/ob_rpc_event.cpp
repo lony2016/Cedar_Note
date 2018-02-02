@@ -73,11 +73,7 @@ void ObCommonRpcEvent::set_result_code(const int32_t code)
   result_code_ = code;
 }
 
-<<<<<<< HEAD
 onev_io_process_pe* ObCommonRpcEvent::get_handler() const
-=======
-easy_io_process_pt* ObCommonRpcEvent::get_handler() const
->>>>>>> refs/remotes/origin/master
 {
   return handler_;
 }

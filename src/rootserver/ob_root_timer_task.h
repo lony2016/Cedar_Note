@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  * @file     ob_root_timer_task.h
  * @brief    add a timer task class to run
@@ -9,8 +8,6 @@
  * @date     2015-12-25
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
   * (C) 2007-2010 Taobao Inc.
   *
   * This program is free software; you can redistribute it and/or modify
@@ -45,7 +42,6 @@ namespace oceanbase
       private:
         ObRootWorker* worker_;
     };
-<<<<<<< HEAD
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     class ObRootSetAutoElectFlagTask : public common::ObTimerTask
     {
@@ -59,8 +55,6 @@ namespace oceanbase
         ObRootWorker* worker_;
     };
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }
 

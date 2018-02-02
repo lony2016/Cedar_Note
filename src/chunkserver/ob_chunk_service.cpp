@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -21,8 +20,6 @@
  * @date 2016_01_19
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *  (C) 2007-2010 Taobao Inc.
  *
@@ -68,12 +65,9 @@
 #include "common/ob_common_stat.h"
 #include "ob_tablet_writer.h"
 #include "ob_tablet_reader.h"
-<<<<<<< HEAD
 //add weixing [statistics build] 20170105:b
 #include "common/ob_gather_table_info.h"
 //add :e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase::common;
 using namespace oceanbase::sstable;
@@ -88,16 +82,12 @@ namespace oceanbase
       service_started_(false), in_register_process_(false),
       service_expired_time_(0),
       migrate_task_count_(0), lease_checker_(this), merge_task_(this),
-<<<<<<< HEAD
       //add longfei [cons static index] 151120:b
       se_index_task_(this),
       //add e
       fetch_ups_task_(this), report_tablet_task_(this)//add weixing [statistics build] 20170207:b
       ,statistics_task_(this),statistics_check_task_(this)
     //add e
-=======
-      fetch_ups_task_(this), report_tablet_task_(this)
->>>>>>> refs/remotes/origin/master
 
     {
     }
@@ -268,7 +258,6 @@ namespace oceanbase
           }
         }
       }
-<<<<<<< HEAD
       //add longfei [cons static index] 151117:b
       if(OB_SUCCESS == rc)
       {
@@ -284,9 +273,6 @@ namespace oceanbase
         //add e
       }
       //add e
-=======
-
->>>>>>> refs/remotes/origin/master
       return rc;
     }
 
@@ -370,7 +356,6 @@ namespace oceanbase
       status = 0;
       char server_version[OB_SERVER_VERSION_LENGTH] = "";
       get_package_and_svn(server_version, sizeof(server_version));
-<<<<<<< HEAD
       //add wenghaixing [secondary index.static_index]20160117
       int64_t cluster_id = 0;
       //add e
@@ -380,12 +365,6 @@ namespace oceanbase
         //rc = CS_RPC_CALL_RS(register_server, chunk_server_->get_self(), false, status,  server_version);
           rc = CS_RPC_CALL_RS(register_server, chunk_server_->get_self(), false, status, cluster_id,  server_version);
         //modify e
-=======
-
-      while (inited_)
-      {
-        rc = CS_RPC_CALL_RS(register_server, chunk_server_->get_self(), false, status, server_version);
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS == rc) break;
         if (OB_RESPONSE_TIME_OUT != rc && OB_NOT_INIT != rc)
         {
@@ -394,15 +373,12 @@ namespace oceanbase
         }
         usleep(static_cast<useconds_t>(chunk_server_->get_config().network_timeout));
       }
-<<<<<<< HEAD
       //add wenghaixing [secondary index.static_index]20160117
       if (OB_SUCCESS == rc)
       {
         chunk_server_->get_config().cluster_id = cluster_id;
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       return rc;
     }
 
@@ -516,11 +492,7 @@ namespace oceanbase
         const int32_t packet_code,
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -681,7 +653,6 @@ namespace oceanbase
           case OB_CS_SHOW_DISK:
             rc = cs_show_disk(version, channel_id, req, in_buffer, out_buffer);
             break;
-<<<<<<< HEAD
           //add longfei [cons static index] 151218:b
           case OB_RE_IDX_CONS_F:
             rc = cs_recieve_work(version, channel_id, req, in_buffer, out_buffer);
@@ -694,8 +665,6 @@ namespace oceanbase
             TBSYS_LOG(INFO,"TEST::WEIXING receive successfully!");
             break;
           //add e
-=======
->>>>>>> refs/remotes/origin/master
           default:
             rc = OB_ERROR;
             TBSYS_LOG(WARN, "not support packet code[%d]", packet_code);
@@ -705,7 +674,6 @@ namespace oceanbase
       return rc;
     }
 
-<<<<<<< HEAD
 
     //add longfei [cons static index] 151218:b
     int ObChunkService::cs_recieve_work(
@@ -752,12 +720,6 @@ namespace oceanbase
         const int32_t version,
         const int32_t channel_id,
         onev_request_e* req,
-=======
-    int ObChunkService::cs_send_file(
-        const int32_t version,
-        const int32_t channel_id,
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -768,11 +730,7 @@ namespace oceanbase
     int ObChunkService::cs_batch_get(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -813,11 +771,7 @@ namespace oceanbase
         const int64_t start_time,
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -838,11 +792,7 @@ namespace oceanbase
       ObPacket* next_request = NULL;
       ObPacketQueueThread& queue_thread =
         chunk_server_->get_default_task_queue_thread();
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       FILL_TRACE_LOG("start cs_get");
 
       if (version != CS_GET_VERSION)
@@ -1056,11 +1006,7 @@ namespace oceanbase
     int ObChunkService::cs_show_disk(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -1128,11 +1074,7 @@ namespace oceanbase
     int ObChunkService::cs_disk_maintain(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -1210,16 +1152,11 @@ namespace oceanbase
     int ObChunkService::cs_sql_scan(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
     {
-<<<<<<< HEAD
       //add longfei 2016-03-30 14:34:03 统计scan时间
       int64_t now = tbsys::CTimeUtil::getTime(); //add
       int ret = OB_SUCCESS;//add
@@ -1233,21 +1170,12 @@ namespace oceanbase
                 tbsys::CTimeUtil::getTime() - now,
                 sql_scan_param_ptr->get_table_id()); //add
       return ret; //add
-=======
-      sql::ObSqlScanParam *sql_scan_param_ptr = GET_TSI_MULT(sql::ObSqlScanParam, TSI_CS_SQL_SCAN_PARAM_1);
-      FILL_TRACE_LOG("start_cs_sql_scan");
-      return cs_sql_read(version, channel_id, req, in_buffer, out_buffer, timeout_time, sql_scan_param_ptr);
->>>>>>> refs/remotes/origin/master
     }
 
     int ObChunkService::cs_sql_get(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -1260,11 +1188,7 @@ namespace oceanbase
     int ObChunkService::cs_sql_read(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time,
@@ -1309,10 +1233,7 @@ namespace oceanbase
 
       if (OB_SUCCESS == rc.result_code_)
       {
-<<<<<<< HEAD
         //解析出来ms发送过来scan的参数
-=======
->>>>>>> refs/remotes/origin/master
         rc.result_code_ = sql_read_param_ptr->deserialize(
             in_buffer.get_data(), in_buffer.get_capacity(),
             in_buffer.get_position());
@@ -1320,7 +1241,6 @@ namespace oceanbase
         {
           TBSYS_LOG(ERROR, "parse cs_sql_scan input scan param error. ret=%d", rc.result_code_);
         }
-<<<<<<< HEAD
         //add longfei 2016-04-04 16:06:06
         //看看ms发送过来的read param到底是什么
         else
@@ -1328,8 +1248,6 @@ namespace oceanbase
           TBSYS_LOG(DEBUG, "debug::longfei>>>sql_read_param recieve from ms is [%s]", to_cstring(*sql_read_param_ptr));
         }
         //add e
-=======
->>>>>>> refs/remotes/origin/master
       }
 
       if (OB_SUCCESS == rc.result_code_)
@@ -1481,11 +1399,7 @@ namespace oceanbase
             if (NULL != next_request)
             {
               req = next_request->get_request();
-<<<<<<< HEAD
               onev_request_wakeup(req);
-=======
-              easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             }
             break;
           }
@@ -1577,11 +1491,7 @@ namespace oceanbase
         const int64_t start_time,
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -1603,11 +1513,7 @@ namespace oceanbase
       ObPacket* next_request = NULL;
       ObPacketQueueThread& queue_thread =
         chunk_server_->get_default_task_queue_thread();
-<<<<<<< HEAD
       onev_addr_e addr = get_onev_addr(req);
-=======
-      easy_addr_t addr = get_easy_addr(req);
->>>>>>> refs/remotes/origin/master
       char sql[1024] = "";
       int64_t pos = 0;
 
@@ -1712,14 +1618,10 @@ namespace oceanbase
           packet_cnt++;
         }
 
-<<<<<<< HEAD
         //modify wenghaixing [secondary index static_index_build ]20151230
         //if (OB_SUCCESS == rc.result_code_ && !is_fullfilled && !is_last_packet)old code
         if (OB_SUCCESS == rc.result_code_ && !is_fullfilled && !is_last_packet && !scan_param_ptr->if_need_fake())
         //modify e
-=======
-        if (OB_SUCCESS == rc.result_code_ && !is_fullfilled && !is_last_packet)
->>>>>>> refs/remotes/origin/master
         {
           scanner->reset();
           rc.result_code_ = queue_thread.wait_for_next_request(
@@ -1729,11 +1631,7 @@ namespace oceanbase
             //merge server end this session
             req = next_request->get_request();
             rc.result_code_ = OB_SUCCESS;
-<<<<<<< HEAD
             onev_request_wakeup(req);
-=======
-            easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             break;
           }
           else if (OB_SUCCESS != rc.result_code_)
@@ -1824,11 +1722,7 @@ namespace oceanbase
     int ObChunkService::cs_drop_old_tablets(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -1880,7 +1774,6 @@ namespace oceanbase
       return rc.result_code_;
     }
 
-<<<<<<< HEAD
     //add weixing [statistics build v1]20170331:b
     int ObChunkService::cs_start_gather_operation(const int32_t version,
         const int32_t channel_id,
@@ -1960,19 +1853,13 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     /*
      * int cs_heart_beat(const int64_t lease_duration);
      */
     int ObChunkService::cs_heart_beat(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2146,7 +2033,6 @@ namespace oceanbase
             out_buffer, connection, channel_id);
       }
       */
-<<<<<<< HEAD
       //add longfei [cons static index] 151120:b
       IndexBeat beat;
       if(OB_SUCCESS == rc.result_code_)
@@ -2166,19 +2052,13 @@ namespace oceanbase
         }
       }
       //add e
-=======
->>>>>>> refs/remotes/origin/master
       return rc.result_code_;
     }
 
     int ObChunkService::cs_accept_schema(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2227,7 +2107,6 @@ namespace oceanbase
         {
           schema_version = schema->get_version();
         }
-<<<<<<< HEAD
 
         // test longfei
         //IndexList temp_list;
@@ -2241,8 +2120,6 @@ namespace oceanbase
         //  TBSYS_LOG(INFO,"LONGFEI:student de secondary index table id = %d",static_cast<int>(temp_list.index_tid[temp_counter]));
         //}
 
-=======
->>>>>>> refs/remotes/origin/master
       }
 
       if (OB_SUCCESS == err)
@@ -2281,11 +2158,7 @@ namespace oceanbase
     int ObChunkService::cs_create_tablet(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2374,11 +2247,7 @@ namespace oceanbase
     int ObChunkService::cs_load_tablet(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2572,11 +2441,7 @@ namespace oceanbase
     int ObChunkService::cs_delete_tablets(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2715,11 +2580,7 @@ namespace oceanbase
     int ObChunkService::cs_merge_tablets(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2805,11 +2666,7 @@ namespace oceanbase
     int ObChunkService::cs_get_migrate_dest_loc(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -2906,11 +2763,7 @@ namespace oceanbase
     int ObChunkService::cs_dump_tablet_image(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3006,11 +2859,7 @@ namespace oceanbase
     int ObChunkService::cs_fetch_stats(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3052,11 +2901,7 @@ namespace oceanbase
     int ObChunkService::cs_start_gc(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3098,11 +2943,7 @@ namespace oceanbase
     int ObChunkService::cs_check_tablet(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3159,11 +3000,7 @@ namespace oceanbase
     int ObChunkService::cs_reload_conf(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3204,11 +3041,7 @@ namespace oceanbase
     int ObChunkService::cs_show_param(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3245,11 +3078,7 @@ namespace oceanbase
     int ObChunkService::cs_stop_server(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer)
     {
@@ -3313,11 +3142,7 @@ namespace oceanbase
     int ObChunkService::cs_force_to_report_tablet(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3356,22 +3181,14 @@ namespace oceanbase
           atomic_exchange(&scan_tablet_image_count_, 0);
         }
       }
-<<<<<<< HEAD
       onev_request_wakeup(req);
-=======
-      easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
     int ObChunkService::cs_change_log_level(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer)
     {
@@ -3418,11 +3235,7 @@ namespace oceanbase
     int ObChunkService::cs_sync_all_images(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -3472,11 +3285,7 @@ namespace oceanbase
     int ObChunkService::cs_tablet_read(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -3631,11 +3440,7 @@ namespace oceanbase
             if (NULL != next_request)
             {
               req = next_request->get_request();
-<<<<<<< HEAD
               onev_request_wakeup(req);
-=======
-              easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             }
             break;
           }
@@ -3708,11 +3513,7 @@ namespace oceanbase
     int ObChunkService::cs_fetch_data(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -4002,11 +3803,7 @@ namespace oceanbase
     int ObChunkService::cs_load_bypass_sstables(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -4107,11 +3904,7 @@ namespace oceanbase
     int ObChunkService::cs_delete_table(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -4192,11 +3985,7 @@ namespace oceanbase
     int ObChunkService::cs_fetch_sstable_dist(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -4459,11 +4248,7 @@ namespace oceanbase
     int ObChunkService::cs_set_config(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer)
     {
@@ -4511,11 +4296,7 @@ namespace oceanbase
     int ObChunkService::cs_get_config(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer)
     {
@@ -4557,11 +4338,7 @@ namespace oceanbase
     int ObChunkService::cs_get_bloom_filter(
       const int32_t version,
       const int32_t channel_id,
-<<<<<<< HEAD
       onev_request_e* req,
-=======
-      easy_request_t* req,
->>>>>>> refs/remotes/origin/master
       common::ObDataBuffer& in_buffer,
       common::ObDataBuffer& out_buffer,
       const int64_t timeout_time)
@@ -4769,11 +4546,7 @@ namespace oceanbase
           if (OB_NET_SESSION_END == ret)
           {
             ret = OB_SUCCESS;
-<<<<<<< HEAD
             onev_request_wakeup(req);
-=======
-            easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             break;
           }
           else if (OB_SUCCESS == ret)
@@ -5105,7 +4878,6 @@ namespace oceanbase
           report_tablet_task_.get_next_wait_useconds(), false);
     }
 
-<<<<<<< HEAD
     // add longfei [cons static index] 151120:b
     int ObChunkService::handle_index_beat(IndexBeat beat)
     {
@@ -5317,7 +5089,5 @@ namespace oceanbase
      }
      //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase

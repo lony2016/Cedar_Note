@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -14,8 +13,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -41,26 +38,19 @@ namespace oceanbase
 {
   namespace rootserver
   {
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     class ObRootWorker;
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     // thread safe simple ronud-robin merge server provider
     class ObRootMsProvider:public common::ObMsProvider
     {
     public:
       ObRootMsProvider(ObChunkServerManager & server_manager);
       virtual ~ObRootMsProvider();
-<<<<<<< HEAD
       // modify by zcd [multi_cluster] 20150416:b
       void init(ObRootServerConfig & config, ObRootRpcStub & rpc_stub, ObRootWorker &root_worker);
       // modify:e
-=======
-      void init(ObRootServerConfig & config, ObRootRpcStub & rpc_stub);
->>>>>>> refs/remotes/origin/master
     public:
       int get_ms(common::ObServer & server);
       int get_ms(common::ObServer & server, const bool query_master_cluster);
@@ -80,12 +70,9 @@ namespace oceanbase
       ObChunkServerManager & server_manager_;
       ObRootServerConfig *config_;
       ObRootRpcStub *rpc_stub_;
-<<<<<<< HEAD
       // add by zcd [multi_cluster] 20150416:b
       ObRootWorker *root_worker_;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
     };
   } // end namespace rootserver
 } // end namespace oceanbase

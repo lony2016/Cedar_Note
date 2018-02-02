@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
 * Copyright (C) 2013-2016 DaSE .
 *
 * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
 */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -36,13 +33,10 @@
 
 #include "ob_multiple_get_merge.h"
 #include "common/ob_row_fuse.h"
-<<<<<<< HEAD
 //add maoxx
 #include "ob_mem_sstable_scan.h"
 #include "ob_inc_scan.h"
 //add e
-=======
->>>>>>> refs/remotes/origin/master
 
 using namespace oceanbase;
 using namespace sql;
@@ -204,7 +198,6 @@ int64_t ObMultipleGetMerge::to_string(char *buf, int64_t buf_len) const
   return pos;
 }
 
-<<<<<<< HEAD
 //add maoxx
 void ObMultipleGetMerge::reset_iterator()
 {
@@ -223,8 +216,6 @@ void ObMultipleGetMerge::reset_iterator()
 }
 //add e
 
-=======
->>>>>>> refs/remotes/origin/master
 PHY_OPERATOR_ASSIGN(ObMultipleGetMerge)
 {
   int ret = OB_SUCCESS;

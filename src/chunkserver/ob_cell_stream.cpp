@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or 
@@ -170,7 +167,6 @@ namespace oceanbase
       return ret;
     }
     
-<<<<<<< HEAD
     //add longfei [cons static index] 151204:b
     int ObCellStream::rpc_scan_row_data(const ObScanParam &param, const ObServer &chunkserver)
     {
@@ -204,8 +200,6 @@ namespace oceanbase
     }
     // add e
 
-=======
->>>>>>> refs/remotes/origin/master
     int ObCellStream::rpc_get_cell_data(const common::ObGetParam & param)
     {
       int ret = OB_SUCCESS;

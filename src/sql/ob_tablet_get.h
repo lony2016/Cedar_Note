@@ -49,13 +49,10 @@ namespace oceanbase
                                   ObTabletJoin::TableJoinInfo &table_join_info,
                                   int64_t start_data_version,
                                   int64_t end_data_version);
-<<<<<<< HEAD
 
         int need_incremental_data(ObArray<uint64_t> &basic_columns,
                                   ObTabletJoin::TableJoinInfo &table_join_info,
                                   ObVersionRange *range); //add hxlong [Truncate Table]:20170318
-=======
->>>>>>> refs/remotes/origin/master
         bool check_inner_stat() const;
         int add_action_flag_column(ObProject &project);
 

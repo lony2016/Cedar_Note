@@ -22,11 +22,8 @@ typedef struct
   void* schema_checker_; // ObSchemaChecker
   ErrStat err_stat_;
   int   is_prepare_;
-<<<<<<< HEAD
   const char* input_sql_;//add by zz 2014-12-25
   //  const char* source_sql_;//add by zz 2014-12-27, delete by zt 20151117
-=======
->>>>>>> refs/remotes/origin/master
 } ResultPlan;
 
 struct _ParseNode;

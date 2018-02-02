@@ -4,11 +4,7 @@
  //
  // Copyright (C) 2010 Taobao.com, Inc.
  //
-<<<<<<< HEAD
  // Created on 2010-09-09 by Yubai (yubai.lk@taobao.com)
-=======
- // Created on 2010-09-09 by Yubai (yubai.lk@taobao.com) 
->>>>>>> refs/remotes/origin/master
  //
  // -------------------------------------------------------------------
  //
@@ -16,11 +12,7 @@
  //
  //
  // -------------------------------------------------------------------
-<<<<<<< HEAD
  //
-=======
- // 
->>>>>>> refs/remotes/origin/master
  // Change Log
  //
 ////====================================================================
@@ -60,12 +52,9 @@ namespace oceanbase
 {
   namespace updateserver
   {
-<<<<<<< HEAD
     //add hushuang[scalable commit]20160507
     #define RowCounterCAS(x, old_pos, new_pos) __sync_bool_compare_and_swap(x, old_pos, new_pos)
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     class MemTable;
 
     typedef QueryEngine TableEngine;
@@ -180,12 +169,8 @@ namespace oceanbase
         void set_(const uint64_t table_id,
                   common::ColumnFilter *column_filter,
                   const bool return_rowkey_column,
-<<<<<<< HEAD
                   const BaseSessionCtx *session_ctx,
                   TEValue * value = NULL); /*add hxlong [Truncate Table]:20170318*/
-=======
-                  const BaseSessionCtx *session_ctx);
->>>>>>> refs/remotes/origin/master
         inline TableEngineIterator &get_te_iter_();
         inline static bool is_row_not_exist_(MemTableGetIter &get_iter);
       private:
@@ -195,10 +180,7 @@ namespace oceanbase
         bool return_rowkey_column_;
         const BaseSessionCtx *session_ctx_;
         bool is_iter_end_;
-<<<<<<< HEAD
         TEValue * table_value_; /*add hxlong [Truncate Table]:20170318*/
-=======
->>>>>>> refs/remotes/origin/master
         MemTableGetIter get_iter_;
     };
 
@@ -309,11 +291,7 @@ namespace oceanbase
         int start_transaction(const TETransType trans_type, MemTableTransDescriptor &td, const int64_t trans_id = -1);
 
         int end_transaction(const MemTableTransDescriptor td, bool rollback = false);
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> refs/remotes/origin/master
         // 开始一次事务性的更新
         // 一次mutation结束之前不能开启新的mutation
         int start_mutation(const MemTableTransDescriptor td);
@@ -321,11 +299,7 @@ namespace oceanbase
         // 结束一次mutation
         // @param[in] rollback 是否回滚
         int end_mutation(const MemTableTransDescriptor td, bool rollback);
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> refs/remotes/origin/master
         inline int64_t get_version() const
         {
           return version_;
@@ -441,16 +415,12 @@ namespace oceanbase
 
         inline void add_row_counter(const int64_t row_counter)
         {
-<<<<<<< HEAD
           //row_counter_ += row_counter; modify hushuang [scalable commit] 20160507
           int64_t pre_counter = row_counter_;
           while(!CAS(&row_counter_, pre_counter, row_counter_ + row_counter))
           {
             pre_counter = row_counter_;
           }
-=======
-          row_counter_ += row_counter;
->>>>>>> refs/remotes/origin/master
         }
 
         inline int64_t size() const
@@ -492,18 +462,11 @@ namespace oceanbase
         {
           return table_engine_.hash_uninit_unit_num();
         };
-<<<<<<< HEAD
         int get_table_truncate_stat(uint64_t table_id, bool & is_truncated); /*add hxlong [Truncate Table]:20170318*/
         int get_bloomfilter(common::TableBloomFilter &table_bf) const;
 
         int scan_all(TableEngineIterator &iter);
         int scan_all_table(TableEngineIterator &iter); /*add hxlong [Truncate Table]:20170318*/
-=======
-
-        int get_bloomfilter(common::TableBloomFilter &table_bf) const;
-
-        int scan_all(TableEngineIterator &iter);
->>>>>>> refs/remotes/origin/master
 
       private:
         inline int copy_cells_(TransNode &tn,
@@ -587,7 +550,6 @@ namespace oceanbase
             length = length / CELL_INFO_SIZE_UNIT;
             ret = (int16_t)length;
           }
-<<<<<<< HEAD
           //add fanqiushi ECNU_DECIMAL V0.1 2016_5_29:b
           else if(ObDecimalType == value.get_type())
           {
@@ -600,8 +562,6 @@ namespace oceanbase
               ret = (int16_t)length;
           }
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
           return ret;
         };
         inline static bool is_row_not_exist_(const common::ObObj &value)
@@ -612,15 +572,12 @@ namespace oceanbase
         {
           return (value.get_ext() == common::ObActionFlag::OP_DEL_ROW);
         };
-<<<<<<< HEAD
         //add hxlong [Truncate Table]:20170318:b
         inline static bool is_trun_tab_(const common::ObObj &value)
         {
           return (value.get_ext() == common::ObActionFlag::OP_TRUN_TAB);
         };
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         inline static bool is_nop_(const common::ObObj &value)
         {
           return (value.get_ext() == common::ObActionFlag::OP_NOP);
@@ -682,11 +639,7 @@ namespace oceanbase
         common::ObObj MIN_OBJ;
         common::ObObj MAX_OBJ;
         TransMgr trans_mgr_;
-<<<<<<< HEAD
         volatile int64_t row_counter_;
-=======
-        int64_t row_counter_;
->>>>>>> refs/remotes/origin/master
 
         TEValueSessionCallback tevalue_cb_;
         TransSessionCallback trans_cb_;

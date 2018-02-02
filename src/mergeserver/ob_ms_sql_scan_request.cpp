@@ -38,13 +38,10 @@ namespace oceanbase
       cs_result_mem_size_used_ = 0;
       sharding_limit_count_ = 0;
       inited_ = false;
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       rpc_scan_ = NULL;
       is_end_ = false;
       //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     ObMsSqlScanRequest::~ObMsSqlScanRequest()
@@ -155,12 +152,9 @@ namespace oceanbase
       {
         // in the case of empty range scan
         set_finish(true);
-<<<<<<< HEAD
         //add wanglei [semi join in expr] 20161131:b
         this ->is_end_ = true ;
         //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       else if ((OB_SUCCESS == err) &&(OB_SUCCESS != (err = org_req_range_iter_.initialize(get_cache_proxy(),
         scan_param_->get_range(), scan_param_->get_scan_direction(), &get_buffer_pool()))))
@@ -354,12 +348,9 @@ namespace oceanbase
         }
         /// 1. split requested ObNewRange into small ranges
         err = range_iter.next(reinterpret_cast<ObChunkServerItem*>(replicas), replica_count, query_range);
-<<<<<<< HEAD
         //add longfei 2016-03-30 14:05:43
         TBSYS_LOG(DEBUG, "debug::longfei>>>query_range is [%s]", to_cstring(query_range));
         //add e
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_ITER_END == err)
         {
           //TBSYS_LOG(DEBUG, "end of range iteration. break");
@@ -1023,17 +1014,13 @@ namespace oceanbase
       cs_result_mem_size_used_ = 0;
       sharding_limit_count_ = 0;
       inited_ = false;
-<<<<<<< HEAD
       //add wanglei [semi join in expr] 20161131:b
       this ->is_end_ = false ;
       //add wanglei [semi join in expr] 20161131:e
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     int ObMsSqlScanRequest::get_next_row(oceanbase::common::ObRow &row)
     {
-<<<<<<< HEAD
         if ( this->is_end_ && this ->is_finish())
         {
             // nop
@@ -1302,34 +1289,6 @@ namespace oceanbase
         return ret;
     }
     //add wanglei [semi join multi thread] 20170417:e
-=======
-      if (true == is_finish())
-      {
-        // nop
-      }
-      else
-      {
-        // check if need to trigger more request
-        if ((total_sub_request_count_ - finished_sub_request_count_ < max_parallel_count_)
-            && (merger_operator_.get_mem_size_used() < max_cs_result_mem_size_)
-            && false == org_req_range_iter_.end())
-        {
-          TBSYS_LOG(DEBUG, "total_sub_request_count_=%d, finished_sub_request_count_=%d, max_parallel_count_=%ld,"
-              "merger_operator_.get_mem_size_used()=%ld, max_cs_result_mem_size_=%ld",
-              total_sub_request_count_, finished_sub_request_count_, max_parallel_count_,
-              merger_operator_.get_mem_size_used(), max_cs_result_mem_size_);
-          int err = do_request(max_parallel_count_, org_req_range_iter_, timeout_us_);
-          if (OB_SUCCESS != err)
-          {
-            TBSYS_LOG(WARN, "fail to trigger more event request. err=%d", err);
-          }
-        }
-      }
-      int ret = merger_operator_.get_next_row(row);
-      return ret;
-    }
-
->>>>>>> refs/remotes/origin/master
     /// namespace
   }
 }

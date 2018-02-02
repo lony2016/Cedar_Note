@@ -3,10 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "ob_define.h"
-<<<<<<< HEAD
 #include <tblog.h>
-=======
->>>>>>> refs/remotes/origin/master
 
 namespace oceanbase
 {

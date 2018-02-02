@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -17,8 +16,6 @@
  * @date 2015_01_19
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  *  (C) 2007-2010 Taobao Inc.
  *  
@@ -777,7 +774,6 @@ namespace oceanbase
       merged_ = status; 
     }
 
-<<<<<<< HEAD
     //add longfei [cons static index] 151202:b
     int ObTablet::add_local_index_sstable_by_id(const ObSSTableId &sstable_id)
     {
@@ -882,8 +878,6 @@ namespace oceanbase
     }
     //add e
 
-=======
->>>>>>> refs/remotes/origin/master
   } // end namespace chunkserver
 } // end namespace oceanbase
 

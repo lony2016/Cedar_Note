@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -60,7 +57,6 @@ int ObMsgUpsHeartbeat::serialize(char* buf, const int64_t buf_len, int64_t &pos)
   {
     TBSYS_LOG(ERROR, "serailize config_version fail, err=%d", ret);
   }
-<<<<<<< HEAD
   // add by guojinwei [lease between rs and ups][multi_cluster] 20150819:b
   else if (OB_SUCCESS != (ret = serialization::encode_vi64(buf, buf_len, pos, rs_election_lease_)))
   {
@@ -71,8 +67,6 @@ int ObMsgUpsHeartbeat::serialize(char* buf, const int64_t buf_len, int64_t &pos)
     TBSYS_LOG(ERROR, "serialize election_role fail, err=%d", ret);
   }
   // add:e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 
@@ -101,7 +95,6 @@ int ObMsgUpsHeartbeat::deserialize(const char* buf, const int64_t data_len, int6
   {
     TBSYS_LOG(ERROR, "deserialize config_version fail, ret: [%d]", ret);
   }
-<<<<<<< HEAD
   // add by guojinwei [lease between rs and ups][multi_cluster] 20150819:b
   else if (OB_SUCCESS != (ret = serialization::decode_vi64(buf, data_len, pos, &rs_election_lease_)))
   {
@@ -112,8 +105,6 @@ int ObMsgUpsHeartbeat::deserialize(const char* buf, const int64_t data_len, int6
     TBSYS_LOG(ERROR, "deserialize election_role fail, err=%d", ret);
   }
   // add:e
-=======
->>>>>>> refs/remotes/origin/master
   return ret;
 }
 

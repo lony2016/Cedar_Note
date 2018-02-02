@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -17,8 +16,6 @@
  * @date 2016_06_16
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_lock_mgr.cpp updateserver / Oceanbase
@@ -49,15 +46,9 @@ namespace oceanbase
     int IRowUnlocker::cb_func(const bool rollback, void *data, BaseSessionCtx &session)
     {
       UNUSED(rollback);
-<<<<<<< HEAD
       // ï¿½ï¿½Òª Òªï¿½Ú½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½te_valueï¿½ï¿½cur_uc_infoï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½â±»ï¿½ï¿½Ò»ï¿½ï¿½sessionï¿½Ø¸ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½Ðµï¿½cur_uc_info
       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½á½»ï¿½ó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ß³Ì·ï¿½ï¿½ï¿½
       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ß³ï¿½ï¿½á½»ï¿½Í·ï¿½ï¿½ï¿½
-=======
-      // ÖØÒª ÒªÔÚ½âËøµÄÊ±ºò½«te_valueµÄcur_uc_infoÇå¿Õ£¬±ÜÃâ±»ºóÒ»¸ösessionÖØ¸´Ê¹ÓÃÕâ¸öÊÂÎñÄÚË½ÓÐµÄcur_uc_info
-      // Ö÷»ú£º¶àÏß³ÌÌá½»ºó£¬½âËø£¬ÓÉÌá½»Ïß³Ì·¢²¼
-      // ±¸»ú£º¶àÏß³Ì½âËø£¬ÓÉÌá½»Ïß³ÌÌá½»ºÍ·¢²¼
->>>>>>> refs/remotes/origin/master
       TEValue *te_value = (TEValue*)data;
       if (NULL != te_value)
       {
@@ -258,7 +249,6 @@ namespace oceanbase
       return callback_mgr_.callback(rollback, session);
     }
 
-<<<<<<< HEAD
     // add by guojinwei [repeatable read] 20160307:b
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     RRLockInfo::RRLockInfo(RWSessionCtx &session_ctx) : ILockInfo(REPEATABLE_READ),
@@ -346,8 +336,6 @@ namespace oceanbase
 
     // add:e
 
-=======
->>>>>>> refs/remotes/origin/master
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     LockMgr::LockMgr()
@@ -397,7 +385,6 @@ namespace oceanbase
           ret = NULL;
         }
         break;
-<<<<<<< HEAD
       // add by guojinwei [repeatable read] 20160307:b
       case REPEATABLE_READ:
         if (NULL == (rwsession_ctx = dynamic_cast<RWSessionCtx*>(&session_ctx)))
@@ -415,8 +402,6 @@ namespace oceanbase
         }
         break;
       // add:e
-=======
->>>>>>> refs/remotes/origin/master
       default:
         TBSYS_LOG(WARN, "isolation level=%d not support", level);
         break;

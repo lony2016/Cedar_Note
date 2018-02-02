@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  * @file     ob_root_admin2.h
@@ -9,8 +8,6 @@
  * @date     2015-12-25
  */
 
-=======
->>>>>>> refs/remotes/origin/master
 /*
  * Copyright (C) 2007-2012 Taobao Inc.
  *
@@ -47,12 +44,9 @@ namespace oceanbase
     // declare all the handlers here
     int do_get_obi_role(ObBaseClient &client, Arguments &args);
     int do_set_obi_role(ObBaseClient &client, Arguments &args);
-<<<<<<< HEAD
     // add by zcd [multi_cluster] 20150416:b
     int do_set_master_obi_role(ObBaseClient &client, Arguments &args);
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
     int do_rs_admin(ObBaseClient &client, Arguments &args);
     int do_change_log_level(ObBaseClient &client, Arguments &args);
     int do_rs_stat(ObBaseClient &client, Arguments &args);
@@ -78,12 +72,9 @@ namespace oceanbase
     int do_kill_import(ObBaseClient &client, Arguments &args);
     int do_create_table_for_emergency(ObBaseClient &client, Arguments &args);
     int do_drop_table_for_emergency(ObBaseClient &client, Arguments &args);
-<<<<<<< HEAD
     // add by zhangcd [rs_election][auto_elect_flag] 20151129:b
     int do_set_auto_elect_flag(ObBaseClient &client, Arguments &args);
     // add:e
-=======
->>>>>>> refs/remotes/origin/master
     struct Command
     {
       const char* cmdstr;

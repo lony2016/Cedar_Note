@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -15,8 +14,6 @@
  * @author guojinwei <guojinwei@stu.ecnu.edu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 ////===================================================================
  //
  // ob_trans_executor.cpp updateserver / Oceanbase
@@ -96,27 +93,18 @@ namespace oceanbase
         uint32_t session_descriptor_;
         bool fake_write_granted_;
     };
-<<<<<<< HEAD
 
     TransExecutor::TransExecutor(ObUtilInterface &ui) : TransHandlePool(),
                                                         TransCommitThread(),
                                                         ui_(ui),
                                                         my_thread_buffer_(static_cast<int32_t>(OB_LOG_BUFFER_MAX_SIZE)),  // enable handle log pkt
-=======
-    TransExecutor::TransExecutor(ObUtilInterface &ui) : TransHandlePool(),
-                                                        TransCommitThread(),
-                                                        ui_(ui),
->>>>>>> refs/remotes/origin/master
                                                         allocator_(),
                                                         session_ctx_factory_(),
                                                         session_mgr_(),
                                                         lock_mgr_(),
                                                         uncommited_session_list_(),
                                                         ups_result_buffer_(ups_result_memory_, OB_MAX_PACKET_LENGTH)
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
     {
       allocator_.set_mod_id(ObModIds::OB_UPS_TRANS_EXECUTOR_TASK);
       memset(ups_result_memory_, 0, OB_MAX_PACKET_LENGTH);
@@ -141,10 +129,7 @@ namespace oceanbase
       packet_handler_[OB_UPS_ASYNC_CHECK_CUR_VERSION] = phandle_check_cur_version;
       packet_handler_[OB_UPS_ASYNC_CHECK_SSTABLE_CHECKSUM] = phandle_check_sstable_checksum;
 
-<<<<<<< HEAD
       trans_handler_[OB_TRUNCATE_TABLE] = thandle_write_trans; //add hxlong [truncate table] 20170403
-=======
->>>>>>> refs/remotes/origin/master
       trans_handler_[OB_COMMIT_END] = thandle_commit_end;
       trans_handler_[OB_NEW_SCAN_REQUEST] = thandle_scan_trans;
       trans_handler_[OB_NEW_GET_REQUEST] = thandle_get_trans;
@@ -159,12 +144,9 @@ namespace oceanbase
       trans_handler_[OB_UPS_KILL_SESSION] = thandle_kill_session;
       trans_handler_[OB_END_TRANSACTION] = thandle_end_session;
 
-<<<<<<< HEAD
       //add hxlong [Truncate Table]:20170127:b
       commit_handler_[OB_TRUNCATE_TABLE] = chandle_write_commit;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       commit_handler_[OB_MS_MUTATE] = chandle_write_commit;
       commit_handler_[OB_WRITE] = chandle_write_commit;
       commit_handler_[OB_PHY_PLAN_EXECUTE] = chandle_write_commit;
@@ -175,12 +157,8 @@ namespace oceanbase
       commit_handler_[OB_SWITCH_SCHEMA] = chandle_switch_schema;
       commit_handler_[OB_UPS_FORCE_FETCH_SCHEMA] = chandle_force_fetch_schema;
       commit_handler_[OB_UPS_SWITCH_COMMIT_LOG] = chandle_switch_commit_log;
-<<<<<<< HEAD
       //commit_handler_[OB_NOP_PKT] = chandle_nop;
       //delete by zhouhuan [scalablecommit]
-=======
-      commit_handler_[OB_NOP_PKT] = chandle_nop;
->>>>>>> refs/remotes/origin/master
     }
 
     TransExecutor::~TransExecutor()
@@ -193,18 +171,12 @@ namespace oceanbase
     int TransExecutor::init(const int64_t trans_thread_num,
                             const int64_t trans_thread_start_cpu,
                             const int64_t trans_thread_end_cpu,
-<<<<<<< HEAD
                             const int64_t commit_thread_cpu)
                            // const int64_t commit_end_thread_num)
-=======
-                            const int64_t commit_thread_cpu,
-                            const int64_t commit_end_thread_num)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       bool queue_rebalance = true;
       bool dynamic_rebalance = true;
-<<<<<<< HEAD
       // add by guojinwei [log synchronization][multi_cluster] 20151028:b
       message_residence_time_us_ = 1000;
       message_residence_protection_us_ = UPS.get_param().message_residence_protection_time;
@@ -219,15 +191,6 @@ namespace oceanbase
         TBSYS_LOG(WARN, "init allocator fail ret=%d", ret);
       }
       else if (OB_SUCCESS != (ret = session_mgr_.init(MAX_RO_NUM, MAX_RP_NUM, MAX_RW_NUM, MAX_LRW_NUM, &session_ctx_factory_)))  // add a parameter by qx 20170314 for long transcation
-=======
-      TransHandlePool::set_cpu_affinity(trans_thread_start_cpu, trans_thread_end_cpu);
-      TransCommitThread::set_cpu_affinity(commit_thread_cpu);
-      if (OB_SUCCESS != (ret = allocator_.init(ALLOCATOR_TOTAL_LIMIT, ALLOCATOR_HOLD_LIMIT, ALLOCATOR_PAGE_SIZE)))
-      {
-        TBSYS_LOG(WARN, "init allocator fail ret=%d", ret);
-      }
-      else if (OB_SUCCESS != (ret = session_mgr_.init(MAX_RO_NUM, MAX_RP_NUM, MAX_RW_NUM, &session_ctx_factory_)))
->>>>>>> refs/remotes/origin/master
       {
         TBSYS_LOG(WARN, "init session mgr fail ret=%d", ret);
       }
@@ -239,7 +202,6 @@ namespace oceanbase
       {
         TBSYS_LOG(WARN, "init TransCommitThread fail ret=%d", ret);
       }
-<<<<<<< HEAD
       //modify by hushuang [scalable commit]20160507
 //      else if (OB_SUCCESS != (ret = TransHandlePool::init(trans_thread_num, TASK_QUEUE_LIMIT, queue_rebalance, dynamic_rebalance)))
 //      {
@@ -276,20 +238,6 @@ namespace oceanbase
         //add by zhouhuan [scalablecommit] 20160509:b
         nop_pos_.group_id_ = -1;
         //add:e
-=======
-      else if (OB_SUCCESS != (ret = TransHandlePool::init(trans_thread_num, TASK_QUEUE_LIMIT, queue_rebalance, dynamic_rebalance)))
-      {
-        TBSYS_LOG(WARN, "init TransHandlePool fail ret=%d", ret);
-      }
-      else if (OB_SUCCESS != (ret = CommitEndHandlePool::init(commit_end_thread_num, TASK_QUEUE_LIMIT, queue_rebalance, false)))
-      {
-        TBSYS_LOG(WARN, "init CommitEndHandlePool fail ret=%d", ret);
-      }
-      else
-      {
-        fifo_stream_.init("run/updateserver.fifo", 100L * 1024L * 1024L);
-        nop_task_.pkt.set_packet_code(OB_NOP_PKT);
->>>>>>> refs/remotes/origin/master
         TBSYS_LOG(INFO, "TransExecutor init succ");
       }
       return ret;
@@ -318,11 +266,7 @@ namespace oceanbase
       if (0 > pcode
           || OB_PACKET_NUM <= pcode)
       {
-<<<<<<< HEAD
         onev_request_e *req = pkt.get_request();
-=======
-        easy_request_t *req = pkt.get_request();
->>>>>>> refs/remotes/origin/master
         TBSYS_LOG(ERROR, "invalid packet code=%d src=%s",
                   pcode, NULL == req ? NULL : get_peer_ip(req));
         ret = OB_UNKNOWN_PACKET;
@@ -339,11 +283,7 @@ namespace oceanbase
         {
           task->reset();
           task->pkt = pkt;
-<<<<<<< HEAD
           task->src_addr = get_onev_addr(pkt.get_request());
-=======
-          task->src_addr = get_easy_addr(pkt.get_request());
->>>>>>> refs/remotes/origin/master
           char *data_buffer = (char*)task + sizeof(Task);
           memcpy(data_buffer, pkt.get_buffer()->get_data(), pkt.get_buffer()->get_capacity());
           task->pkt.get_buffer()->set_data(data_buffer, pkt.get_buffer()->get_capacity());
@@ -351,7 +291,6 @@ namespace oceanbase
           TBSYS_LOG(DEBUG, "task_size=%ld data_size=%ld pos=%ld",
                     task_size, pkt.get_buffer()->get_capacity(), pkt.get_buffer()->get_position());
           (task->pkt).set_receive_ts(tbsys::CTimeUtil::getTime());
-<<<<<<< HEAD
           //modify by zhouhuan [scalablecommit] 20160417
           //ret = push_task_(*task);
           if (!handle_in_wthread_(pcode))
@@ -363,9 +302,6 @@ namespace oceanbase
             handle_special_task(task, special_pdata);
           }
           //modify :e
-=======
-          ret = push_task_(*task);
->>>>>>> refs/remotes/origin/master
         }
       }
       else
@@ -379,13 +315,9 @@ namespace oceanbase
         ret = session_mgr_.wait_write_session_end_and_lock(packet_timewait);
         if (OB_SUCCESS == ret)
         {
-<<<<<<< HEAD
           //modify by zhouhuan [scalablecommit] 20160428
           //ObSpinLockGuard guard(write_clog_mutex1_);
           write_clog_mutex_.wrlock();
-=======
-          ObSpinLockGuard guard(write_clog_mutex_);
->>>>>>> refs/remotes/origin/master
           ThreadSpecificBuffer::Buffer* my_buffer = my_thread_buffer_.get_buffer();
           if (NULL == my_buffer)
           {
@@ -399,10 +331,7 @@ namespace oceanbase
             packet_handler_[pcode](pkt, thread_buff);
           }
           session_mgr_.unlock_write_session();
-<<<<<<< HEAD
           write_clog_mutex_.unlock();
-=======
->>>>>>> refs/remotes/origin/master
         }
         else
         {
@@ -434,7 +363,6 @@ namespace oceanbase
       return bret;
     }
 
-<<<<<<< HEAD
     //add by zhouhuan [scalablecommit] 20160417:b
     bool TransExecutor::handle_in_wthread_(const int pcode)
     {
@@ -777,9 +705,6 @@ namespace oceanbase
 
     //delete by zhouhuan [scalable commit] 20160510:b
    /* int TransExecutor::push_task_(Task &task)
-=======
-    int TransExecutor::push_task_(Task &task)
->>>>>>> refs/remotes/origin/master
     {
       int ret = OB_SUCCESS;
       switch (task.pkt.get_packet_code())
@@ -813,12 +738,8 @@ namespace oceanbase
           break;
       }
       return ret;
-<<<<<<< HEAD
     }*/
     //delete:e
-=======
-    }
->>>>>>> refs/remotes/origin/master
 
     bool TransExecutor::wait_for_commit_(const int pcode)
     {
@@ -898,10 +819,7 @@ namespace oceanbase
 
     void TransExecutor::handle_trans(void *ptask, void *pdata)
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
       ob_reset_err_msg();
       int ret = OB_SUCCESS;
       thread_errno() = OB_SUCCESS;
@@ -1043,14 +961,11 @@ namespace oceanbase
       }
       else
       {
-<<<<<<< HEAD
         //add by zhouhuan for __all_server_stat:20160531
         int64_t cur_time = tbsys::CTimeUtil::getTime();
         OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_WTIME, cur_time - task.pkt.get_receive_ts());
         session_ctx->set_last_proc_time(cur_time);
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         LOG_SESSION("mutator start", session_ctx, task);
         session_ctx->set_start_handle_time(tbsys::CTimeUtil::getTime());
         session_ctx->set_stmt_start_time(task.pkt.get_receive_ts());
@@ -1108,7 +1023,6 @@ namespace oceanbase
             OB_STAT_INC(UPDATESERVER, get_stat_num(session_ctx->get_priority(), APPLY, COUNT), 1);
             OB_STAT_INC(UPDATESERVER, get_stat_num(session_ctx->get_priority(), APPLY, QTIME), session_ctx->get_start_handle_time() - session_ctx->get_stmt_start_time());
             OB_STAT_INC(UPDATESERVER, get_stat_num(session_ctx->get_priority(), APPLY, TIMEU), tbsys::CTimeUtil::getTime() - session_ctx->get_start_handle_time());
-<<<<<<< HEAD
             //add by zhouhuan for __all_server_stat 20150531
             cur_time = tbsys::CTimeUtil::getTime();
             OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_HTIME, cur_time - session_ctx->get_last_proc_time());
@@ -1120,10 +1034,6 @@ namespace oceanbase
             //ret = TransCommitThread::push(&task);
             ret = handle_precommit(task);
             //modify:e
-=======
-            session_guard.revert();
-            ret = TransCommitThread::push(&task);
->>>>>>> refs/remotes/origin/master
             if (OB_SUCCESS != ret && task.sid.is_valid())
             {
               session_mgr_.end_session(task.sid.descriptor_, true);
@@ -1238,7 +1148,6 @@ namespace oceanbase
         if (ST_READ_WRITE == type && !req.rollback_)
         {
           task.sid = req.trans_id_;
-<<<<<<< HEAD
           //modify by zhouhuan [scalablecommit] 20160426:b
           //if (OB_SUCCESS != (ret = TransCommitThread::push(&task)))
           if (OB_SUCCESS != (ret = handle_precommit(task)))
@@ -1246,11 +1155,6 @@ namespace oceanbase
             //TBSYS_LOG(ERROR, "push task=%p to TransCommitThread fail, ret=%d %s", &task, ret, to_cstring(req.trans_id_));
             TBSYS_LOG(ERROR, "handle_precommit fail task=%p, ret=%d %s", &task, ret, to_cstring(req.trans_id_));
             //modify:e
-=======
-          if (OB_SUCCESS != (ret = TransCommitThread::push(&task)))
-          {
-            TBSYS_LOG(ERROR, "push task=%p to TransCommitThread fail, ret=%d %s", &task, ret, to_cstring(req.trans_id_));
->>>>>>> refs/remotes/origin/master
             session_mgr_.end_session(req.trans_id_.descriptor_, true);
             UPS.response_result(OB_TRANS_ROLLBACKED, task.pkt);
           }
@@ -1325,12 +1229,9 @@ namespace oceanbase
       else
       {
         phy_plan.get_trans_req().start_time_ = task.pkt.get_receive_ts();
-<<<<<<< HEAD
         //add qx test
         //TBSYS_LOG(ERROR,"req type =%d",phy_plan.get_trans_req().type_);
         //ob_print_mod_memory_usage();
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != (ret = session_guard.start_session(phy_plan.get_trans_req(), task.sid, session_ctx)))
         {
           if (OB_BEGIN_TRANS_LOCKED == ret)
@@ -1363,12 +1264,9 @@ namespace oceanbase
       {}
       else
       {
-<<<<<<< HEAD
         //test add by qx 20170313 :b
         //TBSYS_LOG(ERROR,"no group = %d long_trans = %d", phy_plan.is_group_exec(), phy_plan.is_long_trans_exec());
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
         int64_t cur_time = tbsys::CTimeUtil::getTime();
         OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_WTIME, cur_time - task.pkt.get_receive_ts());
         session_ctx->set_last_proc_time(cur_time);
@@ -1396,14 +1294,11 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
           //test add by qx 20170313 :b
           //TBSYS_LOG(ERROR,"no group = %d long_trans = %d", phy_plan.is_group_exec(), phy_plan.is_long_trans_exec());
           //TBSYS_LOG(ERROR,"phyplan allocator used=%ld total=%ld",allocator.used(), allocator.total());
           //add :e
 
-=======
->>>>>>> refs/remotes/origin/master
           FILL_TRACE_BUF(session_ctx->get_tlog_buffer(), "phyplan allocator used=%ld total=%ld",
                         allocator.used(), allocator.total());
         }
@@ -1414,7 +1309,6 @@ namespace oceanbase
           TBSYS_LOG(WARN, "main query null pointer");
           ret = OB_ERR_UNEXPECTED;
         }
-<<<<<<< HEAD
         //add lbzhong [auto_increment] 20161218:b
         else if (phy_plan.is_auto_increment() && PHY_UPS_MODIFY_WITH_DML_TYPE == main_op->get_type()
                  && OB_SUCCESS != (ret = static_cast<MemTableModifyWithDmlType*>(main_op)->set_is_update_auto_value()))
@@ -1422,13 +1316,10 @@ namespace oceanbase
           //do nothing
         }
         //add:e
-=======
->>>>>>> refs/remotes/origin/master
         else if (OB_SUCCESS != (ret = main_op->open())
                 || OB_SUCCESS != (ret = fill_return_rows_(*main_op, new_scanner, session_ctx->get_ups_result())))
         {
           session_ctx->rollback_stmt();
-<<<<<<< HEAD
           //add wangjiahao [table lock] 20160616 :b
 
           if ((OB_ERR_TABLE_EXCLUSIVE_LOCK_CONFLICT == ret
@@ -1445,8 +1336,6 @@ namespace oceanbase
             need_free_task = false;
           }
           //add :e
-=======
->>>>>>> refs/remotes/origin/master
           if ((OB_ERR_EXCLUSIVE_LOCK_CONFLICT == ret
                 || OB_ERR_SHARED_LOCK_CONFLICT == ret)
               && !session_ctx->is_session_expired()
@@ -1489,7 +1378,6 @@ namespace oceanbase
         //}
         else
         {
-<<<<<<< HEAD
           //add lbzhong [auto_increment] 20161218:b
           if (phy_plan.is_auto_increment() && PHY_UPS_MODIFY_WITH_DML_TYPE == main_op->get_type())
           {
@@ -1497,8 +1385,6 @@ namespace oceanbase
               session_ctx->get_ups_result().set_affected_rows(0);//ignore affect
           }
           //add:e
-=======
->>>>>>> refs/remotes/origin/master
           session_ctx->commit_stmt();
           main_op->close();
           fill_warning_strings_(session_ctx->get_ups_result());
@@ -1507,7 +1393,6 @@ namespace oceanbase
 
         if (OB_SUCCESS != ret)
         {
-<<<<<<< HEAD
           if ((phy_plan.get_start_trans()
               && NULL != session_ctx
               && session_ctx->get_ups_result().get_trans_id().is_valid()
@@ -1516,12 +1401,6 @@ namespace oceanbase
               //|| OB_ERR_AUTO_VALUE_NOT_SERVE == ret
               //add:e
               )
-=======
-          if (phy_plan.get_start_trans()
-              && NULL != session_ctx
-              && session_ctx->get_ups_result().get_trans_id().is_valid()
-              && give_up_lock)
->>>>>>> refs/remotes/origin/master
           {
             session_ctx->get_ups_result().set_error_code(ret);
             ret = OB_SUCCESS;
@@ -1558,7 +1437,6 @@ namespace oceanbase
 
             session_ctx = NULL;
             session_guard.revert();
-<<<<<<< HEAD
             //modify by zhouhuan [scalablecommit] 20160426:b
             //if (OB_SUCCESS != (ret = TransCommitThread::push(&task)))
             //{
@@ -1569,12 +1447,6 @@ namespace oceanbase
               TBSYS_LOG(WARN, "handle_precommit, ret=%d", ret);
             }
             //modify:e
-=======
-            if (OB_SUCCESS != (ret = TransCommitThread::push(&task)))
-            {
-              TBSYS_LOG(WARN, "commit thread queue is full, ret=%d", ret);
-            }
->>>>>>> refs/remotes/origin/master
             else
             {
               need_free_task = false;
@@ -1662,7 +1534,6 @@ namespace oceanbase
         session_ctx->set_stmt_start_time(pkt.get_receive_ts());
         session_ctx->set_stmt_timeout(process_timeout);
         session_ctx->set_priority((PriorityPacketQueueThread::QueuePriority)pkt.get_packet_priority());
-<<<<<<< HEAD
         // add by guojinwei [repeatable read] 20160418:b
         TBSYS_LOG(DEBUG, "ISOLATION_LEVEL = %d, guojinwei", get_param.get_trans_id().isolation_level_);
         if (common::REPEATABLE_READ == get_param.get_trans_id().isolation_level_
@@ -1676,8 +1547,6 @@ namespace oceanbase
           session_ctx->set_trans_descriptor(get_param.get_trans_id().descriptor_);
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_NEW_GET_REQUEST == pkt.get_packet_code())
         {
           new_scanner.reuse();
@@ -1777,7 +1646,6 @@ namespace oceanbase
         session_ctx->set_stmt_start_time(pkt.get_receive_ts());
         session_ctx->set_stmt_timeout(process_timeout);
         session_ctx->set_priority((PriorityPacketQueueThread::QueuePriority)pkt.get_packet_priority());
-<<<<<<< HEAD
         // add by guojinwei [repeatable read] 20160418:b
         TBSYS_LOG(DEBUG, "ISOLATION_LEVEL = %d, guojinwei", scan_param.get_trans_id().isolation_level_);
         if (common::REPEATABLE_READ == scan_param.get_trans_id().isolation_level_
@@ -1791,8 +1659,6 @@ namespace oceanbase
           session_ctx->set_trans_descriptor(scan_param.get_trans_id().descriptor_);
         }
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_NEW_SCAN_REQUEST == pkt.get_packet_code())
         {
           new_scanner.reuse();
@@ -1934,11 +1800,7 @@ namespace oceanbase
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
     bool TransExecutor::is_write_packet(ObPacket& pkt)
-=======
-    bool is_write_packet(ObPacket& pkt)
->>>>>>> refs/remotes/origin/master
     {
       bool ret = false;
       switch(pkt.get_packet_code())
@@ -1946,10 +1808,7 @@ namespace oceanbase
         case OB_MS_MUTATE:
         case OB_WRITE:
         case OB_PHY_PLAN_EXECUTE:
-<<<<<<< HEAD
         case OB_TRUNCATE_TABLE:  //add hxlong [truncate table] 20170403
-=======
->>>>>>> refs/remotes/origin/master
         case OB_END_TRANSACTION:
           ret = true;
           break;
@@ -1961,14 +1820,10 @@ namespace oceanbase
 
     int64_t TransExecutor::get_commit_queue_len()
     {
-<<<<<<< HEAD
       //modify by zhouhuan [scalablecommit] 20160511:b
       //return session_mgr_.get_trans_seq().get_seq() - TransCommitThread::task_queue_.get_seq();
       return TransCommitThread::seq_queue_.get_seq();
       //modify:e
-=======
-      return session_mgr_.get_trans_seq().get_seq() - TransCommitThread::task_queue_.get_seq();
->>>>>>> refs/remotes/origin/master
     }
 
     int64_t TransExecutor::get_seq(void* ptr)
@@ -2010,7 +1865,6 @@ namespace oceanbase
             session_ctx->get_checksum();
           }
         }
-<<<<<<< HEAD
 
         //add by zhouhuan [scalablecommit] 20160413:b
         if (OB_SUCCESS == ret && task.sid.is_valid()
@@ -2019,8 +1873,6 @@ namespace oceanbase
           TBSYS_LOG(ERROR, "precommit(%s)=>%d",to_cstring(task.sid), ret);
         }
         //add 20160413:e
-=======
->>>>>>> refs/remotes/origin/master
         if (OB_SUCCESS != ret)
         {
           task.sid.reset();
@@ -2068,11 +1920,7 @@ namespace oceanbase
         if (wait_for_commit_(task->pkt.get_packet_code()))
         {
           {
-<<<<<<< HEAD
             ObSpinLockGuard guard(write_clog_mutex1_);
-=======
-            ObSpinLockGuard guard(write_clog_mutex_);
->>>>>>> refs/remotes/origin/master
             commit_log_(); // 把日志缓存区刷盘，并且提交end_session和响应客户端的任务
           }
           if (is_only_master_can_handle(task->pkt.get_packet_code()))
@@ -2085,32 +1933,20 @@ namespace oceanbase
             }
             else
             {
-<<<<<<< HEAD
               ObSpinLockGuard guard(write_clog_mutex1_);
-=======
-              ObSpinLockGuard guard(write_clog_mutex_);
->>>>>>> refs/remotes/origin/master
               // 这个分支不能加FakeWriteGuard, 否则备机收日志就没不能处理了
               release_task = commit_handler_[task->pkt.get_packet_code()](*this, *task, *param);
             }
           }
           else
           {
-<<<<<<< HEAD
             ObSpinLockGuard guard(write_clog_mutex1_);
-=======
-            ObSpinLockGuard guard(write_clog_mutex_);
->>>>>>> refs/remotes/origin/master
             release_task = commit_handler_[task->pkt.get_packet_code()](*this, *task, *param);
           }
         }
         else
         {
-<<<<<<< HEAD
           ObSpinLockGuard guard(write_clog_mutex1_);
-=======
-          ObSpinLockGuard guard(write_clog_mutex_);
->>>>>>> refs/remotes/origin/master
           release_task = commit_handler_[task->pkt.get_packet_code()](*this, *task, *param);
         }
       }
@@ -2134,7 +1970,6 @@ namespace oceanbase
       }
     }
 
-<<<<<<< HEAD
     //add hushuang [scalable commit] 20160410:b
     void TransExecutor::handle_private_task()
     {
@@ -2373,8 +2208,6 @@ namespace oceanbase
 
 
     //add e
-=======
->>>>>>> refs/remotes/origin/master
     int TransExecutor::handle_write_commit_(Task &task)
     {
       int &ret = thread_errno();
@@ -2398,7 +2231,6 @@ namespace oceanbase
         }
         else
         {
-<<<<<<< HEAD
 		//delete by zhouhuan [scalablecommit]
 //          if (0 != session_ctx->get_last_proc_time())
 //          {
@@ -2406,14 +2238,6 @@ namespace oceanbase
 //            OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_CTIME, cur_time - session_ctx->get_last_proc_time());
 //            session_ctx->set_last_proc_time(cur_time);
 //          }
-=======
-          if (0 != session_ctx->get_last_proc_time())
-          {
-            int64_t cur_time = tbsys::CTimeUtil::getTime();
-            OB_STAT_INC(UPDATESERVER, UPS_STAT_TRANS_CTIME, cur_time - session_ctx->get_last_proc_time());
-            session_ctx->set_last_proc_time(cur_time);
-          }
->>>>>>> refs/remotes/origin/master
 
           batch_start_time() = (0 == batch_start_time()) ? tbsys::CTimeUtil::getTime() : batch_start_time();
           int64_t cur_timestamp = session_ctx->get_trans_id();
@@ -2455,7 +2279,6 @@ namespace oceanbase
           kill(getpid(), SIGTERM);
         }
       }
-<<<<<<< HEAD
       // add by guojinwei [log synchronization][multi_cluster] 20151028:b
       int64_t cur_time_us = tbsys::CTimeUtil::getTime();
       // add:e
@@ -2472,12 +2295,6 @@ namespace oceanbase
         // add by guojinwei [log synchronization][multi_cluster] 20151028:b
         last_commit_log_time_us_ = tbsys::CTimeUtil::getTime();
         // add:e
-=======
-      if (OB_SUCCESS == ret
-          && (0 == TransCommitThread::get_queued_num()
-              || MAX_BATCH_NUM <= uncommited_session_list_.size()))
-      {
->>>>>>> refs/remotes/origin/master
         ret = commit_log_();
       }
       if (OB_SUCCESS != ret)
@@ -2487,7 +2304,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
     //mod by zhouhuan for [scalablecommit] 20160822:b
     void TransExecutor::on_commit_idle()
     {
@@ -2498,13 +2314,6 @@ namespace oceanbase
       {
         handle_flush_queue_task();
       }
-=======
-    void TransExecutor::on_commit_idle()
-    {
-      commit_log_();
-      handle_flushed_log_();
-      try_submit_auto_freeze_();
->>>>>>> refs/remotes/origin/master
     }
 
     int TransExecutor::handle_response(ObAckQueue::WaitNode& node)
@@ -2519,27 +2328,20 @@ namespace oceanbase
       else
       {
         UPS.get_log_mgr().get_clog_stat().add_net_us(node.start_seq_, node.end_seq_, node.get_delay());
-<<<<<<< HEAD
         // add by guojinwei [log synchronization][multi_cluster] 20151028:b
         message_residence_time_us_ = (message_residence_time_us_ >> 1) + (node.message_residence_time_us_ >> 1);
 //        TBSYS_LOG(INFO,"test::zhouhuan handle_response message_residence_time=[%ld], node.message_redidence_time_us=[%ld]",
 //                  message_residence_time_us_, node.message_residence_time_us_);
         // add:e
-=======
->>>>>>> refs/remotes/origin/master
       }
       return ret;
     }
 
-<<<<<<< HEAD
     //modify by zhouhuan [scalablecommit] 20160520:b
-=======
->>>>>>> refs/remotes/origin/master
     int TransExecutor::on_ack(ObAckQueue::WaitNode& node)
     {
       int ret = OB_SUCCESS;
       TBSYS_LOG(TRACE, "on_ack: %s", to_cstring(node));
-<<<<<<< HEAD
       //modify by zhouhuan [scalablecommit] 20160503:b
       //if (OB_SUCCESS != (ret = TransCommitThread::push(&nop_task_)))
       if (OB_SUCCESS != (ret = TransCommitThread::push(nop_pos_.group_id_, &nop_pos_)))
@@ -2548,12 +2350,6 @@ namespace oceanbase
         TBSYS_LOG(ERROR, "push nop_task to wakeup handle thread fail, %s, ret=%d", to_cstring(node), ret);
       }
       //modify:e
-=======
-      if (OB_SUCCESS != (ret = TransCommitThread::push(&nop_task_)))
-      {
-        TBSYS_LOG(ERROR, "push nop_task to wakeup commit thread fail, %s, ret=%d", to_cstring(node), ret);
-      }
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
@@ -2563,7 +2359,6 @@ namespace oceanbase
       int64_t flushed_clog_id = UPS.get_log_mgr().get_flushed_clog_id();
       int64_t flush_seq = 0;
       Task *task = NULL;
-<<<<<<< HEAD
        //delete chujiajia [log synchronization][multi_cluster] 20160625:b
       // add by guojinwei [commit point for log replay][multi_cluster] 20151127:b
       //int64_t last_commit_point = 0;
@@ -2579,8 +2374,6 @@ namespace oceanbase
      // }
       // add:e
 	  //delete:e
-=======
->>>>>>> refs/remotes/origin/master
       while(true)
       {
         if (OB_SUCCESS != (err = flush_queue_.tail(flush_seq, (void*&)task))
@@ -2688,7 +2481,6 @@ namespace oceanbase
       return ret;
     }
 
-<<<<<<< HEAD
 	//modify by zhouhuan [scalablecommit]
     int TransExecutor::handle_commit_end_(Task &task, ObDataBuffer &buffer)
     {
@@ -2750,62 +2542,17 @@ namespace oceanbase
           usleep(1);
         }
       }
-=======
-    int TransExecutor::handle_commit_end_(Task &task, ObDataBuffer &buffer)
-    {
-      int ret = OB_SUCCESS;
-      {
-        int ret_ok = OB_SUCCESS;
-        SessionGuard session_guard(session_mgr_, lock_mgr_, ret_ok);
-        RWSessionCtx *session_ctx = NULL;
-        if (OB_SUCCESS != (ret = session_guard.fetch_session(task.sid, session_ctx)))
-        {
-          TBSYS_LOG(ERROR, "unexpected fetch_session fail ret=%d %s, will kill self", ret, to_cstring(task.sid));
-          kill(getpid(), SIGTERM);
-        }
-        else
-        {
-          session_ctx->get_ups_result().serialize(buffer.get_data(),
-                                                  buffer.get_capacity(),
-                                                  buffer.get_position());
-        }
-      }
-      bool rollback = false;
-      if (OB_SUCCESS != ret)
-      {}
-      else if (OB_SUCCESS != (ret = session_mgr_.end_session(task.sid.descriptor_, rollback)))
-      {
-        TBSYS_LOG(ERROR, "unexpected end_session fail ret=%d %s, will kill self", ret, to_cstring(task.sid));
-        kill(getpid(), SIGTERM);
-      }
-      if (OB_SUCCESS == ret)
-      {
-        UPS.response_buffer(ret, task.pkt, buffer); // phyplan的话不能多线程执行
-      }
-      else
-      {
-        UPS.response_result(ret, task.pkt);
-      }
->>>>>>> refs/remotes/origin/master
       return ret;
     }
 
     int TransExecutor::commit_log_()
     {
       int ret = OB_SUCCESS;
-<<<<<<< HEAD
       //int64_t end_log_id = 0;
       if (0 < flush_queue_.size())
       {
         CLEAR_TRACE_BUF(TraceLog::get_logbuffer());
         //ret = UPS.get_log_mgr().async_flush_log(end_log_id, TraceLog::get_logbuffer());
-=======
-      int64_t end_log_id = 0;
-      if (0 < flush_queue_.size())
-      {
-        CLEAR_TRACE_BUF(TraceLog::get_logbuffer());
-        ret = UPS.get_log_mgr().async_flush_log(end_log_id, TraceLog::get_logbuffer());
->>>>>>> refs/remotes/origin/master
         /*
         if (OB_SUCCESS != ret)
         {
@@ -2871,7 +2618,6 @@ namespace oceanbase
           }
         }
         uncommited_session_list_.clear(); */
-<<<<<<< HEAD
         // debug by guojinwei [inner table error][multi_cluster] 20150919:b
         if (0 != batch_start_time())
         {
@@ -2909,11 +2655,6 @@ namespace oceanbase
         // debug by guojinwei [inner table error][multi_custer] 20150919:b
         }
         // debug:e
-=======
-        OB_STAT_INC(UPDATESERVER, UPS_STAT_BATCH_COUNT, 1);
-        OB_STAT_INC(UPDATESERVER, UPS_STAT_BATCH_TIMEU, tbsys::CTimeUtil::getTime() - batch_start_time());
-        batch_start_time() = 0;
->>>>>>> refs/remotes/origin/master
       }
       try_submit_auto_freeze_();
       return ret;
@@ -3150,10 +2891,7 @@ namespace oceanbase
       UNUSED(host);
       UNUSED(task);
       UNUSED(pdata);
-<<<<<<< HEAD
      // TBSYS_LOG(INFO, "test::zhouhuan:handle_fake_write_for_keep_alive start!");
-=======
->>>>>>> refs/remotes/origin/master
       UPS.ups_handle_fake_write_for_keep_alive();
       return true;
     }
@@ -3174,10 +2912,7 @@ namespace oceanbase
     {
       UNUSED(host);
       UNUSED(pdata);
-<<<<<<< HEAD
       //TBSYS_LOG(INFO,"test::zhouhuan switch schema!!");
-=======
->>>>>>> refs/remotes/origin/master
       UPS.ups_switch_schema(task.pkt.get_api_version(),
                             &(task.pkt),
                             *(task.pkt.get_buffer()));
@@ -3188,10 +2923,7 @@ namespace oceanbase
     {
       UNUSED(host);
       UNUSED(pdata);
-<<<<<<< HEAD
       //TBSYS_LOG(INFO,"test::zhouhuan force fetch schema!!");
-=======
->>>>>>> refs/remotes/origin/master
       UPS.ups_force_fetch_schema(task.pkt.get_api_version(),
                                  task.pkt.get_request(),
                                  task.pkt.get_channel_id());
@@ -3202,10 +2934,7 @@ namespace oceanbase
     {
       UNUSED(host);
       pdata.buffer.get_position() = 0;
-<<<<<<< HEAD
       //TBSYS_LOG(INFO,"test::zhouhuan switch commit log!!");
-=======
->>>>>>> refs/remotes/origin/master
       UPS.ups_switch_commit_log(task.pkt.get_api_version(),
                                 task.pkt.get_request(),
                                 task.pkt.get_channel_id(),
@@ -3221,7 +2950,6 @@ namespace oceanbase
       //TBSYS_LOG(INFO, "handle nop");
       return false;
     }
-<<<<<<< HEAD
     //add by hushuang [scalablecommit] 20160415
    /* TransExecutor::CommitTask::CommitTask():mgr_(NULL)
     {
@@ -3451,7 +3179,5 @@ namespace oceanbase
       return ret;
     }
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
   }
 }

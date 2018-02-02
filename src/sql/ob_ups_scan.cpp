@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
@@ -16,8 +15,6 @@
  *         bingo <bingxiao@stu.ecnu.edu.cn>
  * @date 2016_06_16
  */
-=======
->>>>>>> refs/remotes/origin/master
 
 #include "ob_ups_scan.h"
 #include "common/utility.h"
@@ -219,15 +216,12 @@ void ObUpsScan::set_version_range(const ObVersionRange &version_range)
 {
   cur_scan_param_.set_version_range(version_range);
 }
-<<<<<<< HEAD
 // add by guojinwei [repeatable read] 20160312:b
 void ObUpsScan::set_trans_id(const ObTransID &trans_id)
 {
   cur_scan_param_.set_trans_id(trans_id);
 }
 // add:e
-=======
->>>>>>> refs/remotes/origin/master
 
 int ObUpsScan::set_child(int32_t child_idx, ObPhyOperator &child_operator)
 {

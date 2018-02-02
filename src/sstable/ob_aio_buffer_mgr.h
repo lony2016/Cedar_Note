@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -17,8 +16,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2011 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or
@@ -537,13 +534,10 @@ namespace oceanbase
       void add_stat(const ObIOStat& stat);
       const char* get_thread_aio_stat_str();
 
-<<<<<<< HEAD
       //add wenghaixing [secondary index static_index_build]20150804
       void reset();
       //add e
 
-=======
->>>>>>> refs/remotes/origin/master
     private:
       struct ObThreadAIOBufferMgrItem
       {
@@ -554,7 +548,6 @@ namespace oceanbase
 
         }
 
-<<<<<<< HEAD
         //add longfei [cons static index] 151216:b
         void reset()
         {
@@ -565,8 +558,6 @@ namespace oceanbase
         }
         //add e
 
-=======
->>>>>>> refs/remotes/origin/master
         uint64_t sstable_id_;
         uint64_t table_id_;
         uint64_t column_group_id_;

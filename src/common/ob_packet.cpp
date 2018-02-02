@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * Copyright (C) 2013-2016 DaSE .
  *
@@ -18,8 +17,6 @@
  * @date 2016_01_21
  */
  
-=======
->>>>>>> refs/remotes/origin/master
 #include "ob_packet.h"
 #include "ob_thread_mempool.h"
 #include "utility.h"
@@ -141,20 +138,12 @@ namespace oceanbase
       return _next;
     }
 
-<<<<<<< HEAD
     onev_request_e* ObPacket::get_request() const
-=======
-    easy_request_t* ObPacket::get_request() const
->>>>>>> refs/remotes/origin/master
     {
       return req_;
     }
 
-<<<<<<< HEAD
     void ObPacket::set_request(onev_request_e* r)
-=======
-    void ObPacket::set_request(easy_request_t* r)
->>>>>>> refs/remotes/origin/master
     {
       req_ = r;
     }
@@ -274,11 +263,7 @@ namespace oceanbase
       header_.set_magic_num(OB_PACKET_CHECKSUM_MAGIC);
       header_.header_length_ = static_cast<int16_t>(header_.get_serialize_size());
       header_.version_ = 0;
-<<<<<<< HEAD
       header_.timestamp_ = 0;
-=======
-      header_.reserved_ = 0;
->>>>>>> refs/remotes/origin/master
 
       header_.data_length_ = static_cast<int32_t>(buffer_.get_position());
       header_.data_zlength_ = header_.data_length_; // not compressed

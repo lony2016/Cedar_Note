@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 /**
  * Copyright (C) 2013-2016 DaSE .
@@ -16,8 +15,6 @@
  * @author guojinwei <guojinwei@stu.ecnu.edu.cn>
  * @date 2015_12_30
  */
-=======
->>>>>>> refs/remotes/origin/master
 /**
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
@@ -79,22 +76,15 @@ namespace oceanbase
         common::ObRole get_server_type() const
         { return OB_UPDATESERVER; }
 
-<<<<<<< HEAD
         int load_config();
 
-=======
->>>>>>> refs/remotes/origin/master
       private:
         DISALLOW_COPY_AND_ASSIGN(ObUpdateServerConfig);
         int64_t total_memory_limit_bk_;
 
       public:
         DEF_INT(replay_worker_num, "0", "replay worker number"); /* calc later */
-<<<<<<< HEAD
         DEF_INT(commit_end_thread_num, "10", "number of thread to end session and response to client");
-=======
-        DEF_INT(commit_end_thread_num, "4", "number of thread to end session and response to client");
->>>>>>> refs/remotes/origin/master
         DEF_INT(trans_thread_num, "0", "number of thread to process read/write transaction");  /* calc later */
         DEF_CAP(memtable_hash_buckets_size, "0", "number of hash index buckets"); /* calc later */
 
@@ -106,11 +96,7 @@ namespace oceanbase
         DEF_IP(lsync_ip, "0.0.0.0", "lsync ip address");
         DEF_INT(lsync_port, "3000", "(1024,65536)", "lsync listen port");
 
-<<<<<<< HEAD
         DEF_INT(io_thread_count, "4", "io thread number for libonev");
-=======
-        DEF_INT(io_thread_count, "4", "io thread number for libeasy");
->>>>>>> refs/remotes/origin/master
         DEF_INT(read_thread_count, "4", "read thread number");
         DEF_INT(store_thread_count, "3", "store thread number");
         DEF_INT(read_queue_size, "1000", "read queue size");
@@ -135,10 +121,7 @@ namespace oceanbase
         DEF_INT(max_n_lagged_log_allowed, "10000", "commit log laged count beyond this value beyond this valud between master and slave ups will give an alarm");
 
         DEF_TIME(state_check_period, "50ms", "interval of slave to check sync-stat");
-<<<<<<< HEAD
         //modify by zhouhuan 0-async  1-sync
-=======
->>>>>>> refs/remotes/origin/master
         DEF_INT(log_sync_type, "1", "sync log to disk");
         DEF_INT(log_sync_retry_times, "2", "log sync retry times");
 
@@ -170,13 +153,9 @@ namespace oceanbase
         DEF_CAP(sstable_block_size, "64K", "sstable block size");
         DEF_MOMENT(major_freeze_duty_time, "Disable", OB_CONFIG_DYNAMIC, "major freeze duty time");
         DEF_TIME(min_major_freeze_interval, "3600s", "minimal time to generate major freeze version");
-<<<<<<< HEAD
         //modify by zhouhuan [scalablecommit] 20160515
         //DEF_BOOL(replay_checksum_flag, "True", "memtable checksum when replay");
         DEF_BOOL(replay_checksum_flag, "False", "memtable checksum when replay");
-=======
-        DEF_BOOL(replay_checksum_flag, "True", "memtable checksum when replay");
->>>>>>> refs/remotes/origin/master
         DEF_BOOL(allow_write_without_token, "True", "allow write without token");
 
         DEF_TIME(lsync_fetch_timeout, "5s", "fetch commit log timeout from lsync or master ups");
@@ -194,7 +173,6 @@ namespace oceanbase
         DEF_TIME(keep_alive_timeout, "5s", "keep alive timeout");
         DEF_TIME(lease_timeout_in_advance, "500ms", "lease timeout in advance");
         DEF_BOOL(real_time_slave, "True", "whetch the server is a realtime slave ups");
-<<<<<<< HEAD
         // modify by guojinwei [multi_cluster] 20151020:b
         //DEF_INT(consistency_type, "3", "[1,3]", "consistency type of log-sync, 1: strong, 2: normal, 3: weak");
         DEF_INT(consistency_type, "1", "[1,3]", "consistency type of log-sync, 1: strong, 2: normal, 3: weak");
@@ -208,10 +186,6 @@ namespace oceanbase
         //add by hushuang[scalabale commit] 20160630
         DEF_INT(commit_group_size, "30", "[1,100]", "commit_group_size");
         //add:e
-=======
-        DEF_INT(consistency_type, "3", "[1,3]", "consistency type of log-sync, 1: strong, 2: normal, 3: weak");
-
->>>>>>> refs/remotes/origin/master
         DEF_BOOL(using_static_cm_column_id, "False", "should treat 2 and 3 as create_time and modify_time column id");
         DEF_BOOL(using_hash_index, "True", "using hash index");
 
@@ -220,14 +194,10 @@ namespace oceanbase
         DEF_CAP(replay_log_buf_size, "10GB", "replay log buffer size");
         DEF_INT(replay_queue_len, "500", "replay queue size");
         DEF_TIME(wait_slave_sync_time, "100ms", "wait slave sync time");
-<<<<<<< HEAD
         // modify by guojinwei [log synchronization][multi_cluster] 20151211:b
         //DEF_INT(wait_slave_sync_type, "0", "[0,2]", "0: response master ups before replay; 1: response master ups after replay before sync to disk; 2: response master ups after sync to disk");
         DEF_INT(wait_slave_sync_type, "2", "[0,2]", "0: response master ups before replay; 1: response master ups after replay before sync to disk; 2: response master ups after sync to disk");
         // modify:e
-=======
-        DEF_INT(wait_slave_sync_type, "0", "[0,2]", "0: response master ups before replay; 1: response master ups after replay before sync to disk; 2: response master ups after sync to disk");
->>>>>>> refs/remotes/origin/master
         DEF_TIME(disk_warn_threshold, "5ms", "disk warn threshold");
         DEF_TIME(net_warn_threshold, "5ms", "net worn threshold");
 
@@ -241,7 +211,6 @@ namespace oceanbase
         DEF_INT(io_thread_end_cpu,   "-1", "end number of cpu, set affinity by io thread");
 
         DEF_INT(commit_bind_core_id, "-1", "commit thread will bind to this core(given configured core_id > 0)");
-<<<<<<< HEAD
 
         //add by zhouhuan [scalable commit] 20160711:b
         DEF_INT(switch_bind_core_id, "-1", "switch group thread will bind to this core(given configured core_id > 0)");
@@ -266,8 +235,6 @@ namespace oceanbase
         DEF_INT2(allocator_total_limit,"16106127360","allocator total limit default 15GB")
         DEF_INT2(allocator_hold_limit,"8589934592","allocator total limit default 8GB")
         //add :e
-=======
->>>>>>> refs/remotes/origin/master
     };
   }
 }

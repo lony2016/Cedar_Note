@@ -130,11 +130,7 @@ namespace oceanbase
         const int32_t packet_code,
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -233,11 +229,7 @@ namespace oceanbase
     int ObProxyService::proxy_fetch_data(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -385,11 +377,7 @@ namespace oceanbase
             if (NULL != next_request)
             {
               req = next_request->get_request();
-<<<<<<< HEAD
               onev_request_wakeup(req);
-=======
-              easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             }
             break;
           }
@@ -473,11 +461,7 @@ namespace oceanbase
     int ObProxyService::proxy_fetch_range(
         const int32_t version,
         const int32_t channel_id,
-<<<<<<< HEAD
         onev_request_e* req,
-=======
-        easy_request_t* req,
->>>>>>> refs/remotes/origin/master
         common::ObDataBuffer& in_buffer,
         common::ObDataBuffer& out_buffer,
         const int64_t timeout_time)
@@ -619,11 +603,7 @@ namespace oceanbase
             if (NULL != next_request)
             {
               req = next_request->get_request();
-<<<<<<< HEAD
               onev_request_wakeup(req);
-=======
-              easy_request_wakeup(req);
->>>>>>> refs/remotes/origin/master
             }
             break;
           }

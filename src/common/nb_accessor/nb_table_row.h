@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -18,8 +17,6 @@
  */
 
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -63,12 +60,9 @@ namespace common
       int set_cell(ObCellInfo* cell, int64_t index);
       int64_t count() const;
       void dump() const;
-<<<<<<< HEAD
       //add wenghaixing [secondary index.static_index]20160117
       void dump_test() const;
       //add e
-=======
->>>>>>> refs/remotes/origin/master
 
     private:
       bool check_inner_stat() const;

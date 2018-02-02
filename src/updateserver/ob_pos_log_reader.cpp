@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 DaSE .
  *
  * This program is free software; you can redistribute it and/or
@@ -16,8 +15,6 @@
  * @date 2015_12_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2007-2010 Taobao Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -124,7 +121,6 @@ namespace oceanbase
       }
       return err;
     }
-<<<<<<< HEAD
 
     //add lbzhong [Commit Point] 20150820:b
     int ObPosLogReader::get_log(const int64_t start_id, ObLogLocation& start_location, ObLogLocation& end_location,
@@ -173,7 +169,5 @@ namespace oceanbase
     }
     //add:e
 
-=======
->>>>>>> refs/remotes/origin/master
   }; // end namespace updateserver
 }; // end namespace oceanbase

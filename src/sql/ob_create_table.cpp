@@ -59,11 +59,7 @@ int ObCreateTable::open()
   }
   else if (OB_SUCCESS != (ret = local_context_.rs_rpc_proxy_->create_table(if_not_exists_, table_schema_)))
   {
-<<<<<<< HEAD
     TBSYS_LOG(WARN, "failed to create table[%s], err=%d", table_schema_.table_name_, ret);
-=======
-    TBSYS_LOG(WARN, "failed to create table, err=%d", ret);
->>>>>>> refs/remotes/origin/master
   }
   else
   {
@@ -237,12 +233,9 @@ int64_t ObCreateTable::to_string(char* buf, const int64_t buf_len) const
     databuff_printf(buf, buf_len, pos, "data_length_=%ld, ", col.data_length_);
     databuff_printf(buf, buf_len, pos, "data_precision=%ld, ", col.data_precision_);
     databuff_printf(buf, buf_len, pos, "nullable=%s, ", col.nullable_ ? "TRUE" : "FALSE");
-<<<<<<< HEAD
     //add lbzhong [auto_increment] 20161123:b
     databuff_printf(buf, buf_len, pos, "auto_increment=%s, ", col.auto_increment_ ? "TRUE" : "FALSE");
     //add:e
-=======
->>>>>>> refs/remotes/origin/master
     databuff_printf(buf, buf_len, pos, "length_in_rowkey=%ld, ", col.length_in_rowkey_);
     databuff_printf(buf, buf_len, pos, "gm_create=%ld, ", col.gm_create_);
     databuff_printf(buf, buf_len, pos, "gm_modify=%ld)", col.gm_modify_);

@@ -1,9 +1,5 @@
 AM_CPPFLAGS := $(AM_CPPFLAGS) -I${TBLIB_ROOT}/include/tbsys  \
-<<<<<<< HEAD
               -I${ONEV_ROOT}/include/onev    \
-=======
-              -I${EASY_ROOT}/include/easy    \
->>>>>>> refs/remotes/origin/master
               -I${top_srcdir}/include        \
               -I${top_srcdir}/src
 
@@ -19,11 +15,7 @@ LDADD = $(top_builddir)/src/sql/libsql.a              \
         ${top_builddir}/src/common/libcommon.a        \
         ${top_builddir}/src/common/btree/libbtree.a   \
 				$(top_builddir)/src/common/timezone/libtimezone.a    \
-<<<<<<< HEAD
         ${ONEV_LIB_PATH}/libonev.a                    \
-=======
-        ${EASY_LIB_PATH}/libeasy.a                    \
->>>>>>> refs/remotes/origin/master
         ${TBLIB_ROOT}/lib/libtbsys.a -lcrypt
 
 CXXFLAGS+=-D__VERSION_ID__="\"updateserver 1.0.0.0\""
@@ -109,27 +101,20 @@ libupdateserver_a_SOURCES =                                                 \
   ob_table_list_query.h             ob_table_list_query.cpp                 \
   ob_ups_lock_filter.h              ob_ups_lock_filter.cpp                  \
   ob_ups_inc_scan.h                 ob_ups_inc_scan.cpp                     \
-<<<<<<< HEAD
   ob_ups_procedure.h                ob_ups_procedure.cpp                    \
   ob_ups_procedure_special_executor.h  ob_ups_procedure_special_executor.cpp  \
-=======
->>>>>>> refs/remotes/origin/master
   ob_clog_stat.h                    ob_clog_stat.cpp                        \
   ups_mon.h                                                                 \
   ob_memtable_modify.h              ob_memtable_modify.cpp                  \
   ob_trigger_handler.h              ob_trigger_handler.cpp                  \
   ob_update_reload_config.h         ob_update_reload_config.cpp             \
   ob_util_interface.h                                                       \
-<<<<<<< HEAD
   ob_inc_seq.h                      ob_inc_seq.cpp			    \
   ob_commit_point_runnable.h	    ob_commit_point_runnable.cpp	   \
   ob_switch_group_runnable.h	    ob_switch_group_runnable.cpp	   \
   ob_memtable_lock.h                ob_memtable_lock.cpp                    \
   ob_table_lock_mgr.h               ob_table_lock_mgr.cpp                   \
   ob_table_lock.h
-=======
-  ob_inc_seq.h                      ob_inc_seq.cpp
->>>>>>> refs/remotes/origin/master
 
 bin_PROGRAMS = updateserver ob_ping
 updateserver_SOURCES = main.cpp ${libupdateserver_a_SOURCES}

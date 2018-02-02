@@ -40,13 +40,10 @@ namespace oceanbase
       int64_t to_string(char* buf, const int64_t len) const;
       int this_entry(ObLogEntry& entry, const LogCommand cmd, const char* log_data, const int64_t data_len) const;
       int next_entry(ObLogEntry& entry, const LogCommand cmd, const char* log_data, const int64_t data_len) const;
-<<<<<<< HEAD
       //add by chujiajia [log synchronization][multi_cluster] 20160328:b
       int this_entry(ObLogEntry& entry, const LogCommand cmd, const char* log_data, const int64_t data_len, const int64_t max_cmt_id) const;
       int next_entry(ObLogEntry& entry, const LogCommand cmd, const char* log_data, const int64_t data_len, const int64_t max_cmt_id) const;
       //add:e
-=======
->>>>>>> refs/remotes/origin/master
       int advance(const ObLogEntry& entry);
       int advance(LogCommand cmd, int64_t seq, const int64_t data_len);
       bool newer_than(const ObLogCursor& that) const;

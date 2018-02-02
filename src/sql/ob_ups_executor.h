@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * Copyright (C) 2013-2016 ECNU_DaSE.
  *
  * This program is free software; you can redistribute it and/or
@@ -19,8 +18,6 @@
  * @date 2016_07_30
  */
 /**
-=======
->>>>>>> refs/remotes/origin/master
  * (C) 2010-2012 Alibaba Group Holding Limited.
  *
  * This program is free software; you can redistribute it and/or
@@ -63,7 +60,6 @@ namespace oceanbase
         virtual int64_t to_string(char* buf, const int64_t buf_len) const;
 
         virtual int get_next_row(const common::ObRow *&row);
-<<<<<<< HEAD
 
         //add zt 20151107:b
         /**
@@ -76,8 +72,6 @@ namespace oceanbase
         int get_next_row_for_sp(const common::ObRow *&row, const ObRowDesc &fake_row_desc);
         //add zt 20151107:e
 
-=======
->>>>>>> refs/remotes/origin/master
         virtual int get_row_desc(const common::ObRowDesc *&row_desc) const {UNUSED(row_desc); return common::OB_NOT_SUPPORTED;}
         virtual enum ObPhyOperatorType get_type() const {return PHY_UPS_EXECUTOR;};
         DECLARE_PHY_OPERATOR_ASSIGN;
